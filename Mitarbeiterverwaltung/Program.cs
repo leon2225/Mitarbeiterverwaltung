@@ -4,11 +4,15 @@ namespace Mitarbeiterverwaltung
 {
     public class Staff
     {
+        public string Id { get; set; }
         public string name { get; set; }
-        public string surname  { get; set; }
-        public int age  { get; set; }
+        public string surname { get; set; }
+        public DateTime age { get; set; }
+        public string adress { get; set; }
+        public string phone { get; set; }
         public DateTime startTime  { get; set; }
-        public TimeSpan weekWorkingTime { get; set; }
+        public int holidays { get; set; }
+        public int weekWorkingTime { get; set; }
         public TimeSpan totalWorktime { get; set; }
     }
 
@@ -140,7 +144,9 @@ namespace Mitarbeiterverwaltung
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-            //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.Run(new mainView());
+            
 
             InitFileParser initFileParser = new InitFileParser();
             initFileParser.parseFile("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");

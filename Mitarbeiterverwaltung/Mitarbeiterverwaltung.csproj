@@ -8,4 +8,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="AdminView.cs" />
+    <Compile Remove="AdminView.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="AdminView.resx" />
+  </ItemGroup>
+
 </Project>
