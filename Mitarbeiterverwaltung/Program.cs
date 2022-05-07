@@ -18,7 +18,7 @@ namespace Mitarbeiterverwaltung
 
         public string toString()
         {
-            return "[" + startTime.ToString() + " " + endTime.ToString() + " " + state.ToString() + "]";
+            return startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
         }
     }
     public class Employee
@@ -189,41 +189,156 @@ namespace Mitarbeiterverwaltung
             }
         }
     }
-
     public interface IStorageHandler
     {
-        CompanyData? load();
-        void save(CompanyData data);
+        Dictionary<string, Employee> load();
+        bool save(Dictionary<string, Employee> employees);
     }
 
-    public class JSONHandler : IStorageHandler
+    public class CSVStorageHandler : IStorageHandler
     {
-        public string jsonPath;
-        public JSONHandler(string fileName)
+        public string path;
+
+        public CSVStorageHandler(string path)
         {
-            jsonPath = fileName;
+            this.path = path;
         }
 
-        public CompanyData? load()
+        public Dictionary<string, Employee> load()
         {
-            string jsonString = File.ReadAllText(jsonPath);
-            CompanyData? result =
-                JsonSerializer.Deserialize<CompanyData>(jsonString);
+            string csvString = File.ReadAllText(path);
 
+            var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
+            propertyNames.Sort();
+            string header = string.Join(",", propertyNames);
+            
+            List<string> csvLines = csvString.Split("\r\n").ToList();
 
-            return result;
+            //If headers aren't equal, the csv file is not compatible
+            if(!csvLines[0].Equals(header))
+            {
+                return null;
+            }
+
+            //remove header from lines
+            csvLines.RemoveAt(0);
+
+            Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
+
+            foreach (var line in csvLines)
+            {
+                List <string> values = line.Split(",").ToList();
+                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                int holidays = int.Parse(p["holidays"]);
+                TimeSpan weekTimeLimit = TimeSpan.Parse(p["weekTimeLimit"]);
+                HourlyRatedEmployee employee = new HourlyRatedEmployee(p["Id"], p["name"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
+                employee.overtime = TimeSpan.Parse(p["overtime"]);
+                employee.endTime = DateTime.Parse(p["endTime"]);
+                employee.startTime = DateTime.Parse(p["startTime"]);
+                employee.totalWorktime = TimeSpan.Parse(p["totalWorktime"]);
+                employee.timeWorkedToday = TimeSpan.Parse(p["timeWorkedToday"]);
+                employee.pauseTime = TimeSpan.Parse(p["pauseTime"]);
+                employee.overtime = TimeSpan.Parse(p["overtime"]);
+                employee.passwordHash = p["passwordHash"];
+
+                //parse holidayRequests TODO correctly implement!
+                employee.holidayRequests = new List<HolidayRequest>();
+                employees.Add(p["Id"], employee);
+            }
+            foreach (var line in csvLines)
+            {
+                List<string> values = line.Split(",").ToList();
+                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                string id = p["Id"];
+                Employee employee = employees[id];
+                string supervisorId = p["supervisor"];
+                if (supervisorId != "")
+                    employee.supervisor = employees[supervisorId];
+                List<string> subordinateIds = p["subordinates"].Split(";").ToList();
+                Dictionary<string, Employee> subordinates = new Dictionary<string, Employee>();
+                foreach (var subordinateId in subordinateIds)
+                {
+                    if (subordinateId != "")
+                        subordinates.Add(subordinateId, employees[subordinateId]);
+                }
+
+                employee.subordinates = subordinates;
+            }
+                
+
+            return employees;
         }
 
-        public void save(CompanyData data)
+        public bool save(Dictionary<string, Employee> employees)
         {
-            string jsonString = JsonSerializer.Serialize(data);
-            File.WriteAllText(jsonPath, jsonString);
+            string csvString = "";
+            var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
+            propertyNames.Sort();
+            string header = string.Join(",", propertyNames);
+            csvString += header;
+
+            foreach (HourlyRatedEmployee employee in employees.Values)
+            {
+                csvString += "\r\n";
+                foreach(string key in propertyNames)
+                {
+                    var value = employee.GetType().GetProperty(key).GetValue(employee);
+
+                    switch (key)
+                    {
+                        case "holidays":
+                            value = value.ToString();
+                            break;
+
+                        case "supervisor":
+                            if(value == null)
+                            {
+                                value = "";
+                            }
+                            else 
+                            {
+                                HourlyRatedEmployee supervisor = (HourlyRatedEmployee)value;
+                                value = supervisor.Id;
+                            }
+                            
+                            break;
+
+                        case "subordinates":
+                            List<string> subordinates = ((Dictionary<string, Employee>)value).Select(kvp => kvp.Key).ToList(); ;
+                            value = string.Join(";",subordinates);
+                            break;
+
+
+                        case "holidayRequests":
+                            List<HolidayRequest> holidayRequests = (List<HolidayRequest>)value;
+                            value = string.Join(";", holidayRequests);
+                            //value = value.toString();
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    csvString += value + ",";
+                }
+            }
+            File.WriteAllText(path, csvString);
+            return true;
         }
     }
 
     public class InitFileParser
     {
-        public Dictionary<string, Dictionary<string, string>> parseFile(string fileName)
+        public string path;
+        public InitFileParser(string filePath = "init.ini")
+        {
+            path = filePath;
+        }
+        public bool saveFile()
+        {
+            return true;
+        }
+        public Dictionary<string, Dictionary<string, string>> parseFile()
         {
             Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
 
@@ -232,7 +347,7 @@ namespace Mitarbeiterverwaltung
 
             string currentSection = "NoSection";
             // Read the file and display it line by line.  
-            foreach (string line in System.IO.File.ReadLines(fileName))
+            foreach (string line in System.IO.File.ReadLines(path))
             {
                 string currentLine = line;
                 //remove comments
@@ -301,12 +416,13 @@ namespace Mitarbeiterverwaltung
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-            Application.EnableVisualStyles();
-            Application.Run(new mainView());
+            
+            
             
 
-            InitFileParser initFileParser = new InitFileParser();
-            initFileParser.parseFile("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
+            InitFileParser initFileParser = new InitFileParser("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
+            initFileParser.parseFile();
+
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
             HourlyRatedEmployee damian = new HourlyRatedEmployee("1", "Damian Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
@@ -315,11 +431,17 @@ namespace Mitarbeiterverwaltung
             companyData.addEmployee(damian);
             companyData.addEmployee(leon);
 
+            //JSONHandler jsonHandler = new JSONHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\test.json");
+            //jsonHandler.save(companyData);
+            //CompanyData? loadedStaff = jsonHandler.load();
 
-            JSONHandler jsonHandler = new JSONHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\test.json");
-            jsonHandler.save(staffData);
-            CompanyData? loadedStaff = jsonHandler.load();
+            var csvStorageHandler = new CSVStorageHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data.csv");
+            csvStorageHandler.save(companyData.employees);
+            var loadedEmployees = csvStorageHandler.load();
 
+
+            Application.EnableVisualStyles();
+            Application.Run(new mainView());
             return;
 
         }
