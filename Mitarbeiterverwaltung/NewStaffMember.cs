@@ -7,18 +7,18 @@ namespace Mitarbeiterverwaltung
             InitializeComponent();
         }
 
-        public Staff getUserData()
+        public Employee getUserData()
         {
-            Staff staff = new Staff
-            {
-                name = this.textBox_name.Text,
-                surname = this.textBox_surname.Text,
-                adress = this.label_adress.Text,
-                phone = this.textBox_phone.Text,
-                age = this.dateTimePicker_birthday.Value
-            };
-            //weekWorkingTime = Int32.Parse(this.label_workingTimeWeek.Text),
-            //holidays = Int32.Parse(this.label_holidays.Text)
+            HourlyRatedEmployee staff = new HourlyRatedEmployee
+            (
+                "12",
+                this.textBox_name.Text,
+                this.label_adress.Text,
+                this.textBox_phone.Text,
+                Int32.Parse(this.label_holidays.Text),
+                "hasdasd",
+                new TimeSpan(Int32.Parse(this.label_workingTimeWeek.Text), 0,0)
+            );
             return staff;
         }
 

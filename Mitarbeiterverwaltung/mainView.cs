@@ -56,10 +56,10 @@ namespace Mitarbeiterverwaltung
             DialogResult result = newStaffMember.ShowDialog();
             if(result == DialogResult.OK)
             {
-                Staff staffMember = new Staff();
+                Employee staffMember = new HourlyRatedEmployee("1", "Damian Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37, 0, 0));
                 staffMember = newStaffMember.getUserData();
                 //update ListView
-                listBox_staffMembers.Items.Add(staffMember.surname + ", " + staffMember.name);
+                listBox_staffMembers.Items.Add(staffMember.name);
                 ListViewItem item1 = new ListViewItem("item1", 0);
                 listView_staffMembers.Items.Add(item1);
                 listView_staffMembers.View = View.Details;

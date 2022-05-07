@@ -2,34 +2,103 @@ using System.Text.Json;
 
 namespace Mitarbeiterverwaltung
 {
-    public class Staff
+    public enum RequestState
+    {
+        pending,
+        accepted,
+        denied
+    }
+    public class HolidayRequest
+    {
+        public DateTime startTime { get; set; }
+        public DateTime endTime { get; set; }
+        public RequestState state { get; set; }
+
+        public string toString()
+        {
+            return "[" + startTime.ToString() + " " + endTime.ToString() + " " + state.ToString() + "]";
+        }
+    }
+    public class Employee
     {
         public string Id { get; set; }
+        public string passwordHash { get; set; }
         public string name { get; set; }
-        public string surname { get; set; }
-        public DateTime age { get; set; }
         public string adress { get; set; }
         public string phone { get; set; }
-        public DateTime startTime  { get; set; }
         public int holidays { get; set; }
-        public int weekWorkingTime { get; set; }
-        public TimeSpan totalWorktime { get; set; }
+        public Employee supervisor { get; set; }
+        public Dictionary<string, Employee> subordinates { get; set; }
+        public List<HolidayRequest> holidayRequests { get; set; }
+
+        public Employee(string Id, string name, string adress, string phone, int holidays, string password)
+        {
+            this.Id = Id; //TODO add auto Id
+            this.name = name;
+            this.adress = adress;
+            this.phone = phone; 
+            this.holidays = holidays;
+
+            this.subordinates = new Dictionary<string, Employee>();
+            this.holidayRequests = new List<HolidayRequest>();
+
+            setPassword(password);
+        }
+    }
+
+    public class HourlyRatedEmployee : Employee
+    {
+        public TimeSpan weekTimeLimit { get; set; } = TimeSpan.Zero; //worktime/week due to contract
+        public TimeSpan totalWorktime { get; set; } = TimeSpan.Zero; //worktime for this month until now
+        public DateTime startTime { get; set; } = DateTime.MinValue;
+        public DateTime endTime { get; set; } = DateTime.MinValue;
+        public TimeSpan timeWorkedToday { get; set; } = TimeSpan.Zero; //worktime today until last pause
+        public TimeSpan pauseTime { get; set; } = TimeSpan.Zero;
+        public TimeSpan overtime { get; set; } = TimeSpan.Zero; //overtime until last month
+
+        public HourlyRatedEmployee(string Id, string name, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(Id, name, adress, phone, holidays, password)
+        {
+            this.weekTimeLimit = weekTimeLimit;
+        }
+    }
+
+    public class Administrator : HourlyRatedEmployee
+    {
+        public Administrator(string Id, string name, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(Id, name, adress, phone, holidays, password, weekTimeLimit)
+        {
+
+        }
     }
 
     public class CompanyData
     {
-        public List<Staff> staffList { get; set; }
+        public Dictionary<string, Employee> employees { get; set; }
+        public string logoPath { get; set; }
         public string companyName { get; set; }
 
-        public CompanyData()
+        public CompanyData(string companyName, string logoPath = "logo.png")
         {
-            staffList = new List<Staff>();
-            companyName = string.Empty;
+            employees = new Dictionary<string, Employee>();
+            this.companyName = companyName;
+            this.logoPath = logoPath;
         }
 
-        public void addStaff(Staff staff)
+        public void addEmployee(Employee employee)
         {
-            staffList.Add(staff);
+            employees.Add(employee.Id, employee);
+            if(employee.supervisor != null)
+            {
+                employee.supervisor.subordinates.Add(employee.Id, employee);
+            }
+        }
+
+        public void removeEmployee(Employee employee)
+        {
+            employees.Remove(employee.Id);
+            if (employee.supervisor != null)
+            {
+                employee.supervisor.subordinates.Remove(employee.Id);
+            }
         }
     }
 
@@ -151,11 +220,13 @@ namespace Mitarbeiterverwaltung
             InitFileParser initFileParser = new InitFileParser();
             initFileParser.parseFile("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
 
+            CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
+            HourlyRatedEmployee damian = new HourlyRatedEmployee("1", "Damian Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
+            HourlyRatedEmployee leon = new HourlyRatedEmployee("2", "Leon Farchau", "Unterhausstra�e 19", "05654 568423", 27, "qwertzuiop�", new TimeSpan(30,0,0));
+            leon.supervisor = damian;
+            companyData.addEmployee(damian);
+            companyData.addEmployee(leon);
 
-            CompanyData staffData = new CompanyData();
-            Staff staff = new Staff();
-            staff.surname = "Nachname";
-            staffData.addStaff(staff);
 
             JSONHandler jsonHandler = new JSONHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\test.json");
             jsonHandler.save(staffData);
