@@ -86,6 +86,58 @@ namespace Mitarbeiterverwaltung
         {
             this.weekTimeLimit = weekTimeLimit;
         }
+
+        public bool checkIn()
+        {
+            //checkIn only possible if last action was a checkOut
+            if (startTime > endTime)
+            {
+                return false;
+            }
+
+            DateTime now = DateTime.Now;
+
+            //if endTime was today, then add time between endTime and now to pausetime
+            if (endTime > DateTime.Today)
+            {
+                pauseTime += now - endTime;
+            }
+            else
+            {
+                //TODO handle holidays
+
+                //start of new day
+                timeWorkedToday = TimeSpan.Zero;
+
+                //if endTime was last week reset totalWorktime and add overtime
+                if (endTime.DayOfWeek > now.DayOfWeek)
+                {
+                    overtime += totalWorktime - weekTimeLimit;
+                    totalWorktime = TimeSpan.Zero;
+                }
+
+            }
+
+            startTime = now;
+            return true;
+        }
+
+        public bool checkOut()
+        {
+            //checkOut only possible if last action was a checkIn
+            if (endTime > startTime)
+            {
+                return false;
+            }
+
+            DateTime now = DateTime.Now;
+
+            timeWorkedToday += now - endTime;
+            totalWorktime += now - endTime;
+
+            endTime = now;
+            return true;
+        }
     }
 
     public class Administrator : HourlyRatedEmployee
