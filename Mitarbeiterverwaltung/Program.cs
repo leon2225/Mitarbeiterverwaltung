@@ -46,6 +46,16 @@ namespace Mitarbeiterverwaltung
 
             setPassword(password);
         }
+
+        public void requestHoliday(DateTime startTime, DateTime endTime)
+        {
+            HolidayRequest holidayRequest = new HolidayRequest();
+            holidayRequest.startTime = startTime;
+            holidayRequest.endTime = endTime;
+            holidayRequest.state = RequestState.pending;
+
+            this.holidayRequests.Add(holidayRequest);
+        }
         private byte[] GetHash(string inputString)
         {
             using (HashAlgorithm algorithm = SHA256.Create())
