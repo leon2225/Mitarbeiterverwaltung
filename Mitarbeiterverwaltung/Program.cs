@@ -445,7 +445,7 @@ namespace Mitarbeiterverwaltung
 
 
             Application.EnableVisualStyles();
-            Application.Run(new MainViewL());
+            Application.Run(new MainViewL(companyData));
             return;
 
         }

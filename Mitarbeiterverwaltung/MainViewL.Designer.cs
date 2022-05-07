@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Mitarbeiter 1",
-            "",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Mitarbeiter 2");
+            "5",
+            "Rolf",
+            "12"}, -1);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveIniFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +53,7 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listView_staffMembers = new System.Windows.Forms.ListView();
+            this.lvEmployees = new System.Windows.Forms.ListView();
             this.ID = new System.Windows.Forms.ColumnHeader();
             this.Nachname = new System.Windows.Forms.ColumnHeader();
             this.Vorname = new System.Windows.Forms.ColumnHeader();
@@ -284,30 +283,29 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Mitarbeiter ID:";
             // 
-            // listView_staffMembers
+            // lvEmployees
             // 
-            this.listView_staffMembers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ID,
             this.Nachname,
             this.Vorname,
-            this.Wochenarbeitszeit,
-            this.Urlaubstage,
             this.subordinates,
+            this.Wochenarbeitszeit,
             this.totalWorktime,
-            this.overtime});
-            this.listView_staffMembers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView_staffMembers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.listView_staffMembers.Location = new System.Drawing.Point(0, 0);
-            this.listView_staffMembers.MultiSelect = false;
-            this.listView_staffMembers.Name = "listView_staffMembers";
-            this.listView_staffMembers.Size = new System.Drawing.Size(1184, 535);
-            this.listView_staffMembers.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listView_staffMembers.TabIndex = 12;
-            this.listView_staffMembers.UseCompatibleStateImageBehavior = false;
-            this.listView_staffMembers.View = System.Windows.Forms.View.Details;
-            this.listView_staffMembers.SelectedIndexChanged += new System.EventHandler(this.listView_staffMembers_SelectedIndexChanged);
+            this.overtime,
+            this.Urlaubstage});
+            this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.lvEmployees.Location = new System.Drawing.Point(0, 0);
+            this.lvEmployees.MultiSelect = false;
+            this.lvEmployees.Name = "lvEmployees";
+            this.lvEmployees.Size = new System.Drawing.Size(1184, 535);
+            this.lvEmployees.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.lvEmployees.TabIndex = 12;
+            this.lvEmployees.UseCompatibleStateImageBehavior = false;
+            this.lvEmployees.View = System.Windows.Forms.View.Details;
+            this.lvEmployees.SelectedIndexChanged += new System.EventHandler(this.listView_staffMembers_SelectedIndexChanged);
             // 
             // ID
             // 
@@ -327,14 +325,12 @@
             // 
             // Wochenarbeitszeit
             // 
-            this.Wochenarbeitszeit.DisplayIndex = 4;
             this.Wochenarbeitszeit.Text = "Wochenarbeitszeit";
             this.Wochenarbeitszeit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Wochenarbeitszeit.Width = 120;
             // 
             // Urlaubstage
             // 
-            this.Urlaubstage.DisplayIndex = 3;
             this.Urlaubstage.Text = "Urlaubstage";
             this.Urlaubstage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Urlaubstage.Width = 80;
@@ -360,7 +356,7 @@
             this.managementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.managementPanel.Controls.Add(this.listView_staffMembers);
+            this.managementPanel.Controls.Add(this.lvEmployees);
             this.managementPanel.Location = new System.Drawing.Point(0, 47);
             this.managementPanel.Name = "managementPanel";
             this.managementPanel.Size = new System.Drawing.Size(1184, 535);
@@ -407,8 +403,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
-            this.Controls.Add(this.loginPanel);
-            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -416,6 +410,8 @@
             this.Controls.Add(this.btnPanelCtrl);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.loginPanel);
+            this.Controls.Add(this.checkInPanel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainViewL";
             this.Text = "MainViewL";
@@ -451,7 +447,7 @@
         private Button button3;
         private Panel panel1;
         private Panel managementPanel;
-        private ListView listView_staffMembers;
+        private ListView lvEmployees;
         private ColumnHeader ID;
         private ColumnHeader Nachname;
         private ColumnHeader Vorname;

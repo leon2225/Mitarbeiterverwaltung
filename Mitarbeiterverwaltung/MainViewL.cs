@@ -13,9 +13,11 @@ namespace Mitarbeiterverwaltung
     public partial class MainViewL : Form
     {
         Panel ?activePanel;
+        private CompanyData companyData;
 
-        public MainViewL()
+        public MainViewL(CompanyData companyData)
         {
+            this.companyData = companyData;
             InitializeComponent();
         }
 
@@ -26,12 +28,38 @@ namespace Mitarbeiterverwaltung
 
         private void MainViewL_Load(object sender, EventArgs e)
         {
-            activePanel = loginPanel;
-            btnAddEmployee.Visible = false;
-            btnRemoveEmployee.Visible = false;
-            managementPanel.Visible = false;
-            checkInPanel.Visible = false;
+            
+            updatelvEmployees();
+            changeToManagement();
 
+        }
+
+        private void updatelvEmployees()
+        {
+            lvEmployees.Items.Clear();
+            foreach (var employee in companyData.employees.Values)
+            {
+                addEmployeeToList((HourlyRatedEmployee)employee);
+            }
+        }
+
+        private void addEmployeeToList(HourlyRatedEmployee employee)
+        {
+            List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.name + ", " + kvp.Value.surname)).ToList(); ;
+            string subordinatesString = string.Join(", ", subordinates);
+
+            ListViewItem listItem = new ListViewItem(new string[] {
+                employee.Id,
+                employee.surname,
+                employee.name,
+                subordinatesString,
+                employee.weekTimeLimit.TotalHours.ToString(),
+                employee.totalWorktime.ToString(),
+                employee.overtime.ToString(),
+                employee.holidays.ToString()
+            });
+
+            lvEmployees.Items.Add(listItem);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -56,7 +84,19 @@ namespace Mitarbeiterverwaltung
 
         private void listView_staffMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Test");
+            var indices = lvEmployees.SelectedIndices;
+            if(indices.Count > 0)
+            {
+                string id = lvEmployees.SelectedIndices[0].ToString();
+                HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
+                if (currentEmployee != null)
+                {
+                    currentEmployee.name += "!";
+                    updatelvEmployees();
+                }
+            }
+            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
