@@ -1,4 +1,6 @@
 using System.Text.Json;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Mitarbeiterverwaltung
 {
@@ -43,6 +45,30 @@ namespace Mitarbeiterverwaltung
             this.holidayRequests = new List<HolidayRequest>();
 
             setPassword(password);
+        }
+        private byte[] GetHash(string inputString)
+        {
+            using (HashAlgorithm algorithm = SHA256.Create())
+                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        private string hashPassword(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(password))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+
+        public void setPassword(string password)
+        {
+            passwordHash = hashPassword(password);
+        }
+
+        public bool checkPassword(string password)
+        {
+            return hashPassword(password).Equals(passwordHash);
         }
     }
 
