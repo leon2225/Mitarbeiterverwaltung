@@ -23,6 +23,7 @@ namespace Mitarbeiterverwaltung
     }
     public class Employee
     {
+        private static int numberOfEmployees = 0;
         public string Id { get; set; }
         public string passwordHash { get; set; }
         public string name { get; set; }
@@ -34,9 +35,9 @@ namespace Mitarbeiterverwaltung
         public Dictionary<string, Employee> subordinates { get; set; }
         public List<HolidayRequest> holidayRequests { get; set; }
 
-        public Employee(string Id, string name, string surname, string adress, string phone, int holidays, string password)
+        public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = Id; //TODO add auto Id
+            this.Id = numberOfEmployees++.ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
@@ -94,7 +95,7 @@ namespace Mitarbeiterverwaltung
         public TimeSpan pauseTime { get; set; } = TimeSpan.Zero;
         public TimeSpan overtime { get; set; } = TimeSpan.Zero; //overtime until last month
 
-        public HourlyRatedEmployee(string Id, string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(Id, name, surname, adress, phone, holidays, password)
+        public HourlyRatedEmployee(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password)
         {
             this.weekTimeLimit = weekTimeLimit;
         }
@@ -154,7 +155,7 @@ namespace Mitarbeiterverwaltung
 
     public class Administrator : HourlyRatedEmployee
     {
-        public Administrator(string Id, string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(Id, name, surname, adress, phone, holidays, password, weekTimeLimit)
+        public Administrator(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password, weekTimeLimit)
         {
 
         }
@@ -233,7 +234,8 @@ namespace Mitarbeiterverwaltung
                 var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
                 int holidays = int.Parse(p["holidays"]);
                 TimeSpan weekTimeLimit = TimeSpan.Parse(p["weekTimeLimit"]);
-                HourlyRatedEmployee employee = new HourlyRatedEmployee(p["Id"], p["name"], p["surname"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
+                HourlyRatedEmployee employee = new HourlyRatedEmployee(p["name"], p["surname"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
+                employee.Id = p["Id"];
                 employee.overtime = TimeSpan.Parse(p["overtime"]);
                 employee.endTime = DateTime.Parse(p["endTime"]);
                 employee.startTime = DateTime.Parse(p["startTime"]);
@@ -427,8 +429,8 @@ namespace Mitarbeiterverwaltung
 
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
-            HourlyRatedEmployee damian = new HourlyRatedEmployee("1", "Damian", "Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
-            HourlyRatedEmployee leon = new HourlyRatedEmployee("2", "Leon", "Farchau", "Unterhausstra�e 19", "05654 568423", 27, "qwertzuiop�", new TimeSpan(30,0,0));
+            HourlyRatedEmployee damian = new HourlyRatedEmployee("Damian", "Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
+            HourlyRatedEmployee leon = new HourlyRatedEmployee("Leon", "Farchau", "Unterhausstra�e 19", "05654 568423", 27, "qwertzuiop�", new TimeSpan(30,0,0));
             leon.supervisor = damian;
             companyData.addEmployee(damian);
             companyData.addEmployee(leon);

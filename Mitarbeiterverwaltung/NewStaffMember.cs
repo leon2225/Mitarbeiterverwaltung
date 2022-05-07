@@ -11,8 +11,8 @@ namespace Mitarbeiterverwaltung
         {
             HourlyRatedEmployee staff = new HourlyRatedEmployee
             (
-                "12",
                 this.textBox_name.Text,
+                this.textBox_surname.Text,
                 this.label_adress.Text,
                 this.textBox_phone.Text,
                 Int32.Parse(this.label_holidays.Text),
