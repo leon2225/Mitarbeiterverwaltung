@@ -425,8 +425,8 @@ namespace Mitarbeiterverwaltung
 
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
-            HourlyRatedEmployee damian = new HourlyRatedEmployee("1", "Damian Goldbach", "Oberhausstraße 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
-            HourlyRatedEmployee leon = new HourlyRatedEmployee("2", "Leon Farchau", "Unterhausstraße 19", "05654 568423", 27, "qwertzuiopü", new TimeSpan(30,0,0));
+            HourlyRatedEmployee damian = new HourlyRatedEmployee("1", "Damian Goldbach", "Oberhausstraï¿½e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
+            HourlyRatedEmployee leon = new HourlyRatedEmployee("2", "Leon Farchau", "Unterhausstraï¿½e 19", "05654 568423", 27, "qwertzuiopï¿½", new TimeSpan(30,0,0));
             leon.supervisor = damian;
             companyData.addEmployee(damian);
             companyData.addEmployee(leon);
