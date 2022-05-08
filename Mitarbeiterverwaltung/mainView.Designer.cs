@@ -41,13 +41,13 @@
             this.button_removeStaffMember = new System.Windows.Forms.Button();
             this.label_headerUser = new System.Windows.Forms.Label();
             this.listView_staffMembers = new System.Windows.Forms.ListView();
+            this.ID = new System.Windows.Forms.ColumnHeader();
             this.Nachname = new System.Windows.Forms.ColumnHeader();
             this.Vorname = new System.Windows.Forms.ColumnHeader();
             this.Benutzername = new System.Windows.Forms.ColumnHeader();
             this.Passwort = new System.Windows.Forms.ColumnHeader();
-            this.Urlaubstage = new System.Windows.Forms.ColumnHeader();
             this.Wochenarbeitszeit = new System.Windows.Forms.ColumnHeader();
-            this.ID = new System.Windows.Forms.ColumnHeader();
+            this.Urlaubstage = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // label_headerAdmin
@@ -148,6 +148,11 @@
             this.listView_staffMembers.TabIndex = 11;
             this.listView_staffMembers.UseCompatibleStateImageBehavior = false;
             this.listView_staffMembers.View = System.Windows.Forms.View.Details;
+            this.listView_staffMembers.SelectedIndexChanged += new System.EventHandler(this.listView_staffMembers_SelectedIndexChanged);
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
             // 
             // Nachname
             // 
@@ -169,27 +174,23 @@
             this.Passwort.Text = "Passwort";
             this.Passwort.Width = 80;
             // 
-            // Urlaubstage
-            // 
-            this.Urlaubstage.DisplayIndex = 5;
-            this.Urlaubstage.Text = "Urlaubstage";
-            this.Urlaubstage.Width = 80;
-            // 
             // Wochenarbeitszeit
             // 
             this.Wochenarbeitszeit.DisplayIndex = 6;
             this.Wochenarbeitszeit.Text = "Wochenarbeitszeit";
             this.Wochenarbeitszeit.Width = 120;
             // 
-            // ID
+            // Urlaubstage
             // 
-            this.ID.Text = "ID";
+            this.Urlaubstage.DisplayIndex = 5;
+            this.Urlaubstage.Text = "Urlaubstage";
+            this.Urlaubstage.Width = 80;
             // 
             // mainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 266);
+            this.ClientSize = new System.Drawing.Size(990, 261);
             this.Controls.Add(this.listView_staffMembers);
             this.Controls.Add(this.label_headerUser);
             this.Controls.Add(this.button_removeStaffMember);
