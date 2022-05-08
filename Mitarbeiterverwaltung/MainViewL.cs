@@ -79,7 +79,13 @@ namespace Mitarbeiterverwaltung
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            NewStaffMember newStaffMember = new NewStaffMember(null);
+            DialogResult result = newStaffMember.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                companyData.addEmployee(newStaffMember.getUserData());
+                updatelvEmployees();
+            }
         }
 
         private void listView_staffMembers_SelectedIndexChanged(object sender, EventArgs e)
