@@ -15,6 +15,7 @@ namespace Mitarbeiterverwaltung
     {
         Panel ?activePanel;
         private CompanyData companyData;
+        private HourlyRatedEmployee currentEmployee;
         private Dictionary<string, ListViewItem> lvItems;
 
         public MainViewL(CompanyData companyData)
@@ -143,11 +144,25 @@ namespace Mitarbeiterverwaltung
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            changeToCheckin();
+            string Id = txtEmployeeId.Text;
+            if(companyData.employees[Id].checkPassword(txtPassword.Text))
+            {
+                txtPassword.Text = "";
+                txtEmployeeId.Text = "";
+                lblWrongPwd.Visible = false;
+                currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
+                changeToCheckin();
+            }
+            else
+            {
+                lblWrongPwd.Visible = true;
+            }
+            
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+            currentEmployee = null;
             changeToLogin();
         }
 
@@ -169,6 +184,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Visible = true;
             checkInPanel.BringToFront();
             btnPanelCtrl.Text = "Mitarbeiter verwalten";
+            lblWelcome.Text = "Willkommen " + currentEmployee.name + "!";
             activePanel = checkInPanel;
         }
         private void changeToManagement()
