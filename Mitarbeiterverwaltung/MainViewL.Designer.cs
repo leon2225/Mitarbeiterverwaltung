@@ -43,8 +43,9 @@
             this.btnLogout = new System.Windows.Forms.Button();
             this.checkInPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblCheckInState = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblWrongPwd = new System.Windows.Forms.Label();
@@ -132,14 +133,13 @@
             // lblClock
             // 
             this.lblClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblClock.AutoSize = true;
             this.lblClock.Font = new System.Drawing.Font("Monospac821 BT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblClock.Location = new System.Drawing.Point(1131, 26);
+            this.lblClock.Location = new System.Drawing.Point(1113, 26);
             this.lblClock.Name = "lblClock";
-            this.lblClock.Size = new System.Drawing.Size(53, 18);
+            this.lblClock.Size = new System.Drawing.Size(71, 18);
             this.lblClock.TabIndex = 1;
             this.lblClock.Text = "22:18";
-            this.lblClock.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblClock.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnLogout
             // 
@@ -168,12 +168,23 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.lblCheckInState);
             this.panel1.Controls.Add(this.lblWelcome);
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btnCheckIn);
             this.panel1.Location = new System.Drawing.Point(434, 205);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(317, 96);
             this.panel1.TabIndex = 2;
+            // 
+            // lblCheckInState
+            // 
+            this.lblCheckInState.AutoSize = true;
+            this.lblCheckInState.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblCheckInState.Location = new System.Drawing.Point(3, 61);
+            this.lblCheckInState.Name = "lblCheckInState";
+            this.lblCheckInState.Size = new System.Drawing.Size(136, 25);
+            this.lblCheckInState.TabIndex = 2;
+            this.lblCheckInState.Text = "Eingestempelt!";
             // 
             // lblWelcome
             // 
@@ -323,6 +334,7 @@
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
+            listViewItem1.StateImageIndex = 0;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
@@ -486,5 +498,6 @@
         private Label label4;
         private Label label3;
         private Label lblWrongPwd;
+        private Label lblCheckInState;
     }
 }

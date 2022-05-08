@@ -151,6 +151,21 @@ namespace Mitarbeiterverwaltung
             checkInPanel.Visible = false;
             loginPanel.Visible = false;
         }
+
+        private void updateCheckInState()
+        {
+            bool checkedIn = currentEmployee.startTime > currentEmployee.endTime;
+            if (checkedIn)
+            {
+                lblCheckInState.Text = "Eingestempelt";
+                btnCheckIn.Text = "Ausstempeln";
+            }
+            else
+            {
+                btnCheckIn.Text = "Einstempeln";
+                lblCheckInState.Text = "Ausgestempelt";
+            }
+        }
         private void changeToCheckin()
         {
             hideAll();
@@ -161,6 +176,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Text = "Mitarbeiter verwalten";
             lblWelcome.Text = "Willkommen " + currentEmployee.name + "!";
             activePanel = checkInPanel;
+            updateCheckInState();
         }
         private void changeToManagement()
         {
@@ -173,6 +189,7 @@ namespace Mitarbeiterverwaltung
             managementPanel.BringToFront();
             btnPanelCtrl.Text = "Ein / Ausstemplen";
             activePanel = managementPanel;
+            updatelvEmployees();
         }
 
         private void changeToLogin()
@@ -215,6 +232,16 @@ namespace Mitarbeiterverwaltung
                     updatelvEmployees();
                 }
             }
+        }
+
+        private void btnCheckIn_Click(object sender, EventArgs e)
+        {
+            if (currentEmployee.startTime > currentEmployee.endTime)
+                currentEmployee.checkOut();
+            else
+                currentEmployee.checkIn();
+
+            updateCheckInState();
         }
     }
 }
