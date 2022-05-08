@@ -71,6 +71,13 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        private TimeSpan roundTimeSpan(TimeSpan inTimeSpan, int numberOfMinutes)
+        {
+            int roundedMinutes = ((inTimeSpan.Minutes + numberOfMinutes / 2) / numberOfMinutes) * numberOfMinutes;
+            TimeSpan timeSpan = new TimeSpan(inTimeSpan.Days ,inTimeSpan.Hours, roundedMinutes, 0);
+            return timeSpan;
+        }
+
         private ListViewItem employeeToItem(HourlyRatedEmployee employee)
         {
             List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.surname + ", " + kvp.Value.name)).ToList(); ;
@@ -82,8 +89,8 @@ namespace Mitarbeiterverwaltung
                 employee.name,
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
-                employee.totalWorktime.ToString(),
-                employee.overtime.ToString(),
+                roundTimeSpan(employee.totalWorktime, 15).ToString(),
+                roundTimeSpan(employee.overtime, 15).ToString(),
                 employee.holidays.ToString()
             });
             return listItem;
