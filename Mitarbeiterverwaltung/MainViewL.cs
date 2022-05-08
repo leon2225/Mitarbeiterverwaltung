@@ -23,6 +23,18 @@ namespace Mitarbeiterverwaltung
             this.companyData = companyData;
             lvItems = new Dictionary<string, ListViewItem > ();
             InitializeComponent();
+            var timer = new System.Windows.Forms.Timer ();
+            timer.Tick += new EventHandler (updateTime);
+            timer.Interval = 1000;
+            timer.Start ();
+            updateTime(new object(), new EventArgs ());
+        }
+
+        private void updateTime(Object myObject, EventArgs myEventArgs)
+        {
+            string seperator = DateTime.Now.Second % 2 == 0 ? ":" : " ";
+            string timeString = DateTime.Now.Hour.ToString() + seperator + DateTime.Now.Minute.ToString();
+            lblClock.Text = timeString;
         }
 
         private void saveIniFileToolStripMenuItem_Click(object sender, EventArgs e)
