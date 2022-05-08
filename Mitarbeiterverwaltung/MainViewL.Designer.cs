@@ -140,6 +140,7 @@
             this.lblClock.TabIndex = 1;
             this.lblClock.Text = "22:18";
             this.lblClock.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblClock.Click += new System.EventHandler(this.lblClock_Click);
             // 
             // btnLogout
             // 

@@ -10,6 +10,32 @@ namespace Mitarbeiterverwaltung
         accepted,
         denied
     }
+
+    public class TimeHandler
+    {
+        private TimeSpan offset;
+
+        public TimeHandler()
+        {
+            offset = TimeSpan.Zero;
+        }
+
+        public DateTime getTime()
+        {
+            return DateTime.Now + offset;
+        }
+
+        public void setTime(DateTime time)
+        {
+            offset = time - DateTime.Now;
+        }
+
+        public void setOffset(TimeSpan offset)
+        {
+            this.offset = offset;
+        }
+    }
+
     public class HolidayRequest
     {
         public DateTime startTime { get; set; }
@@ -100,7 +126,7 @@ namespace Mitarbeiterverwaltung
             this.weekTimeLimit = weekTimeLimit;
         }
 
-        public bool checkIn()
+        public bool checkIn(TimeHandler timeHandler)
         {
             //checkIn only possible if last action was a checkOut
             if (startTime > endTime)
@@ -108,7 +134,7 @@ namespace Mitarbeiterverwaltung
                 return false;
             }
 
-            DateTime now = DateTime.Now;
+            DateTime now = timeHandler.getTime();
 
             //if endTime was today, then add time between endTime and now to pausetime
             if (endTime > DateTime.Today)
@@ -135,7 +161,7 @@ namespace Mitarbeiterverwaltung
             return true;
         }
 
-        public bool checkOut()
+        public bool checkOut(TimeHandler timeHandler)
         {
             //checkOut only possible if last action was a checkIn
             if (endTime > startTime)
@@ -143,7 +169,7 @@ namespace Mitarbeiterverwaltung
                 return false;
             }
 
-            DateTime now = DateTime.Now;
+            DateTime now = timeHandler.getTime();
 
             timeWorkedToday += now - startTime;
             totalWorktime += now - startTime;
@@ -166,6 +192,7 @@ namespace Mitarbeiterverwaltung
         public Dictionary<string, Employee> employees { get; set; }
         public string logoPath { get; set; }
         public string companyName { get; set; }
+
 
         public CompanyData(string companyName, string logoPath = "logo.png")
         {

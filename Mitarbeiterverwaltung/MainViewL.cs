@@ -17,9 +17,11 @@ namespace Mitarbeiterverwaltung
         private CompanyData companyData;
         private HourlyRatedEmployee currentEmployee;
         private Dictionary<string, ListViewItem> lvItems;
+        private TimeHandler timeHandler;
 
         public MainViewL(CompanyData companyData)
         {
+            this.timeHandler = new TimeHandler();
             this.companyData = companyData;
             lvItems = new Dictionary<string, ListViewItem > ();
             InitializeComponent();
@@ -32,8 +34,8 @@ namespace Mitarbeiterverwaltung
 
         private void updateTime(Object myObject, EventArgs myEventArgs)
         {
-            string seperator = DateTime.Now.Second % 2 == 0 ? ":" : " ";
-            string timeString = DateTime.Now.Hour.ToString("D2")+ seperator + DateTime.Now.Minute.ToString("D2");
+            string seperator = timeHandler.getTime().Second % 2 == 0 ? ":" : " ";
+            string timeString = timeHandler.getTime().Hour.ToString("D2")+ seperator + timeHandler.getTime().Minute.ToString("D2");
             lblClock.Text = timeString;
         }
 
@@ -237,11 +239,17 @@ namespace Mitarbeiterverwaltung
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             if (currentEmployee.startTime > currentEmployee.endTime)
-                currentEmployee.checkOut();
+                currentEmployee.checkOut(timeHandler);
             else
-                currentEmployee.checkIn();
+                currentEmployee.checkIn(timeHandler);
 
             updateCheckInState();
+        }
+
+        private void lblClock_Click(object sender, EventArgs e)
+        {
+            timeHandler.setTime(timeHandler.getTime() + TimeSpan.FromHours(1));
+            updateTime(new object(), new EventArgs());
         }
     }
 }
