@@ -33,7 +33,7 @@ namespace Mitarbeiterverwaltung
         private void updateTime(Object myObject, EventArgs myEventArgs)
         {
             string seperator = DateTime.Now.Second % 2 == 0 ? ":" : " ";
-            string timeString = DateTime.Now.Hour.ToString() + seperator + DateTime.Now.Minute.ToString();
+            string timeString = DateTime.Now.Hour.ToString("D2")+ seperator + DateTime.Now.Minute.ToString("D2");
             lblClock.Text = timeString;
         }
 
@@ -71,7 +71,7 @@ namespace Mitarbeiterverwaltung
 
         private ListViewItem employeeToItem(HourlyRatedEmployee employee)
         {
-            List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.name + ", " + kvp.Value.surname)).ToList(); ;
+            List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.surname + ", " + kvp.Value.name)).ToList(); ;
             string subordinatesString = string.Join("; ", subordinates);
 
             ListViewItem listItem = new ListViewItem(new string[] {
@@ -92,36 +92,6 @@ namespace Mitarbeiterverwaltung
             ListViewItem newItem = employeeToItem(employee);
             lvEmployees.Items.Add(newItem);
             lvItems.Add(employee.Id, newItem);
-            
-            /*
-            int Id = Int32.Parse(employee.Id);
-            if (lvEmployees.Items.Count > Id)
-            {
-                for (int i = 0; i < newItem.SubItems.Count; i++)
-                {
-                    lvEmployees.Items[Id].SubItems[i] = newItem.SubItems[i];
-                }
-            }
-            else
-            {
-                
-            }*/
-            
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -133,13 +103,6 @@ namespace Mitarbeiterverwaltung
                 companyData.addEmployee(newStaffMember.getUserData());
                 updatelvEmployees();
             }
-        }
-
-        private void listView_staffMembers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -230,11 +193,6 @@ namespace Mitarbeiterverwaltung
             {
                 btnRemoveEmployee.Enabled = false;
             }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void btnRemoveEmployee_Click(object sender, EventArgs e)

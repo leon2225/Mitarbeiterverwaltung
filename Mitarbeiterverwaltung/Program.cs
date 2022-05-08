@@ -145,8 +145,8 @@ namespace Mitarbeiterverwaltung
 
             DateTime now = DateTime.Now;
 
-            timeWorkedToday += now - endTime;
-            totalWorktime += now - endTime;
+            timeWorkedToday += now - startTime;
+            totalWorktime += now - startTime;
 
             endTime = now;
             return true;
@@ -433,23 +433,23 @@ namespace Mitarbeiterverwaltung
 
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
-            HourlyRatedEmployee karl = new HourlyRatedEmployee("Karl", "Heiner", "Oberhausstrasse 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
-            HourlyRatedEmployee emil = new HourlyRatedEmployee("Emil", "Jansen", "Unterhausstrasse 19", "05654 568423", 27, "qwertzuiop", new TimeSpan(30, 0, 0));
-            HourlyRatedEmployee jens = new HourlyRatedEmployee("Jens", "Hohtal", "Mittelhausstrasse 68", "05694 3254315", 27, "asdfwefdas", new TimeSpan(30, 0, 0));
-            karl.supervisor = jens;
-            emil.supervisor = jens;
-            companyData.addEmployee(jens);
-            companyData.addEmployee(karl);
-            companyData.addEmployee(emil);
+            //HourlyRatedEmployee karl = new HourlyRatedEmployee("Karl", "Heiner", "Oberhausstrasse 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
+            //HourlyRatedEmployee emil = new HourlyRatedEmployee("Emil", "Jansen", "Unterhausstrasse 19", "05654 568423", 27, "qwertzuiop", new TimeSpan(30, 0, 0));
+            //HourlyRatedEmployee jens = new HourlyRatedEmployee("Jens", "Hohtal", "Mittelhausstrasse 68", "05694 3254315", 27, "asdfwefdas", new TimeSpan(30, 0, 0));
+            //karl.supervisor = jens;
+            //emil.supervisor = jens;
+            //companyData.addEmployee(jens);
+            //companyData.addEmployee(karl);
+            //companyData.addEmployee(emil);
 
             //JSONHandler jsonHandler = new JSONHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\test.json");
             //jsonHandler.save(companyData);
             //CompanyData? loadedStaff = jsonHandler.load();
 
             var csvStorageHandler = new CSVStorageHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data.csv");
-            csvStorageHandler.save(companyData.employees);
+            //csvStorageHandler.save(companyData.employees);
             var loadedEmployees = csvStorageHandler.load();
-
+            companyData.employees = loadedEmployees;
 
             Application.EnableVisualStyles();
             Application.Run(new MainViewL(companyData));

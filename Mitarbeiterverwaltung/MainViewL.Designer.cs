@@ -185,18 +185,18 @@
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "Hallo Leon!";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblWelcome.Click += new System.EventHandler(this.label2_Click_1);
             // 
-            // button3
+            // btnCheckIn
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(180, 53);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(137, 40);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Einstempeln";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnCheckIn.Location = new System.Drawing.Point(180, 53);
+            this.btnCheckIn.Name = "btnCheckIn";
+            this.btnCheckIn.Size = new System.Drawing.Size(137, 40);
+            this.btnCheckIn.TabIndex = 1;
+            this.btnCheckIn.Text = "Einstempeln";
+            this.btnCheckIn.UseVisualStyleBackColor = true;
+            this.btnCheckIn.Click += new System.EventHandler(this.btnCheckIn_Click);
             // 
             // loginPanel
             // 
@@ -428,8 +428,8 @@
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.managementPanel);
-            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
+            this.Controls.Add(this.checkInPanel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainViewL";
             this.Text = "MainViewL";
@@ -439,6 +439,7 @@
             this.checkInPanel.ResumeLayout(false);
             this.checkInPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.loginPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -462,7 +463,7 @@
         private Button btnPanelCtrl;
         private Button btnLogout;
         private Label lblWelcome;
-        private Button button3;
+        private Button btnCheckIn;
         private Panel panel1;
         private Panel managementPanel;
         private ListView lvEmployees;
