@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Mitarbeiterverwaltung
 {
@@ -14,10 +15,12 @@ namespace Mitarbeiterverwaltung
     {
         Panel ?activePanel;
         private CompanyData companyData;
+        private Dictionary<string, ListViewItem> lvItems;
 
         public MainViewL(CompanyData companyData)
         {
             this.companyData = companyData;
+            lvItems = new Dictionary<string, ListViewItem > ();
             InitializeComponent();
         }
 
@@ -28,25 +31,35 @@ namespace Mitarbeiterverwaltung
 
         private void MainViewL_Load(object sender, EventArgs e)
         {
-            
+            lvEmployees.Items.Clear();
             updatelvEmployees();
-            changeToManagement();
+            changeToLogin();
 
         }
 
         private void updatelvEmployees()
         {
-            lvEmployees.Items.Clear();
+            
             foreach (var employee in companyData.employees.Values)
             {
-                addEmployeeToList((HourlyRatedEmployee)employee);
+                string Id = employee.Id;
+                if (!lvItems.ContainsKey(Id))
+                    addEmployeeToList((HourlyRatedEmployee)employee);
+                else
+                {
+                    ListViewItem newItem = employeeToItem((HourlyRatedEmployee)employee);
+                    for (int i = 0; i < newItem.SubItems.Count; i++)
+                    {
+                        lvItems[Id].SubItems[i] = newItem.SubItems[i];
+                    }
+                }
             }
         }
 
-        private void addEmployeeToList(HourlyRatedEmployee employee)
+        private ListViewItem employeeToItem(HourlyRatedEmployee employee)
         {
             List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.name + ", " + kvp.Value.surname)).ToList(); ;
-            string subordinatesString = string.Join(", ", subordinates);
+            string subordinatesString = string.Join("; ", subordinates);
 
             ListViewItem listItem = new ListViewItem(new string[] {
                 employee.Id,
@@ -58,8 +71,29 @@ namespace Mitarbeiterverwaltung
                 employee.overtime.ToString(),
                 employee.holidays.ToString()
             });
+            return listItem;
+        }
 
-            lvEmployees.Items.Add(listItem);
+        private void addEmployeeToList(HourlyRatedEmployee employee)
+        {
+            ListViewItem newItem = employeeToItem(employee);
+            lvEmployees.Items.Add(newItem);
+            lvItems.Add(employee.Id, newItem);
+            
+            /*
+            int Id = Int32.Parse(employee.Id);
+            if (lvEmployees.Items.Count > Id)
+            {
+                for (int i = 0; i < newItem.SubItems.Count; i++)
+                {
+                    lvEmployees.Items[Id].SubItems[i] = newItem.SubItems[i];
+                }
+            }
+            else
+            {
+                
+            }*/
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -90,17 +124,7 @@ namespace Mitarbeiterverwaltung
 
         private void listView_staffMembers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var indices = lvEmployees.SelectedIndices;
-            if(indices.Count > 0)
-            {
-                string id = lvEmployees.SelectedIndices[0].ToString();
-                HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
-                if (currentEmployee != null)
-                {
-                    currentEmployee.name += "!";
-                    updatelvEmployees();
-                }
-            }
+            
             
 
         }
@@ -166,6 +190,45 @@ namespace Mitarbeiterverwaltung
             activePanel = loginPanel;
             loginPanel.Visible = true;
             loginPanel.BringToFront();
+        }
+
+        private void lvEmployees_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                btnRemoveEmployee.Enabled = true;
+            }
+            else
+            {
+                btnRemoveEmployee.Enabled = false;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveEmployee_Click(object sender, EventArgs e)
+        {
+            string id = lvEmployees.SelectedItems[0].Text;
+            HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
+            if (currentEmployee != null)
+            {
+                NewStaffMember newStaffMember = new NewStaffMember(currentEmployee);
+                DialogResult result = newStaffMember.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    newStaffMember.getUserData();
+                    updatelvEmployees();
+                }
+                else if (result == DialogResult.Abort)
+                {
+                    companyData.removeEmployee(currentEmployee);
+                    lvEmployees.SelectedItems[0].Remove();
+                    updatelvEmployees();
+                }
+            }
         }
     }
 }

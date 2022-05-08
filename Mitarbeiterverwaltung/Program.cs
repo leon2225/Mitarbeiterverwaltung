@@ -31,13 +31,13 @@ namespace Mitarbeiterverwaltung
         public string adress { get; set; }
         public string phone { get; set; }
         public int holidays { get; set; }
-        public Employee supervisor { get; set; }
+        public Employee ?supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
         public List<HolidayRequest> holidayRequests { get; set; }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = numberOfEmployees++.ToString(); //TODO add auto Id
+            this.Id = ((numberOfEmployees++) + 1).ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
@@ -189,6 +189,10 @@ namespace Mitarbeiterverwaltung
             if (employee.supervisor != null)
             {
                 employee.supervisor.subordinates.Remove(employee.Id);
+            }
+            foreach (Employee subordinate in employee.subordinates.Values)
+            {
+                subordinate.supervisor = employee.supervisor;
             }
         }
     }
@@ -429,11 +433,14 @@ namespace Mitarbeiterverwaltung
 
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
-            HourlyRatedEmployee damian = new HourlyRatedEmployee("Damian", "Goldbach", "Oberhausstra�e 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
-            HourlyRatedEmployee leon = new HourlyRatedEmployee("Leon", "Farchau", "Unterhausstra�e 19", "05654 568423", 27, "qwertzuiop�", new TimeSpan(30,0,0));
-            leon.supervisor = damian;
-            companyData.addEmployee(damian);
-            companyData.addEmployee(leon);
+            HourlyRatedEmployee karl = new HourlyRatedEmployee("Karl", "Heiner", "Oberhausstrasse 7", "01251 1351354", 30, "1234Super", new TimeSpan(37,0,0));
+            HourlyRatedEmployee emil = new HourlyRatedEmployee("Emil", "Jansen", "Unterhausstrasse 19", "05654 568423", 27, "qwertzuiop", new TimeSpan(30, 0, 0));
+            HourlyRatedEmployee jens = new HourlyRatedEmployee("Jens", "Hohtal", "Mittelhausstrasse 68", "05694 3254315", 27, "asdfwefdas", new TimeSpan(30, 0, 0));
+            karl.supervisor = jens;
+            emil.supervisor = jens;
+            companyData.addEmployee(jens);
+            companyData.addEmployee(karl);
+            companyData.addEmployee(emil);
 
             //JSONHandler jsonHandler = new JSONHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\test.json");
             //jsonHandler.save(companyData);

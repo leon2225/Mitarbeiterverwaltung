@@ -36,14 +36,15 @@
             this.label_phone = new System.Windows.Forms.Label();
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.textBox_surname = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_adress = new System.Windows.Forms.TextBox();
             this.textBox_phone = new System.Windows.Forms.TextBox();
-            this.textBox_workingTimeWeek = new System.Windows.Forms.TextBox();
+            this.textBox_weekTimeLimit = new System.Windows.Forms.TextBox();
             this.textBox_holidays = new System.Windows.Forms.TextBox();
             this.button_save = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.textBox_password = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label_name
@@ -121,14 +122,14 @@
             this.textBox_surname.Text = "Mustermann";
             this.textBox_surname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox1
+            // textBox_adress
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(106, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(344, 23);
-            this.textBox1.TabIndex = 9;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_adress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_adress.Location = new System.Drawing.Point(106, 113);
+            this.textBox_adress.Name = "textBox_adress";
+            this.textBox_adress.Size = new System.Drawing.Size(344, 23);
+            this.textBox_adress.TabIndex = 9;
+            this.textBox_adress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_phone
             // 
@@ -139,12 +140,12 @@
             this.textBox_phone.TabIndex = 10;
             this.textBox_phone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox_workingTimeWeek
+            // textBox_weekTimeLimit
             // 
-            this.textBox_workingTimeWeek.Location = new System.Drawing.Point(164, 180);
-            this.textBox_workingTimeWeek.Name = "textBox_workingTimeWeek";
-            this.textBox_workingTimeWeek.Size = new System.Drawing.Size(41, 23);
-            this.textBox_workingTimeWeek.TabIndex = 12;
+            this.textBox_weekTimeLimit.Location = new System.Drawing.Point(164, 180);
+            this.textBox_weekTimeLimit.Name = "textBox_weekTimeLimit";
+            this.textBox_weekTimeLimit.Size = new System.Drawing.Size(41, 23);
+            this.textBox_weekTimeLimit.TabIndex = 12;
             // 
             // textBox_holidays
             // 
@@ -178,14 +179,14 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(106, 79);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(344, 23);
-            this.txtPassword.TabIndex = 17;
-            this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox_password.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_password.Location = new System.Drawing.Point(106, 79);
+            this.textBox_password.Name = "txtPassword";
+            this.textBox_password.Size = new System.Drawing.Size(344, 23);
+            this.textBox_password.TabIndex = 17;
+            this.textBox_password.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_password.UseSystemPasswordChar = true;
+            this.textBox_password.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -197,19 +198,31 @@
             this.label1.Text = "Passwort";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemove.Location = new System.Drawing.Point(10, 217);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 18;
+            this.btnRemove.Text = "Entfernen";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.button1_Click);
+            // 
             // NewStaffMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(462, 252);
-            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.textBox_password);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.textBox_holidays);
-            this.Controls.Add(this.textBox_workingTimeWeek);
+            this.Controls.Add(this.textBox_weekTimeLimit);
             this.Controls.Add(this.textBox_phone);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_adress);
             this.Controls.Add(this.textBox_surname);
             this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label_phone);
@@ -236,15 +249,16 @@
         private Label label_phone;
         private TextBox textBox_name;
         private TextBox textBox_surname;
-        private TextBox textBox1;
+        private TextBox textBox_adress;
         private TextBox textBox_phone;
-        private TextBox textBox_workingTimeWeek;
+        private TextBox textBox_weekTimeLimit;
         private TextBox textBox_holidays;
         private Button button_saveStaffMember;
         private Button button_cancelNewStaffMember;
         private Button button_save;
         private Button button_cancel;
-        private TextBox txtPassword;
+        private TextBox textBox_password;
         private Label label1;
+        private Button btnRemove;
     }
 }

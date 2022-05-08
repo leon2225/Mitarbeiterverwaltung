@@ -39,30 +39,31 @@
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblClock = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.checkInPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblWrongPwd = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtEmployeeId = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.managementPanel = new System.Windows.Forms.Panel();
             this.lvEmployees = new System.Windows.Forms.ListView();
             this.ID = new System.Windows.Forms.ColumnHeader();
             this.Nachname = new System.Windows.Forms.ColumnHeader();
             this.Vorname = new System.Windows.Forms.ColumnHeader();
-            this.Wochenarbeitszeit = new System.Windows.Forms.ColumnHeader();
-            this.Urlaubstage = new System.Windows.Forms.ColumnHeader();
             this.subordinates = new System.Windows.Forms.ColumnHeader();
+            this.Wochenarbeitszeit = new System.Windows.Forms.ColumnHeader();
             this.totalWorktime = new System.Windows.Forms.ColumnHeader();
             this.overtime = new System.Windows.Forms.ColumnHeader();
-            this.managementPanel = new System.Windows.Forms.Panel();
+            this.Urlaubstage = new System.Windows.Forms.ColumnHeader();
             this.btnPanelCtrl = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
@@ -128,17 +129,17 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // label1
+            // lblClock
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(1140, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "22:18";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblClock.AutoSize = true;
+            this.lblClock.Font = new System.Drawing.Font("Monospac821 BT", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblClock.Location = new System.Drawing.Point(1131, 26);
+            this.lblClock.Name = "lblClock";
+            this.lblClock.Size = new System.Drawing.Size(53, 18);
+            this.lblClock.TabIndex = 1;
+            this.lblClock.Text = "22:18";
+            this.lblClock.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnLogout
             // 
@@ -167,24 +168,24 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.lblWelcome);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Location = new System.Drawing.Point(434, 205);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(317, 96);
             this.panel1.TabIndex = 2;
             // 
-            // label2
+            // lblWelcome
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(317, 50);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Hallo Leon!";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWelcome.Location = new System.Drawing.Point(0, 0);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(317, 50);
+            this.lblWelcome.TabIndex = 0;
+            this.lblWelcome.Text = "Hallo Leon!";
+            this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWelcome.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // button3
             // 
@@ -211,6 +212,7 @@
             // panel2
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel2.Controls.Add(this.lblWrongPwd);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtPassword);
             this.panel2.Controls.Add(this.txtEmployeeId);
@@ -221,6 +223,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(320, 165);
             this.panel2.TabIndex = 13;
+            // 
+            // lblWrongPwd
+            // 
+            this.lblWrongPwd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblWrongPwd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWrongPwd.ForeColor = System.Drawing.Color.Red;
+            this.lblWrongPwd.Location = new System.Drawing.Point(3, 128);
+            this.lblWrongPwd.Name = "lblWrongPwd";
+            this.lblWrongPwd.Size = new System.Drawing.Size(195, 23);
+            this.lblWrongPwd.TabIndex = 6;
+            this.lblWrongPwd.Text = "Falsches Passwort!";
+            this.lblWrongPwd.Visible = false;
             // 
             // label5
             // 
@@ -283,6 +298,18 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Mitarbeiter ID:";
             // 
+            // managementPanel
+            // 
+            this.managementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.managementPanel.Controls.Add(this.lvEmployees);
+            this.managementPanel.Location = new System.Drawing.Point(0, 47);
+            this.managementPanel.Name = "managementPanel";
+            this.managementPanel.Size = new System.Drawing.Size(1184, 535);
+            this.managementPanel.TabIndex = 4;
+            this.managementPanel.Visible = false;
+            // 
             // lvEmployees
             // 
             this.lvEmployees.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -295,6 +322,7 @@
             this.overtime,
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvEmployees.FullRowSelect = true;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
@@ -305,7 +333,7 @@
             this.lvEmployees.TabIndex = 12;
             this.lvEmployees.UseCompatibleStateImageBehavior = false;
             this.lvEmployees.View = System.Windows.Forms.View.Details;
-            this.lvEmployees.SelectedIndexChanged += new System.EventHandler(this.listView_staffMembers_SelectedIndexChanged);
+            this.lvEmployees.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvEmployees_ItemSelectionChanged);
             // 
             // ID
             // 
@@ -323,23 +351,17 @@
             this.Vorname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Vorname.Width = 120;
             // 
-            // Wochenarbeitszeit
-            // 
-            this.Wochenarbeitszeit.Text = "Wochenarbeitszeit";
-            this.Wochenarbeitszeit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Wochenarbeitszeit.Width = 120;
-            // 
-            // Urlaubstage
-            // 
-            this.Urlaubstage.Text = "Urlaubstage";
-            this.Urlaubstage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Urlaubstage.Width = 80;
-            // 
             // subordinates
             // 
             this.subordinates.Text = "Untergebene";
             this.subordinates.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.subordinates.Width = 200;
+            // 
+            // Wochenarbeitszeit
+            // 
+            this.Wochenarbeitszeit.Text = "Wochenarbeitszeit";
+            this.Wochenarbeitszeit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Wochenarbeitszeit.Width = 120;
             // 
             // totalWorktime
             // 
@@ -351,17 +373,11 @@
             this.overtime.Text = "Überstunden";
             this.overtime.Width = 80;
             // 
-            // managementPanel
+            // Urlaubstage
             // 
-            this.managementPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.managementPanel.Controls.Add(this.lvEmployees);
-            this.managementPanel.Location = new System.Drawing.Point(0, 47);
-            this.managementPanel.Name = "managementPanel";
-            this.managementPanel.Size = new System.Drawing.Size(1184, 535);
-            this.managementPanel.TabIndex = 4;
-            this.managementPanel.Visible = false;
+            this.Urlaubstage.Text = "Urlaubstage";
+            this.Urlaubstage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Urlaubstage.Width = 80;
             // 
             // btnPanelCtrl
             // 
@@ -390,28 +406,30 @@
             // btnRemoveEmployee
             // 
             this.btnRemoveEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveEmployee.Enabled = false;
             this.btnRemoveEmployee.Location = new System.Drawing.Point(172, 593);
             this.btnRemoveEmployee.Name = "btnRemoveEmployee";
             this.btnRemoveEmployee.Size = new System.Drawing.Size(140, 23);
             this.btnRemoveEmployee.TabIndex = 5;
-            this.btnRemoveEmployee.Text = "Mitarbeiter Entfernen";
+            this.btnRemoveEmployee.Text = "Mitarbeiter Bearbeiten";
             this.btnRemoveEmployee.UseVisualStyleBackColor = true;
             this.btnRemoveEmployee.Visible = false;
+            this.btnRemoveEmployee.Click += new System.EventHandler(this.btnRemoveEmployee_Click);
             // 
             // MainViewL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
-            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPanelCtrl);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblClock);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.loginPanel);
+            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.checkInPanel);
+            this.Controls.Add(this.loginPanel);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainViewL";
             this.Text = "MainViewL";
@@ -439,11 +457,11 @@
         private ToolStripMenuItem infoToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
-        private Label label1;
+        private Label lblClock;
         private Panel checkInPanel;
         private Button btnPanelCtrl;
         private Button btnLogout;
-        private Label label2;
+        private Label lblWelcome;
         private Button button3;
         private Panel panel1;
         private Panel managementPanel;
@@ -466,5 +484,6 @@
         private Button btnLogin;
         private Label label4;
         private Label label3;
+        private Label lblWrongPwd;
     }
 }
