@@ -18,11 +18,13 @@ namespace Mitarbeiterverwaltung
         private HourlyRatedEmployee currentEmployee;
         private Dictionary<string, ListViewItem> lvItems;
         private TimeHandler timeHandler;
+        private Settings settings;
 
-        public MainViewL(CompanyData companyData)
+        public MainViewL(CompanyData companyData, Settings settings)
         {
             this.timeHandler = new TimeHandler();
             this.companyData = companyData;
+            this.settings = settings;
             lvItems = new Dictionary<string, ListViewItem > ();
             InitializeComponent();
             var timer = new System.Windows.Forms.Timer ();
@@ -88,8 +90,8 @@ namespace Mitarbeiterverwaltung
                 employee.name,
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
-                roundTimeSpan(employee.totalWorktime, 15).ToString(),
-                roundTimeSpan(employee.overtime, 15).ToString(),
+                roundTimeSpan(employee.totalWorktime, settings.timeRounding).ToString(),
+                roundTimeSpan(employee.overtime, settings.timeRounding).ToString(),
                 employee.holidays.ToString()
             });
             return listItem;
@@ -263,6 +265,16 @@ namespace Mitarbeiterverwaltung
             DateTime selectedTime = ((DateTimePicker)sender).Value;
             timeHandler.setTime(selectedTime);
             updateTime(null, null);
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsDialog settingsDialog = new SettingsDialog(this.settings);
+            DialogResult result = settingsDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                settingsDialog.getSettings();
+            }
         }
     }
 }

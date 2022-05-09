@@ -11,10 +11,13 @@
   <ItemGroup>
     <Compile Remove="AdminView.cs" />
     <Compile Remove="AdminView.Designer.cs" />
+    <Compile Remove="mainView.cs" />
+    <Compile Remove="mainView.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="AdminView.resx" />
+    <EmbeddedResource Remove="mainView.resx" />
   </ItemGroup>
 
 </Project>

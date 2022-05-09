@@ -11,6 +11,17 @@ namespace Mitarbeiterverwaltung
         denied
     }
 
+    public class HolidayRequest
+    {
+        public DateTime startTime { get; set; }
+        public DateTime endTime { get; set; }
+        public RequestState state { get; set; }
+
+        public string toString()
+        {
+            return startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
+        }
+    }
     public class TimeHandler
     {
         private TimeSpan offset;
@@ -35,18 +46,14 @@ namespace Mitarbeiterverwaltung
             this.offset = offset;
         }
     }
-
-    public class HolidayRequest
+    public class Settings
     {
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
-        public RequestState state { get; set; }
-
-        public string toString()
-        {
-            return startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
-        }
+        public string companyName { get; set; }
+        public string logoPath { get; set; }
+        public string csvPath { get; set; }
+        public int timeRounding { get; set; }
     }
+
     public class Employee
     {
         private static int numberOfEmployees = 0;
@@ -365,12 +372,34 @@ namespace Mitarbeiterverwaltung
     public class InitFileParser
     {
         public string path;
+        private Dictionary<string, Dictionary<string, string>> loadedData;
         public InitFileParser(string filePath = "init.ini")
         {
             path = filePath;
         }
+        public bool updateFromSettings(Settings settings)
+        {
+            loadedData["settings"]["csvPath"] = settings.csvPath;
+            loadedData["settings"]["logoPath"] = settings.logoPath;
+            loadedData["settings"]["companyName"] = settings.companyName;
+            loadedData["settings"]["timeRounding"] = settings.timeRounding.ToString();
+            return true;
+        }
         public bool saveFile()
         {
+            string iniString = "";
+
+            foreach (var kvp in loadedData)
+            {
+                iniString += "\n[" + kvp.Key + "]\n";
+
+                foreach (var kvp2 in kvp.Value)
+                {
+                    iniString += kvp2.Key + "=\"" + kvp2.Value.ToString() + "\"\n";
+                }
+            }
+
+            File.WriteAllText(path, iniString);
             return true;
         }
         public Dictionary<string, Dictionary<string, string>> parseFile()
@@ -435,8 +464,37 @@ namespace Mitarbeiterverwaltung
                 }
             }
             // Suspend the screen.  
-
+            loadedData = result;
             return result;
+        }
+
+        public Settings loadSettings()
+        {
+            Dictionary<string, Dictionary<string, string>> fileContent = parseFile();
+            Settings settings = new Settings();
+
+            foreach (var property in typeof(Settings).GetProperties().Select(field => field.Name))
+            {
+                if(!fileContent.ContainsKey("settings") || !fileContent["settings"].ContainsKey(property))
+                {
+                    throw new Exception("Invalid ini file");
+                }
+            }
+            string currentDir = AppDomain.CurrentDomain.BaseDirectory;
+            settings.companyName = fileContent["settings"]["companyName"];
+            settings.logoPath = fileContent["settings"]["logoPath"];
+            if (settings.logoPath[0] == '.')
+            {
+                settings.logoPath = currentDir + settings.logoPath.Substring(2);
+            }
+            settings.csvPath = fileContent["settings"]["csvPath"];
+            if (settings.csvPath[0] == '.')
+            {
+                settings.csvPath = currentDir + settings.csvPath.Substring(2);
+            }
+            settings.timeRounding = Int32.Parse(fileContent["settings"]["timeRounding"]);
+
+            return settings;
         }
     }
 
@@ -456,7 +514,7 @@ namespace Mitarbeiterverwaltung
             
 
             InitFileParser initFileParser = new InitFileParser("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
-            initFileParser.parseFile();
+            Settings settings = initFileParser.loadSettings();
 
 
             CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
@@ -473,13 +531,16 @@ namespace Mitarbeiterverwaltung
             //jsonHandler.save(companyData);
             //CompanyData? loadedStaff = jsonHandler.load();
 
-            var csvStorageHandler = new CSVStorageHandler("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data.csv");
-            //csvStorageHandler.save(companyData.employees);
+            var csvStorageHandler = new CSVStorageHandler(settings.csvPath);
+            //
             var loadedEmployees = csvStorageHandler.load();
             companyData.employees = loadedEmployees;
 
             Application.EnableVisualStyles();
-            Application.Run(new MainViewL(companyData));
+            Application.Run(new MainViewL(companyData, settings));
+            csvStorageHandler.save(companyData.employees);
+            initFileParser.updateFromSettings(settings);
+            initFileParser.saveFile();
             return;
 
         }

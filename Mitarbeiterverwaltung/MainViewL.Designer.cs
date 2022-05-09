@@ -100,14 +100,14 @@
             // saveIniFileToolStripMenuItem
             // 
             this.saveIniFileToolStripMenuItem.Name = "saveIniFileToolStripMenuItem";
-            this.saveIniFileToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveIniFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveIniFileToolStripMenuItem.Text = "Save .ini-File";
             this.saveIniFileToolStripMenuItem.Click += new System.EventHandler(this.saveIniFileToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // infoToolStripMenuItem
@@ -122,13 +122,14 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // lblClock
