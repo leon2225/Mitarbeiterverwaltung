@@ -56,6 +56,7 @@ namespace Mitarbeiterverwaltung
         private void updatelvEmployees()
         {
             lvItems.Clear();
+            lvEmployees.Items.Clear ();
             foreach (var employee in currentEmployee.subordinates.Values)
             {
                 string Id = employee.Id;
@@ -106,7 +107,7 @@ namespace Mitarbeiterverwaltung
 
         private void button4_Click(object sender, EventArgs e)
         {
-            NewStaffMember newStaffMember = new NewStaffMember(null, currentEmployee);
+            EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
             DialogResult result = newStaffMember.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -229,7 +230,7 @@ namespace Mitarbeiterverwaltung
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
             {
-                NewStaffMember newStaffMember = new NewStaffMember(currentEmployee, this.currentEmployee);
+                EditEmployee newStaffMember = new EditEmployee(currentEmployee, this.currentEmployee);
                 DialogResult result = newStaffMember.ShowDialog();
                 if (result == DialogResult.OK)
                 {

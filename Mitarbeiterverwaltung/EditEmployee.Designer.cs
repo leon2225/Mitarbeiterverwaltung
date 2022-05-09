@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class NewStaffMember
+    partial class EditEmployee
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditEmployee));
             this.label_name = new System.Windows.Forms.Label();
             this.label_surname = new System.Windows.Forms.Label();
             this.label_workingTimeWeek = new System.Windows.Forms.Label();
@@ -177,11 +178,11 @@
             this.button_cancel.UseVisualStyleBackColor = true;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
-            // txtPassword
+            // textBox_password
             // 
             this.textBox_password.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_password.Location = new System.Drawing.Point(106, 79);
-            this.textBox_password.Name = "txtPassword";
+            this.textBox_password.Name = "textBox_password";
             this.textBox_password.Size = new System.Drawing.Size(344, 23);
             this.textBox_password.TabIndex = 17;
             this.textBox_password.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -209,7 +210,7 @@
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.button1_Click);
             // 
-            // NewStaffMember
+            // EditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,8 +232,9 @@
             this.Controls.Add(this.label_workingTimeWeek);
             this.Controls.Add(this.label_surname);
             this.Controls.Add(this.label_name);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "NewStaffMember";
+            this.Name = "EditEmployee";
             this.Text = "Neuen Mitarbeiter hinzufügen";
             this.ResumeLayout(false);
             this.PerformLayout();

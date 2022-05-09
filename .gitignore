@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+Mitarbeiterverwaltung/Form12.cs
+Mitarbeiterverwaltung/Form12.Designer.cs
+Mitarbeiterverwaltung/Form12.resx

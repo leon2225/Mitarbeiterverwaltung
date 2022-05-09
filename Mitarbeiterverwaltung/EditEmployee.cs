@@ -1,10 +1,10 @@
 namespace Mitarbeiterverwaltung
 {
-    public partial class NewStaffMember : Form
+    public partial class EditEmployee : Form
     {
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
-        public NewStaffMember(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
+        public EditEmployee(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
             this.employee = employee;
@@ -36,7 +36,7 @@ namespace Mitarbeiterverwaltung
                 (
                     this.textBox_name.Text,
                     this.textBox_surname.Text,
-                    this.label_adress.Text,
+                    this.textBox_adress.Text,
                     this.textBox_phone.Text,
                     Int32.Parse(this.textBox_holidays.Text),
                     this.textBox_password.Text,
