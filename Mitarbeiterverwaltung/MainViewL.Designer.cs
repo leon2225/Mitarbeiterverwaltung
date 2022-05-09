@@ -427,7 +427,7 @@
             this.btnRemoveEmployee.Text = "Mitarbeiter Bearbeiten";
             this.btnRemoveEmployee.UseVisualStyleBackColor = true;
             this.btnRemoveEmployee.Visible = false;
-            this.btnRemoveEmployee.Click += new System.EventHandler(this.btnRemoveEmployee_Click);
+            this.btnRemoveEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
             // MainViewL
             // 

@@ -52,7 +52,7 @@ namespace Mitarbeiterverwaltung
 
         private void button_add_newStaffMember_Click(object sender, EventArgs e)
         {
-            NewStaffMember newStaffMember = new NewStaffMember(null);
+            NewStaffMember newStaffMember = new NewStaffMember(null, null);
             DialogResult result = newStaffMember.ShowDialog();
             if(result == DialogResult.OK)
             {

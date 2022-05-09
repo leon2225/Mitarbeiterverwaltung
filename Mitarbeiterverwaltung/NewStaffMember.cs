@@ -3,10 +3,12 @@ namespace Mitarbeiterverwaltung
     public partial class NewStaffMember : Form
     {
         private HourlyRatedEmployee? employee;
-        public NewStaffMember(HourlyRatedEmployee? employee)
+        private HourlyRatedEmployee? supervisor;
+        public NewStaffMember(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
             this.employee = employee;
+            this.supervisor = supervisor;
 
             if (employee != null)
             {
@@ -40,6 +42,7 @@ namespace Mitarbeiterverwaltung
                     this.textBox_password.Text,
                     new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0,0)
                 );
+                newEmployee.supervisor = this.supervisor;
             }
             else
             {

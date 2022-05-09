@@ -47,15 +47,14 @@ namespace Mitarbeiterverwaltung
         private void MainViewL_Load(object sender, EventArgs e)
         {
             lvEmployees.Items.Clear();
-            updatelvEmployees();
             changeToLogin();
 
         }
 
         private void updatelvEmployees()
         {
-            
-            foreach (var employee in companyData.employees.Values)
+            lvItems.Clear();
+            foreach (var employee in currentEmployee.subordinates.Values)
             {
                 string Id = employee.Id;
                 if (!lvItems.ContainsKey(Id))
@@ -105,10 +104,11 @@ namespace Mitarbeiterverwaltung
 
         private void button4_Click(object sender, EventArgs e)
         {
-            NewStaffMember newStaffMember = new NewStaffMember(null);
+            NewStaffMember newStaffMember = new NewStaffMember(null, currentEmployee);
             DialogResult result = newStaffMember.ShowDialog();
             if (result == DialogResult.OK)
             {
+
                 companyData.addEmployee(newStaffMember.getUserData());
                 updatelvEmployees();
             }
@@ -221,13 +221,13 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void btnRemoveEmployee_Click(object sender, EventArgs e)
+        private void btnEditEmployee_Click(object sender, EventArgs e)
         {
             string id = lvEmployees.SelectedItems[0].Text;
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
             {
-                NewStaffMember newStaffMember = new NewStaffMember(currentEmployee);
+                NewStaffMember newStaffMember = new NewStaffMember(currentEmployee, this.currentEmployee);
                 DialogResult result = newStaffMember.ShowDialog();
                 if (result == DialogResult.OK)
                 {
