@@ -255,8 +255,14 @@ namespace Mitarbeiterverwaltung
 
         private void lblClock_Click(object sender, EventArgs e)
         {
-            timeHandler.setTime(timeHandler.getTime() + TimeSpan.FromHours(1));
-            updateTime(new object(), new EventArgs());
+            dateTimePicker1.Visible = !dateTimePicker1.Visible;
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedTime = ((DateTimePicker)sender).Value;
+            timeHandler.setTime(selectedTime);
+            updateTime(null, null);
         }
     }
 }

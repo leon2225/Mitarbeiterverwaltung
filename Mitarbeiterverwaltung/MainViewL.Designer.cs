@@ -68,6 +68,7 @@
             this.btnPanelCtrl = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -429,11 +430,23 @@
             this.btnRemoveEmployee.Visible = false;
             this.btnRemoveEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(1024, 24);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(83, 23);
+            this.dateTimePicker1.TabIndex = 7;
+            this.dateTimePicker1.Visible = false;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
             // MainViewL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.btnLogout);
@@ -500,5 +513,6 @@
         private Label label3;
         private Label lblWrongPwd;
         private Label lblCheckInState;
+        private DateTimePicker dateTimePicker1;
     }
 }
