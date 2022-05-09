@@ -276,5 +276,11 @@ namespace Mitarbeiterverwaltung
                 settingsDialog.getSettings();
             }
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About aboutBox1 = new About(settings);
+            aboutBox1.ShowDialog();
+        }
     }
 }
