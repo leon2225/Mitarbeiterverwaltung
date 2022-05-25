@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
+using System.Timers;
 
 namespace Mitarbeiterverwaltung
 {
@@ -51,6 +52,26 @@ namespace Mitarbeiterverwaltung
             lvEmployees.Items.Clear();
             changeToLogin();
 
+        }
+
+        private System.Timers.Timer logoutTimer;
+        private void startLogoutCountdown()
+        {
+            logoutTimer = new System.Timers.Timer();
+            logoutTimer.Interval = 1000*60*settings.autoLogoutTimeout; //timout after 15 minutes [ms]
+
+            // Hook up the Elapsed event for the timer. 
+            logoutTimer.Elapsed += timeoutReached;
+
+            // Have the timer fire repeated events (true is the default)
+            logoutTimer.AutoReset = true;
+            // Start the timer
+            logoutTimer.Enabled = true;
+        }
+
+        private void timeoutReached(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            this.BeginInvoke(new Action(btnLogout.PerformClick));
         }
 
         private void updatelvEmployees()
@@ -138,6 +159,7 @@ namespace Mitarbeiterverwaltung
                 txtEmployeeId.Text = "";
                 lblWrongPwd.Visible = false;
                 currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
+                startLogoutCountdown();
                 changeToCheckin();
             }
             else

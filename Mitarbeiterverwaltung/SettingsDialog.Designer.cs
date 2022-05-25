@@ -43,6 +43,10 @@
             this.btnIcon = new System.Windows.Forms.Button();
             this.btnCsv = new System.Windows.Forms.Button();
             this.nmbrRounding = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nmbrAutoLogoutTimeout = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -95,9 +99,9 @@
             // 
             this.txtCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCompanyName.Location = new System.Drawing.Point(149, 18);
+            this.txtCompanyName.Location = new System.Drawing.Point(165, 18);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(426, 23);
+            this.txtCompanyName.Size = new System.Drawing.Size(410, 23);
             this.txtCompanyName.TabIndex = 4;
             // 
             // txtfilePathIcon
@@ -105,9 +109,9 @@
             this.txtfilePathIcon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtfilePathIcon.Enabled = false;
-            this.txtfilePathIcon.Location = new System.Drawing.Point(149, 48);
+            this.txtfilePathIcon.Location = new System.Drawing.Point(165, 48);
             this.txtfilePathIcon.Name = "txtfilePathIcon";
-            this.txtfilePathIcon.Size = new System.Drawing.Size(386, 23);
+            this.txtfilePathIcon.Size = new System.Drawing.Size(370, 23);
             this.txtfilePathIcon.TabIndex = 5;
             // 
             // txtFilePathCsv
@@ -115,15 +119,15 @@
             this.txtFilePathCsv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilePathCsv.Enabled = false;
-            this.txtFilePathCsv.Location = new System.Drawing.Point(149, 80);
+            this.txtFilePathCsv.Location = new System.Drawing.Point(165, 80);
             this.txtFilePathCsv.Name = "txtFilePathCsv";
-            this.txtFilePathCsv.Size = new System.Drawing.Size(386, 23);
+            this.txtFilePathCsv.Size = new System.Drawing.Size(370, 23);
             this.txtFilePathCsv.TabIndex = 6;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(413, 141);
+            this.btnCancel.Location = new System.Drawing.Point(413, 180);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(81, 23);
             this.btnCancel.TabIndex = 8;
@@ -134,7 +138,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(500, 141);
+            this.btnSave.Location = new System.Drawing.Point(500, 180);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 9;
@@ -171,16 +175,55 @@
             "1",
             "5",
             "15"});
-            this.nmbrRounding.Location = new System.Drawing.Point(149, 108);
+            this.nmbrRounding.Location = new System.Drawing.Point(165, 108);
             this.nmbrRounding.Name = "nmbrRounding";
-            this.nmbrRounding.Size = new System.Drawing.Size(426, 23);
+            this.nmbrRounding.Size = new System.Drawing.Size(140, 23);
             this.nmbrRounding.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(147, 15);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Automatische Abmeldung";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // nmbrAutoLogoutTimeout
+            // 
+            this.nmbrAutoLogoutTimeout.Location = new System.Drawing.Point(165, 137);
+            this.nmbrAutoLogoutTimeout.Name = "nmbrAutoLogoutTimeout";
+            this.nmbrAutoLogoutTimeout.Size = new System.Drawing.Size(140, 23);
+            this.nmbrAutoLogoutTimeout.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(311, 113);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Minute(n)";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(311, 140);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 15);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Minute(n)";
             // 
             // SettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 176);
+            this.ClientSize = new System.Drawing.Size(587, 215);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.nmbrAutoLogoutTimeout);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.nmbrRounding);
             this.Controls.Add(this.btnCsv);
             this.Controls.Add(this.btnIcon);
@@ -196,6 +239,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsDialog";
             this.Text = "Einstellungen";
+            this.Load += new System.EventHandler(this.SettingsDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,5 +261,9 @@
         private Button btnIcon;
         private Button btnCsv;
         private ComboBox nmbrRounding;
+        private Label label5;
+        private TextBox nmbrAutoLogoutTimeout;
+        private Label label6;
+        private Label label7;
     }
 }

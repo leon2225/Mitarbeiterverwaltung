@@ -52,6 +52,7 @@ namespace Mitarbeiterverwaltung
         public string logoPath { get; set; }
         public string csvPath { get; set; }
         public int timeRounding { get; set; }
+        public int autoLogoutTimeout { get; set; }
     }
 
     public class Employee
@@ -383,6 +384,7 @@ namespace Mitarbeiterverwaltung
             loadedData["settings"]["logoPath"] = settings.logoPath;
             loadedData["settings"]["companyName"] = settings.companyName;
             loadedData["settings"]["timeRounding"] = settings.timeRounding.ToString();
+            loadedData["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
             return true;
         }
         public bool saveFile()
@@ -493,6 +495,8 @@ namespace Mitarbeiterverwaltung
                 settings.csvPath = currentDir + settings.csvPath.Substring(2);
             }
             settings.timeRounding = Int32.Parse(fileContent["settings"]["timeRounding"]);
+            settings.autoLogoutTimeout = Int32.Parse(fileContent["settings"]["autoLogoutTimeout"]);
+
 
             return settings;
         }
