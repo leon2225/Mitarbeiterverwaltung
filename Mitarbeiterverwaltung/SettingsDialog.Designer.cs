@@ -42,8 +42,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnIcon = new System.Windows.Forms.Button();
             this.btnCsv = new System.Windows.Forms.Button();
-            this.nmbrRounding = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.nmbrRounding)).BeginInit();
+            this.nmbrRounding = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -167,23 +166,15 @@
             // 
             // nmbrRounding
             // 
-            this.nmbrRounding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nmbrRounding.Location = new System.Drawing.Point(149, 109);
-            this.nmbrRounding.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
+            this.nmbrRounding.FormattingEnabled = true;
+            this.nmbrRounding.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "15"});
+            this.nmbrRounding.Location = new System.Drawing.Point(149, 108);
             this.nmbrRounding.Name = "nmbrRounding";
             this.nmbrRounding.Size = new System.Drawing.Size(426, 23);
-            this.nmbrRounding.TabIndex = 12;
-            this.nmbrRounding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nmbrRounding.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.nmbrRounding.TabIndex = 13;
             // 
             // SettingsDialog
             // 
@@ -205,7 +196,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsDialog";
             this.Text = "Einstellungen";
-            ((System.ComponentModel.ISupportInitialize)(this.nmbrRounding)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,6 +216,6 @@
         private Button btnSave;
         private Button btnIcon;
         private Button btnCsv;
-        private NumericUpDown nmbrRounding;
+        private ComboBox nmbrRounding;
     }
 }

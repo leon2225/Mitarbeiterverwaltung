@@ -513,7 +513,7 @@ namespace Mitarbeiterverwaltung
             
             
 
-            InitFileParser initFileParser = new InitFileParser("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
+            InitFileParser initFileParser = new InitFileParser("C:\\Users\\Damian Goldbach\\source\\repos\\leon2225\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\config.ini");
             Settings settings = initFileParser.loadSettings();
 
 

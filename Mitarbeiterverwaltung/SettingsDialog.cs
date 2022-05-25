@@ -20,7 +20,11 @@ namespace Mitarbeiterverwaltung
             txtCompanyName.Text = startValues.companyName;
             txtFilePathCsv.Text = startValues.csvPath;
             txtfilePathIcon.Text = startValues.logoPath;
-            nmbrRounding.Value = startValues.timeRounding;
+            int itemIdx = nmbrRounding.FindStringExact(startValues.timeRounding.ToString());
+            if (itemIdx == -1) 
+                itemIdx = 0;
+                //throw new Exception("Invalid time rounding"); //Todo exception
+            nmbrRounding.SelectedIndex = itemIdx;
         }
 
         public Settings getSettings()
@@ -29,7 +33,7 @@ namespace Mitarbeiterverwaltung
             startValues.companyName = txtCompanyName.Text;
             startValues.csvPath = txtFilePathCsv.Text;
             startValues.logoPath = txtfilePathIcon.Text;
-            startValues.timeRounding = (int) nmbrRounding.Value;
+            startValues.timeRounding = Int32.Parse((string)nmbrRounding.SelectedItem);
             return settings;
         }
 
