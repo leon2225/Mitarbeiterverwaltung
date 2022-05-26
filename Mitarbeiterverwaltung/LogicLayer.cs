@@ -63,7 +63,7 @@ namespace Mitarbeiterverwaltung.LL
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = ((numberOfEmployees++) + 1).ToString(); //TODO add auto Id
+            this.Id = (1000 + (numberOfEmployees++) + 1).ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
