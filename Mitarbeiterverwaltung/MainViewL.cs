@@ -83,6 +83,37 @@ namespace Mitarbeiterverwaltung
             lblOvertimeRemaining.Text = currentEmployee.overtime.ToString();
         }
 
+        private void checkForPendingHolidayRequests()
+        {
+            int counter = 0;
+            foreach (var employee in currentEmployee.subordinates.Values)
+            {
+                foreach(var holidayRequest in employee.holidayRequests)
+                {
+                    if (holidayRequest.state == RequestState.pending)
+                    {
+                        counter++;
+                        var result = MessageBox.Show(employee.surname + " " + employee.name + " beantragt Urlaub von " + holidayRequest.startTime.ToString("dd.MM.yyyy") + " bis " + holidayRequest.endTime.ToString("dd.MM.yyyy") + "\n\n Soll der Urlaub genehmigt werden?", "Urlaubsanfrage", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                        switch (result)
+                        {
+                            case DialogResult.Yes:
+                                holidayRequest.state = RequestState.accepted;
+                                break;
+                            case DialogResult.No:
+                                holidayRequest.state = RequestState.denied;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            //if(counter != 0)
+            //{
+            //    MessageBox.Show("Es gibt noch " + counter.ToString() + " offene Urlaubsanfragen.", "Offene Urlaubsanfragen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+        }
+
         private void updatelvEmployees()
         {
             lvItems.Clear();
@@ -156,6 +187,7 @@ namespace Mitarbeiterverwaltung
             else if (activePanel == checkInPanel)
             {
                 changeToManagement();
+                checkForPendingHolidayRequests();
             }
         }
 
@@ -290,7 +322,13 @@ namespace Mitarbeiterverwaltung
 
         private void btnRequestHolidays_Click(object sender, EventArgs e)
         {
-            
+            //Todo hier das Fenster für Urlaub beantragen öffnen
+            HolidayRequestView holidayRequest = new HolidayRequestView(currentEmployee);
+            DialogResult result = holidayRequest.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                holidayRequest.sendHolidayRequest();
+            }
         }
 
         private void lblClock_Click(object sender, EventArgs e)
