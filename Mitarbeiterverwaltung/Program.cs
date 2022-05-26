@@ -11,12 +11,6 @@ namespace Mitarbeiterverwaltung
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            //ApplicationConfiguration.Initialize();
-            
-            
-            
 
             InitFileParser initFileParser = new InitFileParser("C:\\Users\\Damian Goldbach\\source\\repos\\leon2225\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data\\config.ini");
             Settings settings = initFileParser.loadSettings();

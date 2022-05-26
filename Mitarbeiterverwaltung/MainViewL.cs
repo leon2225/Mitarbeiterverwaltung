@@ -22,6 +22,7 @@ namespace Mitarbeiterverwaltung
         private Dictionary<string, ListViewItem> lvItems;
         private TimeHandler timeHandler;
         private Settings settings;
+        private System.Timers.Timer logoutTimer;
 
         public MainViewL(CompanyData companyData, Settings settings)
         {
@@ -56,7 +57,6 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private System.Timers.Timer logoutTimer;
         private void startLogoutCountdown()
         {
             logoutTimer = new System.Timers.Timer();
@@ -74,6 +74,13 @@ namespace Mitarbeiterverwaltung
         private void timeoutReached(Object source, System.Timers.ElapsedEventArgs e)
         {
             this.BeginInvoke(new Action(btnLogout.PerformClick));
+        }
+
+        private void loadStatistics()
+        {
+            lblWorkingTime.Text = currentEmployee.totalWorktime.ToString();
+            lblHolidaysRemaining.Text = currentEmployee.holidays.ToString();
+            lblOvertimeRemaining.Text = currentEmployee.overtime.ToString();
         }
 
         private void updatelvEmployees()
@@ -128,7 +135,7 @@ namespace Mitarbeiterverwaltung
             lvItems.Add(employee.Id, newItem);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
             DialogResult result = newStaffMember.ShowDialog();
@@ -140,7 +147,7 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnPanelCtrl_Click(object sender, EventArgs e)
         {
             if (activePanel == managementPanel)
             {
@@ -152,7 +159,7 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void button4_Click_1(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             string Id = txtEmployeeId.Text;
             if(companyData.employees[Id].checkPassword(txtPassword.Text))
@@ -162,6 +169,7 @@ namespace Mitarbeiterverwaltung
                 lblWrongPwd.Visible = false;
                 currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
                 startLogoutCountdown();
+                loadStatistics();
                 changeToCheckin();
             }
             else
@@ -280,6 +288,11 @@ namespace Mitarbeiterverwaltung
             updateCheckInState();
         }
 
+        private void btnRequestHolidays_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         private void lblClock_Click(object sender, EventArgs e)
         {
             dateTimePicker1.Visible = !dateTimePicker1.Visible;
@@ -306,6 +319,16 @@ namespace Mitarbeiterverwaltung
         {
             About aboutBox1 = new About(settings);
             aboutBox1.ShowDialog();
+        }
+
+        private void lblWorkingTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblOvertimeRemaining_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
