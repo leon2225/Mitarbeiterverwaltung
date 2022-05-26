@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
 using System.Timers;
+using Mitarbeiterverwaltung.LL;
+using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {

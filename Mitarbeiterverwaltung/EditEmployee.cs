@@ -1,3 +1,5 @@
+using Mitarbeiterverwaltung.LL;
+
 namespace Mitarbeiterverwaltung
 {
     public partial class EditEmployee : Form
