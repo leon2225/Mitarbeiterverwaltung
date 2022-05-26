@@ -78,9 +78,9 @@ namespace Mitarbeiterverwaltung
 
         private void loadStatistics()
         {
-            lblWorkingTime.Text = currentEmployee.totalWorktime.ToString();
+            lblWorkingTime.Text = currentEmployee.totalWorktime.ToString(@"hh\:mm");
+            lblOvertimeRemaining.Text = currentEmployee.overtime.ToString(@"hh\:mm");
             lblHolidaysRemaining.Text = currentEmployee.holidays.ToString();
-            lblOvertimeRemaining.Text = currentEmployee.overtime.ToString();
         }
 
         private void checkForPendingHolidayRequests()
