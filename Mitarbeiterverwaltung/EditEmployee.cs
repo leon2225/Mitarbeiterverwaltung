@@ -20,7 +20,7 @@ namespace Mitarbeiterverwaltung
                 this.textBox_phone.Text = employee.phone ;
                 this.textBox_holidays.Text = employee.holidays.ToString() ;
                 this.textBox_weekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
-                this.textBox_password.Enabled = false;
+                this.btnResetPassword.Enabled = true;
             }
             else
             {
@@ -41,7 +41,7 @@ namespace Mitarbeiterverwaltung
                     this.textBox_adress.Text,
                     this.textBox_phone.Text,
                     Int32.Parse(this.textBox_holidays.Text),
-                    this.textBox_password.Text,
+                    "0000",
                     new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0,0)
                 );
                 newEmployee.supervisor = this.supervisor;
@@ -100,6 +100,11 @@ namespace Mitarbeiterverwaltung
         {
             this.DialogResult = DialogResult.Abort;
             this.Close();
+        }
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            this.employee.setPassword("0000");
         }
     }
 }

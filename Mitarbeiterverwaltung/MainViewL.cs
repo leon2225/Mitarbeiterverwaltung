@@ -196,13 +196,21 @@ namespace Mitarbeiterverwaltung
             string Id = txtEmployeeId.Text;
             if(companyData.employees[Id].checkPassword(txtPassword.Text))
             {
-                txtPassword.Text = "";
                 txtEmployeeId.Text = "";
                 lblWrongPwd.Visible = false;
                 currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
-                startLogoutCountdown();
-                loadStatistics();
-                changeToCheckin();
+                if (txtPassword.Text == "0000")
+                {
+                    txtPassword.Text = "";
+                    changeInertialPassword();
+                }
+                else
+                {
+                    txtPassword.Text = "";
+                    startLogoutCountdown();
+                    loadStatistics();
+                    changeToCheckin();
+                }
             }
             else
             {
@@ -226,6 +234,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Visible = false;
             checkInPanel.Visible = false;
             loginPanel.Visible = false;
+            changePasswordPanel.Visible = false;
         }
 
         private void updateCheckInState()
@@ -242,6 +251,13 @@ namespace Mitarbeiterverwaltung
                 lblCheckInState.Text = "Ausgestempelt";
             }
         }
+
+        private void changeInertialPassword()
+        {
+            fullLoginPanel.Visible = false;
+            changePasswordPanel.Visible = true;
+        }
+
         private void changeToCheckin()
         {
             hideAll();
@@ -273,6 +289,7 @@ namespace Mitarbeiterverwaltung
             hideAll();
             activePanel = loginPanel;
             loginPanel.Visible = true;
+            fullLoginPanel.Visible = true;
             loginPanel.BringToFront();
         }
 
@@ -301,7 +318,7 @@ namespace Mitarbeiterverwaltung
                     newStaffMember.getUserData();
                     updatelvEmployees();
                 }
-                else if (result == DialogResult.Abort)
+                else if (result == DialogResult.Abort) //TODO geht das so?, abort sollte cancel sein
                 {
                     companyData.removeEmployee(currentEmployee);
                     lvEmployees.SelectedItems[0].Remove();
@@ -365,6 +382,29 @@ namespace Mitarbeiterverwaltung
         }
 
         private void lblOvertimeRemaining_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            if (txtNewPassword.Text == txtNewPasswordRepeated.Text)
+            {
+                //save new password
+                currentEmployee.setPassword(txtPassword.Text);
+                lblPasswordsNotEqual.Visible = false;
+                startLogoutCountdown();
+                loadStatistics();
+                changeToCheckin();
+            }
+            else
+            {
+                lblPasswordsNotEqual.Visible = true;
+            }
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

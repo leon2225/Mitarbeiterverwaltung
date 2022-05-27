@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "5",
             "Rolf",
             "12"}, -1);
@@ -42,12 +42,28 @@
             this.lblClock = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.checkInPanel = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblHolidaysRemaining = new System.Windows.Forms.Label();
+            this.lblOvertimeRemaining = new System.Windows.Forms.Label();
+            this.lblHolidaysRemainingTitle = new System.Windows.Forms.Label();
+            this.lblOvertimeRemainingTitle = new System.Windows.Forms.Label();
+            this.lblWorkingTimeTitle = new System.Windows.Forms.Label();
+            this.lblWorkingTime = new System.Windows.Forms.Label();
+            this.btnRequestHolidays = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblCheckInState = new System.Windows.Forms.Label();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.changePasswordPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.txtNewPassword = new System.Windows.Forms.TextBox();
+            this.txtNewPasswordRepeated = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblPasswordsNotEqual = new System.Windows.Forms.Label();
+            this.fullLoginPanel = new System.Windows.Forms.Panel();
             this.lblWrongPwd = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -69,21 +85,14 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.lblWorkingTimeTitle = new System.Windows.Forms.Label();
-            this.lblHolidaysRemainingTitle = new System.Windows.Forms.Label();
-            this.lblOvertimeRemainingTitle = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblWorkingTime = new System.Windows.Forms.Label();
-            this.lblOvertimeRemaining = new System.Windows.Forms.Label();
-            this.lblHolidaysRemaining = new System.Windows.Forms.Label();
-            this.btnRequestHolidays = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.loginPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.changePasswordPanel.SuspendLayout();
+            this.fullLoginPanel.SuspendLayout();
             this.managementPanel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -170,6 +179,101 @@
             this.checkInPanel.Size = new System.Drawing.Size(1184, 535);
             this.checkInPanel.TabIndex = 3;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemaining, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblOvertimeRemaining, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemainingTitle, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblOvertimeRemainingTitle, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblWorkingTimeTitle, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblWorkingTime, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnRequestHolidays, 0, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 432);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(269, 100);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // lblHolidaysRemaining
+            // 
+            this.lblHolidaysRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblHolidaysRemaining.AutoSize = true;
+            this.lblHolidaysRemaining.Location = new System.Drawing.Point(253, 50);
+            this.lblHolidaysRemaining.Name = "lblHolidaysRemaining";
+            this.lblHolidaysRemaining.Size = new System.Drawing.Size(13, 15);
+            this.lblHolidaysRemaining.TabIndex = 8;
+            this.lblHolidaysRemaining.Text = "0";
+            // 
+            // lblOvertimeRemaining
+            // 
+            this.lblOvertimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblOvertimeRemaining.AutoSize = true;
+            this.lblOvertimeRemaining.Location = new System.Drawing.Point(253, 27);
+            this.lblOvertimeRemaining.Name = "lblOvertimeRemaining";
+            this.lblOvertimeRemaining.Size = new System.Drawing.Size(13, 15);
+            this.lblOvertimeRemaining.TabIndex = 7;
+            this.lblOvertimeRemaining.Text = "0";
+            // 
+            // lblHolidaysRemainingTitle
+            // 
+            this.lblHolidaysRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblHolidaysRemainingTitle.AutoSize = true;
+            this.lblHolidaysRemainingTitle.Location = new System.Drawing.Point(3, 50);
+            this.lblHolidaysRemainingTitle.Name = "lblHolidaysRemainingTitle";
+            this.lblHolidaysRemainingTitle.Size = new System.Drawing.Size(141, 15);
+            this.lblHolidaysRemainingTitle.TabIndex = 4;
+            this.lblHolidaysRemainingTitle.Text = "Verbleibende Urlaubstage";
+            // 
+            // lblOvertimeRemainingTitle
+            // 
+            this.lblOvertimeRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblOvertimeRemainingTitle.AutoSize = true;
+            this.lblOvertimeRemainingTitle.Location = new System.Drawing.Point(3, 27);
+            this.lblOvertimeRemainingTitle.Name = "lblOvertimeRemainingTitle";
+            this.lblOvertimeRemainingTitle.Size = new System.Drawing.Size(146, 15);
+            this.lblOvertimeRemainingTitle.TabIndex = 5;
+            this.lblOvertimeRemainingTitle.Text = "Verbleibende Überstunden";
+            this.lblOvertimeRemainingTitle.Click += new System.EventHandler(this.lblOvertimeRemaining_Click);
+            // 
+            // lblWorkingTimeTitle
+            // 
+            this.lblWorkingTimeTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblWorkingTimeTitle.AutoSize = true;
+            this.lblWorkingTimeTitle.Location = new System.Drawing.Point(3, 4);
+            this.lblWorkingTimeTitle.Name = "lblWorkingTimeTitle";
+            this.lblWorkingTimeTitle.Size = new System.Drawing.Size(193, 15);
+            this.lblWorkingTimeTitle.TabIndex = 3;
+            this.lblWorkingTimeTitle.Text = "Arbeitsstunden im aktuellen Monat";
+            this.lblWorkingTimeTitle.Click += new System.EventHandler(this.lblWorkingTime_Click);
+            // 
+            // lblWorkingTime
+            // 
+            this.lblWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblWorkingTime.AutoSize = true;
+            this.lblWorkingTime.Location = new System.Drawing.Point(253, 4);
+            this.lblWorkingTime.Name = "lblWorkingTime";
+            this.lblWorkingTime.Size = new System.Drawing.Size(13, 15);
+            this.lblWorkingTime.TabIndex = 6;
+            this.lblWorkingTime.Text = "0";
+            // 
+            // btnRequestHolidays
+            // 
+            this.btnRequestHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRequestHolidays.Location = new System.Drawing.Point(3, 73);
+            this.btnRequestHolidays.Name = "btnRequestHolidays";
+            this.btnRequestHolidays.Size = new System.Drawing.Size(209, 23);
+            this.btnRequestHolidays.TabIndex = 9;
+            this.btnRequestHolidays.Text = "Urlaub beantragen";
+            this.btnRequestHolidays.UseVisualStyleBackColor = true;
+            this.btnRequestHolidays.Click += new System.EventHandler(this.btnRequestHolidays_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -220,26 +324,125 @@
             this.loginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginPanel.Controls.Add(this.panel2);
+            this.loginPanel.Controls.Add(this.changePasswordPanel);
+            this.loginPanel.Controls.Add(this.fullLoginPanel);
             this.loginPanel.Location = new System.Drawing.Point(0, 47);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(1184, 535);
             this.loginPanel.TabIndex = 6;
             // 
-            // panel2
+            // changePasswordPanel
             // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel2.Controls.Add(this.lblWrongPwd);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.txtPassword);
-            this.panel2.Controls.Add(this.txtEmployeeId);
-            this.panel2.Controls.Add(this.btnLogin);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(455, 157);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(320, 165);
-            this.panel2.TabIndex = 13;
+            this.changePasswordPanel.ColumnCount = 2;
+            this.changePasswordPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.changePasswordPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
+            this.changePasswordPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.changePasswordPanel.Controls.Add(this.label2, 0, 2);
+            this.changePasswordPanel.Controls.Add(this.label1, 0, 1);
+            this.changePasswordPanel.Controls.Add(this.btnChangePassword, 1, 3);
+            this.changePasswordPanel.Controls.Add(this.txtNewPassword, 1, 1);
+            this.changePasswordPanel.Controls.Add(this.txtNewPasswordRepeated, 1, 2);
+            this.changePasswordPanel.Controls.Add(this.label6, 0, 0);
+            this.changePasswordPanel.Controls.Add(this.lblPasswordsNotEqual, 0, 3);
+            this.changePasswordPanel.Location = new System.Drawing.Point(434, 192);
+            this.changePasswordPanel.Name = "changePasswordPanel";
+            this.changePasswordPanel.RowCount = 4;
+            this.changePasswordPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.changePasswordPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.changePasswordPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.changePasswordPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.changePasswordPanel.Size = new System.Drawing.Size(362, 158);
+            this.changePasswordPanel.TabIndex = 14;
+            this.changePasswordPanel.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(3, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(165, 21);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Passwort wiederholen:";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(3, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Neues Passwort:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChangePassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnChangePassword.Location = new System.Drawing.Point(266, 102);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(93, 30);
+            this.btnChangePassword.TabIndex = 2;
+            this.btnChangePassword.Text = "Speichern";
+            this.btnChangePassword.UseVisualStyleBackColor = true;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
+            // txtNewPassword
+            // 
+            this.txtNewPassword.Location = new System.Drawing.Point(197, 43);
+            this.txtNewPassword.Name = "txtNewPassword";
+            this.txtNewPassword.Size = new System.Drawing.Size(162, 23);
+            this.txtNewPassword.TabIndex = 3;
+            // 
+            // txtNewPasswordRepeated
+            // 
+            this.txtNewPasswordRepeated.Location = new System.Drawing.Point(197, 73);
+            this.txtNewPasswordRepeated.Name = "txtNewPasswordRepeated";
+            this.txtNewPasswordRepeated.Size = new System.Drawing.Size(162, 23);
+            this.txtNewPasswordRepeated.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.changePasswordPanel.SetColumnSpan(this.label6, 2);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(3, 4);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(356, 32);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Änderung des Initalpassworts";
+            // 
+            // lblPasswordsNotEqual
+            // 
+            this.lblPasswordsNotEqual.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPasswordsNotEqual.AutoSize = true;
+            this.lblPasswordsNotEqual.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPasswordsNotEqual.ForeColor = System.Drawing.Color.Red;
+            this.lblPasswordsNotEqual.Location = new System.Drawing.Point(3, 107);
+            this.lblPasswordsNotEqual.Name = "lblPasswordsNotEqual";
+            this.lblPasswordsNotEqual.Size = new System.Drawing.Size(155, 42);
+            this.lblPasswordsNotEqual.TabIndex = 6;
+            this.lblPasswordsNotEqual.Text = "Passwörter stimmen nicht überein!";
+            this.lblPasswordsNotEqual.Visible = false;
+            // 
+            // fullLoginPanel
+            // 
+            this.fullLoginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fullLoginPanel.Controls.Add(this.lblWrongPwd);
+            this.fullLoginPanel.Controls.Add(this.label5);
+            this.fullLoginPanel.Controls.Add(this.txtPassword);
+            this.fullLoginPanel.Controls.Add(this.txtEmployeeId);
+            this.fullLoginPanel.Controls.Add(this.btnLogin);
+            this.fullLoginPanel.Controls.Add(this.label4);
+            this.fullLoginPanel.Controls.Add(this.label3);
+            this.fullLoginPanel.Location = new System.Drawing.Point(455, 157);
+            this.fullLoginPanel.Name = "fullLoginPanel";
+            this.fullLoginPanel.Size = new System.Drawing.Size(320, 165);
+            this.fullLoginPanel.TabIndex = 13;
             // 
             // lblWrongPwd
             // 
@@ -340,9 +543,9 @@
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
             this.lvEmployees.MultiSelect = false;
             this.lvEmployees.Name = "lvEmployees";
@@ -445,106 +648,12 @@
             this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // lblWorkingTimeTitle
-            // 
-            this.lblWorkingTimeTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblWorkingTimeTitle.AutoSize = true;
-            this.lblWorkingTimeTitle.Location = new System.Drawing.Point(3, 4);
-            this.lblWorkingTimeTitle.Name = "lblWorkingTimeTitle";
-            this.lblWorkingTimeTitle.Size = new System.Drawing.Size(193, 15);
-            this.lblWorkingTimeTitle.TabIndex = 3;
-            this.lblWorkingTimeTitle.Text = "Arbeitsstunden im aktuellen Monat";
-            this.lblWorkingTimeTitle.Click += new System.EventHandler(this.lblWorkingTime_Click);
-            // 
-            // lblHolidaysRemainingTitle
-            // 
-            this.lblHolidaysRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblHolidaysRemainingTitle.AutoSize = true;
-            this.lblHolidaysRemainingTitle.Location = new System.Drawing.Point(3, 50);
-            this.lblHolidaysRemainingTitle.Name = "lblHolidaysRemainingTitle";
-            this.lblHolidaysRemainingTitle.Size = new System.Drawing.Size(141, 15);
-            this.lblHolidaysRemainingTitle.TabIndex = 4;
-            this.lblHolidaysRemainingTitle.Text = "Verbleibende Urlaubstage";
-            // 
-            // lblOvertimeRemainingTitle
-            // 
-            this.lblOvertimeRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblOvertimeRemainingTitle.AutoSize = true;
-            this.lblOvertimeRemainingTitle.Location = new System.Drawing.Point(3, 27);
-            this.lblOvertimeRemainingTitle.Name = "lblOvertimeRemainingTitle";
-            this.lblOvertimeRemainingTitle.Size = new System.Drawing.Size(146, 15);
-            this.lblOvertimeRemainingTitle.TabIndex = 5;
-            this.lblOvertimeRemainingTitle.Text = "Verbleibende Überstunden";
-            this.lblOvertimeRemainingTitle.Click += new System.EventHandler(this.lblOvertimeRemaining_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemaining, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblOvertimeRemaining, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemainingTitle, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblOvertimeRemainingTitle, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblWorkingTimeTitle, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblWorkingTime, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnRequestHolidays, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 432);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(269, 100);
-            this.tableLayoutPanel1.TabIndex = 6;
-            // 
-            // lblWorkingTime
-            // 
-            this.lblWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblWorkingTime.AutoSize = true;
-            this.lblWorkingTime.Location = new System.Drawing.Point(253, 4);
-            this.lblWorkingTime.Name = "lblWorkingTime";
-            this.lblWorkingTime.Size = new System.Drawing.Size(13, 15);
-            this.lblWorkingTime.TabIndex = 6;
-            this.lblWorkingTime.Text = "0";
-            // 
-            // lblOvertimeRemaining
-            // 
-            this.lblOvertimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblOvertimeRemaining.AutoSize = true;
-            this.lblOvertimeRemaining.Location = new System.Drawing.Point(253, 27);
-            this.lblOvertimeRemaining.Name = "lblOvertimeRemaining";
-            this.lblOvertimeRemaining.Size = new System.Drawing.Size(13, 15);
-            this.lblOvertimeRemaining.TabIndex = 7;
-            this.lblOvertimeRemaining.Text = "0";
-            // 
-            // lblHolidaysRemaining
-            // 
-            this.lblHolidaysRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblHolidaysRemaining.AutoSize = true;
-            this.lblHolidaysRemaining.Location = new System.Drawing.Point(253, 50);
-            this.lblHolidaysRemaining.Name = "lblHolidaysRemaining";
-            this.lblHolidaysRemaining.Size = new System.Drawing.Size(13, 15);
-            this.lblHolidaysRemaining.TabIndex = 8;
-            this.lblHolidaysRemaining.Text = "0";
-            // 
-            // btnRequestHolidays
-            // 
-            this.btnRequestHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRequestHolidays.Location = new System.Drawing.Point(3, 73);
-            this.btnRequestHolidays.Name = "btnRequestHolidays";
-            this.btnRequestHolidays.Size = new System.Drawing.Size(209, 23);
-            this.btnRequestHolidays.TabIndex = 9;
-            this.btnRequestHolidays.Text = "Urlaub beantragen";
-            this.btnRequestHolidays.UseVisualStyleBackColor = true;
-            this.btnRequestHolidays.Click += new System.EventHandler(this.btnRequestHolidays_Click);
-            // 
             // MainViewL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
@@ -554,7 +663,6 @@
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.managementPanel);
-            this.Controls.Add(this.loginPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainViewL";
@@ -564,14 +672,16 @@
             this.menuStrip1.PerformLayout();
             this.checkInPanel.ResumeLayout(false);
             this.checkInPanel.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.loginPanel.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.changePasswordPanel.ResumeLayout(false);
+            this.changePasswordPanel.PerformLayout();
+            this.fullLoginPanel.ResumeLayout(false);
+            this.fullLoginPanel.PerformLayout();
             this.managementPanel.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,7 +714,7 @@
         private ColumnHeader totalWorktime;
         private ColumnHeader overtime;
         private Panel loginPanel;
-        private Panel panel2;
+        private Panel fullLoginPanel;
         private Label label5;
         private TextBox txtPassword;
         private TextBox txtEmployeeId;
@@ -623,5 +733,13 @@
         private Label lblHolidaysRemaining;
         private Label lblOvertimeRemaining;
         private Button btnRequestHolidays;
+        private TableLayoutPanel changePasswordPanel;
+        private Label label2;
+        private Label label1;
+        private Button btnChangePassword;
+        private TextBox txtNewPassword;
+        private TextBox txtNewPasswordRepeated;
+        private Label label6;
+        private Label lblPasswordsNotEqual;
     }
 }
