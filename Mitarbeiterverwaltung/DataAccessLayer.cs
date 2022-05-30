@@ -67,6 +67,17 @@ public class CSVStorageHandler : IStorageHandler
 
             //parse holidayRequests TODO correctly implement!
             employee.absenteeism = new List<Absenteeism>();
+                if(p["absenteeism"].Contains(";"))
+                {
+                        List<string> absenteeismElements = p["absenteeism"].Split(";").ToList();
+                        foreach (var element in absenteeismElements)
+                        {
+                            List<string> elementItem = element.Split(" ").ToList();
+                            Absenteeism item = new Absenteeism(elementItem[0], elementItem[1], elementItem[2], elementItem[3]);
+                            employee.absenteeism.Add(item);
+                        }
+                    }
+                
 
             employees.Add(p["Id"], employee);
         }
@@ -140,6 +151,10 @@ public class CSVStorageHandler : IStorageHandler
                         {
                              value = string.Join(";", absenteeism);
                         }
+                        else
+                            {
+                                value = "";
+                            }
                         break;
 
                     default:

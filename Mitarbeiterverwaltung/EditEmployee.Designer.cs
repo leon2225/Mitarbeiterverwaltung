@@ -54,6 +54,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.absenteeism = new System.Windows.Forms.TabPage();
             this.absenteeismListPanel = new System.Windows.Forms.Panel();
+            this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
             this.lvAbsenteeism = new System.Windows.Forms.ListView();
             this.Typ = new System.Windows.Forms.ColumnHeader();
             this.Beginn = new System.Windows.Forms.ColumnHeader();
@@ -68,7 +69,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveAbsenteeism = new System.Windows.Forms.Button();
             this.btnCancelAddAbsenteeism = new System.Windows.Forms.Button();
-            this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.personalData.SuspendLayout();
@@ -300,6 +300,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(526, 272);
             this.tabControl1.TabIndex = 20;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
             // 
             // personalData
             // 
@@ -362,6 +363,16 @@
             this.absenteeismListPanel.Name = "absenteeismListPanel";
             this.absenteeismListPanel.Size = new System.Drawing.Size(518, 244);
             this.absenteeismListPanel.TabIndex = 3;
+            // 
+            // btnDeleteAbsenteeism
+            // 
+            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(286, 216);
+            this.btnDeleteAbsenteeism.Name = "btnDeleteAbsenteeism";
+            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(101, 23);
+            this.btnDeleteAbsenteeism.TabIndex = 3;
+            this.btnDeleteAbsenteeism.Text = "Fehlzeit löschen";
+            this.btnDeleteAbsenteeism.UseVisualStyleBackColor = true;
+            this.btnDeleteAbsenteeism.Click += new System.EventHandler(this.btnDeleteAbsenteeism_Click);
             // 
             // lvAbsenteeism
             // 
@@ -503,16 +514,6 @@
             this.btnCancelAddAbsenteeism.Text = "Abbrechen";
             this.btnCancelAddAbsenteeism.UseVisualStyleBackColor = true;
             this.btnCancelAddAbsenteeism.Click += new System.EventHandler(this.btnCancelAddAbsenteeism_Click);
-            // 
-            // btnDeleteAbsenteeism
-            // 
-            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(286, 216);
-            this.btnDeleteAbsenteeism.Name = "btnDeleteAbsenteeism";
-            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(101, 23);
-            this.btnDeleteAbsenteeism.TabIndex = 3;
-            this.btnDeleteAbsenteeism.Text = "Fehlzeit löschen";
-            this.btnDeleteAbsenteeism.UseVisualStyleBackColor = true;
-            this.btnDeleteAbsenteeism.Click += new System.EventHandler(this.btnDeleteAbsenteeism_Click);
             // 
             // EditEmployee
             // 

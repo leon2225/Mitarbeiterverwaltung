@@ -19,16 +19,22 @@ namespace Mitarbeiterverwaltung.LL
         public RequestState? state { get; set; }
         public String type { get; set; }
 
+        public Absenteeism()
+        {
+
+        }
+
+        public Absenteeism(string type, string startTime, string endTime, string state)
+        {
+            this.type = type;
+            this.startTime = DateTime.Parse(startTime);
+            this.endTime = DateTime.Parse(endTime);
+            this.state = (RequestState) Enum.Parse(typeof(RequestState),state);
+        }
+
         public override string ToString()
         {
-            if(this != null)
-            {
-                return type + " " + startTime.ToString("dd.MM.yyyy") + " " + endTime.ToString("dd.MM.yyyy") + " " + state.ToString();
-            }
-            else
-            {
-                return "";
-            }
+            return type + " " + startTime.ToString("dd.MM.yyyy") + " " + endTime.ToString("dd.MM.yyyy") + " " + state.ToString();
         }
 
     }
