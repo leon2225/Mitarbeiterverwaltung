@@ -527,7 +527,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "EditEmployee";
-            this.Text = "Neuen Mitarbeiter hinzufügen";
+            this.Text = "Mitarbeiter bearbeiten";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

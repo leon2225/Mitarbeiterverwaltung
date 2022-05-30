@@ -25,6 +25,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
+                this.Text = "Neuen Mitarbeiter hinzufügen";
                 btnRemove.Visible = false;
             }
             
