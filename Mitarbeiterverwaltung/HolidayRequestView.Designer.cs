@@ -42,9 +42,12 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.82353F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.17647F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.11765F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.88235F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
@@ -61,14 +64,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.34811F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(340, 124);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(354, 147);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 15);
             this.label1.TabIndex = 0;
@@ -78,7 +81,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 41);
+            this.label2.Location = new System.Drawing.Point(3, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 15);
             this.label2.TabIndex = 1;
@@ -88,7 +91,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 73);
+            this.label3.Location = new System.Drawing.Point(3, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 15);
             this.label3.TabIndex = 2;
@@ -97,7 +100,7 @@
             // btnCancelRequest
             // 
             this.btnCancelRequest.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnCancelRequest.Location = new System.Drawing.Point(3, 100);
+            this.btnCancelRequest.Location = new System.Drawing.Point(3, 123);
             this.btnCancelRequest.Name = "btnCancelRequest";
             this.btnCancelRequest.Size = new System.Drawing.Size(75, 20);
             this.btnCancelRequest.TabIndex = 3;
@@ -108,7 +111,7 @@
             // btnSendRequest
             // 
             this.btnSendRequest.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSendRequest.Location = new System.Drawing.Point(262, 100);
+            this.btnSendRequest.Location = new System.Drawing.Point(276, 123);
             this.btnSendRequest.Name = "btnSendRequest";
             this.btnSendRequest.Size = new System.Drawing.Size(75, 20);
             this.btnSendRequest.TabIndex = 4;
@@ -121,18 +124,18 @@
             this.dtpHolidayStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.dtpHolidayStart.CustomFormat = "MMMM dd, yyyy - dddd";
             this.dtpHolidayStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHolidayStart.Location = new System.Drawing.Point(152, 4);
+            this.dtpHolidayStart.Location = new System.Drawing.Point(194, 8);
             this.dtpHolidayStart.Name = "dtpHolidayStart";
-            this.dtpHolidayStart.Size = new System.Drawing.Size(185, 23);
+            this.dtpHolidayStart.Size = new System.Drawing.Size(157, 23);
             this.dtpHolidayStart.TabIndex = 5;
             // 
             // dtpHolidayEnd
             // 
             this.dtpHolidayEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.dtpHolidayEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHolidayEnd.Location = new System.Drawing.Point(152, 37);
+            this.dtpHolidayEnd.Location = new System.Drawing.Point(194, 49);
             this.dtpHolidayEnd.Name = "dtpHolidayEnd";
-            this.dtpHolidayEnd.Size = new System.Drawing.Size(185, 23);
+            this.dtpHolidayEnd.Size = new System.Drawing.Size(157, 23);
             this.dtpHolidayEnd.TabIndex = 6;
             this.dtpHolidayEnd.ValueChanged += new System.EventHandler(this.dtpHolidayEnd_ValueChanged);
             // 
@@ -140,7 +143,7 @@
             // 
             this.lblRemainingHolidaysPreview.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblRemainingHolidaysPreview.AutoSize = true;
-            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(324, 73);
+            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(338, 93);
             this.lblRemainingHolidaysPreview.Name = "lblRemainingHolidaysPreview";
             this.lblRemainingHolidaysPreview.Size = new System.Drawing.Size(13, 15);
             this.lblRemainingHolidaysPreview.TabIndex = 7;
@@ -152,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelRequest;
-            this.ClientSize = new System.Drawing.Size(362, 139);
+            this.ClientSize = new System.Drawing.Size(376, 162);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

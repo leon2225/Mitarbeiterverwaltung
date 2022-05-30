@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "5",
             "Rolf",
             "12"}, -1);
@@ -266,9 +266,10 @@
             // btnRequestHolidays
             // 
             this.btnRequestHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.btnRequestHolidays, 2);
             this.btnRequestHolidays.Location = new System.Drawing.Point(3, 73);
             this.btnRequestHolidays.Name = "btnRequestHolidays";
-            this.btnRequestHolidays.Size = new System.Drawing.Size(209, 23);
+            this.btnRequestHolidays.Size = new System.Drawing.Size(263, 23);
             this.btnRequestHolidays.TabIndex = 9;
             this.btnRequestHolidays.Text = "Urlaub beantragen";
             this.btnRequestHolidays.UseVisualStyleBackColor = true;
@@ -543,9 +544,9 @@
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
             this.lvEmployees.MultiSelect = false;
             this.lvEmployees.Name = "lvEmployees";
@@ -653,8 +654,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
-            this.Controls.Add(this.loginPanel);
+            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.checkInPanel);
+            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -662,7 +664,6 @@
             this.Controls.Add(this.btnPanelCtrl);
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.managementPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainViewL";

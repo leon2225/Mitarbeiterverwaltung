@@ -4,6 +4,7 @@ namespace Mitarbeiterverwaltung
 {
     public partial class EditEmployee : Form
     {
+        Panel? activePanel;
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
         public EditEmployee(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
@@ -105,6 +106,47 @@ namespace Mitarbeiterverwaltung
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
             this.employee.setPassword("0000");
+        }
+
+        private void btnAddAbsenteeism_Click(object sender, EventArgs e)
+        {
+            changeToNewAbsenteeism();
+
+        }
+
+        private void btnCancelAddAbsenteeism_Click(object sender, EventArgs e)
+        {
+            changeToAbsenteeismList();
+            //discard new item 
+        }
+
+        private void btnSaveAbsenteeism_Click(object sender, EventArgs e)
+        {
+            changeToAbsenteeismList();
+            //save absenteeism and display in list
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void changeToNewAbsenteeism()
+        {
+            absenteeismListPanel.Visible = false;
+            newAbsenteeismPanel.Visible = true;
+            button_save.Enabled = false;
+            button_cancel.Enabled = false;
+            btnRemove.Enabled = false;
+        }
+
+        private void changeToAbsenteeismList()
+        {
+            newAbsenteeismPanel.Visible = false;
+            absenteeismListPanel.Visible = true;
+            button_save.Enabled = true;
+            button_cancel.Enabled=true;
+            btnRemove.Enabled=true;
         }
     }
 }
