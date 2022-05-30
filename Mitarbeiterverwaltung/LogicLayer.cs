@@ -8,19 +8,22 @@ namespace Mitarbeiterverwaltung.LL
     {
         pending,
         accepted,
-        denied
+        denied,
+        none
     }
 
-    public class HolidayRequest
+    public class Absenteeism
     {
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
-        public RequestState state { get; set; }
+        public RequestState? state { get; set; }
+        public String type { get; set; }
 
         public string toString()
         {
-            return startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
+            return type.ToString() + " " + startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
         }
+
     }
     public class TimeHandler
     {
@@ -59,7 +62,7 @@ namespace Mitarbeiterverwaltung.LL
         public int holidays { get; set; }
         public Employee? supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
-        public List<HolidayRequest> holidayRequests { get; set; }
+        public List<Absenteeism> absenteeism { get; set; }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
@@ -71,20 +74,33 @@ namespace Mitarbeiterverwaltung.LL
             this.holidays = holidays;
 
             this.subordinates = new Dictionary<string, Employee>();
-            this.holidayRequests = new List<HolidayRequest>();
+            this.absenteeism = new List<Absenteeism>();
 
             setPassword(password);
         }
 
         public void requestHoliday(DateTime startTime, DateTime endTime)
         {
-            HolidayRequest holidayRequest = new HolidayRequest();
+            Absenteeism holidayRequest = new Absenteeism();
+            holidayRequest.type = "Urlaub";
             holidayRequest.startTime = startTime;
             holidayRequest.endTime = endTime;
             holidayRequest.state = RequestState.pending;
 
-            this.holidayRequests.Add(holidayRequest);
+            this.absenteeism.Add(holidayRequest);
         }
+
+        public void setSickDays(DateTime startTime, DateTime endTime)
+        {
+            Absenteeism sickDays = new Absenteeism();
+            sickDays.type = "Krankheit";
+            sickDays.startTime = startTime;
+            sickDays.endTime = endTime;
+            sickDays.state = null;
+
+            this.absenteeism.Add(sickDays);
+        }
+
         private byte[] GetHash(string inputString)
         {
             using (HashAlgorithm algorithm = SHA256.Create())

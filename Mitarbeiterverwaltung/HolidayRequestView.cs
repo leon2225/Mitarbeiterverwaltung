@@ -27,11 +27,11 @@ namespace Mitarbeiterverwaltung
 
         public void sendHolidayRequest()
         {
-            DateTime startTime = dtpHolidayStart.Value;
-            DateTime endTime = dtpHolidayEnd.Value;
-            if (endTime > startTime)
+            DateTime startDate = dtpHolidayStart.Value;
+            DateTime endDate = dtpHolidayEnd.Value;
+            if (endDate > startDate)
             {
-                employee.requestHoliday(startTime, endTime);
+                employee.requestHoliday(startDate, endDate);
             }
             else
             {
@@ -44,14 +44,14 @@ namespace Mitarbeiterverwaltung
         {
             int holidaysCount;
             int remainingHolidays;
-            DateTime startTime = dtpHolidayStart.Value;
-            DateTime endTime = dtpHolidayEnd.Value;
+            DateTime startDate = dtpHolidayStart.Value;
+            DateTime endDate = dtpHolidayEnd.Value;
 
-            if (endTime < startTime)
+            if (endDate < startDate)
             {
                 throw new Exception("Enddate is before Startdate");
             }
-            holidaysCount = getBusinessDays(startTime, endTime);
+            holidaysCount = getBusinessDays(startDate, endDate);
             remainingHolidays = employee.holidays - holidaysCount;
             if (remainingHolidays < 0)
             {

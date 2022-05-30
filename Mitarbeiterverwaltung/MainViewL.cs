@@ -88,7 +88,7 @@ namespace Mitarbeiterverwaltung
             int counter = 0;
             foreach (var employee in currentEmployee.subordinates.Values)
             {
-                foreach(var holidayRequest in employee.holidayRequests)
+                foreach(var holidayRequest in employee.absenteeism)
                 {
                     if (holidayRequest.state == RequestState.pending)
                     {
@@ -318,7 +318,7 @@ namespace Mitarbeiterverwaltung
                     newStaffMember.getUserData();
                     updatelvEmployees();
                 }
-                else if (result == DialogResult.Abort) //TODO geht das so?, abort sollte cancel sein
+                else if (result == DialogResult.Abort)
                 {
                     companyData.removeEmployee(currentEmployee);
                     lvEmployees.SelectedItems[0].Remove();

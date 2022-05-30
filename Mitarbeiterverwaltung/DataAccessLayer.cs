@@ -66,7 +66,7 @@ public class CSVStorageHandler : IStorageHandler
             employee.passwordHash = p["passwordHash"];
 
             //parse holidayRequests TODO correctly implement!
-            employee.holidayRequests = new List<HolidayRequest>();
+            employee.absenteeism = new List<Absenteeism>();
             employees.Add(p["Id"], employee);
         }
         foreach (var line in csvLines)
@@ -133,8 +133,8 @@ public class CSVStorageHandler : IStorageHandler
                         break;
 
 
-                    case "holidayRequests":
-                        List<HolidayRequest> holidayRequests = (List<HolidayRequest>)value;
+                    case "absenteeism":
+                        List<Absenteeism> holidayRequests = (List<Absenteeism>)value;
                         value = string.Join(";", holidayRequests);
                         //value = value.toString();
                         break;

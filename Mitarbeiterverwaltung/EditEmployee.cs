@@ -124,6 +124,18 @@ namespace Mitarbeiterverwaltung
         {
             changeToAbsenteeismList();
             //save absenteeism and display in list
+            DateTime startDate = dtpBeginnAbsenteeism.Value;
+            DateTime endDate = dtpEndAbsenteeism.Value;
+
+            if (endDate < startDate)
+            {
+                throw new Exception("Selected Enddate is before Startdate");
+            }
+            //add to list 
+            employee.setSickDays(startDate, endDate);
+            //update view 
+            updatelvAbsenteeism();
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -137,7 +149,6 @@ namespace Mitarbeiterverwaltung
             newAbsenteeismPanel.Visible = true;
             button_save.Enabled = false;
             button_cancel.Enabled = false;
-            btnRemove.Enabled = false;
         }
 
         private void changeToAbsenteeismList()
@@ -146,7 +157,54 @@ namespace Mitarbeiterverwaltung
             absenteeismListPanel.Visible = true;
             button_save.Enabled = true;
             button_cancel.Enabled=true;
-            btnRemove.Enabled=true;
+        }
+
+        private ListViewItem absenteeismToItem(Absenteeism absenteeism)
+        {
+                ListViewItem newItem = new ListViewItem(new string[] {
+                absenteeism.type.ToString(),
+                absenteeism.startTime.ToString("dd.MM.yyyy"),
+                absenteeism.endTime.ToString("dd.MM.yyyy"),
+                absenteeism.state.ToString()
+            });
+            return newItem;
+        }
+
+        private void updatelvAbsenteeism()
+        {
+            lvAbsenteeism.Items.Clear();
+            for (int i = 0; i < employee.absenteeism.Count; i++)
+            {
+                ListViewItem newItem = absenteeismToItem(employee.absenteeism[i]);
+                newItem.Tag = i;
+                lvAbsenteeism.Items.Add(newItem);
+            }          
+        }
+
+        private void TabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == absenteeism)
+            {
+                updatelvAbsenteeism();
+                btnRemove.Enabled = false;
+            }
+            else if(e.TabPage == workingTimes)
+            {
+                Console.Write("Pressed working time");
+                btnRemove.Enabled = false;
+            }
+            else
+            {
+                Console.Write("Pressed personal info");
+                btnRemove.Enabled = true;
+            }
+        }
+
+        private void btnDeleteAbsenteeism_Click(object sender, EventArgs e)
+        {
+            int index = (int)lvAbsenteeism.SelectedItems[0].Tag;
+            employee.absenteeism.RemoveAt(index);
+            lvAbsenteeism.SelectedItems[0].Remove();
         }
     }
 }
