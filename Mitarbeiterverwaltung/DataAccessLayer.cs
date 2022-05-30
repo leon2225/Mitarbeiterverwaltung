@@ -67,6 +67,7 @@ public class CSVStorageHandler : IStorageHandler
 
             //parse holidayRequests TODO correctly implement!
             employee.absenteeism = new List<Absenteeism>();
+
             employees.Add(p["Id"], employee);
         }
         foreach (var line in csvLines)
@@ -134,9 +135,11 @@ public class CSVStorageHandler : IStorageHandler
 
 
                     case "absenteeism":
-                        List<Absenteeism> holidayRequests = (List<Absenteeism>)value;
-                        value = string.Join(";", holidayRequests);
-                        //value = value.toString();
+                        List<Absenteeism> absenteeism = (List<Absenteeism>)value;
+                        if(absenteeism.Count > 0)
+                        {
+                             value = string.Join(";", absenteeism);
+                        }
                         break;
 
                     default:

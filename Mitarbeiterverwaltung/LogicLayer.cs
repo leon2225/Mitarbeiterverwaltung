@@ -19,9 +19,16 @@ namespace Mitarbeiterverwaltung.LL
         public RequestState? state { get; set; }
         public String type { get; set; }
 
-        public string toString()
+        public override string ToString()
         {
-            return type.ToString() + " " + startTime.ToString() + " " + endTime.ToString() + " " + state.ToString();
+            if(this != null)
+            {
+                return type + " " + startTime.ToString("dd.MM.yyyy") + " " + endTime.ToString("dd.MM.yyyy") + " " + state.ToString();
+            }
+            else
+            {
+                return "";
+            }
         }
 
     }

@@ -49,7 +49,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                newEmployee = this.employee;
+                newEmployee = employee;
                 newEmployee.name = this.textBox_name.Text;
                 newEmployee.surname = this.textBox_surname.Text;
                 newEmployee.adress = this.textBox_adress.Text;
