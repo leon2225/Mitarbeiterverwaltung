@@ -11,7 +11,7 @@ namespace Mitarbeiterverwaltung
         [STAThread]
         static void Main()
         {
-                InitFileParser initFileParser = new InitFileParser("C:\\Users\\Damian Goldbach\\source\\repos\\leon2225\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data\\config.ini");
+                InitFileParser initFileParser = new InitFileParser("C:\\Users\\Leon Farchau\\OneDrive\\Hochschule\\S2\\aktuellesThema\\Mitarbeiterverwaltung\\Mitarbeiterverwaltung\\data\\config.ini");
                 Settings settings = initFileParser.loadSettings();
 
 
