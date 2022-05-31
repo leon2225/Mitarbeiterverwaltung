@@ -55,6 +55,17 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
+            this.pnlSecureLogin = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.btnSecureLogin = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblWrongPassword = new System.Windows.Forms.Label();
+            this.fullLoginPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtEmployeeId = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.changePasswordPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -63,14 +74,6 @@
             this.txtNewPasswordRepeated = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblPasswordsNotEqual = new System.Windows.Forms.Label();
-            this.fullLoginPanel = new System.Windows.Forms.Panel();
-            this.lblWrongPwd = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtEmployeeId = new System.Windows.Forms.TextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.managementPanel = new System.Windows.Forms.Panel();
             this.lvEmployees = new System.Windows.Forms.ListView();
             this.ID = new System.Windows.Forms.ColumnHeader();
@@ -85,13 +88,15 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.loginPanel.SuspendLayout();
-            this.changePasswordPanel.SuspendLayout();
+            this.pnlSecureLogin.SuspendLayout();
             this.fullLoginPanel.SuspendLayout();
+            this.changePasswordPanel.SuspendLayout();
             this.managementPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -325,12 +330,139 @@
             this.loginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginPanel.Controls.Add(this.changePasswordPanel);
+            this.loginPanel.Controls.Add(this.pnlSecureLogin);
             this.loginPanel.Controls.Add(this.fullLoginPanel);
+            this.loginPanel.Controls.Add(this.changePasswordPanel);
             this.loginPanel.Location = new System.Drawing.Point(0, 47);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(1184, 535);
             this.loginPanel.TabIndex = 6;
+            // 
+            // pnlSecureLogin
+            // 
+            this.pnlSecureLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnlSecureLogin.Controls.Add(this.label4);
+            this.pnlSecureLogin.Controls.Add(this.label8);
+            this.pnlSecureLogin.Controls.Add(this.txtPassword);
+            this.pnlSecureLogin.Controls.Add(this.btnSecureLogin);
+            this.pnlSecureLogin.Controls.Add(this.label9);
+            this.pnlSecureLogin.Controls.Add(this.lblWrongPassword);
+            this.pnlSecureLogin.Location = new System.Drawing.Point(454, 166);
+            this.pnlSecureLogin.Name = "pnlSecureLogin";
+            this.pnlSecureLogin.Size = new System.Drawing.Size(320, 154);
+            this.pnlSecureLogin.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(0, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(320, 32);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Bitte Passwort angeben";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtPassword.Location = new System.Drawing.Point(136, 52);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(181, 29);
+            this.txtPassword.TabIndex = 4;
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
+            // 
+            // btnSecureLogin
+            // 
+            this.btnSecureLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSecureLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSecureLogin.Location = new System.Drawing.Point(204, 87);
+            this.btnSecureLogin.Name = "btnSecureLogin";
+            this.btnSecureLogin.Size = new System.Drawing.Size(113, 35);
+            this.btnSecureLogin.TabIndex = 2;
+            this.btnSecureLogin.Text = "Anmelden";
+            this.btnSecureLogin.UseVisualStyleBackColor = true;
+            this.btnSecureLogin.Click += new System.EventHandler(this.btnSecureLogin_Click);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(3, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(75, 21);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Passwort:";
+            // 
+            // lblWrongPassword
+            // 
+            this.lblWrongPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblWrongPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWrongPassword.ForeColor = System.Drawing.Color.Red;
+            this.lblWrongPassword.Location = new System.Drawing.Point(6, 97);
+            this.lblWrongPassword.Name = "lblWrongPassword";
+            this.lblWrongPassword.Size = new System.Drawing.Size(315, 23);
+            this.lblWrongPassword.TabIndex = 6;
+            this.lblWrongPassword.Text = "Falsches Passwort!";
+            this.lblWrongPassword.Visible = false;
+            // 
+            // fullLoginPanel
+            // 
+            this.fullLoginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fullLoginPanel.Controls.Add(this.label5);
+            this.fullLoginPanel.Controls.Add(this.txtEmployeeId);
+            this.fullLoginPanel.Controls.Add(this.btnLogin);
+            this.fullLoginPanel.Controls.Add(this.label3);
+            this.fullLoginPanel.Location = new System.Drawing.Point(455, 157);
+            this.fullLoginPanel.Name = "fullLoginPanel";
+            this.fullLoginPanel.Size = new System.Drawing.Size(320, 131);
+            this.fullLoginPanel.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(320, 32);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Herzlich Willkommen!";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtEmployeeId
+            // 
+            this.txtEmployeeId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmployeeId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtEmployeeId.Location = new System.Drawing.Point(136, 53);
+            this.txtEmployeeId.Name = "txtEmployeeId";
+            this.txtEmployeeId.Size = new System.Drawing.Size(181, 29);
+            this.txtEmployeeId.TabIndex = 3;
+            this.txtEmployeeId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmployeeId_KeyUp);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnLogin.Location = new System.Drawing.Point(204, 88);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(113, 35);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Anmelden";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(3, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 21);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Mitarbeiter ID:";
             // 
             // changePasswordPanel
             // 
@@ -429,95 +561,6 @@
             this.lblPasswordsNotEqual.TabIndex = 6;
             this.lblPasswordsNotEqual.Text = "Passwörter stimmen nicht überein!";
             this.lblPasswordsNotEqual.Visible = false;
-            // 
-            // fullLoginPanel
-            // 
-            this.fullLoginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fullLoginPanel.Controls.Add(this.lblWrongPwd);
-            this.fullLoginPanel.Controls.Add(this.label5);
-            this.fullLoginPanel.Controls.Add(this.txtPassword);
-            this.fullLoginPanel.Controls.Add(this.txtEmployeeId);
-            this.fullLoginPanel.Controls.Add(this.btnLogin);
-            this.fullLoginPanel.Controls.Add(this.label4);
-            this.fullLoginPanel.Controls.Add(this.label3);
-            this.fullLoginPanel.Location = new System.Drawing.Point(455, 157);
-            this.fullLoginPanel.Name = "fullLoginPanel";
-            this.fullLoginPanel.Size = new System.Drawing.Size(320, 165);
-            this.fullLoginPanel.TabIndex = 13;
-            // 
-            // lblWrongPwd
-            // 
-            this.lblWrongPwd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblWrongPwd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblWrongPwd.ForeColor = System.Drawing.Color.Red;
-            this.lblWrongPwd.Location = new System.Drawing.Point(3, 128);
-            this.lblWrongPwd.Name = "lblWrongPwd";
-            this.lblWrongPwd.Size = new System.Drawing.Size(195, 23);
-            this.lblWrongPwd.TabIndex = 6;
-            this.lblWrongPwd.Text = "Falsches Passwort!";
-            this.lblWrongPwd.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(320, 32);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Herzlich Willkommen!";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPassword.Location = new System.Drawing.Point(136, 87);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(181, 29);
-            this.txtPassword.TabIndex = 4;
-            this.txtPassword.UseSystemPasswordChar = true;
-            // 
-            // txtEmployeeId
-            // 
-            this.txtEmployeeId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmployeeId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtEmployeeId.Location = new System.Drawing.Point(136, 53);
-            this.txtEmployeeId.Name = "txtEmployeeId";
-            this.txtEmployeeId.Size = new System.Drawing.Size(181, 29);
-            this.txtEmployeeId.TabIndex = 3;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnLogin.Location = new System.Drawing.Point(204, 122);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(113, 35);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Anmelden";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(3, 90);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 21);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Passwort:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(3, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 21);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Mitarbeiter ID:";
             // 
             // managementPanel
             // 
@@ -649,14 +692,27 @@
             this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // MainViewL
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(182, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Passwort vergessen";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.checkInPanel);
-            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -666,7 +722,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainViewL";
+            this.Name = "MainView";
             this.Text = "Mitarbeiter Verwaltung";
             this.Load += new System.EventHandler(this.MainViewL_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -678,10 +734,12 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.loginPanel.ResumeLayout(false);
-            this.changePasswordPanel.ResumeLayout(false);
-            this.changePasswordPanel.PerformLayout();
+            this.pnlSecureLogin.ResumeLayout(false);
+            this.pnlSecureLogin.PerformLayout();
             this.fullLoginPanel.ResumeLayout(false);
             this.fullLoginPanel.PerformLayout();
+            this.changePasswordPanel.ResumeLayout(false);
+            this.changePasswordPanel.PerformLayout();
             this.managementPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -717,12 +775,9 @@
         private Panel loginPanel;
         private Panel fullLoginPanel;
         private Label label5;
-        private TextBox txtPassword;
         private TextBox txtEmployeeId;
         private Button btnLogin;
-        private Label label4;
         private Label label3;
-        private Label lblWrongPwd;
         private Label lblCheckInState;
         private DateTimePicker dateTimePicker1;
         private ToolStripMenuItem settingsToolStripMenuItem;
@@ -742,5 +797,12 @@
         private TextBox txtNewPasswordRepeated;
         private Label label6;
         private Label lblPasswordsNotEqual;
+        private Panel pnlSecureLogin;
+        private Label lblWrongPassword;
+        private Label label8;
+        private TextBox txtPassword;
+        private Button btnSecureLogin;
+        private Label label9;
+        private Label label4;
     }
 }

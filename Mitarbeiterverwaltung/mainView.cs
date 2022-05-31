@@ -186,37 +186,48 @@ namespace Mitarbeiterverwaltung
             }
             else if (activePanel == checkInPanel)
             {
-                changeToManagement();
-                checkForPendingHolidayRequests();
+                changeToSecureLogin();
+            }
+            else if (activePanel == loginPanel)
+            {
+                //called from pnlSecureLogin
+                changeToCheckin();
+            }
+            else
+            {
+                throw new Exception("activePanelNotSupported");
             }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string Id = txtEmployeeId.Text;
-            if(companyData.employees[Id].checkPassword(txtPassword.Text))
+            //TODO transform key into valid pattern i.e. 0001 -> 1 
+            if (!companyData.employees.Keys.Contains(Id))
             {
-                txtEmployeeId.Text = "";
-                lblWrongPwd.Visible = false;
-                currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
-                if (txtPassword.Text == "0000")
-                {
-                    txtPassword.Text = "";
-                    changeInertialPassword();
-                }
-                else
-                {
-                    txtPassword.Text = "";
-                    startLogoutCountdown();
-                    loadStatistics();
-                    changeToCheckin();
-                }
+                //TODO throw Error here
+            }
+
+            currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
+            
+            startLogoutCountdown();
+            loadStatistics();
+            changeToCheckin();
+        }
+
+        private void btnSecureLogin_Click(object sender, EventArgs e)
+        {
+            if (currentEmployee.checkPassword(txtPassword.Text))
+            {
+                lblWrongPassword.Visible = false;
+                txtPassword.Text = "";
+                startLogoutCountdown();
+                changeToManagement();
             }
             else
             {
-                lblWrongPwd.Visible = true;
+                lblWrongPassword.Visible = true;
             }
-            
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -235,6 +246,7 @@ namespace Mitarbeiterverwaltung
             checkInPanel.Visible = false;
             loginPanel.Visible = false;
             changePasswordPanel.Visible = false;
+            pnlSecureLogin.Visible = false;
         }
 
         private void updateCheckInState()
@@ -252,8 +264,9 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void changeInertialPassword()
+        private void changeToUpdatePassword()
         {
+            changeToLogin();
             fullLoginPanel.Visible = false;
             changePasswordPanel.Visible = true;
         }
@@ -270,6 +283,8 @@ namespace Mitarbeiterverwaltung
             activePanel = checkInPanel;
             updateCheckInState();
         }
+
+
         private void changeToManagement()
         {
             hideAll();
@@ -282,15 +297,33 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Text = "Ein / Ausstemplen";
             activePanel = managementPanel;
             updatelvEmployees();
+            checkForPendingHolidayRequests();
         }
 
         private void changeToLogin()
         {
             hideAll();
+            txtEmployeeId.Text = "";
             activePanel = loginPanel;
             loginPanel.Visible = true;
             fullLoginPanel.Visible = true;
             loginPanel.BringToFront();
+        }
+
+        /// <summary>
+        /// Changes MainView to Panel for Login into secured area
+        /// </summary>
+        private void changeToSecureLogin()
+        {
+            changeToLogin();
+            fullLoginPanel.Visible = false;
+            pnlSecureLogin.Visible = true;
+            txtPassword.Text = "";
+            lblWrongPassword.Visible = false;
+            btnLogout.Visible = true;
+            btnPanelCtrl.Visible = true;
+            btnPanelCtrl.Text = "Ein / Ausstemplen";
+            activePanel = loginPanel;
         }
 
         private void lvEmployees_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -391,7 +424,7 @@ namespace Mitarbeiterverwaltung
             if (txtNewPassword.Text == txtNewPasswordRepeated.Text)
             {
                 //save new password
-                currentEmployee.setPassword(txtPassword.Text);
+                currentEmployee.setPassword(txtNewPassword.Text);
                 lblPasswordsNotEqual.Visible = false;
                 startLogoutCountdown();
                 loadStatistics();
@@ -407,6 +440,29 @@ namespace Mitarbeiterverwaltung
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtEmployeeId_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin_Click(sender, e);
+                e.Handled = true;
+            }
+        }
+
+        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSecureLogin_Click(sender, e);
+                e.Handled = true;
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            changeToUpdatePassword();
         }
     }
 }
