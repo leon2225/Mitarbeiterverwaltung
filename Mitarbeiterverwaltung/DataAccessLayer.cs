@@ -3,80 +3,80 @@
 namespace Mitarbeiterverwaltung.DAL
 {
 
-public class Settings
-{
-    public string companyName { get; set; }
-    public string logoPath { get; set; }
-    public string csvPath { get; set; }
-    public int timeRounding { get; set; }
-    public int autoLogoutTimeout { get; set; }
-}
-
-public interface IStorageHandler
-{
-    Dictionary<string, Employee> load();
-    bool save(Dictionary<string, Employee> employees);
-}
-
-public class CSVStorageHandler : IStorageHandler
-{
-    public string path;
-
-    public CSVStorageHandler(string path)
+    public class Settings
     {
-        this.path = path;
+        public string companyName { get; set; }
+        public string logoPath { get; set; }
+        public string csvPath { get; set; }
+        public int timeRounding { get; set; }
+        public int autoLogoutTimeout { get; set; }
     }
 
-    public Dictionary<string, Employee> load()
+    public interface IStorageHandler
     {
-        string csvString = File.ReadAllText(path);
+        Dictionary<string, Employee> load();
+        bool save(Dictionary<string, Employee> employees);
+    }
 
-        var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
-        propertyNames.Sort();
-        string header = string.Join(",", propertyNames);
+    public class CSVStorageHandler : IStorageHandler
+    {
+        public string path;
 
-        List<string> csvLines = csvString.Split("\r\n").ToList();
-
-        //If headers aren't equal, the csv file is not compatible
-        if (!csvLines[0].Equals(header))
+        public CSVStorageHandler(string path)
         {
-            return null;
+            this.path = path;
         }
 
-        //remove header from lines
-        csvLines.RemoveAt(0);
-
-        Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
-
-        foreach (var line in csvLines)
+        public Dictionary<string, Employee> load()
         {
-            List<string> values = line.Split(",").ToList();
-            var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
-            int holidays = int.Parse(p["holidays"]);
-            TimeSpan weekTimeLimit = TimeSpan.Parse(p["weekTimeLimit"]);
-            HourlyRatedEmployee employee = new HourlyRatedEmployee(p["name"], p["surname"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
-            employee.Id = p["Id"];
-            employee.overtime = TimeSpan.Parse(p["overtime"]);
-            employee.endTime = DateTime.Parse(p["endTime"]);
-            employee.startTime = DateTime.Parse(p["startTime"]);
-            employee.totalWorktime = TimeSpan.Parse(p["totalWorktime"]);
-            employee.timeWorkedToday = TimeSpan.Parse(p["timeWorkedToday"]);
-            employee.pauseTime = TimeSpan.Parse(p["pauseTime"]);
-            employee.overtime = TimeSpan.Parse(p["overtime"]);
-            employee.passwordHash = p["passwordHash"];
+            string csvString = File.ReadAllText(path);
 
-            //parse holidayRequests TODO correctly implement!
-            employee.absenteeism = new List<Absenteeism>();
-                if(p["absenteeism"].Contains(";"))
+            var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
+            propertyNames.Sort();
+            string header = string.Join(",", propertyNames);
+
+            List<string> csvLines = csvString.Split("\r\n").ToList();
+
+            //If headers aren't equal, the csv file is not compatible
+            if (!csvLines[0].Equals(header))
+            {
+                return null;
+            }
+
+            //remove header from lines
+            csvLines.RemoveAt(0);
+
+            Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
+
+            foreach (var line in csvLines)
+            {
+                List<string> values = line.Split(",").ToList();
+                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                int holidays = int.Parse(p["holidays"]);
+                TimeSpan weekTimeLimit = TimeSpan.Parse(p["weekTimeLimit"]);
+                HourlyRatedEmployee employee = new HourlyRatedEmployee(p["name"], p["surname"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
+                employee.Id = p["Id"];
+                employee.overtime = TimeSpan.Parse(p["overtime"]);
+                employee.endTime = DateTime.Parse(p["endTime"]);
+                employee.startTime = DateTime.Parse(p["startTime"]);
+                employee.totalWorktime = TimeSpan.Parse(p["totalWorktime"]);
+                employee.timeWorkedToday = TimeSpan.Parse(p["timeWorkedToday"]);
+                employee.pauseTime = TimeSpan.Parse(p["pauseTime"]);
+                employee.overtime = TimeSpan.Parse(p["overtime"]);
+                employee.passwordHash = p["passwordHash"];
+
+                //parse holidayRequests TODO correctly implement!
+                employee.absenteeism = new List<Absenteeism>();
+                if (p["absenteeism"].Contains(";"))
                 {
-                        List<string> absenteeismElements = p["absenteeism"].Split(";").ToList();
-                        foreach (var element in absenteeismElements)
-                        {
-                            List<string> elementItem = element.Split(" ").ToList();
-                            Absenteeism item = new Absenteeism(elementItem[0], elementItem[1], elementItem[2], elementItem[3]);
-                            employee.absenteeism.Add(item);
-                        }
+                    List<string> absenteeismElements = p["absenteeism"].Split(";").ToList();
+                    foreach (var element in absenteeismElements)
+                    {
+                        List<string> elementItem = element.Split(" ").ToList();
+                        Absenteeism item = new Absenteeism(elementItem[0], elementItem[1], elementItem[2], elementItem[3]);
+                        employee.absenteeism.Add(item);
                     }
+                }
                 //todo delete unnecessary code
                 employee.timestamps = new List<DateTime>();
                 if (p["timestamps"].Contains(";"))
@@ -91,84 +91,84 @@ public class CSVStorageHandler : IStorageHandler
 
 
                 employees.Add(p["Id"], employee);
-        }
-        foreach (var line in csvLines)
-        {
-            List<string> values = line.Split(",").ToList();
-            var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
-            string id = p["Id"];
-            Employee employee = employees[id];
-            string supervisorId = p["supervisor"];
-            if (supervisorId != "")
-                employee.supervisor = employees[supervisorId];
-            List<string> subordinateIds = p["subordinates"].Split(";").ToList();
-            Dictionary<string, Employee> subordinates = new Dictionary<string, Employee>();
-            foreach (var subordinateId in subordinateIds)
+            }
+            foreach (var line in csvLines)
             {
-                if (subordinateId != "")
-                    subordinates.Add(subordinateId, employees[subordinateId]);
+                List<string> values = line.Split(",").ToList();
+                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                string id = p["Id"];
+                Employee employee = employees[id];
+                string supervisorId = p["supervisor"];
+                if (supervisorId != "")
+                    employee.supervisor = employees[supervisorId];
+                List<string> subordinateIds = p["subordinates"].Split(";").ToList();
+                Dictionary<string, Employee> subordinates = new Dictionary<string, Employee>();
+                foreach (var subordinateId in subordinateIds)
+                {
+                    if (subordinateId != "")
+                        subordinates.Add(subordinateId, employees[subordinateId]);
+                }
+
+                employee.subordinates = subordinates;
             }
 
-            employee.subordinates = subordinates;
+
+            return employees;
         }
 
-
-        return employees;
-    }
-
-    public bool save(Dictionary<string, Employee> employees)
-    {
-        string csvString = "";
-        var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
-        propertyNames.Sort();
-        string header = string.Join(",", propertyNames);
-        csvString += header;
-
-        foreach (HourlyRatedEmployee employee in employees.Values)
+        public bool save(Dictionary<string, Employee> employees)
         {
-            csvString += "\r\n";
-            foreach (string key in propertyNames)
+            string csvString = "";
+            var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
+            propertyNames.Sort();
+            string header = string.Join(",", propertyNames);
+            csvString += header;
+
+            foreach (HourlyRatedEmployee employee in employees.Values)
             {
-                var value = employee.GetType().GetProperty(key).GetValue(employee);
-
-                switch (key)
+                csvString += "\r\n";
+                foreach (string key in propertyNames)
                 {
-                    case "holidays":
-                        value = value.ToString();
-                        break;
+                    var value = employee.GetType().GetProperty(key).GetValue(employee);
 
-                    case "supervisor":
-                        if (value == null)
-                        {
-                            value = "";
-                        }
-                        else
-                        {
-                            HourlyRatedEmployee supervisor = (HourlyRatedEmployee)value;
-                            value = supervisor.Id;
-                        }
+                    switch (key)
+                    {
+                        case "holidays":
+                            value = value.ToString();
+                            break;
 
-                        break;
-
-                    case "subordinates":
-                        List<string> subordinates = ((Dictionary<string, Employee>)value).Select(kvp => kvp.Key).ToList(); ;
-                        value = string.Join(";", subordinates);
-                        break;
-
-
-                    case "absenteeism":
-                        List<Absenteeism> absenteeism = (List<Absenteeism>)value;
-                        if(absenteeism.Count > 0)
-                        {
-                             value = string.Join(";", absenteeism);
-                        }
-                        else
+                        case "supervisor":
+                            if (value == null)
                             {
                                 value = "";
                             }
-                        break;
+                            else
+                            {
+                                HourlyRatedEmployee supervisor = (HourlyRatedEmployee)value;
+                                value = supervisor.Id;
+                            }
 
-                    case "timestamps":
+                            break;
+
+                        case "subordinates":
+                            List<string> subordinates = ((Dictionary<string, Employee>)value).Select(kvp => kvp.Key).ToList(); ;
+                            value = string.Join(";", subordinates);
+                            break;
+
+
+                        case "absenteeism":
+                            List<Absenteeism> absenteeism = (List<Absenteeism>)value;
+                            if (absenteeism.Count > 0)
+                            {
+                                value = string.Join(";", absenteeism);
+                            }
+                            else
+                            {
+                                value = "";
+                            }
+                            break;
+
+                        case "timestamps":
                             List<DateTime> timestamps = (List<DateTime>)value;
                             if (timestamps.Count > 0)
                             {
@@ -181,146 +181,161 @@ public class CSVStorageHandler : IStorageHandler
                             break;
 
                         default:
-                        break;
-                }
+                            break;
+                    }
 
-                csvString += value + ",";
+                    csvString += value + ",";
+                }
             }
+            File.WriteAllText(path, csvString);
+            return true;
         }
-        File.WriteAllText(path, csvString);
-        return true;
     }
-}
 
-public class InitFileParser
-{
-    public string path;
-    private Dictionary<string, Dictionary<string, string>> loadedData;
-    public InitFileParser(string filePath = "init.ini")
+    public class InitFileParser
     {
-        path = filePath;
-    }
-    public bool updateFromSettings(Settings settings)
-    {
-        loadedData["settings"]["csvPath"] = settings.csvPath;
-        loadedData["settings"]["logoPath"] = settings.logoPath;
-        loadedData["settings"]["companyName"] = settings.companyName;
-        loadedData["settings"]["timeRounding"] = settings.timeRounding.ToString();
-        loadedData["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
-        return true;
-    }
-    public bool saveFile()
-    {
-        string iniString = "";
-
-        foreach (var kvp in loadedData)
+        public string path;
+        private Dictionary<string, Dictionary<string, string>> loadedData;
+        public InitFileParser(string filePath = "init.ini")
         {
-            iniString += "\n[" + kvp.Key + "]\n";
-
-            foreach (var kvp2 in kvp.Value)
-            {
-                iniString += kvp2.Key + "=\"" + kvp2.Value.ToString() + "\"\n";
-            }
+            path = filePath;
         }
-
-        File.WriteAllText(path, iniString);
-        return true;
-    }
-    public Dictionary<string, Dictionary<string, string>> parseFile()
-    {
-        Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
-
-
-        //TODO check if file exists
-
-        string currentSection = "NoSection";
-        // Read the file and display it line by line.  
-        foreach (string line in System.IO.File.ReadLines(path))
+        public bool updateFromSettings(Settings settings)
         {
-            string currentLine = line;
-            //remove comments
-            int commentStart = currentLine.IndexOf('#');
-            if (commentStart != -1)
+            string currentDir = Directory.GetCurrentDirectory();
+            if (settings.csvPath.Contains(currentDir))
             {
-                currentLine = currentLine.Substring(0, commentStart);
-            }
-
-            //remove whitespace
-            currentLine = currentLine.Trim();
-
-            //handle sections
-            if (currentLine.Contains('['))
-            {
-                if (!currentLine.Contains(']'))
-                {
-                    // TODO raise error
-                }
-                int sectionStart = currentLine.IndexOf('[') + 1;
-                int sectionEnd = currentLine.IndexOf(']');
-
-                currentSection = currentLine.Substring(sectionStart, sectionEnd - sectionStart);
-
-                result.Add(currentSection, new Dictionary<string, string>());
-
-                continue;
-            }
-            else if (currentLine.Contains('='))
-            {
-                //parse key value pair
-                int keyEnd = currentLine.IndexOf("=");
-                string key = currentLine.Substring(0, keyEnd);
-                key = key.Trim();
-                string value = currentLine.Substring(keyEnd + 1);
-                value = value.Trim();
-
-                // remove " if they exists
-                if (value[value.Length - 1] == '"' && value[0] == '"')
-                {
-                    value = value.Substring(1, value.Length - 2);
-                }
-
-                result[currentSection].Add(key, value);
+                loadedData["settings"]["csvPath"] = "." + settings.csvPath.Substring(currentDir.Length);
             }
             else
             {
-                // neihter section nor key/value pair -> ignore
-                continue;
+                loadedData["settings"]["csvPath"] = settings.csvPath;
             }
-        }
-        // Suspend the screen.  
-        loadedData = result;
-        return result;
-    }
-
-    public Settings loadSettings()
-    {
-        Dictionary<string, Dictionary<string, string>> fileContent = parseFile();
-        Settings settings = new Settings();
-
-        foreach (var property in typeof(Settings).GetProperties().Select(field => field.Name))
-        {
-            if (!fileContent.ContainsKey("settings") || !fileContent["settings"].ContainsKey(property))
+            if (settings.logoPath.Contains(currentDir))
             {
-                throw new Exception("Invalid ini file");
+                loadedData["settings"]["logoPath"] = "." + settings.logoPath.Substring(currentDir.Length);
             }
+            else
+            {
+                loadedData["settings"]["logoPath"] = settings.logoPath;
+            }
+            loadedData["settings"]["companyName"] = settings.companyName;
+            loadedData["settings"]["timeRounding"] = settings.timeRounding.ToString();
+            loadedData["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
+            return true;
         }
-        string currentDir = AppDomain.CurrentDomain.BaseDirectory;
-        settings.companyName = fileContent["settings"]["companyName"];
-        settings.logoPath = fileContent["settings"]["logoPath"];
-        if (settings.logoPath[0] == '.')
+        public bool saveFile()
         {
-            settings.logoPath = currentDir + settings.logoPath.Substring(2);
+            string iniString = "";
+
+            foreach (var kvp in loadedData)
+            {
+                iniString += "\n[" + kvp.Key + "]\n";
+
+                foreach (var kvp2 in kvp.Value)
+                {
+                    iniString += kvp2.Key + "=\"" + kvp2.Value.ToString() + "\"\n";
+                }
+            }
+
+            File.WriteAllText(path, iniString);
+            return true;
         }
-        settings.csvPath = fileContent["settings"]["csvPath"];
-        if (settings.csvPath[0] == '.')
+        public Dictionary<string, Dictionary<string, string>> parseFile()
         {
-            settings.csvPath = currentDir + settings.csvPath.Substring(2);
-        }
-        settings.timeRounding = Int32.Parse(fileContent["settings"]["timeRounding"]);
-        settings.autoLogoutTimeout = Int32.Parse(fileContent["settings"]["autoLogoutTimeout"]);
+            Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
 
 
-        return settings;
+            //TODO check if file exists
+
+            string currentSection = "NoSection";
+            // Read the file and display it line by line.  
+            foreach (string line in System.IO.File.ReadLines(path))
+            {
+                string currentLine = line;
+                //remove comments
+                int commentStart = currentLine.IndexOf('#');
+                if (commentStart != -1)
+                {
+                    currentLine = currentLine.Substring(0, commentStart);
+                }
+
+                //remove whitespace
+                currentLine = currentLine.Trim();
+
+                //handle sections
+                if (currentLine.Contains('['))
+                {
+                    if (!currentLine.Contains(']'))
+                    {
+                        // TODO raise error
+                    }
+                    int sectionStart = currentLine.IndexOf('[') + 1;
+                    int sectionEnd = currentLine.IndexOf(']');
+
+                    currentSection = currentLine.Substring(sectionStart, sectionEnd - sectionStart);
+
+                    result.Add(currentSection, new Dictionary<string, string>());
+
+                    continue;
+                }
+                else if (currentLine.Contains('='))
+                {
+                    //parse key value pair
+                    int keyEnd = currentLine.IndexOf("=");
+                    string key = currentLine.Substring(0, keyEnd);
+                    key = key.Trim();
+                    string value = currentLine.Substring(keyEnd + 1);
+                    value = value.Trim();
+
+                    // remove " if they exists
+                    if (value[value.Length - 1] == '"' && value[0] == '"')
+                    {
+                        value = value.Substring(1, value.Length - 2);
+                    }
+
+                    result[currentSection].Add(key, value);
+                }
+                else
+                {
+                    // neihter section nor key/value pair -> ignore
+                    continue;
+                }
+            }
+            // Suspend the screen.  
+            loadedData = result;
+            return result;
+        }
+
+        public Settings loadSettings()
+        {
+            Dictionary<string, Dictionary<string, string>> fileContent = parseFile();
+            Settings settings = new Settings();
+
+            foreach (var property in typeof(Settings).GetProperties().Select(field => field.Name))
+            {
+                if (!fileContent.ContainsKey("settings") || !fileContent["settings"].ContainsKey(property))
+                {
+                    throw new Exception("Invalid ini file");
+                }
+            }
+            string currentDir = Directory.GetCurrentDirectory();
+            settings.companyName = fileContent["settings"]["companyName"];
+            settings.logoPath = fileContent["settings"]["logoPath"];
+            if (settings.logoPath[0] == '.')
+            {
+                settings.logoPath = currentDir + settings.logoPath.Substring(1);
+            }
+            settings.csvPath = fileContent["settings"]["csvPath"];
+            if (settings.csvPath[0] == '.')
+            {
+                settings.csvPath = currentDir + settings.csvPath.Substring(1);
+            }
+            settings.timeRounding = Int32.Parse(fileContent["settings"]["timeRounding"]);
+            settings.autoLogoutTimeout = Int32.Parse(fileContent["settings"]["autoLogoutTimeout"]);
+
+
+            return settings;
+        }
     }
-}
 }
