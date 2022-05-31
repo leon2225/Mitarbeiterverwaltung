@@ -76,6 +76,7 @@ namespace Mitarbeiterverwaltung.LL
         public Employee? supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
         public List<Absenteeism> absenteeism { get; set; }
+        public List<DateTime> timestamps { get; set; }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
@@ -187,6 +188,7 @@ namespace Mitarbeiterverwaltung.LL
             }
 
             startTime = now;
+            timestamps.Add(startTime);
             return true;
         }
 
@@ -204,6 +206,7 @@ namespace Mitarbeiterverwaltung.LL
             totalWorktime += now - startTime;
 
             endTime = now;
+            timestamps.Add(endTime);
             return true;
         }
     }

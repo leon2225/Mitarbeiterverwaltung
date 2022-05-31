@@ -171,6 +171,16 @@ namespace Mitarbeiterverwaltung
             return newItem;
         }
 
+        private ListViewItem timestampToItem(DateTime timestamp, string stampType)
+        {
+            ListViewItem newItem = new ListViewItem(new string[] {
+               stampType,
+               timestamp.ToString("dd.MM.yyyy"),
+               timestamp.ToString("HH:mm"),
+            });
+            return newItem;
+        }
+
         private void updatelvAbsenteeism()
         {
             lvAbsenteeism.Items.Clear();
@@ -182,6 +192,17 @@ namespace Mitarbeiterverwaltung
             }          
         }
 
+        private void updatelvTimestamps()
+        {
+            lvTimestamps.Items.Clear();
+            for (int i = 0; i < employee.timestamps.Count; i++)
+            {
+                ListViewItem newItem = timestampToItem(employee.timestamps[i], "Test in");
+                newItem.Tag = i;
+                lvTimestamps.Items.Add(newItem);
+            }
+        }
+
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
             if (e.TabPage == absenteeism)
@@ -191,12 +212,11 @@ namespace Mitarbeiterverwaltung
             }
             else if(e.TabPage == workingTimes)
             {
-                Console.Write("Pressed working time");
+                updatelvTimestamps();
                 btnRemove.Enabled = false;
             }
             else
             {
-                Console.Write("Pressed personal info");
                 btnRemove.Enabled = true;
             }
         }

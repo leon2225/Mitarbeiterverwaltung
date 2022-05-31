@@ -77,9 +77,20 @@ public class CSVStorageHandler : IStorageHandler
                             employee.absenteeism.Add(item);
                         }
                     }
-                
+                //todo delete unnecessary code
+                employee.timestamps = new List<DateTime>();
+                if (p["timestamps"].Contains(";"))
+                {
+                    List<string> timestampElements = p["timestamps"].Split(";").ToList();
+                    foreach (var element in timestampElements)
+                    {
+                        ;
+                        employee.timestamps.Add(DateTime.Parse(element));
+                    }
+                }
 
-            employees.Add(p["Id"], employee);
+
+                employees.Add(p["Id"], employee);
         }
         foreach (var line in csvLines)
         {
@@ -157,7 +168,19 @@ public class CSVStorageHandler : IStorageHandler
                             }
                         break;
 
-                    default:
+                    case "timestamps":
+                            List<DateTime> timestamps = (List<DateTime>)value;
+                            if (timestamps.Count > 0)
+                            {
+                                value = string.Join(";", timestamps);
+                            }
+                            else
+                            {
+                                value = "";
+                            }
+                            break;
+
+                        default:
                         break;
                 }
 

@@ -51,7 +51,7 @@
             this.personalData = new System.Windows.Forms.TabPage();
             this.workingTimes = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvTimestamps = new System.Windows.Forms.ListView();
             this.absenteeism = new System.Windows.Forms.TabPage();
             this.absenteeismListPanel = new System.Windows.Forms.Panel();
             this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
@@ -69,6 +69,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveAbsenteeism = new System.Windows.Forms.Button();
             this.btnCancelAddAbsenteeism = new System.Windows.Forms.Button();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.personalData.SuspendLayout();
@@ -328,20 +331,25 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.listView1);
+            this.panel1.Controls.Add(this.lvTimestamps);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 244);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // listView1
+            // lvTimestamps
             // 
-            this.listView1.Location = new System.Drawing.Point(6, 6);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(506, 232);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvTimestamps.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.lvTimestamps.Location = new System.Drawing.Point(6, 6);
+            this.lvTimestamps.Name = "lvTimestamps";
+            this.lvTimestamps.Size = new System.Drawing.Size(506, 232);
+            this.lvTimestamps.TabIndex = 0;
+            this.lvTimestamps.UseCompatibleStateImageBehavior = false;
+            this.lvTimestamps.View = System.Windows.Forms.View.Details;
             // 
             // absenteeism
             // 
@@ -515,6 +523,21 @@
             this.btnCancelAddAbsenteeism.UseVisualStyleBackColor = true;
             this.btnCancelAddAbsenteeism.Click += new System.EventHandler(this.btnCancelAddAbsenteeism_Click);
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Status";
+            this.columnHeader1.Width = 120;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Uhrzeit";
+            this.columnHeader2.Width = 120;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Datum";
+            this.columnHeader3.Width = 120;
+            // 
             // EditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -568,7 +591,7 @@
         private TabPage personalData;
         private TabPage workingTimes;
         private TabPage absenteeism;
-        private ListView listView1;
+        private ListView lvTimestamps;
         private ListView lvAbsenteeism;
         private ColumnHeader Beginn;
         private ColumnHeader Ende;
@@ -586,5 +609,8 @@
         private Button btnCancelAddAbsenteeism;
         private Panel panel1;
         private Button btnDeleteAbsenteeism;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
     }
 }
