@@ -23,7 +23,7 @@ namespace Mitarbeiterverwaltung
                 companyData.employees = loadedEmployees;
 
                 Application.EnableVisualStyles();
-                Application.Run(new MainViewL(companyData, settings));
+                Application.Run(new MainView(companyData, settings));
                 csvStorageHandler.save(companyData.employees);
                 initFileParser.updateFromSettings(settings);
                 initFileParser.saveFile();
