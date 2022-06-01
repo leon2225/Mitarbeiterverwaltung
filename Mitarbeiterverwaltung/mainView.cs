@@ -279,7 +279,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Visible = true;
             checkInPanel.BringToFront();
             btnPanelCtrl.Text = "Mitarbeiter verwalten";
-            lblWelcome.Text = "Willkommen " + currentEmployee.name + "!";
+            lblWelcome.Text = "Hallo " + currentEmployee.name;
             activePanel = checkInPanel;
             updateCheckInState();
         }

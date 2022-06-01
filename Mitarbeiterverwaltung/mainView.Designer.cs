@@ -304,13 +304,14 @@
             // 
             // lblWelcome
             // 
+            this.lblWelcome.AutoEllipsis = true;
             this.lblWelcome.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblWelcome.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWelcome.Location = new System.Drawing.Point(0, 0);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(317, 50);
             this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Hallo Leon!";
+            this.lblWelcome.Text = "Hallo LangerLulatschName!";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnCheckIn
