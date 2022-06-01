@@ -89,6 +89,7 @@ namespace Mitarbeiterverwaltung.LL
 
             this.subordinates = new Dictionary<string, Employee>();
             this.absenteeism = new List<Absenteeism>();
+            this.timestamps = new List<DateTime>();
 
             setPassword(password);
         }

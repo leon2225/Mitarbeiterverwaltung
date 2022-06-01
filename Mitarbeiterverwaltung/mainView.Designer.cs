@@ -55,6 +55,11 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
+            this.fullLoginPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtEmployeeId = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlSecureLogin = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -62,11 +67,6 @@
             this.btnSecureLogin = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.lblWrongPassword = new System.Windows.Forms.Label();
-            this.fullLoginPanel = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtEmployeeId = new System.Windows.Forms.TextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.changePasswordPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -94,8 +94,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.loginPanel.SuspendLayout();
-            this.pnlSecureLogin.SuspendLayout();
             this.fullLoginPanel.SuspendLayout();
+            this.pnlSecureLogin.SuspendLayout();
             this.changePasswordPanel.SuspendLayout();
             this.managementPanel.SuspendLayout();
             this.SuspendLayout();
@@ -330,13 +330,68 @@
             this.loginPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginPanel.Controls.Add(this.pnlSecureLogin);
             this.loginPanel.Controls.Add(this.fullLoginPanel);
+            this.loginPanel.Controls.Add(this.pnlSecureLogin);
             this.loginPanel.Controls.Add(this.changePasswordPanel);
             this.loginPanel.Location = new System.Drawing.Point(0, 47);
             this.loginPanel.Name = "loginPanel";
             this.loginPanel.Size = new System.Drawing.Size(1184, 535);
             this.loginPanel.TabIndex = 6;
+            // 
+            // fullLoginPanel
+            // 
+            this.fullLoginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fullLoginPanel.Controls.Add(this.label5);
+            this.fullLoginPanel.Controls.Add(this.txtEmployeeId);
+            this.fullLoginPanel.Controls.Add(this.btnLogin);
+            this.fullLoginPanel.Controls.Add(this.label3);
+            this.fullLoginPanel.Location = new System.Drawing.Point(455, 157);
+            this.fullLoginPanel.Name = "fullLoginPanel";
+            this.fullLoginPanel.Size = new System.Drawing.Size(320, 131);
+            this.fullLoginPanel.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(320, 32);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Herzlich Willkommen!";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtEmployeeId
+            // 
+            this.txtEmployeeId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEmployeeId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtEmployeeId.Location = new System.Drawing.Point(136, 53);
+            this.txtEmployeeId.Name = "txtEmployeeId";
+            this.txtEmployeeId.Size = new System.Drawing.Size(181, 29);
+            this.txtEmployeeId.TabIndex = 3;
+            this.txtEmployeeId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmployeeId_KeyUp);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnLogin.Location = new System.Drawing.Point(204, 88);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(113, 35);
+            this.btnLogin.TabIndex = 2;
+            this.btnLogin.Text = "Anmelden";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(3, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(109, 21);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Mitarbeiter ID:";
             // 
             // pnlSecureLogin
             // 
@@ -421,61 +476,6 @@
             this.lblWrongPassword.TabIndex = 6;
             this.lblWrongPassword.Text = "Falsches Passwort!";
             this.lblWrongPassword.Visible = false;
-            // 
-            // fullLoginPanel
-            // 
-            this.fullLoginPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fullLoginPanel.Controls.Add(this.label5);
-            this.fullLoginPanel.Controls.Add(this.txtEmployeeId);
-            this.fullLoginPanel.Controls.Add(this.btnLogin);
-            this.fullLoginPanel.Controls.Add(this.label3);
-            this.fullLoginPanel.Location = new System.Drawing.Point(455, 157);
-            this.fullLoginPanel.Name = "fullLoginPanel";
-            this.fullLoginPanel.Size = new System.Drawing.Size(320, 131);
-            this.fullLoginPanel.TabIndex = 13;
-            // 
-            // label5
-            // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(320, 32);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Herzlich Willkommen!";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtEmployeeId
-            // 
-            this.txtEmployeeId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEmployeeId.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtEmployeeId.Location = new System.Drawing.Point(136, 53);
-            this.txtEmployeeId.Name = "txtEmployeeId";
-            this.txtEmployeeId.Size = new System.Drawing.Size(181, 29);
-            this.txtEmployeeId.TabIndex = 3;
-            this.txtEmployeeId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmployeeId_KeyUp);
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnLogin.Location = new System.Drawing.Point(204, 88);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(113, 35);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Anmelden";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(3, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(109, 21);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Mitarbeiter ID:";
             // 
             // changePasswordPanel
             // 
@@ -710,9 +710,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.managementPanel);
-            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -734,10 +734,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.loginPanel.ResumeLayout(false);
-            this.pnlSecureLogin.ResumeLayout(false);
-            this.pnlSecureLogin.PerformLayout();
             this.fullLoginPanel.ResumeLayout(false);
             this.fullLoginPanel.PerformLayout();
+            this.pnlSecureLogin.ResumeLayout(false);
+            this.pnlSecureLogin.PerformLayout();
             this.changePasswordPanel.ResumeLayout(false);
             this.changePasswordPanel.PerformLayout();
             this.managementPanel.ResumeLayout(false);

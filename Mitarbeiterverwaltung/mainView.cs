@@ -93,7 +93,7 @@ namespace Mitarbeiterverwaltung
                     if (holidayRequest.state == RequestState.pending)
                     {
                         counter++;
-                        var result = MessageBox.Show(employee.surname + " " + employee.name + " beantragt Urlaub von " + holidayRequest.startTime.ToString("dd.MM.yyyy") + " bis " + holidayRequest.endTime.ToString("dd.MM.yyyy") + "\n\n Soll der Urlaub genehmigt werden?", "Urlaubsanfrage", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                        var result = MessageBox.Show(employee.surname + " " + employee.name + " beantragt Urlaub vom " + holidayRequest.startTime.ToString("dd.MM.yyyy") + " bis zum " + holidayRequest.endTime.ToString("dd.MM.yyyy") + "\n\n Soll der Urlaub genehmigt werden?", "Urlaubsanfrage", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                         switch (result)
                         {
                             case DialogResult.Yes:

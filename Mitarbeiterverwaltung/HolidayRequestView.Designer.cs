@@ -31,12 +31,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblRemainingHolidays = new System.Windows.Forms.Label();
             this.btnCancelRequest = new System.Windows.Forms.Button();
-            this.btnSendRequest = new System.Windows.Forms.Button();
             this.dtpHolidayStart = new System.Windows.Forms.DateTimePicker();
             this.dtpHolidayEnd = new System.Windows.Forms.DateTimePicker();
+            this.chkHalfDayBegin = new System.Windows.Forms.CheckBox();
+            this.btnSendRequest = new System.Windows.Forms.Button();
+            this.chkHalfDayEnd = new System.Windows.Forms.CheckBox();
             this.lblRemainingHolidaysPreview = new System.Windows.Forms.Label();
+            this.lblInvalid = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,17 +48,21 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.11765F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.88235F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.04869F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38.95131F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblRemainingHolidays, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnCancelRequest, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnSendRequest, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.dtpHolidayStart, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.dtpHolidayEnd, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.chkHalfDayBegin, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSendRequest, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.chkHalfDayEnd, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblRemainingHolidaysPreview, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblInvalid, 2, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -87,15 +94,15 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Ende des Urlaubs";
             // 
-            // label3
+            // lblRemainingHolidays
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(141, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Verbleibende Urlaubstage";
+            this.lblRemainingHolidays.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblRemainingHolidays.AutoSize = true;
+            this.lblRemainingHolidays.Location = new System.Drawing.Point(3, 93);
+            this.lblRemainingHolidays.Name = "lblRemainingHolidays";
+            this.lblRemainingHolidays.Size = new System.Drawing.Size(141, 15);
+            this.lblRemainingHolidays.TabIndex = 2;
+            this.lblRemainingHolidays.Text = "Verbleibende Urlaubstage";
             // 
             // btnCancelRequest
             // 
@@ -108,6 +115,40 @@
             this.btnCancelRequest.UseVisualStyleBackColor = true;
             this.btnCancelRequest.Click += new System.EventHandler(this.btnCancelRequest_Click);
             // 
+            // dtpHolidayStart
+            // 
+            this.dtpHolidayStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.dtpHolidayStart.CustomFormat = "MMMM dd, yyyy - dddd";
+            this.dtpHolidayStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHolidayStart.Location = new System.Drawing.Point(172, 8);
+            this.dtpHolidayStart.Name = "dtpHolidayStart";
+            this.dtpHolidayStart.Size = new System.Drawing.Size(92, 23);
+            this.dtpHolidayStart.TabIndex = 5;
+            this.dtpHolidayStart.ValueChanged += new System.EventHandler(this.holidayRangeChanged);
+            // 
+            // dtpHolidayEnd
+            // 
+            this.dtpHolidayEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.dtpHolidayEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHolidayEnd.Location = new System.Drawing.Point(172, 49);
+            this.dtpHolidayEnd.Name = "dtpHolidayEnd";
+            this.dtpHolidayEnd.Size = new System.Drawing.Size(92, 23);
+            this.dtpHolidayEnd.TabIndex = 6;
+            this.dtpHolidayEnd.ValueChanged += new System.EventHandler(this.holidayRangeChanged);
+            // 
+            // chkHalfDayBegin
+            // 
+            this.chkHalfDayBegin.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkHalfDayBegin.AutoSize = true;
+            this.chkHalfDayBegin.Location = new System.Drawing.Point(271, 10);
+            this.chkHalfDayBegin.Name = "chkHalfDayBegin";
+            this.chkHalfDayBegin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkHalfDayBegin.Size = new System.Drawing.Size(80, 19);
+            this.chkHalfDayBegin.TabIndex = 8;
+            this.chkHalfDayBegin.Text = "halber Tag";
+            this.chkHalfDayBegin.UseVisualStyleBackColor = true;
+            this.chkHalfDayBegin.CheckedChanged += new System.EventHandler(this.holidayRangeChanged);
+            // 
             // btnSendRequest
             // 
             this.btnSendRequest.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -119,35 +160,40 @@
             this.btnSendRequest.UseVisualStyleBackColor = true;
             this.btnSendRequest.Click += new System.EventHandler(this.btnSendRequest_Click);
             // 
-            // dtpHolidayStart
+            // chkHalfDayEnd
             // 
-            this.dtpHolidayStart.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.dtpHolidayStart.CustomFormat = "MMMM dd, yyyy - dddd";
-            this.dtpHolidayStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHolidayStart.Location = new System.Drawing.Point(194, 8);
-            this.dtpHolidayStart.Name = "dtpHolidayStart";
-            this.dtpHolidayStart.Size = new System.Drawing.Size(157, 23);
-            this.dtpHolidayStart.TabIndex = 5;
-            // 
-            // dtpHolidayEnd
-            // 
-            this.dtpHolidayEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.dtpHolidayEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHolidayEnd.Location = new System.Drawing.Point(194, 49);
-            this.dtpHolidayEnd.Name = "dtpHolidayEnd";
-            this.dtpHolidayEnd.Size = new System.Drawing.Size(157, 23);
-            this.dtpHolidayEnd.TabIndex = 6;
-            this.dtpHolidayEnd.ValueChanged += new System.EventHandler(this.dtpHolidayEnd_ValueChanged);
+            this.chkHalfDayEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.chkHalfDayEnd.AutoSize = true;
+            this.chkHalfDayEnd.Location = new System.Drawing.Point(271, 51);
+            this.chkHalfDayEnd.Name = "chkHalfDayEnd";
+            this.chkHalfDayEnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkHalfDayEnd.Size = new System.Drawing.Size(80, 19);
+            this.chkHalfDayEnd.TabIndex = 9;
+            this.chkHalfDayEnd.Text = "halber Tag";
+            this.chkHalfDayEnd.UseVisualStyleBackColor = true;
+            this.chkHalfDayEnd.CheckedChanged += new System.EventHandler(this.holidayRangeChanged);
             // 
             // lblRemainingHolidaysPreview
             // 
-            this.lblRemainingHolidaysPreview.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblRemainingHolidaysPreview.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblRemainingHolidaysPreview.AutoSize = true;
-            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(338, 93);
+            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(166, 93);
             this.lblRemainingHolidaysPreview.Name = "lblRemainingHolidaysPreview";
             this.lblRemainingHolidaysPreview.Size = new System.Drawing.Size(13, 15);
             this.lblRemainingHolidaysPreview.TabIndex = 7;
             this.lblRemainingHolidaysPreview.Text = "0";
+            // 
+            // lblInvalid
+            // 
+            this.lblInvalid.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblInvalid.AutoSize = true;
+            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
+            this.lblInvalid.Location = new System.Drawing.Point(298, 93);
+            this.lblInvalid.Name = "lblInvalid";
+            this.lblInvalid.Size = new System.Drawing.Size(53, 15);
+            this.lblInvalid.TabIndex = 10;
+            this.lblInvalid.Text = "Ungültig";
+            this.lblInvalid.Visible = false;
             // 
             // HolidayRequestView
             // 
@@ -157,6 +203,7 @@
             this.CancelButton = this.btnCancelRequest;
             this.ClientSize = new System.Drawing.Size(376, 162);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "HolidayRequestView";
@@ -172,11 +219,14 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private Label label2;
-        private Label label3;
+        private Label lblRemainingHolidays;
         private Button btnCancelRequest;
         private Button btnSendRequest;
         private DateTimePicker dtpHolidayStart;
         private DateTimePicker dtpHolidayEnd;
         private Label lblRemainingHolidaysPreview;
+        private CheckBox chkHalfDayBegin;
+        private CheckBox chkHalfDayEnd;
+        private Label lblInvalid;
     }
 }
