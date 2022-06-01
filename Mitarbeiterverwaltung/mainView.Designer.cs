@@ -56,6 +56,7 @@
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
             this.pnlSecureLogin = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnSecureLogin = new System.Windows.Forms.Button();
@@ -88,7 +89,6 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -151,7 +151,7 @@
             // lblClock
             // 
             this.lblClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblClock.Font = new System.Drawing.Font("Cascadia Mono", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblClock.Location = new System.Drawing.Point(1113, 26);
             this.lblClock.Name = "lblClock";
             this.lblClock.Size = new System.Drawing.Size(71, 18);
@@ -351,6 +351,19 @@
             this.pnlSecureLogin.Name = "pnlSecureLogin";
             this.pnlSecureLogin.Size = new System.Drawing.Size(320, 154);
             this.pnlSecureLogin.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(182, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Passwort vergessen";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label8
             // 
@@ -691,19 +704,6 @@
             this.dateTimePicker1.TabIndex = 7;
             this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(182, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Passwort vergessen";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // MainView
             // 
