@@ -226,19 +226,73 @@ namespace Mitarbeiterverwaltung.DAL
         }
         public bool saveFile()
         {
-            string iniString = "";
-
-            foreach (var kvp in loadedData)
+            String currentSection = "NoSection";
+            String outputString = String.Empty;
+            // Read the file and display it line by line.  
+            foreach (String line in System.IO.File.ReadLines(path))
             {
-                iniString += "\n[" + kvp.Key + "]\n";
-
-                foreach (var kvp2 in kvp.Value)
+                String currentLine = line;
+                String trimmedLine = String.Empty;
+                //remove comments
+                int commentStart = currentLine.IndexOf('#');
+                if (commentStart != -1)
                 {
-                    iniString += kvp2.Key + "=\"" + kvp2.Value.ToString() + "\"\n";
+                    trimmedLine = currentLine.Substring(0, commentStart);
                 }
+                else
+                {
+                    trimmedLine = currentLine;
+                }
+
+                //remove whitespace
+                trimmedLine = trimmedLine.Trim();
+
+                //handle sections
+                if (trimmedLine.Contains('['))
+                {
+                    if (!trimmedLine.Contains(']'))
+                    {
+                        // TODO raise error
+                        throw new Exception("Invalid ini File");
+                    }
+
+                    int sectionStart = trimmedLine.IndexOf('[') + 1;
+                    int sectionEnd = trimmedLine.IndexOf(']');
+
+                    currentSection = trimmedLine.Substring(sectionStart, sectionEnd - sectionStart);
+                }
+                else if (trimmedLine.Contains('='))
+                {
+                    //parse key value pair
+                    int keyEnd = trimmedLine.IndexOf("=");
+                    String key = trimmedLine.Substring(0, keyEnd);
+                    key = key.Trim();
+
+
+                    String oldValue = trimmedLine.Substring(keyEnd + 1);
+                    oldValue = oldValue.Trim();
+
+                    //TODO: Validate if section and key exists in dict
+                    String newValue = loadedData[currentSection][key];
+
+                    // add " if there are whitespaces in the value
+                    if (newValue.Any(Char.IsWhiteSpace))
+                    {
+                        newValue = "\"" + newValue + "\""; 
+                    }
+
+                    currentLine = currentLine.Replace(oldValue, newValue);
+
+                }
+                else
+                {
+                    // neihter section nor key/value pair -> ignore
+                }
+
+                outputString += currentLine + "\n";
             }
 
-            File.WriteAllText(path, iniString);
+            File.WriteAllText(path, outputString);
             return true;
         }
         public Dictionary<string, Dictionary<string, string>> parseFile()
