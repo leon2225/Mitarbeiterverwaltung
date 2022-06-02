@@ -58,10 +58,9 @@
             this.sickDates = new System.Windows.Forms.TabPage();
             this.absenteeismListPanel = new System.Windows.Forms.Panel();
             this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
-            this.lvAbsenteeism = new System.Windows.Forms.ListView();
+            this.lvSickDays = new System.Windows.Forms.ListView();
             this.Beginn = new System.Windows.Forms.ColumnHeader();
             this.Ende = new System.Windows.Forms.ColumnHeader();
-            this.Status = new System.Windows.Forms.ColumnHeader();
             this.btnAddAbsenteeism = new System.Windows.Forms.Button();
             this.newAbsenteeismPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,13 +72,12 @@
             this.btnCancelAddAbsenteeism = new System.Windows.Forms.Button();
             this.holiday = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.btnAllowRequest = new System.Windows.Forms.Button();
+            this.lvHolidays = new System.Windows.Forms.ListView();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDenyRequest = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.personalData.SuspendLayout();
@@ -406,7 +404,7 @@
             // absenteeismListPanel
             // 
             this.absenteeismListPanel.Controls.Add(this.btnDeleteAbsenteeism);
-            this.absenteeismListPanel.Controls.Add(this.lvAbsenteeism);
+            this.absenteeismListPanel.Controls.Add(this.lvSickDays);
             this.absenteeismListPanel.Controls.Add(this.btnAddAbsenteeism);
             this.absenteeismListPanel.Location = new System.Drawing.Point(0, 0);
             this.absenteeismListPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -416,32 +414,31 @@
             // 
             // btnDeleteAbsenteeism
             // 
-            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(327, 288);
+            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(352, 168);
             this.btnDeleteAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDeleteAbsenteeism.Name = "btnDeleteAbsenteeism";
-            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(115, 31);
+            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(211, 31);
             this.btnDeleteAbsenteeism.TabIndex = 3;
             this.btnDeleteAbsenteeism.Text = "Fehlzeit löschen";
             this.btnDeleteAbsenteeism.UseVisualStyleBackColor = true;
             this.btnDeleteAbsenteeism.Click += new System.EventHandler(this.btnDeleteAbsenteeism_Click);
             // 
-            // lvAbsenteeism
+            // lvSickDays
             // 
-            this.lvAbsenteeism.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvSickDays.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvAbsenteeism.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvSickDays.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Beginn,
-            this.Ende,
-            this.Status});
-            this.lvAbsenteeism.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvAbsenteeism.Location = new System.Drawing.Point(3, 4);
-            this.lvAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lvAbsenteeism.Name = "lvAbsenteeism";
-            this.lvAbsenteeism.Size = new System.Drawing.Size(583, 275);
-            this.lvAbsenteeism.TabIndex = 1;
-            this.lvAbsenteeism.UseCompatibleStateImageBehavior = false;
-            this.lvAbsenteeism.View = System.Windows.Forms.View.Details;
+            this.Ende});
+            this.lvSickDays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvSickDays.Location = new System.Drawing.Point(3, 4);
+            this.lvSickDays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvSickDays.Name = "lvSickDays";
+            this.lvSickDays.Size = new System.Drawing.Size(307, 317);
+            this.lvSickDays.TabIndex = 1;
+            this.lvSickDays.UseCompatibleStateImageBehavior = false;
+            this.lvSickDays.View = System.Windows.Forms.View.Details;
             // 
             // Beginn
             // 
@@ -454,18 +451,12 @@
             this.Ende.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Ende.Width = 150;
             // 
-            // Status
-            // 
-            this.Status.Text = "Status";
-            this.Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Status.Width = 300;
-            // 
             // btnAddAbsenteeism
             // 
-            this.btnAddAbsenteeism.Location = new System.Drawing.Point(449, 288);
+            this.btnAddAbsenteeism.Location = new System.Drawing.Point(352, 129);
             this.btnAddAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddAbsenteeism.Name = "btnAddAbsenteeism";
-            this.btnAddAbsenteeism.Size = new System.Drawing.Size(138, 31);
+            this.btnAddAbsenteeism.Size = new System.Drawing.Size(211, 31);
             this.btnAddAbsenteeism.TabIndex = 2;
             this.btnAddAbsenteeism.Text = "Fehlzeit hinzufügen";
             this.btnAddAbsenteeism.UseVisualStyleBackColor = true;
@@ -581,48 +572,43 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.listView1);
+            this.panel2.Controls.Add(this.btnDenyRequest);
+            this.panel2.Controls.Add(this.btnAllowRequest);
+            this.panel2.Controls.Add(this.lvHolidays);
             this.panel2.Location = new System.Drawing.Point(0, 3);
             this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(592, 325);
             this.panel2.TabIndex = 4;
             // 
-            // button1
+            // btnAllowRequest
             // 
-            this.button1.Location = new System.Drawing.Point(327, 288);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 31);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Fehlzeit löschen";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAllowRequest.Enabled = false;
+            this.btnAllowRequest.Location = new System.Drawing.Point(399, 124);
+            this.btnAllowRequest.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAllowRequest.Name = "btnAllowRequest";
+            this.btnAllowRequest.Size = new System.Drawing.Size(160, 31);
+            this.btnAllowRequest.TabIndex = 3;
+            this.btnAllowRequest.Text = "Genehmigen";
+            this.btnAllowRequest.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // lvHolidays
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
+            this.lvHolidays.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(3, 4);
-            this.listView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(589, 276);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Typ";
-            this.columnHeader4.Width = 120;
+            this.lvHolidays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvHolidays.Location = new System.Drawing.Point(3, 4);
+            this.lvHolidays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvHolidays.Name = "lvHolidays";
+            this.lvHolidays.Size = new System.Drawing.Size(366, 317);
+            this.lvHolidays.TabIndex = 1;
+            this.lvHolidays.UseCompatibleStateImageBehavior = false;
+            this.lvHolidays.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader5
             // 
@@ -640,15 +626,16 @@
             this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader7.Width = 120;
             // 
-            // button2
+            // btnDenyRequest
             // 
-            this.button2.Location = new System.Drawing.Point(449, 288);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 31);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Fehlzeit hinzufügen";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDenyRequest.Enabled = false;
+            this.btnDenyRequest.Location = new System.Drawing.Point(399, 163);
+            this.btnDenyRequest.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDenyRequest.Name = "btnDenyRequest";
+            this.btnDenyRequest.Size = new System.Drawing.Size(160, 31);
+            this.btnDenyRequest.TabIndex = 2;
+            this.btnDenyRequest.Text = "Verweigern";
+            this.btnDenyRequest.UseVisualStyleBackColor = true;
             // 
             // EditEmployee
             // 
@@ -707,10 +694,9 @@
         private TabPage workingTimes;
         private TabPage sickDates;
         private ListView lvTimestamps;
-        private ListView lvAbsenteeism;
+        private ListView lvSickDays;
         private ColumnHeader Beginn;
         private ColumnHeader Ende;
-        private ColumnHeader Status;
         private Button btnAddAbsenteeism;
         private Panel absenteeismListPanel;
         private TableLayoutPanel newAbsenteeismPanel;
@@ -728,10 +714,9 @@
         private ColumnHeader columnHeader3;
         private TabPage holiday;
         private Panel panel2;
-        private Button button2;
-        private Button button1;
-        private ListView listView1;
-        private ColumnHeader columnHeader4;
+        private Button btnDenyRequest;
+        private Button btnAllowRequest;
+        private ListView lvHolidays;
         private ColumnHeader columnHeader5;
         private ColumnHeader columnHeader6;
         private ColumnHeader columnHeader7;

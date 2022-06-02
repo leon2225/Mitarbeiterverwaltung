@@ -183,12 +183,12 @@ namespace Mitarbeiterverwaltung
 
         private void updatelvAbsenteeism()
         {
-            lvAbsenteeism.Items.Clear();
+            lvSickDays.Items.Clear();
             for (int i = 0; i < employee.absenteeism.Count; i++)
             {
                 ListViewItem newItem = absenteeismToItem(employee.absenteeism[i]);
                 newItem.Tag = i;
-                lvAbsenteeism.Items.Add(newItem);
+                lvSickDays.Items.Add(newItem);
             }          
         }
 
@@ -223,9 +223,9 @@ namespace Mitarbeiterverwaltung
 
         private void btnDeleteAbsenteeism_Click(object sender, EventArgs e)
         {
-            int index = (int)lvAbsenteeism.SelectedItems[0].Tag;
+            int index = (int)lvSickDays.SelectedItems[0].Tag;
             employee.absenteeism.RemoveAt(index);
-            lvAbsenteeism.SelectedItems[0].Remove();
+            lvSickDays.SelectedItems[0].Remove();
         }
     }
 }
