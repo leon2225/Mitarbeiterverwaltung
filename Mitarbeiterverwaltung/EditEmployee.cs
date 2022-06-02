@@ -26,6 +26,12 @@ namespace Mitarbeiterverwaltung
             else
             {
                 this.Text = "Neuen Mitarbeiter hinzufügen";
+
+                // Remove tabs other then Personal Data
+                this.tabControl1.Controls.Remove(this.tabHolidays);
+                this.tabControl1.Controls.Remove(this.tabWorkingTimes);
+                this.tabControl1.Controls.Remove(this.tabSickDates);
+
                 btnRemove.Visible = false;
             }
             
