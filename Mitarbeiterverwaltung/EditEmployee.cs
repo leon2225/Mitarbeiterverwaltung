@@ -205,7 +205,7 @@ namespace Mitarbeiterverwaltung
 
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPage == absenteeism)
+            if (e.TabPage == sickDates)
             {
                 updatelvAbsenteeism();
                 btnRemove.Enabled = false;
