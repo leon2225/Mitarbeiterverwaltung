@@ -205,12 +205,12 @@ namespace Mitarbeiterverwaltung
 
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPage == sickDates)
+            if (e.TabPage == tabSickDates)
             {
                 updatelvAbsenteeism();
                 btnRemove.Enabled = false;
             }
-            else if(e.TabPage == workingTimes)
+            else if(e.TabPage == tabWorkingTimes)
             {
                 updatelvTimestamps();
                 btnRemove.Enabled = false;

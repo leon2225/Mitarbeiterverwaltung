@@ -48,14 +48,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.personalData = new System.Windows.Forms.TabPage();
-            this.workingTimes = new System.Windows.Forms.TabPage();
+            this.tabPersonalData = new System.Windows.Forms.TabPage();
+            this.tabWorkingTimes = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lvTimestamps = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.sickDates = new System.Windows.Forms.TabPage();
+            this.tabSickDates = new System.Windows.Forms.TabPage();
             this.absenteeismListPanel = new System.Windows.Forms.Panel();
             this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
             this.lvSickDays = new System.Windows.Forms.ListView();
@@ -70,23 +70,23 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSaveAbsenteeism = new System.Windows.Forms.Button();
             this.btnCancelAddAbsenteeism = new System.Windows.Forms.Button();
-            this.holiday = new System.Windows.Forms.TabPage();
+            this.tabHolidays = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnDenyRequest = new System.Windows.Forms.Button();
             this.btnAllowRequest = new System.Windows.Forms.Button();
             this.lvHolidays = new System.Windows.Forms.ListView();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.btnDenyRequest = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.personalData.SuspendLayout();
-            this.workingTimes.SuspendLayout();
+            this.tabPersonalData.SuspendLayout();
+            this.tabWorkingTimes.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.sickDates.SuspendLayout();
+            this.tabSickDates.SuspendLayout();
             this.absenteeismListPanel.SuspendLayout();
             this.newAbsenteeismPanel.SuspendLayout();
-            this.holiday.SuspendLayout();
+            this.tabHolidays.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +96,7 @@
             this.label_name.AutoSize = true;
             this.label_name.Location = new System.Drawing.Point(3, 7);
             this.label_name.Name = "label_name";
-            this.label_name.Size = new System.Drawing.Size(68, 20);
+            this.label_name.Size = new System.Drawing.Size(54, 15);
             this.label_name.TabIndex = 0;
             this.label_name.Text = "Vorname";
             // 
@@ -104,9 +104,9 @@
             // 
             this.label_surname.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_surname.AutoSize = true;
-            this.label_surname.Location = new System.Drawing.Point(3, 42);
+            this.label_surname.Location = new System.Drawing.Point(3, 36);
             this.label_surname.Name = "label_surname";
-            this.label_surname.Size = new System.Drawing.Size(80, 20);
+            this.label_surname.Size = new System.Drawing.Size(65, 15);
             this.label_surname.TabIndex = 1;
             this.label_surname.Text = "Nachname";
             // 
@@ -114,9 +114,9 @@
             // 
             this.label_workingTimeWeek.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_workingTimeWeek.AutoSize = true;
-            this.label_workingTimeWeek.Location = new System.Drawing.Point(3, 147);
+            this.label_workingTimeWeek.Location = new System.Drawing.Point(3, 123);
             this.label_workingTimeWeek.Name = "label_workingTimeWeek";
-            this.label_workingTimeWeek.Size = new System.Drawing.Size(184, 20);
+            this.label_workingTimeWeek.Size = new System.Drawing.Size(148, 15);
             this.label_workingTimeWeek.TabIndex = 3;
             this.label_workingTimeWeek.Text = "Arbeitsstunden pro Woche";
             // 
@@ -124,9 +124,9 @@
             // 
             this.label_holidays.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_holidays.AutoSize = true;
-            this.label_holidays.Location = new System.Drawing.Point(245, 147);
+            this.label_holidays.Location = new System.Drawing.Point(204, 123);
             this.label_holidays.Name = "label_holidays";
-            this.label_holidays.Size = new System.Drawing.Size(89, 20);
+            this.label_holidays.Size = new System.Drawing.Size(70, 15);
             this.label_holidays.TabIndex = 4;
             this.label_holidays.Text = "Urlaubstage";
             // 
@@ -134,9 +134,9 @@
             // 
             this.label_adress.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_adress.AutoSize = true;
-            this.label_adress.Location = new System.Drawing.Point(3, 77);
+            this.label_adress.Location = new System.Drawing.Point(3, 65);
             this.label_adress.Name = "label_adress";
-            this.label_adress.Size = new System.Drawing.Size(67, 20);
+            this.label_adress.Size = new System.Drawing.Size(55, 15);
             this.label_adress.TabIndex = 5;
             this.label_adress.Text = "Anschrift";
             // 
@@ -144,83 +144,80 @@
             // 
             this.label_phone.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label_phone.AutoSize = true;
-            this.label_phone.Location = new System.Drawing.Point(3, 112);
+            this.label_phone.Location = new System.Drawing.Point(3, 94);
             this.label_phone.Name = "label_phone";
-            this.label_phone.Size = new System.Drawing.Size(113, 20);
+            this.label_phone.Size = new System.Drawing.Size(91, 15);
             this.label_phone.TabIndex = 6;
             this.label_phone.Text = "Telefonnummer";
             // 
             // textBox_name
             // 
-            this.textBox_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBox_name, 3);
-            this.textBox_name.Location = new System.Drawing.Point(193, 4);
-            this.textBox_name.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_name.Location = new System.Drawing.Point(157, 3);
             this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(405, 27);
+            this.textBox_name.Size = new System.Drawing.Size(355, 23);
             this.textBox_name.TabIndex = 7;
             this.textBox_name.Text = "Max";
             this.textBox_name.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_surname
             // 
-            this.textBox_surname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_surname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBox_surname, 3);
-            this.textBox_surname.Location = new System.Drawing.Point(193, 39);
-            this.textBox_surname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_surname.Location = new System.Drawing.Point(157, 32);
             this.textBox_surname.Name = "textBox_surname";
-            this.textBox_surname.Size = new System.Drawing.Size(405, 27);
+            this.textBox_surname.Size = new System.Drawing.Size(355, 23);
             this.textBox_surname.TabIndex = 8;
             this.textBox_surname.Text = "Mustermann";
             this.textBox_surname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_adress
             // 
-            this.textBox_adress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_adress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBox_adress, 3);
-            this.textBox_adress.Location = new System.Drawing.Point(193, 74);
-            this.textBox_adress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_adress.Location = new System.Drawing.Point(157, 61);
             this.textBox_adress.Name = "textBox_adress";
-            this.textBox_adress.Size = new System.Drawing.Size(405, 27);
+            this.textBox_adress.Size = new System.Drawing.Size(355, 23);
             this.textBox_adress.TabIndex = 9;
             this.textBox_adress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_phone
             // 
-            this.textBox_phone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_phone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.textBox_phone, 3);
-            this.textBox_phone.Location = new System.Drawing.Point(193, 109);
-            this.textBox_phone.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_phone.Location = new System.Drawing.Point(157, 90);
             this.textBox_phone.Name = "textBox_phone";
-            this.textBox_phone.Size = new System.Drawing.Size(405, 27);
+            this.textBox_phone.Size = new System.Drawing.Size(355, 23);
             this.textBox_phone.TabIndex = 10;
             this.textBox_phone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_weekTimeLimit
             // 
             this.textBox_weekTimeLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_weekTimeLimit.Location = new System.Drawing.Point(193, 144);
-            this.textBox_weekTimeLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_weekTimeLimit.Location = new System.Drawing.Point(157, 119);
             this.textBox_weekTimeLimit.Name = "textBox_weekTimeLimit";
-            this.textBox_weekTimeLimit.Size = new System.Drawing.Size(46, 27);
+            this.textBox_weekTimeLimit.Size = new System.Drawing.Size(41, 23);
             this.textBox_weekTimeLimit.TabIndex = 12;
             // 
             // textBox_holidays
             // 
             this.textBox_holidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_holidays.Location = new System.Drawing.Point(340, 144);
-            this.textBox_holidays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox_holidays.Location = new System.Drawing.Point(280, 119);
             this.textBox_holidays.Name = "textBox_holidays";
-            this.textBox_holidays.Size = new System.Drawing.Size(50, 27);
+            this.textBox_holidays.Size = new System.Drawing.Size(44, 23);
             this.textBox_holidays.TabIndex = 13;
             // 
             // button_save
             // 
             this.button_save.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_save.Location = new System.Drawing.Point(529, 387);
-            this.button_save.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_save.Location = new System.Drawing.Point(463, 290);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(86, 29);
+            this.button_save.Size = new System.Drawing.Size(75, 22);
             this.button_save.TabIndex = 14;
             this.button_save.Text = "Speichern";
             this.button_save.UseVisualStyleBackColor = true;
@@ -229,10 +226,9 @@
             // button_cancel
             // 
             this.button_cancel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_cancel.Location = new System.Drawing.Point(437, 387);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button_cancel.Location = new System.Drawing.Point(382, 290);
             this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(86, 29);
+            this.button_cancel.Size = new System.Drawing.Size(75, 22);
             this.button_cancel.TabIndex = 15;
             this.button_cancel.Text = "Abbrechen";
             this.button_cancel.UseVisualStyleBackColor = true;
@@ -241,10 +237,9 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemove.Location = new System.Drawing.Point(14, 387);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRemove.Location = new System.Drawing.Point(12, 290);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(86, 31);
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 18;
             this.btnRemove.Text = "Entfernen";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -252,8 +247,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -284,28 +278,27 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(589, 241);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(515, 181);
             this.tableLayoutPanel1.TabIndex = 19;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 198);
+            this.label1.Location = new System.Drawing.Point(3, 155);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 20);
+            this.label1.Size = new System.Drawing.Size(54, 15);
             this.label1.TabIndex = 20;
             this.label1.Text = "Passwort";
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.tableLayoutPanel1.SetColumnSpan(this.btnResetPassword, 2);
             this.btnResetPassword.Enabled = false;
-            this.btnResetPassword.Location = new System.Drawing.Point(200, 206);
-            this.btnResetPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnResetPassword.Location = new System.Drawing.Point(157, 151);
             this.btnResetPassword.Name = "btnResetPassword";
-            this.btnResetPassword.Size = new System.Drawing.Size(134, 31);
+            this.btnResetPassword.Size = new System.Drawing.Size(117, 23);
             this.btnResetPassword.TabIndex = 21;
             this.btnResetPassword.Text = "Zurücksetzen";
             this.btnResetPassword.UseVisualStyleBackColor = true;
@@ -313,50 +306,52 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.personalData);
-            this.tabControl1.Controls.Add(this.workingTimes);
-            this.tabControl1.Controls.Add(this.sickDates);
-            this.tabControl1.Controls.Add(this.holiday);
-            this.tabControl1.Location = new System.Drawing.Point(14, 16);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPersonalData);
+            this.tabControl1.Controls.Add(this.tabWorkingTimes);
+            this.tabControl1.Controls.Add(this.tabSickDates);
+            this.tabControl1.Controls.Add(this.tabHolidays);
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(601, 363);
+            this.tabControl1.Size = new System.Drawing.Size(526, 272);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 20;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
             // 
-            // personalData
+            // tabPersonalData
             // 
-            this.personalData.BackColor = System.Drawing.SystemColors.Control;
-            this.personalData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.personalData.Controls.Add(this.tableLayoutPanel1);
-            this.personalData.Location = new System.Drawing.Point(4, 29);
-            this.personalData.Margin = new System.Windows.Forms.Padding(0);
-            this.personalData.Name = "personalData";
-            this.personalData.Size = new System.Drawing.Size(593, 330);
-            this.personalData.TabIndex = 0;
-            this.personalData.Text = "Persöhnliche Daten";
+            this.tabPersonalData.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPersonalData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPersonalData.Controls.Add(this.tableLayoutPanel1);
+            this.tabPersonalData.Location = new System.Drawing.Point(4, 24);
+            this.tabPersonalData.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPersonalData.Name = "tabPersonalData";
+            this.tabPersonalData.Size = new System.Drawing.Size(518, 244);
+            this.tabPersonalData.TabIndex = 0;
+            this.tabPersonalData.Text = "Persöhnliche Daten";
             // 
-            // workingTimes
+            // tabWorkingTimes
             // 
-            this.workingTimes.BackColor = System.Drawing.SystemColors.Control;
-            this.workingTimes.Controls.Add(this.panel1);
-            this.workingTimes.Location = new System.Drawing.Point(4, 29);
-            this.workingTimes.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.workingTimes.Name = "workingTimes";
-            this.workingTimes.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.workingTimes.Size = new System.Drawing.Size(593, 284);
-            this.workingTimes.TabIndex = 1;
-            this.workingTimes.Text = "Arbeitszeiten";
+            this.tabWorkingTimes.BackColor = System.Drawing.SystemColors.Control;
+            this.tabWorkingTimes.Controls.Add(this.panel1);
+            this.tabWorkingTimes.Location = new System.Drawing.Point(4, 24);
+            this.tabWorkingTimes.Name = "tabWorkingTimes";
+            this.tabWorkingTimes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWorkingTimes.Size = new System.Drawing.Size(518, 244);
+            this.tabWorkingTimes.TabIndex = 1;
+            this.tabWorkingTimes.Text = "Arbeitszeiten";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.lvTimestamps);
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(592, 325);
+            this.panel1.Size = new System.Drawing.Size(518, 244);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -366,10 +361,9 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lvTimestamps.Location = new System.Drawing.Point(7, 8);
-            this.lvTimestamps.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvTimestamps.Location = new System.Drawing.Point(3, 3);
             this.lvTimestamps.Name = "lvTimestamps";
-            this.lvTimestamps.Size = new System.Drawing.Size(578, 308);
+            this.lvTimestamps.Size = new System.Drawing.Size(506, 232);
             this.lvTimestamps.TabIndex = 0;
             this.lvTimestamps.UseCompatibleStateImageBehavior = false;
             this.lvTimestamps.View = System.Windows.Forms.View.Details;
@@ -389,17 +383,16 @@
             this.columnHeader3.Text = "Datum";
             this.columnHeader3.Width = 120;
             // 
-            // sickDates
+            // tabSickDates
             // 
-            this.sickDates.BackColor = System.Drawing.SystemColors.Control;
-            this.sickDates.Controls.Add(this.absenteeismListPanel);
-            this.sickDates.Controls.Add(this.newAbsenteeismPanel);
-            this.sickDates.Location = new System.Drawing.Point(4, 29);
-            this.sickDates.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.sickDates.Name = "sickDates";
-            this.sickDates.Size = new System.Drawing.Size(593, 330);
-            this.sickDates.TabIndex = 2;
-            this.sickDates.Text = "Krankheit";
+            this.tabSickDates.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSickDates.Controls.Add(this.absenteeismListPanel);
+            this.tabSickDates.Controls.Add(this.newAbsenteeismPanel);
+            this.tabSickDates.Location = new System.Drawing.Point(4, 24);
+            this.tabSickDates.Name = "tabSickDates";
+            this.tabSickDates.Size = new System.Drawing.Size(518, 244);
+            this.tabSickDates.TabIndex = 2;
+            this.tabSickDates.Text = "Krankheit";
             // 
             // absenteeismListPanel
             // 
@@ -407,17 +400,15 @@
             this.absenteeismListPanel.Controls.Add(this.lvSickDays);
             this.absenteeismListPanel.Controls.Add(this.btnAddAbsenteeism);
             this.absenteeismListPanel.Location = new System.Drawing.Point(0, 0);
-            this.absenteeismListPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.absenteeismListPanel.Name = "absenteeismListPanel";
-            this.absenteeismListPanel.Size = new System.Drawing.Size(592, 325);
+            this.absenteeismListPanel.Size = new System.Drawing.Size(518, 244);
             this.absenteeismListPanel.TabIndex = 3;
             // 
             // btnDeleteAbsenteeism
             // 
-            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(352, 168);
-            this.btnDeleteAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(349, 122);
             this.btnDeleteAbsenteeism.Name = "btnDeleteAbsenteeism";
-            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(211, 31);
+            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(140, 23);
             this.btnDeleteAbsenteeism.TabIndex = 3;
             this.btnDeleteAbsenteeism.Text = "Fehlzeit löschen";
             this.btnDeleteAbsenteeism.UseVisualStyleBackColor = true;
@@ -432,10 +423,9 @@
             this.Beginn,
             this.Ende});
             this.lvSickDays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvSickDays.Location = new System.Drawing.Point(3, 4);
-            this.lvSickDays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvSickDays.Location = new System.Drawing.Point(3, 3);
             this.lvSickDays.Name = "lvSickDays";
-            this.lvSickDays.Size = new System.Drawing.Size(307, 317);
+            this.lvSickDays.Size = new System.Drawing.Size(320, 239);
             this.lvSickDays.TabIndex = 1;
             this.lvSickDays.UseCompatibleStateImageBehavior = false;
             this.lvSickDays.View = System.Windows.Forms.View.Details;
@@ -443,20 +433,19 @@
             // Beginn
             // 
             this.Beginn.Text = "Beginn";
-            this.Beginn.Width = 150;
+            this.Beginn.Width = 160;
             // 
             // Ende
             // 
             this.Ende.Text = "Ende";
             this.Ende.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ende.Width = 150;
+            this.Ende.Width = 156;
             // 
             // btnAddAbsenteeism
             // 
-            this.btnAddAbsenteeism.Location = new System.Drawing.Point(352, 129);
-            this.btnAddAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddAbsenteeism.Location = new System.Drawing.Point(349, 93);
             this.btnAddAbsenteeism.Name = "btnAddAbsenteeism";
-            this.btnAddAbsenteeism.Size = new System.Drawing.Size(211, 31);
+            this.btnAddAbsenteeism.Size = new System.Drawing.Size(140, 23);
             this.btnAddAbsenteeism.TabIndex = 2;
             this.btnAddAbsenteeism.Text = "Fehlzeit hinzufügen";
             this.btnAddAbsenteeism.UseVisualStyleBackColor = true;
@@ -476,7 +465,6 @@
             this.newAbsenteeismPanel.Controls.Add(this.btnSaveAbsenteeism, 1, 3);
             this.newAbsenteeismPanel.Controls.Add(this.btnCancelAddAbsenteeism, 0, 3);
             this.newAbsenteeismPanel.Location = new System.Drawing.Point(0, 0);
-            this.newAbsenteeismPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.newAbsenteeismPanel.Name = "newAbsenteeismPanel";
             this.newAbsenteeismPanel.RowCount = 5;
             this.newAbsenteeismPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.68226F));
@@ -484,7 +472,7 @@
             this.newAbsenteeismPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.80992F));
             this.newAbsenteeismPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.43801F));
             this.newAbsenteeismPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.newAbsenteeismPanel.Size = new System.Drawing.Size(592, 325);
+            this.newAbsenteeismPanel.Size = new System.Drawing.Size(518, 244);
             this.newAbsenteeismPanel.TabIndex = 3;
             // 
             // label2
@@ -493,37 +481,35 @@
             this.label2.AutoSize = true;
             this.newAbsenteeismPanel.SetColumnSpan(this.label2, 2);
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(3, 17);
+            this.label2.Location = new System.Drawing.Point(3, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(586, 20);
+            this.label2.Size = new System.Drawing.Size(512, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Neue krankheitsbedingte Fehlzeit eintragen";
             // 
             // dtpBeginnAbsenteeism
             // 
             this.dtpBeginnAbsenteeism.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpBeginnAbsenteeism.Location = new System.Drawing.Point(146, 58);
-            this.dtpBeginnAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpBeginnAbsenteeism.Location = new System.Drawing.Point(128, 43);
             this.dtpBeginnAbsenteeism.Name = "dtpBeginnAbsenteeism";
-            this.dtpBeginnAbsenteeism.Size = new System.Drawing.Size(108, 27);
+            this.dtpBeginnAbsenteeism.Size = new System.Drawing.Size(95, 23);
             this.dtpBeginnAbsenteeism.TabIndex = 1;
             // 
             // dtpEndAbsenteeism
             // 
             this.dtpEndAbsenteeism.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEndAbsenteeism.Location = new System.Drawing.Point(146, 100);
-            this.dtpEndAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndAbsenteeism.Location = new System.Drawing.Point(128, 75);
             this.dtpEndAbsenteeism.Name = "dtpEndAbsenteeism";
-            this.dtpEndAbsenteeism.Size = new System.Drawing.Size(108, 27);
+            this.dtpEndAbsenteeism.Size = new System.Drawing.Size(95, 23);
             this.dtpEndAbsenteeism.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 65);
+            this.label3.Location = new System.Drawing.Point(3, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 20);
+            this.label3.Size = new System.Drawing.Size(107, 15);
             this.label3.TabIndex = 3;
             this.label3.Text = "Beginn der Fehlzeit";
             // 
@@ -531,18 +517,17 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 106);
+            this.label4.Location = new System.Drawing.Point(3, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 20);
+            this.label4.Size = new System.Drawing.Size(96, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Ende der Fehlzeit";
             // 
             // btnSaveAbsenteeism
             // 
-            this.btnSaveAbsenteeism.Location = new System.Drawing.Point(146, 141);
-            this.btnSaveAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSaveAbsenteeism.Location = new System.Drawing.Point(128, 106);
             this.btnSaveAbsenteeism.Name = "btnSaveAbsenteeism";
-            this.btnSaveAbsenteeism.Size = new System.Drawing.Size(86, 31);
+            this.btnSaveAbsenteeism.Size = new System.Drawing.Size(75, 23);
             this.btnSaveAbsenteeism.TabIndex = 5;
             this.btnSaveAbsenteeism.Text = "Eintragen";
             this.btnSaveAbsenteeism.UseVisualStyleBackColor = true;
@@ -550,24 +535,24 @@
             // 
             // btnCancelAddAbsenteeism
             // 
-            this.btnCancelAddAbsenteeism.Location = new System.Drawing.Point(3, 141);
-            this.btnCancelAddAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancelAddAbsenteeism.Location = new System.Drawing.Point(3, 106);
             this.btnCancelAddAbsenteeism.Name = "btnCancelAddAbsenteeism";
-            this.btnCancelAddAbsenteeism.Size = new System.Drawing.Size(86, 31);
+            this.btnCancelAddAbsenteeism.Size = new System.Drawing.Size(75, 23);
             this.btnCancelAddAbsenteeism.TabIndex = 6;
             this.btnCancelAddAbsenteeism.Text = "Abbrechen";
             this.btnCancelAddAbsenteeism.UseVisualStyleBackColor = true;
             this.btnCancelAddAbsenteeism.Click += new System.EventHandler(this.btnCancelAddAbsenteeism_Click);
             // 
-            // holiday
+            // tabHolidays
             // 
-            this.holiday.Controls.Add(this.panel2);
-            this.holiday.Location = new System.Drawing.Point(4, 29);
-            this.holiday.Name = "holiday";
-            this.holiday.Size = new System.Drawing.Size(593, 330);
-            this.holiday.TabIndex = 3;
-            this.holiday.Text = "Urlaub";
-            this.holiday.UseVisualStyleBackColor = true;
+            this.tabHolidays.Controls.Add(this.panel2);
+            this.tabHolidays.Location = new System.Drawing.Point(4, 24);
+            this.tabHolidays.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabHolidays.Name = "tabHolidays";
+            this.tabHolidays.Size = new System.Drawing.Size(518, 244);
+            this.tabHolidays.TabIndex = 3;
+            this.tabHolidays.Text = "Urlaub";
+            this.tabHolidays.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -575,19 +560,27 @@
             this.panel2.Controls.Add(this.btnDenyRequest);
             this.panel2.Controls.Add(this.btnAllowRequest);
             this.panel2.Controls.Add(this.lvHolidays);
-            this.panel2.Location = new System.Drawing.Point(0, 3);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(592, 325);
+            this.panel2.Size = new System.Drawing.Size(518, 244);
             this.panel2.TabIndex = 4;
+            // 
+            // btnDenyRequest
+            // 
+            this.btnDenyRequest.Enabled = false;
+            this.btnDenyRequest.Location = new System.Drawing.Point(349, 122);
+            this.btnDenyRequest.Name = "btnDenyRequest";
+            this.btnDenyRequest.Size = new System.Drawing.Size(140, 23);
+            this.btnDenyRequest.TabIndex = 2;
+            this.btnDenyRequest.Text = "Verweigern";
+            this.btnDenyRequest.UseVisualStyleBackColor = true;
             // 
             // btnAllowRequest
             // 
             this.btnAllowRequest.Enabled = false;
-            this.btnAllowRequest.Location = new System.Drawing.Point(399, 124);
-            this.btnAllowRequest.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAllowRequest.Location = new System.Drawing.Point(349, 93);
             this.btnAllowRequest.Name = "btnAllowRequest";
-            this.btnAllowRequest.Size = new System.Drawing.Size(160, 31);
+            this.btnAllowRequest.Size = new System.Drawing.Size(140, 23);
             this.btnAllowRequest.TabIndex = 3;
             this.btnAllowRequest.Text = "Genehmigen";
             this.btnAllowRequest.UseVisualStyleBackColor = true;
@@ -602,10 +595,9 @@
             this.columnHeader6,
             this.columnHeader7});
             this.lvHolidays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvHolidays.Location = new System.Drawing.Point(3, 4);
-            this.lvHolidays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvHolidays.Location = new System.Drawing.Point(3, 3);
             this.lvHolidays.Name = "lvHolidays";
-            this.lvHolidays.Size = new System.Drawing.Size(366, 317);
+            this.lvHolidays.Size = new System.Drawing.Size(320, 240);
             this.lvHolidays.TabIndex = 1;
             this.lvHolidays.UseCompatibleStateImageBehavior = false;
             this.lvHolidays.View = System.Windows.Forms.View.Details;
@@ -613,55 +605,44 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Beginn";
-            this.columnHeader5.Width = 120;
+            this.columnHeader5.Width = 100;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Ende";
-            this.columnHeader6.Width = 120;
+            this.columnHeader6.Width = 100;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Status";
             this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 120;
-            // 
-            // btnDenyRequest
-            // 
-            this.btnDenyRequest.Enabled = false;
-            this.btnDenyRequest.Location = new System.Drawing.Point(399, 163);
-            this.btnDenyRequest.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDenyRequest.Name = "btnDenyRequest";
-            this.btnDenyRequest.Size = new System.Drawing.Size(160, 31);
-            this.btnDenyRequest.TabIndex = 2;
-            this.btnDenyRequest.Text = "Verweigern";
-            this.btnDenyRequest.UseVisualStyleBackColor = true;
+            this.columnHeader7.Width = 116;
             // 
             // EditEmployee
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 423);
+            this.ClientSize = new System.Drawing.Size(542, 317);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_save);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "EditEmployee";
             this.Text = "Mitarbeiter bearbeiten";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.personalData.ResumeLayout(false);
-            this.workingTimes.ResumeLayout(false);
+            this.tabPersonalData.ResumeLayout(false);
+            this.tabWorkingTimes.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.sickDates.ResumeLayout(false);
+            this.tabSickDates.ResumeLayout(false);
             this.absenteeismListPanel.ResumeLayout(false);
             this.newAbsenteeismPanel.ResumeLayout(false);
             this.newAbsenteeismPanel.PerformLayout();
-            this.holiday.ResumeLayout(false);
+            this.tabHolidays.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -690,9 +671,9 @@
         private Label label1;
         private Button btnResetPassword;
         private TabControl tabControl1;
-        private TabPage personalData;
-        private TabPage workingTimes;
-        private TabPage sickDates;
+        private TabPage tabPersonalData;
+        private TabPage tabWorkingTimes;
+        private TabPage tabSickDates;
         private ListView lvTimestamps;
         private ListView lvSickDays;
         private ColumnHeader Beginn;
@@ -712,7 +693,7 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
-        private TabPage holiday;
+        private TabPage tabHolidays;
         private Panel panel2;
         private Button btnDenyRequest;
         private Button btnAllowRequest;

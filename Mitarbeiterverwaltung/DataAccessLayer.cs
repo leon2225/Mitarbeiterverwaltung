@@ -65,7 +65,9 @@ namespace Mitarbeiterverwaltung.DAL
                 employee.overtime = TimeSpan.Parse(p["overtime"]);
                 employee.passwordHash = p["passwordHash"];
 
-                //parse holidayRequests TODO correctly implement!
+                //parse holidayRequests
+                //TODO correctly implement!
+                // TODO: Parsing should also be possible if there is only one value -> no ";"
                 employee.absenteeism = new List<Absenteeism>();
                 if (p["absenteeism"].Contains(";"))
                 {
@@ -77,7 +79,8 @@ namespace Mitarbeiterverwaltung.DAL
                         employee.absenteeism.Add(item);
                     }
                 }
-                //todo delete unnecessary code
+                // TODO: Delete unnecessary code
+                // TODO: Parsing should also be possible if there is only one value -> no ";"
                 employee.timestamps = new List<DateTime>();
                 if (p["timestamps"].Contains(";"))
                 {
