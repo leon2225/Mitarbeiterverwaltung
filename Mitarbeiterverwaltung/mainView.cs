@@ -78,9 +78,9 @@ namespace Mitarbeiterverwaltung
 
         private void loadStatistics()
         {
-            lblWorkingTime.Text = currentEmployee.totalWorktime.ToString(@"hh\:mm");
-            lblOvertimeRemaining.Text = currentEmployee.overtime.ToString(@"hh\:mm");
-            lblHolidaysRemaining.Text = currentEmployee.holidays.ToString();
+            lblWorkingTime.Text = String.Format("{0} ({1})", roundTimeSpan(currentEmployee.getTimeWorkedThisWeek(), settings.timeRounding).ToString(@"hh\:mm"), currentEmployee.getTimeWorkedThisWeek().ToString(@"hh\:mm"));
+            lblOvertimeRemaining.Text = currentEmployee.getOvertime().ToString(@"hh\:mm");
+            lblHolidaysRemaining.Text = currentEmployee.vacationDays.ToString();
         }
 
         private void checkForPendingHolidayRequests()
@@ -88,7 +88,7 @@ namespace Mitarbeiterverwaltung
             int counter = 0;
             foreach (var employee in currentEmployee.subordinates.Values)
             {
-                foreach(var holidayRequest in employee.absenteeism)
+                /*foreach(var holidayRequest in employee.absenteeism)
                 {
                     if (holidayRequest.state == RequestState.pending)
                     {
@@ -106,7 +106,7 @@ namespace Mitarbeiterverwaltung
                                 break;
                         }
                     }
-                }
+                }*/
             }
             //if(counter != 0)
             //{
@@ -152,9 +152,9 @@ namespace Mitarbeiterverwaltung
                 employee.name,
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
-                roundTimeSpan(employee.totalWorktime, settings.timeRounding).ToString(),
-                roundTimeSpan(employee.overtime, settings.timeRounding).ToString(),
-                employee.holidays.ToString()
+                roundTimeSpan(employee.getTimeWorkedThisWeek(), settings.timeRounding).ToString(),
+                roundTimeSpan(employee.getOvertime(), settings.timeRounding).ToString(),
+                employee.vacationDays.ToString()
             });
             return listItem;
         }
@@ -170,6 +170,8 @@ namespace Mitarbeiterverwaltung
         {
             EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
             DialogResult result = newStaffMember.ShowDialog();
+            
+
             if (result == DialogResult.OK)
             {
 
@@ -203,16 +205,20 @@ namespace Mitarbeiterverwaltung
         {
             string Id = txtEmployeeId.Text;
             //TODO transform key into valid pattern i.e. 0001 -> 1 
-            if (!companyData.employees.Keys.Contains(Id))
+            if (companyData.employees.Keys.Contains(Id))
             {
-                //TODO throw Error here
+                currentEmployee = (HourlyRatedEmployee)companyData.employees[Id];
+
+                startLogoutCountdown();
+                loadStatistics();
+                changeToCheckin();
+            }
+            else
+            {
+                throw new Exception("No employee with ID " + Id);
             }
 
-            currentEmployee = (HourlyRatedEmployee) companyData.employees[Id];
             
-            startLogoutCountdown();
-            loadStatistics();
-            changeToCheckin();
         }
 
         private void btnSecureLogin_Click(object sender, EventArgs e)
@@ -251,8 +257,7 @@ namespace Mitarbeiterverwaltung
 
         private void updateCheckInState()
         {
-            bool checkedIn = currentEmployee.startTime > currentEmployee.endTime;
-            if (checkedIn)
+            if (currentEmployee.isCheckedIn())
             {
                 lblCheckInState.Text = "Eingestempelt";
                 btnCheckIn.Text = "Ausstempeln";
@@ -362,7 +367,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
-            if (currentEmployee.startTime > currentEmployee.endTime)
+            if (currentEmployee.isCheckedIn())
                 currentEmployee.checkOut(timeHandler);
             else
                 currentEmployee.checkIn(timeHandler);

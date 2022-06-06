@@ -12,6 +12,68 @@ namespace Mitarbeiterverwaltung.LL
         none
     }
 
+    public class TimePeriod
+    {
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
+
+        public TimePeriod(DateTime startDate, DateTime endDate)
+        {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
+        public TimePeriod(DateTime startDate, TimeSpan duration)
+        {
+            this.startDate = startDate;
+            this.endDate = startDate + duration;
+        }
+
+        public TimeSpan getDuration()
+        {
+            return endDate - startDate;
+        }
+
+        public override String ToString()
+        {
+            return startDate.ToString() + " - " + endDate.ToString();
+        }
+
+        public static TimePeriod parse(String str)
+        {
+            String[] parts = str.Split(" - ");
+            return new TimePeriod(DateTime.Parse(parts[0]), DateTime.Parse(parts[1]));
+        }
+    }
+
+    public class VacationRequest : TimePeriod
+    {
+        public RequestState state { get; set; }
+        public VacationRequest (DateTime startDate, DateTime endDate, RequestState state) : base (startDate, endDate)
+        {
+            this.state = state;
+        }
+        
+        public override String ToString()
+        {
+            return startDate.ToString() + " - " + endDate.ToString() + " - " + state.ToString();
+        }
+
+        public static new VacationRequest parse(String str)
+        {
+            String[] parts = str.Split(" - ");
+
+            RequestState state = RequestState.none;
+            if (Enum.TryParse<RequestState>(parts[2], out state))
+            {
+                return new VacationRequest(DateTime.Parse(parts[0]), DateTime.Parse(parts[1]), state);
+            }
+            else
+            {
+                throw new Exception("Could not parse RequestState");
+            }
+        }
+    }
+
     public class Absenteeism
     {
         public DateTime startTime { get; set; }
@@ -72,48 +134,71 @@ namespace Mitarbeiterverwaltung.LL
         public string surname { get; set; }
         public string adress { get; set; }
         public string phone { get; set; }
-        public int holidays { get; set; }
         public Employee? supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
-        public List<Absenteeism> absenteeism { get; set; }
-        public List<DateTime> timestamps { get; set; }
+
+        public Employee()
+        {
+            this.name = String.Empty;
+            this.surname = String.Empty;
+            this.adress = String.Empty;
+            this.phone = String.Empty;
+            subordinates = new Dictionary<string, Employee>();
+            Id = (1000 + (numberOfEmployees) ).ToString();
+            passwordHash = String.Empty;
+
+            numberOfEmployees++;
+        }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = (1000 + (numberOfEmployees++) + 1).ToString(); //TODO add auto Id
+            this.Id = (1000 + (numberOfEmployees++)).ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
             this.phone = phone;
-            this.holidays = holidays;
 
             this.subordinates = new Dictionary<string, Employee>();
-            this.absenteeism = new List<Absenteeism>();
-            this.timestamps = new List<DateTime>();
 
             setPassword(password);
         }
 
-        public void requestHoliday(DateTime startTime, DateTime endTime)
+        public void parse(Dictionary<String, String> data)
         {
-            Absenteeism holidayRequest = new Absenteeism();
-            holidayRequest.type = "Urlaub";
-            holidayRequest.startTime = startTime;
-            holidayRequest.endTime = endTime;
-            holidayRequest.state = RequestState.pending;
+            foreach (var (key, value) in data)
+            {
+                //This step could be done via property assignment, but this way the interface stays the same,
+                //regardless off changes in propertynames
+                switch (key)
+                {
+                    case "name":
+                        this.name = value;
+                        break;
 
-            this.absenteeism.Add(holidayRequest);
-        }
+                    case "surname":
+                        this.surname = value;
+                        break;
 
-        public void setSickDays(DateTime startTime, DateTime endTime)
-        {
-            Absenteeism sickDays = new Absenteeism();
-            sickDays.type = "Krankheit";
-            sickDays.startTime = startTime;
-            sickDays.endTime = endTime;
-            sickDays.state = null;
+                    case "adress":
+                        this.adress = value;
+                        break;
 
-            this.absenteeism.Add(sickDays);
+                    case "phone":
+                        this.phone = value;
+                        break;
+
+                    case "passwordHash":
+                        this.passwordHash = value;
+                        break;
+
+                    case "Id":
+                        this.Id = value;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
 
         private byte[] GetHash(string inputString)
@@ -145,80 +230,241 @@ namespace Mitarbeiterverwaltung.LL
     public class HourlyRatedEmployee : Employee
     {
         public TimeSpan weekTimeLimit { get; set; } = TimeSpan.Zero; //worktime/week due to contract
-        public TimeSpan totalWorktime { get; set; } = TimeSpan.Zero; //worktime for this month until now
-        public DateTime startTime { get; set; } = DateTime.MinValue;
-        public DateTime endTime { get; set; } = DateTime.MinValue;
-        public TimeSpan timeWorkedToday { get; set; } = TimeSpan.Zero; //worktime today until last pause
-        public TimeSpan pauseTime { get; set; } = TimeSpan.Zero;
-        public TimeSpan overtime { get; set; } = TimeSpan.Zero; //overtime until last month
+        public List<DateTime> checkInOutTimes { get; set; } = new List<DateTime>();
+        public List<TimePeriod> pauseTimes { get; set; } = new List<TimePeriod>();
+        public List<TimePeriod> sickDays { get; set; } = new List<TimePeriod>();
+        public List<VacationRequest> vacations{ get; set; } = new List<VacationRequest>();
+        public int vacationDays { get; set; } = 0;
 
         public HourlyRatedEmployee(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password)
         {
             this.weekTimeLimit = weekTimeLimit;
         }
 
-        public bool checkIn(TimeHandler timeHandler)
+        public HourlyRatedEmployee() : base()
         {
-            //checkIn only possible if last action was a checkOut
-            if (startTime > endTime)
+
+        }
+
+        public new void parse(Dictionary<String, String> data)
+        {
+            base.parse(data);
+            
+            foreach( var (key, value) in data)
             {
-                return false;
+                if( value != "")
+                {
+                    switch (key)
+                    {
+                        case "weekTimeLimit":
+                            this.weekTimeLimit = TimeSpan.Parse(value);
+                            break;
+
+                        case "vacationDays":
+                            this.vacationDays = Int32.Parse(value);
+                            break;
+
+                        case "checkInOutTimes":
+                            this.checkInOutTimes = value.Split(';').Select(x => DateTime.Parse(x)).ToList();
+                            break;
+                            
+                        case "pauseTimes":
+                            this.pauseTimes = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
+                            break;
+
+                        case "sickDays":
+                            this.sickDays = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
+                            break;
+
+                        case "vacations":
+                            this.vacations = value.Split(';').Select(x => VacationRequest.parse(x)).ToList();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    //value is empty -> do nothing
+                }
+                
             }
 
-            DateTime now = timeHandler.getTime();
 
-            //if endTime was today, then add time between endTime and now to pausetime
-            if (endTime > DateTime.Today)
+        }
+
+        public void requestHoliday(DateTime startTime, DateTime endTime)
+        {
+            VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending);
+            vacations.Add(vacationRequest);
+        }
+
+        public void checkIn(TimeHandler timeHandler)
+        {
+            //checkIn only possible if last action was a checkOut
+            // -> len of checkInOutTime must be even
+            if (isCheckedIn())
             {
-                pauseTime += now - endTime;
+                throw new Exception("Invalid chekInOuttimes length");
             }
             else
             {
-                //TODO handle holidays
-
-                //start of new day
-                timeWorkedToday = TimeSpan.Zero;
-
-                //if endTime was last week reset totalWorktime and add overtime
-                if (endTime.DayOfWeek > now.DayOfWeek)
-                {
-                    overtime += totalWorktime - weekTimeLimit;
-                    totalWorktime = TimeSpan.Zero;
-                }
-
+                DateTime now = timeHandler.getTime();
+                checkInOutTimes.Add(now);
             }
 
-            startTime = now;
-            timestamps.Add(startTime);
-            return true;
+            return;
         }
 
-        public bool checkOut(TimeHandler timeHandler)
+        public void checkOut(TimeHandler timeHandler)
         {
             //checkOut only possible if last action was a checkIn
-            if (endTime > startTime)
+            // -> len of checkInOutTime must be odd
+            if ( !isCheckedIn())
             {
-                return false;
+                throw new Exception("Invalid chekInOuttimes length");
+            }
+            else
+            {
+                DateTime now = timeHandler.getTime();
+                checkInOutTimes.Add(now);
             }
 
-            DateTime now = timeHandler.getTime();
-
-            timeWorkedToday += now - startTime;
-            totalWorktime += now - startTime;
-
-            endTime = now;
-            timestamps.Add(endTime);
-            return true;
+            return;
         }
-    }
 
-    public class Administrator : HourlyRatedEmployee
-    {
-        public Administrator(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password, weekTimeLimit)
+        public bool isCheckedIn()
         {
+            return (checkInOutTimes.Count % 2) == 1;
+        }
 
+        public void addSickday(DateTime startTime, DateTime endTime)
+        {
+            TimePeriod sickDays = new TimePeriod(startTime, endTime);
+
+            this.sickDays.Add(sickDays);
+        }
+
+        public void addPause(TimePeriod pauseTime)
+        {
+            this.pauseTimes.Add(pauseTime);
+        }
+
+        public TimeSpan getTotalWorktime()
+        {
+            return new TimeSpan();
+        }
+
+        public TimeSpan getOvertime()
+        {
+            return new TimeSpan();
+        }
+
+        public TimeSpan getTimeWorkedToday()
+        {
+            return new TimeSpan();
+        }
+
+        public TimeSpan getPauseTime()
+        {
+            return new TimeSpan();
+        }
+
+        public TimeSpan getTimeWorkedThisWeek()
+        {
+            return new TimeSpan();
+        }
+
+        public static List<String> getPropertyNames()
+        {
+            List<String> propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
+            propertyNames.Sort();
+            return propertyNames;
+        }
+        
+        public override String ToString()
+        {
+            String returnString = "";
+            List<String> propertyNames = getPropertyNames();
+
+            foreach (string key in propertyNames)
+            {
+                var value = GetType().GetProperty(key).GetValue(this);
+
+                switch (key)
+                {
+                    case "holidays":
+                        value = value.ToString();
+                        break;
+
+                    case "supervisor":
+                        if (value == null)
+                        {
+                            value = "";
+                        }
+                        else
+                        {
+                            HourlyRatedEmployee supervisor = (HourlyRatedEmployee)value;
+                            value = supervisor.Id;
+                        }
+
+                        break;
+
+                    case "subordinates":
+                        List<string> subordinates = ((Dictionary<string, Employee>)value).Select(kvp => kvp.Key).ToList(); ;
+                        value = string.Join(";", subordinates);
+                        break;
+
+                    case "pauseTimes":
+                    case "sickDays":
+                        List<TimePeriod> timePeriods = (List<TimePeriod>)value; 
+                        if (timePeriods.Count > 0)
+                        {
+                            value = string.Join(";", timePeriods);
+                        }
+                        else
+                        {
+                            value = "";
+                        }
+                        break;
+
+
+                    case "vacations":
+                        List<VacationRequest> vacations = (List<VacationRequest>)value;
+                        if (vacations.Count > 0)
+                        {
+                            value = string.Join(";", vacations);
+                        }
+                        else
+                        {
+                            value = "";
+                        }
+                        break;
+
+                    case "timestamps":
+                    case "checkInOutTimes":
+                        List<DateTime> timestamps = (List<DateTime>)value;
+                        if (timestamps.Count > 0)
+                        {
+                            value = string.Join(";", timestamps);
+                        }
+                        else
+                        {
+                            value = "";
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+                returnString += value + ",";
+            }
+            return returnString;
         }
     }
+
 
     public class CompanyData
     {

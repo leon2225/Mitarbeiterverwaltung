@@ -31,67 +31,32 @@ namespace Mitarbeiterverwaltung.DAL
         {
             string csvString = File.ReadAllText(path);
 
-            var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
-            propertyNames.Sort();
-            string header = string.Join(",", propertyNames);
-
+            var actualPropertyNames = HourlyRatedEmployee.getPropertyNames();
+           
             List<string> csvLines = csvString.Split("\r\n").ToList();
 
-            //If headers aren't equal, the csv file is not compatible
-            if (!csvLines[0].Equals(header))
-            {
-                return null;
-            }
+            var propertyNames = csvLines[0].Split(",").ToList();
 
+            var sProptertyNames = new HashSet<string>(propertyNames);
+            
+            //If headers aren't equal, the csv file is not compatible
+            if (!sProptertyNames.SetEquals(actualPropertyNames))
+            {
+                throw new Exception("CSV file is not compatible");
+            }
+            
             //remove header from lines
             csvLines.RemoveAt(0);
 
             Dictionary<string, Employee> employees = new Dictionary<string, Employee>();
-
+            
             foreach (var line in csvLines)
             {
+                
                 List<string> values = line.Split(",").ToList();
                 var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
-                int holidays = int.Parse(p["holidays"]);
-                TimeSpan weekTimeLimit = TimeSpan.Parse(p["weekTimeLimit"]);
-                HourlyRatedEmployee employee = new HourlyRatedEmployee(p["name"], p["surname"], p["adress"], p["phone"], holidays, "", weekTimeLimit);
-                employee.Id = p["Id"];
-                employee.overtime = TimeSpan.Parse(p["overtime"]);
-                employee.endTime = DateTime.Parse(p["endTime"]);
-                employee.startTime = DateTime.Parse(p["startTime"]);
-                employee.totalWorktime = TimeSpan.Parse(p["totalWorktime"]);
-                employee.timeWorkedToday = TimeSpan.Parse(p["timeWorkedToday"]);
-                employee.pauseTime = TimeSpan.Parse(p["pauseTime"]);
-                employee.overtime = TimeSpan.Parse(p["overtime"]);
-                employee.passwordHash = p["passwordHash"];
-
-                //parse holidayRequests
-                //TODO correctly implement!
-                // TODO: Parsing should also be possible if there is only one value -> no ";"
-                employee.absenteeism = new List<Absenteeism>();
-                if (p["absenteeism"].Contains(";"))
-                {
-                    List<string> absenteeismElements = p["absenteeism"].Split(";").ToList();
-                    foreach (var element in absenteeismElements)
-                    {
-                        List<string> elementItem = element.Split(" ").ToList();
-                        Absenteeism item = new Absenteeism(elementItem[0], elementItem[1], elementItem[2], elementItem[3]);
-                        employee.absenteeism.Add(item);
-                    }
-                }
-                // TODO: Delete unnecessary code
-                // TODO: Parsing should also be possible if there is only one value -> no ";"
-                employee.timestamps = new List<DateTime>();
-                if (p["timestamps"].Contains(";"))
-                {
-                    List<string> timestampElements = p["timestamps"].Split(";").ToList();
-                    foreach (var element in timestampElements)
-                    {
-                        ;
-                        employee.timestamps.Add(DateTime.Parse(element));
-                    }
-                }
-
+                HourlyRatedEmployee employee = new HourlyRatedEmployee();
+                employee.parse(p);
 
                 employees.Add(p["Id"], employee);
             }
@@ -130,65 +95,8 @@ namespace Mitarbeiterverwaltung.DAL
             foreach (HourlyRatedEmployee employee in employees.Values)
             {
                 csvString += "\r\n";
-                foreach (string key in propertyNames)
-                {
-                    var value = employee.GetType().GetProperty(key).GetValue(employee);
+                csvString += employee.ToString();
 
-                    switch (key)
-                    {
-                        case "holidays":
-                            value = value.ToString();
-                            break;
-
-                        case "supervisor":
-                            if (value == null)
-                            {
-                                value = "";
-                            }
-                            else
-                            {
-                                HourlyRatedEmployee supervisor = (HourlyRatedEmployee)value;
-                                value = supervisor.Id;
-                            }
-
-                            break;
-
-                        case "subordinates":
-                            List<string> subordinates = ((Dictionary<string, Employee>)value).Select(kvp => kvp.Key).ToList(); ;
-                            value = string.Join(";", subordinates);
-                            break;
-
-
-                        case "absenteeism":
-                            List<Absenteeism> absenteeism = (List<Absenteeism>)value;
-                            if (absenteeism.Count > 0)
-                            {
-                                value = string.Join(";", absenteeism);
-                            }
-                            else
-                            {
-                                value = "";
-                            }
-                            break;
-
-                        case "timestamps":
-                            List<DateTime> timestamps = (List<DateTime>)value;
-                            if (timestamps.Count > 0)
-                            {
-                                value = string.Join(";", timestamps);
-                            }
-                            else
-                            {
-                                value = "";
-                            }
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    csvString += value + ",";
-                }
             }
             File.WriteAllText(path, csvString);
             return true;

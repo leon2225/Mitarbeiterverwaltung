@@ -7,6 +7,7 @@ namespace Mitarbeiterverwaltung
         Panel? activePanel;
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
+
         public EditEmployee(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
@@ -15,11 +16,11 @@ namespace Mitarbeiterverwaltung
 
             if (employee != null)
             {
-                this.textBox_name.Text = employee.name ;
-                this.textBox_surname.Text = employee.surname ;
-                this.textBox_adress.Text = employee.adress ;
-                this.textBox_phone.Text = employee.phone ;
-                this.textBox_holidays.Text = employee.holidays.ToString() ;
+                this.textBox_name.Text = employee.name;
+                this.textBox_surname.Text = employee.surname;
+                this.textBox_adress.Text = employee.adress;
+                this.textBox_phone.Text = employee.phone;
+                this.textBox_holidays.Text = employee.vacationDays.ToString();
                 this.textBox_weekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
                 this.btnResetPassword.Enabled = true;
             }
@@ -28,13 +29,13 @@ namespace Mitarbeiterverwaltung
                 this.Text = "Neuen Mitarbeiter hinzufügen";
 
                 // Remove tabs other then Personal Data
-                this.tabControl1.Controls.Remove(this.tabHolidays);
-                this.tabControl1.Controls.Remove(this.tabWorkingTimes);
-                this.tabControl1.Controls.Remove(this.tabSickDates);
+                this.tabCtrlEditEmployee.Controls.Remove(this.tabVacations);
+                this.tabCtrlEditEmployee.Controls.Remove(this.tabWorkingTimes);
+                this.tabCtrlEditEmployee.Controls.Remove(this.tabSickDates);
 
                 btnRemove.Visible = false;
             }
-            
+
         }
 
         public HourlyRatedEmployee getUserData()
@@ -49,8 +50,8 @@ namespace Mitarbeiterverwaltung
                     this.textBox_adress.Text,
                     this.textBox_phone.Text,
                     Int32.Parse(this.textBox_holidays.Text),
-                    "0000",
-                    new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0,0)
+                    "",
+                    new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0, 0)
                 );
                 newEmployee.supervisor = this.supervisor;
             }
@@ -61,50 +62,26 @@ namespace Mitarbeiterverwaltung
                 newEmployee.surname = this.textBox_surname.Text;
                 newEmployee.adress = this.textBox_adress.Text;
                 newEmployee.phone = this.textBox_phone.Text;
-                newEmployee.holidays = Int32.Parse(this.textBox_holidays.Text);
+                newEmployee.vacationDays = Int32.Parse(this.textBox_holidays.Text);
                 newEmployee.weekTimeLimit = new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0, 0);
             }
 
             return newEmployee;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_save_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-        private void button_cancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult= DialogResult.Cancel;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Abort;
             this.Close();
@@ -112,24 +89,24 @@ namespace Mitarbeiterverwaltung
 
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
-            this.employee.setPassword("0000");
+            this.employee.setPassword("");
         }
 
-        private void btnAddAbsenteeism_Click(object sender, EventArgs e)
+        private void btnAddSickday_Click(object sender, EventArgs e)
         {
-            changeToNewAbsenteeism();
+            changeToNewSickday();
 
         }
 
-        private void btnCancelAddAbsenteeism_Click(object sender, EventArgs e)
+        private void btnCancelAddSickday_Click(object sender, EventArgs e)
         {
-            changeToAbsenteeismList();
+            changeToSickdayList();
             //discard new item 
         }
 
-        private void btnSaveAbsenteeism_Click(object sender, EventArgs e)
+        private void btnSaveSickday_Click(object sender, EventArgs e)
         {
-            changeToAbsenteeismList();
+            changeToSickdayList();
             //save absenteeism and display in list
             DateTime startDate = dtpBeginnAbsenteeism.Value;
             DateTime endDate = dtpEndAbsenteeism.Value;
@@ -138,10 +115,14 @@ namespace Mitarbeiterverwaltung
             {
                 throw new Exception("Selected Enddate is before Startdate");
             }
-            //add to list 
-            employee.setSickDays(startDate, endDate);
-            //update view 
-            updatelvAbsenteeism();
+            else
+            {
+                //add to list
+                employee.addSickday(startDate, endDate);
+                //update view
+                updateLvSickdays();
+            }
+
 
         }
 
@@ -150,76 +131,119 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void changeToNewAbsenteeism()
+        private void changeToNewSickday()
         {
-            absenteeismListPanel.Visible = false;
-            newAbsenteeismPanel.Visible = true;
+            pnlSickdays.Visible = false;
+            pnlNewSickday.Visible = true;
             button_save.Enabled = false;
             button_cancel.Enabled = false;
         }
 
-        private void changeToAbsenteeismList()
+        private void changeToSickdayList()
         {
-            newAbsenteeismPanel.Visible = false;
-            absenteeismListPanel.Visible = true;
+            pnlNewSickday.Visible = false;
+            pnlSickdays.Visible = true;
             button_save.Enabled = true;
-            button_cancel.Enabled=true;
+            button_cancel.Enabled = true;
         }
 
-        private ListViewItem absenteeismToItem(Absenteeism absenteeism)
+        private ListViewItem vacationRequestToItem(VacationRequest vacationRequest)
         {
-                ListViewItem newItem = new ListViewItem(new string[] {
-                absenteeism.type.ToString(),
-                absenteeism.startTime.ToString("dd.MM.yyyy"),
-                absenteeism.endTime.ToString("dd.MM.yyyy"),
-                absenteeism.state.ToString()
+            ListViewItem newItem = new ListViewItem(new string[] {
+                vacationRequest.startDate.ToString("dd.MM.yyyy"),
+                vacationRequest.endDate.ToString("dd.MM.yyyy"),
+                vacationRequest.state.ToString()
             });
             return newItem;
         }
 
-        private ListViewItem timestampToItem(DateTime timestamp, string stampType)
+        private ListViewItem checkInOutTimeToItem(DateTime timestamp, string stampType)
         {
             ListViewItem newItem = new ListViewItem(new string[] {
                stampType,
-               timestamp.ToString("dd.MM.yyyy"),
                timestamp.ToString("HH:mm"),
+               timestamp.ToString("dd.MM.yyyy"),
             });
             return newItem;
         }
 
-        private void updatelvAbsenteeism()
+        private ListViewItem timePeriodToItem(TimePeriod timePeriod, string format = "dd.MM.yyyy")
         {
-            lvSickDays.Items.Clear();
-            for (int i = 0; i < employee.absenteeism.Count; i++)
-            {
-                ListViewItem newItem = absenteeismToItem(employee.absenteeism[i]);
-                newItem.Tag = i;
-                lvSickDays.Items.Add(newItem);
-            }          
+            ListViewItem newItem = new ListViewItem(new string[] {
+                timePeriod.startDate.ToString(format),
+                timePeriod.endDate.ToString(format),
+            });
+            return newItem;
         }
 
-        private void updatelvTimestamps()
+        private void updateLvVacations()
         {
-            lvTimestamps.Items.Clear();
-            for (int i = 0; i < employee.timestamps.Count; i++)
+            lvVacations.Items.Clear();
+            for (int i = 0; i < employee.vacations.Count; i++)
             {
-                ListViewItem newItem = timestampToItem(employee.timestamps[i], "Test in");
+                ListViewItem newItem = vacationRequestToItem(employee.vacations[i]);
                 newItem.Tag = i;
-                lvTimestamps.Items.Add(newItem);
+                lvVacations.Items.Add(newItem);
+            }
+        }
+
+        private void updateLvSickdays()
+        {
+            lvSickDays.Items.Clear();
+            int index = 0;
+            foreach (TimePeriod sickday in employee.sickDays)
+            {
+                ListViewItem newItem = timePeriodToItem(sickday);
+                newItem.Tag = index++;
+                lvSickDays.Items.Add(newItem);
+            }
+        }
+
+        private void updateLvPauseTimes()
+        {
+            lvPause.Items.Clear();
+            int index = 0;
+            foreach (TimePeriod pauseTime in employee.pauseTimes)
+            {
+                ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
+                newItem.Tag = index++;
+                lvPause.Items.Add(newItem);
+            }
+        }
+
+        private void updateLvCheckInOutTimes()
+        {
+            lbCheckInOutTimes.Items.Clear();
+            for (int i = 0; i < employee.checkInOutTimes.Count; i++)
+            {
+                String type = (i % 2 == 0) ? "Eingestempelt" : "Ausgestempelt";
+                ListViewItem newItem = checkInOutTimeToItem(employee.checkInOutTimes[i], type);
+                newItem.Tag = i;
+                lbCheckInOutTimes.Items.Add(newItem);
             }
         }
 
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            if (e.TabPage == tabVacations)
+            {
+                updateLvVacations();
+            }
             if (e.TabPage == tabSickDates)
             {
-                updatelvAbsenteeism();
-                btnRemove.Enabled = false;
+                updateLvSickdays();
             }
-            else if(e.TabPage == tabWorkingTimes)
+            else if (e.TabPage == tabWorkingTimes)
             {
-                updatelvTimestamps();
-                btnRemove.Enabled = false;
+                updateLvCheckInOutTimes();
+            }
+            else if (e.TabPage == tabWorkingTimes)
+            {
+                updateLvCheckInOutTimes();
+            }
+            else if (e.TabPage == tabPause)
+            {
+                updateLvPauseTimes();
             }
             else
             {
@@ -227,11 +251,60 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void btnDeleteAbsenteeism_Click(object sender, EventArgs e)
+        private void btnDeleteSickday_Click(object sender, EventArgs e)
         {
             int index = (int)lvSickDays.SelectedItems[0].Tag;
-            employee.absenteeism.RemoveAt(index);
+            employee.sickDays.RemoveAt(index);
             lvSickDays.SelectedItems[0].Remove();
+            updateLvSickdays();
+        }
+
+        private void lvVacations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            btnAllowVacationRequest.Enabled = true;
+            btnDenyVacationRequest.Enabled = true;
+        }
+
+        private void btnAllowVacationRequest_Click(object sender, EventArgs e)
+        {
+            int index = (int)lvVacations.SelectedItems[0].Tag;
+            employee.vacations[index].state = RequestState.accepted;
+            updateLvVacations();
+        }
+
+        private void btnDenyVacationRequest_Click(object sender, EventArgs e)
+        {
+            int index = (int)lvVacations.SelectedItems[0].Tag;
+            employee.vacations[index].state = RequestState.denied;
+            updateLvVacations();
+        }
+
+        private void btnAddPause_Click(object sender, EventArgs e)
+        {
+            FormAddPause formAddPause = new FormAddPause();
+            DialogResult result = formAddPause.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                employee.addPause(formAddPause.getTimePeriod());
+                updateLvPauseTimes();
+            }
+            else
+            {
+                //do nothing
+            }
+        }
+
+        private void lvPause_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            btnRemovePause.Enabled = true;
+        }
+
+        private void btnRemovePause_click(object sender, EventArgs e)
+        {
+            int index = (int)lvPause.SelectedItems[0].Tag;
+            employee.pauseTimes.RemoveAt(index);
+            updateLvPauseTimes();
         }
     }
 }

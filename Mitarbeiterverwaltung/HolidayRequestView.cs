@@ -61,7 +61,7 @@ namespace Mitarbeiterverwaltung
             else
             {
                 holidaysCount = getBusinessDays(startDate, endDate);
-                remainingHolidays = employee.holidays - holidaysCount;
+                remainingHolidays = employee.vacationDays - holidaysCount;
                 requestValid = remainingHolidays >= 0;
             }
             
@@ -102,12 +102,12 @@ namespace Mitarbeiterverwaltung
                 1 + ((endDay.Date - startDay.Date).TotalDays * 5 -
                 (startDay.DayOfWeek - endDay.DayOfWeek) * 2) / 7;
 
-            if (endDay.DayOfWeek == DayOfWeek.Saturday) businessDays--;
-            if (startDay.DayOfWeek == DayOfWeek.Sunday) businessDays--;
+            businessDays -= (endDay.DayOfWeek == DayOfWeek.Saturday) ? 1 : 0;
+            businessDays -= (startDay.DayOfWeek == DayOfWeek.Sunday) ? 1 : 0;
             // }
 
-            if (endDay.Hour <= 12) businessDays -= 0.5;
-            if (startDay.Hour >= 12) businessDays -= 0.5;
+            businessDays -= (endDay.Hour <= 12) ? 0.5 : 0;
+            businessDays -= (startDay.Hour >= 12) ? 0.5 : 0;
 
             return Math.Round(businessDays,1);
         }

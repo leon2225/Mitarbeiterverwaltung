@@ -89,6 +89,7 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -187,8 +188,8 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.01942F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.98058F));
             this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemaining, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.lblOvertimeRemaining, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblHolidaysRemainingTitle, 0, 2);
@@ -203,14 +204,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(269, 100);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(309, 100);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // lblHolidaysRemaining
             // 
             this.lblHolidaysRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblHolidaysRemaining.AutoSize = true;
-            this.lblHolidaysRemaining.Location = new System.Drawing.Point(253, 50);
+            this.lblHolidaysRemaining.Location = new System.Drawing.Point(293, 50);
             this.lblHolidaysRemaining.Name = "lblHolidaysRemaining";
             this.lblHolidaysRemaining.Size = new System.Drawing.Size(13, 15);
             this.lblHolidaysRemaining.TabIndex = 8;
@@ -220,7 +221,7 @@
             // 
             this.lblOvertimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblOvertimeRemaining.AutoSize = true;
-            this.lblOvertimeRemaining.Location = new System.Drawing.Point(253, 27);
+            this.lblOvertimeRemaining.Location = new System.Drawing.Point(293, 27);
             this.lblOvertimeRemaining.Name = "lblOvertimeRemaining";
             this.lblOvertimeRemaining.Size = new System.Drawing.Size(13, 15);
             this.lblOvertimeRemaining.TabIndex = 7;
@@ -262,7 +263,7 @@
             // 
             this.lblWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblWorkingTime.AutoSize = true;
-            this.lblWorkingTime.Location = new System.Drawing.Point(253, 4);
+            this.lblWorkingTime.Location = new System.Drawing.Point(293, 4);
             this.lblWorkingTime.Name = "lblWorkingTime";
             this.lblWorkingTime.Size = new System.Drawing.Size(13, 15);
             this.lblWorkingTime.TabIndex = 6;
@@ -274,7 +275,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.btnRequestHolidays, 2);
             this.btnRequestHolidays.Location = new System.Drawing.Point(3, 73);
             this.btnRequestHolidays.Name = "btnRequestHolidays";
-            this.btnRequestHolidays.Size = new System.Drawing.Size(263, 23);
+            this.btnRequestHolidays.Size = new System.Drawing.Size(303, 23);
             this.btnRequestHolidays.TabIndex = 9;
             this.btnRequestHolidays.Text = "Urlaub beantragen";
             this.btnRequestHolidays.UseVisualStyleBackColor = true;
@@ -369,7 +370,7 @@
             this.txtEmployeeId.Location = new System.Drawing.Point(136, 53);
             this.txtEmployeeId.Name = "txtEmployeeId";
             this.txtEmployeeId.Size = new System.Drawing.Size(181, 29);
-            this.txtEmployeeId.TabIndex = 3;
+            this.txtEmployeeId.TabIndex = 1;
             this.txtEmployeeId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmployeeId_KeyUp);
             // 
             // btnLogin
@@ -439,7 +440,7 @@
             this.txtPassword.Location = new System.Drawing.Point(136, 52);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(181, 29);
-            this.txtPassword.TabIndex = 4;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
             // 
@@ -706,14 +707,24 @@
             this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
-            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRemoveEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -805,5 +816,6 @@
         private Button btnSecureLogin;
         private Label label9;
         private Label label4;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }
