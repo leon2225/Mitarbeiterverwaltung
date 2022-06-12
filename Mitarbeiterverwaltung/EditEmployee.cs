@@ -237,13 +237,9 @@ namespace Mitarbeiterverwaltung
             {
                 updateLvVacations();
             }
-            if (e.TabPage == tabSickDates)
+            else if (e.TabPage == tabSickDates)
             {
                 updateLvSickdays();
-            }
-            else if (e.TabPage == tabWorkingTimes)
-            {
-                updateLvCheckInOutTimes();
             }
             else if (e.TabPage == tabWorkingTimes)
             {
@@ -255,7 +251,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                btnRemove.Enabled = true;
+                //personal data, no need to refresh field
             }
         }
 
