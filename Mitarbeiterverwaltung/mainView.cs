@@ -251,7 +251,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Visible = false;
             checkInPanel.Visible = false;
             loginPanel.Visible = false;
-            changePasswordPanel.Visible = false;
+            pnlChangePassword.Visible = false;
             pnlSecureLogin.Visible = false;
         }
 
@@ -272,7 +272,7 @@ namespace Mitarbeiterverwaltung
         private void changeToUpdatePassword()
         {
             changeToLogin();
-            fullLoginPanel.Visible = false;
+            pnlMainLogin.Visible = false;
             changePasswordPanel.Visible = true;
         }
 
@@ -312,7 +312,7 @@ namespace Mitarbeiterverwaltung
             txtEmployeeId.Text = "";
             activePanel = loginPanel;
             loginPanel.Visible = true;
-            fullLoginPanel.Visible = true;
+            pnlMainLogin.Visible = true;
             loginPanel.BringToFront();
         }
 
@@ -322,7 +322,7 @@ namespace Mitarbeiterverwaltung
         private void changeToSecureLogin()
         {
             changeToLogin();
-            fullLoginPanel.Visible = false;
+            pnlMainLogin.Visible = false;
             pnlSecureLogin.Visible = true;
             txtPassword.Text = "";
             lblWrongPassword.Visible = false;
