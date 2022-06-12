@@ -16,12 +16,12 @@ namespace Mitarbeiterverwaltung
 
             if (employee != null)
             {
-                this.textBox_name.Text = employee.name;
-                this.textBox_surname.Text = employee.surname;
-                this.textBox_adress.Text = employee.adress;
-                this.textBox_phone.Text = employee.phone;
-                this.textBox_holidays.Text = employee.vacationDays.ToString();
-                this.textBox_weekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
+                this.txtName.Text = employee.name;
+                this.txtSurname.Text = employee.surname;
+                this.txtAddress.Text = employee.adress;
+                this.txtPhone.Text = employee.phone;
+                this.txtHolidays.Text = employee.vacationDays.ToString();
+                this.txtWeekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
                 this.btnResetPassword.Enabled = true;
             }
             else
@@ -46,25 +46,25 @@ namespace Mitarbeiterverwaltung
             {
                 newEmployee = new HourlyRatedEmployee
                 (
-                    this.textBox_name.Text,
-                    this.textBox_surname.Text,
-                    this.textBox_adress.Text,
-                    this.textBox_phone.Text,
-                    Int32.Parse(this.textBox_holidays.Text),
+                    this.txtName.Text,
+                    this.txtSurname.Text,
+                    this.txtAddress.Text,
+                    this.txtPhone.Text,
+                    Int32.Parse(this.txtHolidays.Text),
                     "",
-                    new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0, 0)
+                    new TimeSpan(Int32.Parse(this.txtWeekTimeLimit.Text), 0, 0)
                 );
                 newEmployee.supervisor = this.supervisor;
             }
             else
             {
                 newEmployee = employee;
-                newEmployee.name = this.textBox_name.Text;
-                newEmployee.surname = this.textBox_surname.Text;
-                newEmployee.adress = this.textBox_adress.Text;
-                newEmployee.phone = this.textBox_phone.Text;
-                newEmployee.vacationDays = Int32.Parse(this.textBox_holidays.Text);
-                newEmployee.weekTimeLimit = new TimeSpan(Int32.Parse(this.textBox_weekTimeLimit.Text), 0, 0);
+                newEmployee.name = this.txtName.Text;
+                newEmployee.surname = this.txtSurname.Text;
+                newEmployee.adress = this.txtAddress.Text;
+                newEmployee.phone = this.txtPhone.Text;
+                newEmployee.vacationDays = Int32.Parse(this.txtHolidays.Text);
+                newEmployee.weekTimeLimit = new TimeSpan(Int32.Parse(this.txtWeekTimeLimit.Text), 0, 0);
             }
 
             return newEmployee;
@@ -314,6 +314,60 @@ namespace Mitarbeiterverwaltung
             int index = (int)lvPause.SelectedItems[0].Tag;
             employee.pauseTimes.RemoveAt(index);
             updateLvPauseTimes();
+        }
+
+        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (txtName.Text.Any(char.IsDigit))
+            {
+                txtName.Clear();
+                throw new CustomException("A name can only contain characters, not numbers", exceptionType.info);
+            }
+            else
+            {
+                //validation ok, do nothing
+            }
+        }
+
+        private void txtSurname_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (txtSurname.Text.Any(char.IsDigit))
+            {
+                txtSurname.Clear();
+                throw new CustomException("A surname can only contain characters, not numbers", exceptionType.info);
+            }
+            else
+            {
+                //validation ok, do nothing
+            }
+        }
+
+        private void txtWeekTimeLimit_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (txtWeekTimeLimit.Text.Any(char.IsLetter))
+            {
+                txtWeekTimeLimit.Clear();
+                throw new CustomException("The working time per week can only contain numbers, not characters", exceptionType.info);
+                e.Cancel = true;
+            }
+            else
+            {
+                //validation ok, do nothing
+            }
+        }
+
+        private void txtHolidays_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (txtHolidays.Text.Any(char.IsLetter))
+            {
+                txtHolidays.Clear();
+                throw new CustomException("The number of holidays can only contain numbers, not characters", exceptionType.info);
+                e.Cancel = true;
+            }
+            else
+            {
+                //validation ok, do nothing
+            }
         }
     }
 }

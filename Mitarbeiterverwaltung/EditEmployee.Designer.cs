@@ -35,12 +35,12 @@
             this.label_holidays = new System.Windows.Forms.Label();
             this.label_adress = new System.Windows.Forms.Label();
             this.label_phone = new System.Windows.Forms.Label();
-            this.textBox_name = new System.Windows.Forms.TextBox();
-            this.textBox_surname = new System.Windows.Forms.TextBox();
-            this.textBox_adress = new System.Windows.Forms.TextBox();
-            this.textBox_phone = new System.Windows.Forms.TextBox();
-            this.textBox_weekTimeLimit = new System.Windows.Forms.TextBox();
-            this.textBox_holidays = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtSurname = new System.Windows.Forms.TextBox();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.txtWeekTimeLimit = new System.Windows.Forms.TextBox();
+            this.txtHolidays = new System.Windows.Forms.TextBox();
             this.button_save = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -250,67 +250,71 @@
             this.label_phone.TabIndex = 6;
             this.label_phone.Text = "Telefonnummer";
             // 
-            // textBox_name
+            // txtName
             // 
-            this.textBox_name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox_name, 3);
-            this.textBox_name.Location = new System.Drawing.Point(157, 3);
-            this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(355, 23);
-            this.textBox_name.TabIndex = 7;
-            this.textBox_name.Text = "Max";
-            this.textBox_name.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtName, 3);
+            this.txtName.Location = new System.Drawing.Point(157, 3);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(355, 23);
+            this.txtName.TabIndex = 7;
+            this.txtName.Text = "Max";
+            this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
-            // textBox_surname
+            // txtSurname
             // 
-            this.textBox_surname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox_surname, 3);
-            this.textBox_surname.Location = new System.Drawing.Point(157, 32);
-            this.textBox_surname.Name = "textBox_surname";
-            this.textBox_surname.Size = new System.Drawing.Size(355, 23);
-            this.textBox_surname.TabIndex = 8;
-            this.textBox_surname.Text = "Mustermann";
-            this.textBox_surname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtSurname, 3);
+            this.txtSurname.Location = new System.Drawing.Point(157, 32);
+            this.txtSurname.Name = "txtSurname";
+            this.txtSurname.Size = new System.Drawing.Size(355, 23);
+            this.txtSurname.TabIndex = 8;
+            this.txtSurname.Text = "Mustermann";
+            this.txtSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtSurname.Validating += new System.ComponentModel.CancelEventHandler(this.txtSurname_Validating);
             // 
-            // textBox_adress
+            // txtAddress
             // 
-            this.textBox_adress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox_adress, 3);
-            this.textBox_adress.Location = new System.Drawing.Point(157, 61);
-            this.textBox_adress.Name = "textBox_adress";
-            this.textBox_adress.Size = new System.Drawing.Size(355, 23);
-            this.textBox_adress.TabIndex = 9;
-            this.textBox_adress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtAddress, 3);
+            this.txtAddress.Location = new System.Drawing.Point(157, 61);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(355, 23);
+            this.txtAddress.TabIndex = 9;
+            this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox_phone
+            // txtPhone
             // 
-            this.textBox_phone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox_phone, 3);
-            this.textBox_phone.Location = new System.Drawing.Point(157, 90);
-            this.textBox_phone.Name = "textBox_phone";
-            this.textBox_phone.Size = new System.Drawing.Size(355, 23);
-            this.textBox_phone.TabIndex = 10;
-            this.textBox_phone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtPhone, 3);
+            this.txtPhone.Location = new System.Drawing.Point(157, 90);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(355, 23);
+            this.txtPhone.TabIndex = 10;
+            this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // textBox_weekTimeLimit
+            // txtWeekTimeLimit
             // 
-            this.textBox_weekTimeLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_weekTimeLimit.Location = new System.Drawing.Point(157, 119);
-            this.textBox_weekTimeLimit.Name = "textBox_weekTimeLimit";
-            this.textBox_weekTimeLimit.Size = new System.Drawing.Size(41, 23);
-            this.textBox_weekTimeLimit.TabIndex = 12;
+            this.txtWeekTimeLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWeekTimeLimit.Location = new System.Drawing.Point(157, 119);
+            this.txtWeekTimeLimit.Name = "txtWeekTimeLimit";
+            this.txtWeekTimeLimit.Size = new System.Drawing.Size(41, 23);
+            this.txtWeekTimeLimit.TabIndex = 12;
+            this.txtWeekTimeLimit.Validating += new System.ComponentModel.CancelEventHandler(this.txtWeekTimeLimit_Validating);
             // 
-            // textBox_holidays
+            // txtHolidays
             // 
-            this.textBox_holidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox_holidays.Location = new System.Drawing.Point(280, 119);
-            this.textBox_holidays.Name = "textBox_holidays";
-            this.textBox_holidays.Size = new System.Drawing.Size(44, 23);
-            this.textBox_holidays.TabIndex = 13;
+            this.txtHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtHolidays.Location = new System.Drawing.Point(280, 119);
+            this.txtHolidays.Name = "txtHolidays";
+            this.txtHolidays.Size = new System.Drawing.Size(44, 23);
+            this.txtHolidays.TabIndex = 13;
+            this.txtHolidays.Validating += new System.ComponentModel.CancelEventHandler(this.txtHolidays_Validating);
             // 
             // button_save
             // 
@@ -359,12 +363,12 @@
             this.tableLayoutPanel1.Controls.Add(this.label_adress, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label_phone, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label_workingTimeWeek, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_weekTimeLimit, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_name, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_surname, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_adress, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_phone, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_holidays, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtWeekTimeLimit, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtSurname, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtPhone, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtHolidays, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnResetPassword, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label_holidays, 2, 4);
@@ -1654,12 +1658,12 @@
         private Label label_holidays;
         private Label label_adress;
         private Label label_phone;
-        private TextBox textBox_name;
-        private TextBox textBox_surname;
-        private TextBox textBox_adress;
-        private TextBox textBox_phone;
-        private TextBox textBox_weekTimeLimit;
-        private TextBox textBox_holidays;
+        private TextBox txtName;
+        private TextBox txtSurname;
+        private TextBox txtAddress;
+        private TextBox txtPhone;
+        private TextBox txtWeekTimeLimit;
+        private TextBox txtHolidays;
         private Button button_saveStaffMember;
         private Button button_cancelNewStaffMember;
         private Button button_save;
