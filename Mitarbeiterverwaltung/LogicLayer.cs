@@ -160,7 +160,7 @@ namespace Mitarbeiterverwaltung.LL
 
             this.subordinates = new Dictionary<string, Employee>();
 
-            setPassword(password);
+            setPassword(password, password);
         }
 
         public void parse(Dictionary<String, String> data)
@@ -216,9 +216,26 @@ namespace Mitarbeiterverwaltung.LL
             return sb.ToString();
         }
 
-        public void setPassword(string password)
+        public bool setPassword(string password, string passwordRepeated)
         {
-            passwordHash = hashPassword(password);
+            //check if password valid
+            if(password != passwordRepeated)    //passwords are not equal
+            { 
+                return false; 
+            }
+            else if(password == "")             //password is empty
+            {
+                return false;
+            }
+            else if(checkPassword(password))    //new password is old password
+            {
+                return false;
+            }
+            else
+            {
+                passwordHash = hashPassword(password); //TODO this?
+                return true;
+            }
         }
 
         public bool checkPassword(string password)

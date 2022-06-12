@@ -435,17 +435,16 @@ namespace Mitarbeiterverwaltung
 
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
-            if (txtNewPassword.Text == txtNewPasswordRepeated.Text)
+            if (currentEmployee.setPassword(txtNewPassword.Text, txtNewPasswordRepeated.Text))
             {
                 //save new password
-                currentEmployee.setPassword(txtNewPassword.Text);
-                lblPasswordsNotEqual.Visible = false;
+                lblPasswordChangeFailed.Visible = false;
                 startLogoutCountdown();
                 changeToCheckin();
             }
             else
             {
-                lblPasswordsNotEqual.Visible = true;
+                lblPasswordChangeFailed.Visible = true;
             }
             
         }

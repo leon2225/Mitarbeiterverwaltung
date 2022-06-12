@@ -90,7 +90,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
-            this.employee.setPassword("");
+            this.employee.setPassword("einmalPasswort", "einmalPasswort");
         }
 
         private void btnAddSickday_Click(object sender, EventArgs e)
