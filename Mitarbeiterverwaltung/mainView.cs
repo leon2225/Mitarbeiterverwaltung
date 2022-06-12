@@ -211,7 +211,6 @@ namespace Mitarbeiterverwaltung
                 currentEmployee = (HourlyRatedEmployee)companyData.employees[Id];
 
                 startLogoutCountdown();
-                loadStatistics();
                 changeToCheckin();
             }
             else
@@ -288,6 +287,7 @@ namespace Mitarbeiterverwaltung
             lblWelcome.Text = "Hallo " + currentEmployee.name;
             activePanel = checkInPanel;
             updateCheckInState();
+            loadStatistics();
         }
 
 
@@ -370,10 +370,14 @@ namespace Mitarbeiterverwaltung
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             if (currentEmployee.isCheckedIn())
+            {
                 currentEmployee.checkOut(timeHandler);
+                loadStatistics();
+            }
             else
+            {
                 currentEmployee.checkIn(timeHandler);
-
+            }
             updateCheckInState();
         }
 
@@ -437,7 +441,6 @@ namespace Mitarbeiterverwaltung
                 currentEmployee.setPassword(txtNewPassword.Text);
                 lblPasswordsNotEqual.Visible = false;
                 startLogoutCountdown();
-                loadStatistics();
                 changeToCheckin();
             }
             else
