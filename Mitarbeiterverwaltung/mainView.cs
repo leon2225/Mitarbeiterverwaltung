@@ -169,7 +169,8 @@ namespace Mitarbeiterverwaltung
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
-            DialogResult result = newStaffMember.ShowDialog();
+            newStaffMember.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = newStaffMember.ShowDialog(this);
             
 
             if (result == DialogResult.OK)
@@ -350,7 +351,8 @@ namespace Mitarbeiterverwaltung
             if (currentEmployee != null)
             {
                 EditEmployee newStaffMember = new EditEmployee(currentEmployee, this.currentEmployee);
-                DialogResult result = newStaffMember.ShowDialog();
+                newStaffMember.StartPosition = FormStartPosition.CenterParent;
+                DialogResult result = newStaffMember.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     newStaffMember.getUserData();
@@ -379,7 +381,8 @@ namespace Mitarbeiterverwaltung
         {
             //Todo hier das Fenster für Urlaub beantragen öffnen
             HolidayRequestView holidayRequest = new HolidayRequestView(currentEmployee);
-            DialogResult result = holidayRequest.ShowDialog();
+            holidayRequest.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = holidayRequest.ShowDialog(this);
             if(result == DialogResult.OK)
             {
                 holidayRequest.sendHolidayRequest();
@@ -401,7 +404,8 @@ namespace Mitarbeiterverwaltung
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsDialog settingsDialog = new SettingsDialog(this.settings);
-            DialogResult result = settingsDialog.ShowDialog();
+            settingsDialog.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = settingsDialog.ShowDialog(this);
             if (result == DialogResult.OK)
             {
                 settingsDialog.getSettings();
@@ -411,7 +415,8 @@ namespace Mitarbeiterverwaltung
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About aboutBox1 = new About(settings);
-            aboutBox1.ShowDialog();
+            aboutBox1.StartPosition = FormStartPosition.CenterParent;
+            aboutBox1.ShowDialog(this);
         }
 
         private void lblWorkingTime_Click(object sender, EventArgs e)

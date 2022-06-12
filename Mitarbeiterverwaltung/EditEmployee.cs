@@ -282,7 +282,8 @@ namespace Mitarbeiterverwaltung
         private void btnAddPause_Click(object sender, EventArgs e)
         {
             FormAddPause formAddPause = new FormAddPause();
-            DialogResult result = formAddPause.ShowDialog();
+            formAddPause.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = formAddPause.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
