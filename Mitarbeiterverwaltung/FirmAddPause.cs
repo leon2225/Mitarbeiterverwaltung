@@ -36,7 +36,7 @@ namespace Mitarbeiterverwaltung
             var end = dtpEnd.Value;
             if(begin > end)
             {
-                throw new Exception("Pause shall be later then the begin");
+                throw new CustomException("Pause shall be later then the begin", exceptionType.info);
             }
             else
             {

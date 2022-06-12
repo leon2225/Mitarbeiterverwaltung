@@ -69,7 +69,7 @@ namespace Mitarbeiterverwaltung.LL
             }
             else
             {
-                throw new Exception("Could not parse RequestState");
+                throw new CustomException("Could not parse RequestState", exceptionType.error);
             }
         }
     }
@@ -306,7 +306,7 @@ namespace Mitarbeiterverwaltung.LL
             // -> len of checkInOutTime must be even
             if (isCheckedIn())
             {
-                throw new Exception("Invalid chekInOuttimes length");
+                throw new CustomException("Invalid chekInOuttimes length", exceptionType.error);
             }
             else
             {
@@ -323,7 +323,7 @@ namespace Mitarbeiterverwaltung.LL
             // -> len of checkInOutTime must be odd
             if ( !isCheckedIn())
             {
-                throw new Exception("Invalid chekInOuttimes length");
+                throw new CustomException("Invalid chekInOuttimes length", exceptionType.error);
             }
             else
             {
