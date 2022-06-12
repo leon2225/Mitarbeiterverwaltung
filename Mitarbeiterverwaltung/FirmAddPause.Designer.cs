@@ -105,6 +105,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(234, 105);
+            this.ControlBox = false;
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.dtpEnd);
@@ -112,7 +113,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblBegin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MdiChildrenMinimizedAnchorBottom = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddPause";
+            this.ShowIcon = false;
             this.Text = "Pausenzeit hinzufügen";
             this.ResumeLayout(false);
             this.PerformLayout();
