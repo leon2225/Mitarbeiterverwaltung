@@ -544,6 +544,7 @@
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(162, 23);
             this.txtNewPassword.TabIndex = 3;
+            this.txtNewPassword.UseSystemPasswordChar = true;
             // 
             // txtNewPasswordRepeated
             // 
@@ -551,6 +552,7 @@
             this.txtNewPasswordRepeated.Name = "txtNewPasswordRepeated";
             this.txtNewPasswordRepeated.Size = new System.Drawing.Size(162, 23);
             this.txtNewPasswordRepeated.TabIndex = 4;
+            this.txtNewPasswordRepeated.UseSystemPasswordChar = true;
             // 
             // label6
             // 
