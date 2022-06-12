@@ -647,8 +647,8 @@
             // tabSickDates
             // 
             this.tabSickDates.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSickDates.Controls.Add(this.pnlNewSickday);
             this.tabSickDates.Controls.Add(this.pnlSickdays);
+            this.tabSickDates.Controls.Add(this.pnlNewSickday);
             this.tabSickDates.Location = new System.Drawing.Point(4, 24);
             this.tabSickDates.Name = "tabSickDates";
             this.tabSickDates.Size = new System.Drawing.Size(518, 244);
