@@ -36,7 +36,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new Exception("Invalid Date selected");
+                throw new CustomException("Invalid Date selected", exceptionType.error); //TODO unnecessary because of previous check
             }
 
         }

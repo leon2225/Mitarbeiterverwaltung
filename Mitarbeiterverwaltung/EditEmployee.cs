@@ -114,7 +114,7 @@ namespace Mitarbeiterverwaltung
 
             if (endDate < startDate)
             {
-                throw new Exception("Selected Enddate is before Startdate");
+                throw new CustomException("Selected Enddate is before Startdate", exceptionType.info);
             }
             else
             {
