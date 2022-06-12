@@ -32,6 +32,7 @@ namespace Mitarbeiterverwaltung
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabVacations);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabWorkingTimes);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabSickDates);
+                // Create default pause time
 
                 btnRemove.Visible = false;
             }
@@ -203,11 +204,18 @@ namespace Mitarbeiterverwaltung
         {
             lvPause.Items.Clear();
             int index = 0;
-            foreach (TimePeriod pauseTime in employee.pauseTimes)
+            if (employee != null)
             {
-                ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
-                newItem.Tag = index++;
-                lvPause.Items.Add(newItem);
+                foreach (TimePeriod pauseTime in employee.pauseTimes)
+                {
+                    ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
+                    newItem.Tag = index++;
+                    lvPause.Items.Add(newItem);
+                }
+            }
+            else
+            {
+                // skip loading pause times if empty
             }
         }
 
