@@ -278,7 +278,7 @@
             this.btnRequestHolidays.Name = "btnRequestHolidays";
             this.btnRequestHolidays.Size = new System.Drawing.Size(303, 23);
             this.btnRequestHolidays.TabIndex = 9;
-            this.btnRequestHolidays.Text = "Urlaub beantragen";
+            this.btnRequestHolidays.Text = "Urlaubsverwaltung";
             this.btnRequestHolidays.UseVisualStyleBackColor = true;
             this.btnRequestHolidays.Click += new System.EventHandler(this.btnRequestHolidays_Click);
             // 

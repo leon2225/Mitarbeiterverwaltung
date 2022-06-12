@@ -231,7 +231,7 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void TabControl1_Selected(object sender, TabControlEventArgs e)
+        private void tabCtrlEditEmployee_Selected(object sender, TabControlEventArgs e)
         {
             if (e.TabPage == tabVacations)
             {

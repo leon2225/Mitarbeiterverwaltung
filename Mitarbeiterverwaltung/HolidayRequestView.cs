@@ -111,5 +111,39 @@ namespace Mitarbeiterverwaltung
 
             return Math.Round(businessDays,1);
         }
+
+        //Todo evtl noch rename wegen editEmployee
+        private ListViewItem vacationRequestToItem(VacationRequest vacationRequest)
+        {
+            ListViewItem newItem = new ListViewItem(new string[] {
+                vacationRequest.startDate.ToString("dd.MM.yyyy"),
+                vacationRequest.endDate.ToString("dd.MM.yyyy"),
+                vacationRequest.state.ToString()
+            });
+            return newItem;
+        }
+        private void updateLvHolidayRequests()
+        {
+            lvHolidayRequests.Items.Clear();
+            for (int i = 0; i < employee.vacations.Count; i++)
+            {
+                ListViewItem newItem = vacationRequestToItem(employee.vacations[i]);
+                newItem.Tag = i;
+                lvHolidayRequests.Items.Add(newItem);
+            }
+        }
+
+        private void tabControlHolidayRequest_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == tabViewRequests)
+            {
+                updateLvHolidayRequests();
+            }
+            else
+            {
+                //do nothing
+            }
+
+        }
     }
 }
