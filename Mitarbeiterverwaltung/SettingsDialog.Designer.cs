@@ -102,7 +102,7 @@
             this.txtCompanyName.Location = new System.Drawing.Point(165, 18);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(410, 23);
-            this.txtCompanyName.TabIndex = 4;
+            this.txtCompanyName.TabIndex = 1;
             // 
             // txtfilePathIcon
             // 
@@ -112,7 +112,7 @@
             this.txtfilePathIcon.Location = new System.Drawing.Point(165, 48);
             this.txtfilePathIcon.Name = "txtfilePathIcon";
             this.txtfilePathIcon.Size = new System.Drawing.Size(370, 23);
-            this.txtfilePathIcon.TabIndex = 5;
+            this.txtfilePathIcon.TabIndex = 90;
             // 
             // txtFilePathCsv
             // 
@@ -122,7 +122,7 @@
             this.txtFilePathCsv.Location = new System.Drawing.Point(165, 80);
             this.txtFilePathCsv.Name = "txtFilePathCsv";
             this.txtFilePathCsv.Size = new System.Drawing.Size(370, 23);
-            this.txtFilePathCsv.TabIndex = 6;
+            this.txtFilePathCsv.TabIndex = 91;
             // 
             // btnCancel
             // 
@@ -130,7 +130,7 @@
             this.btnCancel.Location = new System.Drawing.Point(413, 180);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(81, 23);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Abbrechen";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -141,7 +141,7 @@
             this.btnSave.Location = new System.Drawing.Point(500, 180);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 9;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Speichern";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -152,7 +152,7 @@
             this.btnIcon.Location = new System.Drawing.Point(541, 48);
             this.btnIcon.Name = "btnIcon";
             this.btnIcon.Size = new System.Drawing.Size(34, 23);
-            this.btnIcon.TabIndex = 10;
+            this.btnIcon.TabIndex = 2;
             this.btnIcon.Text = "...";
             this.btnIcon.UseVisualStyleBackColor = true;
             this.btnIcon.Click += new System.EventHandler(this.btnIcon_Click);
@@ -163,7 +163,7 @@
             this.btnCsv.Location = new System.Drawing.Point(541, 79);
             this.btnCsv.Name = "btnCsv";
             this.btnCsv.Size = new System.Drawing.Size(34, 23);
-            this.btnCsv.TabIndex = 11;
+            this.btnCsv.TabIndex = 3;
             this.btnCsv.Text = "...";
             this.btnCsv.UseVisualStyleBackColor = true;
             this.btnCsv.Click += new System.EventHandler(this.btnCsv_Click);
@@ -178,7 +178,7 @@
             this.nmbrRounding.Location = new System.Drawing.Point(165, 108);
             this.nmbrRounding.Name = "nmbrRounding";
             this.nmbrRounding.Size = new System.Drawing.Size(140, 23);
-            this.nmbrRounding.TabIndex = 13;
+            this.nmbrRounding.TabIndex = 4;
             // 
             // label5
             // 
@@ -216,7 +216,7 @@
             this.mtxtAutoLogoutTimeout.Mask = "000";
             this.mtxtAutoLogoutTimeout.Name = "mtxtAutoLogoutTimeout";
             this.mtxtAutoLogoutTimeout.Size = new System.Drawing.Size(140, 23);
-            this.mtxtAutoLogoutTimeout.TabIndex = 18;
+            this.mtxtAutoLogoutTimeout.TabIndex = 5;
             this.mtxtAutoLogoutTimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // SettingsDialog

@@ -258,7 +258,7 @@
             this.txtName.Location = new System.Drawing.Point(157, 3);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(355, 23);
-            this.txtName.TabIndex = 7;
+            this.txtName.TabIndex = 2;
             this.txtName.Text = "Max";
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
@@ -271,7 +271,7 @@
             this.txtSurname.Location = new System.Drawing.Point(157, 32);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(355, 23);
-            this.txtSurname.TabIndex = 8;
+            this.txtSurname.TabIndex = 3;
             this.txtSurname.Text = "Mustermann";
             this.txtSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSurname.Validating += new System.ComponentModel.CancelEventHandler(this.txtSurname_Validating);
@@ -284,7 +284,7 @@
             this.txtAddress.Location = new System.Drawing.Point(157, 61);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(355, 23);
-            this.txtAddress.TabIndex = 9;
+            this.txtAddress.TabIndex = 4;
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPhone
@@ -295,7 +295,7 @@
             this.txtPhone.Location = new System.Drawing.Point(157, 90);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(355, 23);
-            this.txtPhone.TabIndex = 10;
+            this.txtPhone.TabIndex = 5;
             this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button_save
@@ -304,7 +304,7 @@
             this.button_save.Location = new System.Drawing.Point(463, 290);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(75, 22);
-            this.button_save.TabIndex = 14;
+            this.button_save.TabIndex = 9;
             this.button_save.Text = "Speichern";
             this.button_save.UseVisualStyleBackColor = true;
             this.button_save.Click += new System.EventHandler(this.btnOk_Click);
@@ -315,7 +315,7 @@
             this.button_cancel.Location = new System.Drawing.Point(382, 290);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(75, 22);
-            this.button_cancel.TabIndex = 15;
+            this.button_cancel.TabIndex = 11;
             this.button_cancel.Text = "Abbrechen";
             this.button_cancel.UseVisualStyleBackColor = true;
             this.button_cancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -326,7 +326,7 @@
             this.btnRemove.Location = new System.Drawing.Point(12, 290);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(140, 23);
-            this.btnRemove.TabIndex = 18;
+            this.btnRemove.TabIndex = 10;
             this.btnRemove.Text = "Mitarbeiter Entfernen";
             this.btnRemove.UseVisualStyleBackColor = true;
             this.btnRemove.Click += new System.EventHandler(this.btnRemoveEmployee_Click);
@@ -375,7 +375,7 @@
             this.mtxtHolidays.Mask = "00";
             this.mtxtHolidays.Name = "mtxtHolidays";
             this.mtxtHolidays.Size = new System.Drawing.Size(41, 23);
-            this.mtxtHolidays.TabIndex = 20;
+            this.mtxtHolidays.TabIndex = 7;
             this.mtxtHolidays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // mtxtWeekTimeLimit
@@ -386,7 +386,7 @@
             this.mtxtWeekTimeLimit.Mask = "00";
             this.mtxtWeekTimeLimit.Name = "mtxtWeekTimeLimit";
             this.mtxtWeekTimeLimit.Size = new System.Drawing.Size(41, 23);
-            this.mtxtWeekTimeLimit.TabIndex = 20;
+            this.mtxtWeekTimeLimit.TabIndex = 6;
             this.mtxtWeekTimeLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -407,7 +407,7 @@
             this.btnResetPassword.Location = new System.Drawing.Point(157, 151);
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.Size = new System.Drawing.Size(117, 23);
-            this.btnResetPassword.TabIndex = 21;
+            this.btnResetPassword.TabIndex = 8;
             this.btnResetPassword.Text = "Zurücksetzen";
             this.btnResetPassword.UseVisualStyleBackColor = true;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
