@@ -441,6 +441,7 @@ namespace Mitarbeiterverwaltung
                 lblPasswordChangeFailed.Visible = false;
                 startLogoutCountdown();
                 changeToCheckin();
+                throw new CustomException("Password changed successfully", exceptionType.info);
             }
             else
             {
