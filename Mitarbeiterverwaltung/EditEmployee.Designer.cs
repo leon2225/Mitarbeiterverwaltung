@@ -39,12 +39,12 @@
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
-            this.txtWeekTimeLimit = new System.Windows.Forms.TextBox();
-            this.txtHolidays = new System.Windows.Forms.TextBox();
             this.button_save = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.mtxtHolidays = new System.Windows.Forms.MaskedTextBox();
+            this.mtxtWeekTimeLimit = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.tabCtrlEditEmployee = new System.Windows.Forms.TabControl();
@@ -298,24 +298,6 @@
             this.txtPhone.TabIndex = 10;
             this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // txtWeekTimeLimit
-            // 
-            this.txtWeekTimeLimit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWeekTimeLimit.Location = new System.Drawing.Point(157, 119);
-            this.txtWeekTimeLimit.Name = "txtWeekTimeLimit";
-            this.txtWeekTimeLimit.Size = new System.Drawing.Size(41, 23);
-            this.txtWeekTimeLimit.TabIndex = 12;
-            this.txtWeekTimeLimit.Validating += new System.ComponentModel.CancelEventHandler(this.txtWeekTimeLimit_Validating);
-            // 
-            // txtHolidays
-            // 
-            this.txtHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtHolidays.Location = new System.Drawing.Point(280, 119);
-            this.txtHolidays.Name = "txtHolidays";
-            this.txtHolidays.Size = new System.Drawing.Size(44, 23);
-            this.txtHolidays.TabIndex = 13;
-            this.txtHolidays.Validating += new System.ComponentModel.CancelEventHandler(this.txtHolidays_Validating);
-            // 
             // button_save
             // 
             this.button_save.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -358,17 +340,17 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.mtxtHolidays, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.mtxtWeekTimeLimit, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label_name, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_surname, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label_adress, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label_phone, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label_workingTimeWeek, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtWeekTimeLimit, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSurname, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtPhone, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtHolidays, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.btnResetPassword, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label_holidays, 2, 4);
@@ -384,6 +366,28 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(515, 181);
             this.tableLayoutPanel1.TabIndex = 19;
+            // 
+            // mtxtHolidays
+            // 
+            this.mtxtHolidays.BeepOnError = true;
+            this.mtxtHolidays.HidePromptOnLeave = true;
+            this.mtxtHolidays.Location = new System.Drawing.Point(280, 119);
+            this.mtxtHolidays.Mask = "00";
+            this.mtxtHolidays.Name = "mtxtHolidays";
+            this.mtxtHolidays.Size = new System.Drawing.Size(41, 23);
+            this.mtxtHolidays.TabIndex = 20;
+            this.mtxtHolidays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // mtxtWeekTimeLimit
+            // 
+            this.mtxtWeekTimeLimit.BeepOnError = true;
+            this.mtxtWeekTimeLimit.HidePromptOnLeave = true;
+            this.mtxtWeekTimeLimit.Location = new System.Drawing.Point(157, 119);
+            this.mtxtWeekTimeLimit.Mask = "00";
+            this.mtxtWeekTimeLimit.Name = "mtxtWeekTimeLimit";
+            this.mtxtWeekTimeLimit.Size = new System.Drawing.Size(41, 23);
+            this.mtxtWeekTimeLimit.TabIndex = 20;
+            this.mtxtWeekTimeLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
             // 
@@ -1662,8 +1666,6 @@
         private TextBox txtSurname;
         private TextBox txtAddress;
         private TextBox txtPhone;
-        private TextBox txtWeekTimeLimit;
-        private TextBox txtHolidays;
         private Button button_saveStaffMember;
         private Button button_cancelNewStaffMember;
         private Button button_save;
@@ -1784,5 +1786,8 @@
         private Label label20;
         private DateTimePicker dateTimePicker2;
         private TabControl tabControl3;
+        private MaskedTextBox mtxtWeekTimeLimit;
+        private MaskedTextBox mtxtHolidays;
+        private MaskedTextBox maskedTextBox1;
     }
 }

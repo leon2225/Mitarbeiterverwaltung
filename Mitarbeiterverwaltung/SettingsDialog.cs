@@ -26,7 +26,7 @@ namespace Mitarbeiterverwaltung
                 itemIdx = 0;
                 //throw new Exception("Invalid time rounding"); //Todo exception
             nmbrRounding.SelectedIndex = itemIdx;
-            nmbrAutoLogoutTimeout.Text = startValues.autoLogoutTimeout.ToString();
+            mtxtAutoLogoutTimeout.Text = startValues.autoLogoutTimeout.ToString();
         }
 
         public Settings getSettings()
@@ -36,7 +36,7 @@ namespace Mitarbeiterverwaltung
             startValues.csvPath = txtFilePathCsv.Text;
             startValues.logoPath = txtfilePathIcon.Text;
             startValues.timeRounding = Int32.Parse((string)nmbrRounding.SelectedItem);
-            startValues.autoLogoutTimeout = Int32.Parse(nmbrAutoLogoutTimeout.Text);
+            startValues.autoLogoutTimeout = Int32.Parse(mtxtAutoLogoutTimeout.Text);
             return settings;
         }
 
