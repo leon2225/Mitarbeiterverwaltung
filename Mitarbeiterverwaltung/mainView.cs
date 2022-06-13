@@ -273,7 +273,7 @@ namespace Mitarbeiterverwaltung
         {
             changeToLogin();
             pnlMainLogin.Visible = false;
-            changePasswordPanel.Visible = true;
+            pnlChangePassword.Visible = true;
         }
 
         private void changeToCheckin()
@@ -441,13 +441,15 @@ namespace Mitarbeiterverwaltung
                 lblPasswordChangeFailed.Visible = false;
                 startLogoutCountdown();
                 changeToCheckin();
-                throw new CustomException("Password changed successfully", exceptionType.info);
+                MessageBox.Show("Passwort wurde erfolgreich geändert","Passwortänderung", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 lblPasswordChangeFailed.Visible = true;
             }
-            
+            // clear password input fields
+            txtNewPassword.Clear();
+            txtNewPasswordRepeated.Clear();
         }
 
         private void label1_Click(object sender, EventArgs e)
