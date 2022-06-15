@@ -84,8 +84,16 @@ namespace Mitarbeiterverwaltung
 
         private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
-            this.Close();
+            DialogResult result = MessageBox.Show("Soll der Mitarbeiter " + this.employee.surname + " " + this.employee.name + " wirklich gelöscht werden?", "Enfernen eines Mitarbeiters", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                this.DialogResult = DialogResult.Abort;
+                this.Close();
+            }
+            else
+            {
+                // do nothing
+            }
         }
 
         private void btnResetPassword_Click(object sender, EventArgs e)
