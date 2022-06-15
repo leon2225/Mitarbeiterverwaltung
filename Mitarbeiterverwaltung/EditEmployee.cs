@@ -95,7 +95,21 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddSickday_Click(object sender, EventArgs e)
         {
-            changeToNewSickday();
+            EditTimeSpanView addSickDayTimespan = new EditTimeSpanView(); //changeToNewSickday();
+            addSickDayTimespan.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = addSickDayTimespan.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                List<DateTime> days = new List<DateTime>();
+                days = addSickDayTimespan.getTimePeriod();
+                employee.addSickday(days[0], days[1]);
+                updateLvSickdays();
+            }
+            else
+            {
+                //do nothing
+            }
 
         }
 
