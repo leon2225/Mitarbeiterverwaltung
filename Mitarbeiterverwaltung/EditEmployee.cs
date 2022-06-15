@@ -98,7 +98,8 @@ namespace Mitarbeiterverwaltung
 
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
-            this.employee.setPassword("einmalPasswort", "einmalPasswort");
+            DialogResult result = MessageBox.Show("Das Passwort von " + this.employee.surname + " " + this.employee.name + " wurde erfolgreich zurückgesetzt", "Passwort eines Mitarbeiters zurücksetzen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.employee.resetPassword();
         }
 
         private void btnAddSickday_Click(object sender, EventArgs e)

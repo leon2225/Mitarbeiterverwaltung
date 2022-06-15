@@ -216,6 +216,17 @@ namespace Mitarbeiterverwaltung.LL
             return sb.ToString();
         }
 
+        private bool resetPasswordFlag = false;
+        public void resetPassword()
+        {
+            resetPasswordFlag = true;
+        }
+
+        public bool isPasswordInResetState()
+        {
+            return resetPasswordFlag;
+        }
+
         public bool setPassword(string password, string passwordRepeated)
         {
             //check if password valid
@@ -234,6 +245,7 @@ namespace Mitarbeiterverwaltung.LL
             else
             {
                 passwordHash = hashPassword(password); //TODO this?
+                this.resetPasswordFlag = false;
                 return true;
             }
         }

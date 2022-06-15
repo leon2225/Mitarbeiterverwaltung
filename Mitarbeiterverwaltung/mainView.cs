@@ -50,7 +50,7 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void MainViewL_Load(object sender, EventArgs e)
+        private void MainViewL_Load(object sender, EventArgs e) //TODO rename to mainviewL
         {
             lvEmployees.Items.Clear();
             changeToLogin();
@@ -189,7 +189,14 @@ namespace Mitarbeiterverwaltung
             }
             else if (activePanel == checkInPanel)
             {
-                changeToSecureLogin();
+                if(currentEmployee.isPasswordInResetState())
+                {
+                    changeToUpdatePassword();
+                }
+                else
+                {
+                    changeToSecureLogin();
+                }
             }
             else if (activePanel == loginPanel)
             {
@@ -330,6 +337,7 @@ namespace Mitarbeiterverwaltung
             btnPanelCtrl.Visible = true;
             btnPanelCtrl.Text = "Ein / Ausstemplen";
             activePanel = loginPanel;
+            this.ActiveControl = txtPassword;
         }
 
         private void lvEmployees_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
