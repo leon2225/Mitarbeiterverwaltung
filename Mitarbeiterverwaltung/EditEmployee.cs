@@ -221,13 +221,13 @@ namespace Mitarbeiterverwaltung
 
         private void updateLvCheckInOutTimes()
         {
-            lbCheckInOutTimes.Items.Clear();
+            lvCheckInOutTimes.Items.Clear();
             for (int i = 0; i < employee.checkInOutTimes.Count; i++)
             {
                 String type = (i % 2 == 0) ? "Eingestempelt" : "Ausgestempelt";
                 ListViewItem newItem = checkInOutTimeToItem(employee.checkInOutTimes[i], type);
                 newItem.Tag = i;
-                lbCheckInOutTimes.Items.Add(newItem);
+                lvCheckInOutTimes.Items.Add(newItem);
             }
         }
 
@@ -336,6 +336,48 @@ namespace Mitarbeiterverwaltung
             {
                 //validation ok, do nothing
             }
+        }
+
+        private void btnEditCheckInOutTime_Click(object sender, EventArgs e)
+        {
+            int index = (int)lvCheckInOutTimes.SelectedItems[0].Tag;
+
+            DateTime minTime;
+            DateTime maxTime;
+
+            if(index > 0)
+            {
+                minTime = employee.checkInOutTimes[index-1];
+            }
+            else
+            {
+                minTime = DateTime.MinValue;
+            }
+
+            if(index < (employee.checkInOutTimes.Count - 1))
+            {
+                maxTime = employee.checkInOutTimes[index+1];
+            }
+            else
+            {
+                maxTime = DateTime.MaxValue;
+            }
+
+            FormEditCheckInOutTime form = new FormEditCheckInOutTime(employee.checkInOutTimes[index], minTime, maxTime);
+
+            form.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = form.ShowDialog(this);
+
+            if (result == DialogResult.OK)
+            {
+                employee.checkInOutTimes[index] = form.getDateTime();
+            }
+            else
+            {
+                //do nothing
+            }
+
+            updateLvCheckInOutTimes();
         }
     }
 }

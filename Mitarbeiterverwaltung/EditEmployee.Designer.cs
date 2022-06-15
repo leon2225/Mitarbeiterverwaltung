@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "12:45",
+            "13:15"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditEmployee));
             this.label_name = new System.Windows.Forms.Label();
             this.label_surname = new System.Windows.Forms.Label();
@@ -66,7 +69,8 @@
             this.button10 = new System.Windows.Forms.Button();
             this.tabWorkingTimes = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbCheckInOutTimes = new System.Windows.Forms.ListView();
+            this.btnEditCheckInOutTime = new System.Windows.Forms.Button();
+            this.lvCheckInOutTimes = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
@@ -484,6 +488,8 @@
             this.columnHeader18});
             this.lvPause.FullRowSelect = true;
             this.lvPause.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvPause.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
             this.lvPause.Location = new System.Drawing.Point(3, 3);
             this.lvPause.Name = "lvPause";
             this.lvPause.Size = new System.Drawing.Size(320, 240);
@@ -500,7 +506,6 @@
             // columnHeader18
             // 
             this.columnHeader18.Text = "Ende";
-            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader18.Width = 156;
             // 
             // btnAddPause
@@ -617,40 +622,52 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.lbCheckInOutTimes);
+            this.panel1.Controls.Add(this.btnEditCheckInOutTime);
+            this.panel1.Controls.Add(this.lvCheckInOutTimes);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(518, 244);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // lbCheckInOutTimes
+            // btnEditCheckInOutTime
             // 
-            this.lbCheckInOutTimes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.btnEditCheckInOutTime.Location = new System.Drawing.Point(349, 111);
+            this.btnEditCheckInOutTime.Name = "btnEditCheckInOutTime";
+            this.btnEditCheckInOutTime.Size = new System.Drawing.Size(140, 23);
+            this.btnEditCheckInOutTime.TabIndex = 1;
+            this.btnEditCheckInOutTime.Text = "Stempelzeit ändern";
+            this.btnEditCheckInOutTime.UseVisualStyleBackColor = true;
+            this.btnEditCheckInOutTime.Click += new System.EventHandler(this.btnEditCheckInOutTime_Click);
+            // 
+            // lvCheckInOutTimes
+            // 
+            this.lvCheckInOutTimes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.lbCheckInOutTimes.Location = new System.Drawing.Point(3, 3);
-            this.lbCheckInOutTimes.Name = "lbCheckInOutTimes";
-            this.lbCheckInOutTimes.Size = new System.Drawing.Size(506, 232);
-            this.lbCheckInOutTimes.TabIndex = 0;
-            this.lbCheckInOutTimes.UseCompatibleStateImageBehavior = false;
-            this.lbCheckInOutTimes.View = System.Windows.Forms.View.Details;
+            this.lvCheckInOutTimes.FullRowSelect = true;
+            this.lvCheckInOutTimes.Location = new System.Drawing.Point(3, 3);
+            this.lvCheckInOutTimes.Name = "lvCheckInOutTimes";
+            this.lvCheckInOutTimes.Size = new System.Drawing.Size(320, 240);
+            this.lvCheckInOutTimes.TabIndex = 0;
+            this.lvCheckInOutTimes.UseCompatibleStateImageBehavior = false;
+            this.lvCheckInOutTimes.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Status";
-            this.columnHeader1.Width = 120;
+            this.columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Uhrzeit";
-            this.columnHeader2.Width = 120;
+            this.columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Datum";
-            this.columnHeader3.Width = 120;
+            this.columnHeader3.Width = 116;
             // 
             // tabSickDates
             // 
@@ -1612,7 +1629,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditEmployee";
+            this.ShowIcon = false;
             this.Text = "Mitarbeiter bearbeiten";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -1678,7 +1697,7 @@
         private TabPage tabPersonalData;
         private TabPage tabWorkingTimes;
         private TabPage tabSickDates;
-        private ListView lbCheckInOutTimes;
+        private ListView lvCheckInOutTimes;
         private ListView lvSickDays;
         private ColumnHeader Beginn;
         private ColumnHeader Ende;
@@ -1789,5 +1808,6 @@
         private MaskedTextBox mtxtWeekTimeLimit;
         private MaskedTextBox mtxtHolidays;
         private MaskedTextBox maskedTextBox1;
+        private Button btnEditCheckInOutTime;
     }
 }
