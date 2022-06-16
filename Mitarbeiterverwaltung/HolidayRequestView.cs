@@ -32,7 +32,7 @@ namespace Mitarbeiterverwaltung
             DateTime endDate = dtpHolidayEnd.Value;
             if (endDate > startDate)
             {
-                employee.requestHoliday(startDate, endDate);
+                employee.requestVacation(startDate, endDate);
             }
             else
             {

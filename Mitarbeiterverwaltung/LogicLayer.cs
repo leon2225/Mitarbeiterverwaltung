@@ -74,32 +74,7 @@ namespace Mitarbeiterverwaltung.LL
         }
     }
 
-    public class Absenteeism
-    {
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
-        public RequestState? state { get; set; }
-        public String type { get; set; }
-
-        public Absenteeism()
-        {
-
-        }
-
-        public Absenteeism(string type, string startTime, string endTime, string state)
-        {
-            this.type = type;
-            this.startTime = DateTime.Parse(startTime);
-            this.endTime = DateTime.Parse(endTime);
-            this.state = (RequestState) Enum.Parse(typeof(RequestState),state);
-        }
-
-        public override string ToString()
-        {
-            return type + " " + startTime.ToString("dd.MM.yyyy") + " " + endTime.ToString("dd.MM.yyyy") + " " + state.ToString();
-        }
-
-    }
+    
     public class TimeHandler
     {
         private TimeSpan offset;
@@ -127,7 +102,7 @@ namespace Mitarbeiterverwaltung.LL
 
     public class Employee
     {
-        private static int numberOfEmployees = 0;
+        private static int maxEmployeeId = 1000;
         public string Id { get; set; }
         public string passwordHash { get; set; }
         public string name { get; set; }
@@ -146,15 +121,14 @@ namespace Mitarbeiterverwaltung.LL
             this.adress = String.Empty;
             this.phone = String.Empty;
             subordinates = new Dictionary<string, Employee>();
-            Id = (1000 + (numberOfEmployees) ).ToString();
             passwordHash = String.Empty;
 
-            numberOfEmployees++;
+            Id = (1 + (maxEmployeeId)).ToString();
+            maxEmployeeId++;
         }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = (1000 + (numberOfEmployees++)).ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
@@ -163,6 +137,9 @@ namespace Mitarbeiterverwaltung.LL
             this.subordinates = new Dictionary<string, Employee>();
 
             setPassword(password, password);
+
+            Id = (1 + (maxEmployeeId)).ToString();
+            maxEmployeeId++;
         }
 
         public void parse(Dictionary<String, String> data)
@@ -195,6 +172,7 @@ namespace Mitarbeiterverwaltung.LL
 
                     case "Id":
                         this.Id = value;
+                        maxEmployeeId = Math.Max(Int32.Parse(value), maxEmployeeId);
                         break;
 
                     default:
@@ -323,7 +301,7 @@ namespace Mitarbeiterverwaltung.LL
 
         }
 
-        public void requestHoliday(DateTime startTime, DateTime endTime)
+        public void requestVacation(DateTime startTime, DateTime endTime)
         {
             VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending);
             vacations.Add(vacationRequest);
@@ -471,7 +449,6 @@ namespace Mitarbeiterverwaltung.LL
                         }
                         break;
 
-                    case "timestamps":
                     case "checkInOutTimes":
                         List<DateTime> timestamps = (List<DateTime>)value;
                         if (timestamps.Count > 0)
