@@ -145,5 +145,10 @@ namespace Mitarbeiterverwaltung
             }
 
         }
+
+        private void pnlNewHolidayRequest_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
