@@ -238,7 +238,10 @@ namespace Mitarbeiterverwaltung.LL
     {
         public TimeSpan weekTimeLimit { get; set; } = TimeSpan.Zero; //worktime/week due to contract
         public List<DateTime> checkInOutTimes { get; set; } = new List<DateTime>();
-        public List<TimePeriod> pauseTimes { get; set; } = new List<TimePeriod>();
+        public List<TimePeriod> pauseTimes { get; set; } = new List<TimePeriod>() 
+        { 
+            new TimePeriod(DateTime.MinValue + new TimeSpan(12,0,0), new TimeSpan(0,45,0))
+        };
         public List<TimePeriod> sickDays { get; set; } = new List<TimePeriod>();
         public List<VacationRequest> vacations{ get; set; } = new List<VacationRequest>();
         public int vacationDays { get; set; } = 0;
