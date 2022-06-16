@@ -764,7 +764,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainView";
             this.Text = "Mitarbeiter Verwaltung";
-            this.Load += new System.EventHandler(this.MainViewL_Load);
+            this.Load += new System.EventHandler(this.onLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.checkInPanel.ResumeLayout(false);

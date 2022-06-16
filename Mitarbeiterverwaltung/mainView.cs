@@ -65,7 +65,7 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void MainViewL_Load(object sender, EventArgs e) //TODO rename to mainviewL
+        private void onLoad(object sender, EventArgs e) //TODO rename to mainviewL
         {
             lvEmployees.Items.Clear();
             changeToLogin();
