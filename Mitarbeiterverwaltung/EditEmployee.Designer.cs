@@ -76,11 +76,11 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.tabSickDates = new System.Windows.Forms.TabPage();
             this.pnlSickdays = new System.Windows.Forms.Panel();
-            this.btnDeleteAbsenteeism = new System.Windows.Forms.Button();
+            this.btnRemoveSickDays = new System.Windows.Forms.Button();
             this.lvSickDays = new System.Windows.Forms.ListView();
             this.Beginn = new System.Windows.Forms.ColumnHeader();
             this.Ende = new System.Windows.Forms.ColumnHeader();
-            this.btnAddAbsenteeism = new System.Windows.Forms.Button();
+            this.btnAddSickDays = new System.Windows.Forms.Button();
             this.tabVacations = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDenyVacationRequest = new System.Windows.Forms.Button();
@@ -604,7 +604,7 @@
             this.tabWorkingTimes.Controls.Add(this.panel1);
             this.tabWorkingTimes.Location = new System.Drawing.Point(4, 24);
             this.tabWorkingTimes.Name = "tabWorkingTimes";
-            this.tabWorkingTimes.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabWorkingTimes.Padding = new System.Windows.Forms.Padding(3);
             this.tabWorkingTimes.Size = new System.Drawing.Size(531, 244);
             this.tabWorkingTimes.TabIndex = 1;
             this.tabWorkingTimes.Text = "Stempelzeiten";
@@ -673,24 +673,24 @@
             // 
             // pnlSickdays
             // 
-            this.pnlSickdays.Controls.Add(this.btnDeleteAbsenteeism);
+            this.pnlSickdays.Controls.Add(this.btnRemoveSickDays);
             this.pnlSickdays.Controls.Add(this.lvSickDays);
-            this.pnlSickdays.Controls.Add(this.btnAddAbsenteeism);
+            this.pnlSickdays.Controls.Add(this.btnAddSickDays);
             this.pnlSickdays.Location = new System.Drawing.Point(0, 0);
             this.pnlSickdays.Name = "pnlSickdays";
             this.pnlSickdays.Size = new System.Drawing.Size(518, 244);
             this.pnlSickdays.TabIndex = 3;
             // 
-            // btnDeleteAbsenteeism
+            // btnRemoveSickDays
             // 
-            this.btnDeleteAbsenteeism.Enabled = false;
-            this.btnDeleteAbsenteeism.Location = new System.Drawing.Point(349, 122);
-            this.btnDeleteAbsenteeism.Name = "btnDeleteAbsenteeism";
-            this.btnDeleteAbsenteeism.Size = new System.Drawing.Size(140, 23);
-            this.btnDeleteAbsenteeism.TabIndex = 3;
-            this.btnDeleteAbsenteeism.Text = "Fehlzeit löschen";
-            this.btnDeleteAbsenteeism.UseVisualStyleBackColor = true;
-            this.btnDeleteAbsenteeism.Click += new System.EventHandler(this.btnDeleteSickday_Click);
+            this.btnRemoveSickDays.Enabled = false;
+            this.btnRemoveSickDays.Location = new System.Drawing.Point(349, 122);
+            this.btnRemoveSickDays.Name = "btnRemoveSickDays";
+            this.btnRemoveSickDays.Size = new System.Drawing.Size(140, 23);
+            this.btnRemoveSickDays.TabIndex = 3;
+            this.btnRemoveSickDays.Text = "Fehlzeit löschen";
+            this.btnRemoveSickDays.UseVisualStyleBackColor = true;
+            this.btnRemoveSickDays.Click += new System.EventHandler(this.btnRemoveSickdays_Click);
             // 
             // lvSickDays
             // 
@@ -721,15 +721,15 @@
             this.Ende.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Ende.Width = 156;
             // 
-            // btnAddAbsenteeism
+            // btnAddSickDays
             // 
-            this.btnAddAbsenteeism.Location = new System.Drawing.Point(349, 93);
-            this.btnAddAbsenteeism.Name = "btnAddAbsenteeism";
-            this.btnAddAbsenteeism.Size = new System.Drawing.Size(140, 23);
-            this.btnAddAbsenteeism.TabIndex = 2;
-            this.btnAddAbsenteeism.Text = "Fehlzeit hinzufügen";
-            this.btnAddAbsenteeism.UseVisualStyleBackColor = true;
-            this.btnAddAbsenteeism.Click += new System.EventHandler(this.btnAddSickday_Click);
+            this.btnAddSickDays.Location = new System.Drawing.Point(349, 93);
+            this.btnAddSickDays.Name = "btnAddSickDays";
+            this.btnAddSickDays.Size = new System.Drawing.Size(140, 23);
+            this.btnAddSickDays.TabIndex = 2;
+            this.btnAddSickDays.Text = "Fehlzeit hinzufügen";
+            this.btnAddSickDays.UseVisualStyleBackColor = true;
+            this.btnAddSickDays.Click += new System.EventHandler(this.btnAddSickdays_Click);
             // 
             // tabVacations
             // 
@@ -1079,7 +1079,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Fehlzeit löschen";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnDeleteSickday_Click);
+            this.button2.Click += new System.EventHandler(this.btnRemoveSickdays_Click);
             // 
             // listView2
             // 
@@ -1107,16 +1107,6 @@
             this.columnHeader11.Text = "Ende";
             this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader11.Width = 156;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(349, 93);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(140, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Fehlzeit hinzufügen";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btnAddSickday_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -1433,7 +1423,7 @@
             this.button5.TabIndex = 3;
             this.button5.Text = "Fehlzeit löschen";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.btnDeleteSickday_Click);
+            this.button5.Click += new System.EventHandler(this.btnRemoveSickdays_Click);
             // 
             // listView4
             // 
@@ -1461,16 +1451,6 @@
             this.columnHeader16.Text = "Ende";
             this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader16.Width = 156;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(349, 93);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(140, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Fehlzeit hinzufügen";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.btnAddSickday_Click);
             // 
             // tableLayoutPanel5
             // 
@@ -1600,10 +1580,10 @@
         private ListView lvSickDays;
         private ColumnHeader Beginn;
         private ColumnHeader Ende;
-        private Button btnAddAbsenteeism;
+        private Button btnAddSickDays;
         private Panel pnlSickdays;
         private Panel panel1;
-        private Button btnDeleteAbsenteeism;
+        private Button btnRemoveSickDays;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;

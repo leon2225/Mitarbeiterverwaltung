@@ -106,7 +106,7 @@ namespace Mitarbeiterverwaltung
             this.employee.resetPassword();
         }
 
-        private void btnAddSickday_Click(object sender, EventArgs e)
+        private void btnAddSickdays_Click(object sender, EventArgs e)
         {
             EditTimeSpanView addSickDays = new EditTimeSpanView(); 
             addSickDays.StartPosition = FormStartPosition.CenterParent;
@@ -237,7 +237,7 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void btnDeleteSickday_Click(object sender, EventArgs e)
+        private void btnRemoveSickdays_Click(object sender, EventArgs e)
         {
             int index = (int)lvSickDays.SelectedItems[0].Tag;
             employee.sickDays.RemoveAt(index);
@@ -348,7 +348,9 @@ namespace Mitarbeiterverwaltung
         private void lvSickDays_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvSickDays.SelectedItems.Count > 0;
-            btnDeleteAbsenteeism .Enabled = enableState; //TODO rename button
+            btnRemoveSickDays .Enabled = enableState; //TODO rename button
         }
+
+
     }
 }
