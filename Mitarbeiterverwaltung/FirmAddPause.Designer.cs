@@ -39,18 +39,18 @@
             // lblBegin
             // 
             this.lblBegin.AutoSize = true;
-            this.lblBegin.Location = new System.Drawing.Point(12, 9);
+            this.lblBegin.Location = new System.Drawing.Point(14, 12);
             this.lblBegin.Name = "lblBegin";
-            this.lblBegin.Size = new System.Drawing.Size(46, 15);
+            this.lblBegin.Size = new System.Drawing.Size(57, 20);
             this.lblBegin.TabIndex = 0;
             this.lblBegin.Text = "Anfang";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 39);
+            this.label1.Location = new System.Drawing.Point(14, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 15);
+            this.label1.Size = new System.Drawing.Size(42, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Ende";
             // 
@@ -59,11 +59,12 @@
             this.dtpBegin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpBegin.CustomFormat = "HH:mm";
             this.dtpBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBegin.Location = new System.Drawing.Point(133, 5);
+            this.dtpBegin.Location = new System.Drawing.Point(152, 7);
+            this.dtpBegin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpBegin.Name = "dtpBegin";
             this.dtpBegin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpBegin.ShowUpDown = true;
-            this.dtpBegin.Size = new System.Drawing.Size(88, 23);
+            this.dtpBegin.Size = new System.Drawing.Size(100, 27);
             this.dtpBegin.TabIndex = 1;
             // 
             // dtpEnd
@@ -71,19 +72,21 @@
             this.dtpEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpEnd.CustomFormat = "HH:mm";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(133, 39);
+            this.dtpEnd.Location = new System.Drawing.Point(152, 52);
+            this.dtpEnd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dtpEnd.ShowUpDown = true;
-            this.dtpEnd.Size = new System.Drawing.Size(88, 23);
+            this.dtpEnd.Size = new System.Drawing.Size(100, 27);
             this.dtpEnd.TabIndex = 2;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancel.Location = new System.Drawing.Point(12, 73);
+            this.btnCancel.Location = new System.Drawing.Point(14, 97);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(86, 31);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Abbrechen";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -92,9 +95,10 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(133, 73);
+            this.btnOk.Location = new System.Drawing.Point(152, 97);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(88, 23);
+            this.btnOk.Size = new System.Drawing.Size(101, 31);
             this.btnOk.TabIndex = 3;
             this.btnOk.Text = "Hinzufügen";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -102,10 +106,9 @@
             // 
             // FormAddPause
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 105);
-            this.ControlBox = false;
+            this.ClientSize = new System.Drawing.Size(267, 140);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.dtpEnd);
@@ -113,6 +116,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblBegin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MdiChildrenMinimizedAnchorBottom = false;
             this.MinimizeBox = false;
