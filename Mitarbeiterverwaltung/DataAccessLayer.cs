@@ -12,13 +12,7 @@ namespace Mitarbeiterverwaltung.DAL
         public int autoLogoutTimeout { get; set; }
     }
 
-    public interface IStorageHandler
-    {
-        Dictionary<string, Employee> load();
-        bool save(Dictionary<string, Employee> employees);
-    }
-
-    public class CSVStorageHandler : IStorageHandler
+    public class CSVStorageHandler
     {
         public string path;
 
@@ -84,7 +78,7 @@ namespace Mitarbeiterverwaltung.DAL
             return employees;
         }
 
-        public bool save(Dictionary<string, Employee> employees)
+        public void save(Dictionary<string, Employee> employees)
         {
             string csvString = "";
             var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
@@ -99,43 +93,41 @@ namespace Mitarbeiterverwaltung.DAL
 
             }
             File.WriteAllText(path, csvString);
-            return true;
         }
     }
 
     public class InitFileParser
     {
         public string path;
-        private Dictionary<string, Dictionary<string, string>> loadedData;
+        private Dictionary<string, Dictionary<string, string>> data;
         public InitFileParser(string filePath = "init.ini")
         {
             path = filePath;
         }
-        public bool updateFromSettings(Settings settings)
+        public void updateFromSettings(Settings settings)
         {
             string currentDir = Directory.GetCurrentDirectory();
             if (settings.csvPath.Contains(currentDir))
             {
-                loadedData["settings"]["csvPath"] = "." + settings.csvPath.Substring(currentDir.Length);
+                data["settings"]["csvPath"] = "." + settings.csvPath.Substring(currentDir.Length);
             }
             else
             {
-                loadedData["settings"]["csvPath"] = settings.csvPath;
+                data["settings"]["csvPath"] = settings.csvPath;
             }
             if (settings.logoPath.Contains(currentDir))
             {
-                loadedData["settings"]["logoPath"] = "." + settings.logoPath.Substring(currentDir.Length);
+                data["settings"]["logoPath"] = "." + settings.logoPath.Substring(currentDir.Length);
             }
             else
             {
-                loadedData["settings"]["logoPath"] = settings.logoPath;
+                data["settings"]["logoPath"] = settings.logoPath;
             }
-            loadedData["settings"]["companyName"] = settings.companyName;
-            loadedData["settings"]["timeRounding"] = settings.timeRounding.ToString();
-            loadedData["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
-            return true;
+            data["settings"]["companyName"] = settings.companyName;
+            data["settings"]["timeRounding"] = settings.timeRounding.ToString();
+            data["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
         }
-        public bool saveFile()
+        public void saveFile()
         {
             String currentSection = "NoSection";
             String outputString = String.Empty;
@@ -184,7 +176,7 @@ namespace Mitarbeiterverwaltung.DAL
                     oldValue = oldValue.Trim();
 
                     //TODO: Validate if section and key exists in dict
-                    String newValue = loadedData[currentSection][key];
+                    String newValue = data[currentSection][key];
 
                     // add " if there are whitespaces in the value
                     if (newValue.Any(Char.IsWhiteSpace))
@@ -204,7 +196,6 @@ namespace Mitarbeiterverwaltung.DAL
             }
 
             File.WriteAllText(path, outputString);
-            return true;
         }
         public Dictionary<string, Dictionary<string, string>> parseFile()
         {
@@ -268,7 +259,7 @@ namespace Mitarbeiterverwaltung.DAL
                 }
             }
             // Suspend the screen.  
-            loadedData = result;
+            data = result;
             return result;
         }
 
