@@ -137,6 +137,8 @@ namespace Mitarbeiterverwaltung.LL
         public Employee? supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
 
+        private bool resetPasswordFlag = false;
+
         public Employee()
         {
             this.name = String.Empty;
@@ -215,8 +217,6 @@ namespace Mitarbeiterverwaltung.LL
 
             return sb.ToString();
         }
-
-        private bool resetPasswordFlag = false;
         public void resetPassword()
         {
             resetPasswordFlag = true;
@@ -491,6 +491,44 @@ namespace Mitarbeiterverwaltung.LL
                 returnString += value + ",";
             }
             return returnString;
+        }
+    public void calcWorkingTime()
+        {
+            // --- to be called on every sign in and stamp out ---
+            //get week working time
+            //calc working time day (weekWorkingTime/5)
+            //if current day is first and not weekend
+            //  delete all stamp times of previous month
+            //else
+            //  do nothing
+            //for each day in month until current day -1
+            //  check if day is weekend
+            //      break
+            //  check if day is holiday
+            //      direct add one working day to totalTime
+            //      break
+            //  check if day is sickDay
+            //      direct add one working day to totalTime
+            //      break
+            //  else calc day working time
+            //      round exact stamp times
+            //      check if stamp times in pause times
+            //          remove invalid stamp times
+            //      add stamp times for given pause times
+            //      -->calc total workTime day
+            //      if totalWorkTimeDay is higher than workTimeDay
+            //          add overtimeWeek for surplus workingTime
+            //      else if totalWorkTimeDay is lower than workTimeDay
+            //          reduce overtimeWeek for deficient workingTimeDay
+            //      else
+            //          do nothing
+            //      add one WorkingTimeDay to totalWorktimeMonth
+            //calc workingTime for current day
+            //  check if day is weekend
+            //  check if day is holiday
+            //  check if day is sickDay
+            //  calc working Time day like above until now
+
         }
     }
 

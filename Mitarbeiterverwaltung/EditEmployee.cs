@@ -41,6 +41,7 @@ namespace Mitarbeiterverwaltung
 
         public HourlyRatedEmployee getUserData()
         {
+            //todo reset password for new worker
             HourlyRatedEmployee newEmployee;
             if (employee == null)
             {
