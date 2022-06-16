@@ -102,7 +102,7 @@ namespace Mitarbeiterverwaltung.LL
 
     public class Employee
     {
-        private static int numberOfEmployees = 0;
+        private static int maxEmployeeId = 1000;
         public string Id { get; set; }
         public string passwordHash { get; set; }
         public string name { get; set; }
@@ -119,15 +119,14 @@ namespace Mitarbeiterverwaltung.LL
             this.adress = String.Empty;
             this.phone = String.Empty;
             subordinates = new Dictionary<string, Employee>();
-            Id = (1000 + (numberOfEmployees) ).ToString();
             passwordHash = String.Empty;
 
-            numberOfEmployees++;
+            Id = (1 + (maxEmployeeId)).ToString();
+            maxEmployeeId++;
         }
 
         public Employee(string name, string surname, string adress, string phone, int holidays, string password)
         {
-            this.Id = (1000 + (numberOfEmployees++)).ToString(); //TODO add auto Id
             this.name = name;
             this.surname = surname;
             this.adress = adress;
@@ -136,6 +135,9 @@ namespace Mitarbeiterverwaltung.LL
             this.subordinates = new Dictionary<string, Employee>();
 
             setPassword(password, password);
+
+            Id = (1 + (maxEmployeeId)).ToString();
+            maxEmployeeId++;
         }
 
         public void parse(Dictionary<String, String> data)
@@ -168,6 +170,7 @@ namespace Mitarbeiterverwaltung.LL
 
                     case "Id":
                         this.Id = value;
+                        maxEmployeeId = Math.Max(Int32.Parse(value), maxEmployeeId);
                         break;
 
                     default:
