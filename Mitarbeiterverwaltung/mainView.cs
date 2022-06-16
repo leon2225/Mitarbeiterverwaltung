@@ -56,7 +56,7 @@ namespace Mitarbeiterverwaltung
                 }
                 else
                 {
-                    //Time sinve login is less then autoLogoutTimeout -> do nothing
+                    //Time since login is less then autoLogoutTimeout -> do nothing
                 }
             }
             else

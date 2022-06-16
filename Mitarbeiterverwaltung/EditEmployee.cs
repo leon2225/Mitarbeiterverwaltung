@@ -293,8 +293,9 @@ namespace Mitarbeiterverwaltung
 
         private void lvVacations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            btnAllowVacationRequest.Enabled = true;
-            btnDenyVacationRequest.Enabled = true;
+            bool enableState = lvVacations.SelectedItems.Count > 0;
+            btnAllowVacationRequest.Enabled = enableState;
+            btnDenyVacationRequest.Enabled = enableState;
         }
 
         private void btnAllowVacationRequest_Click(object sender, EventArgs e)
