@@ -105,14 +105,15 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddSickday_Click(object sender, EventArgs e)
         {
-            EditTimeSpanView addSickDayTimespan = new EditTimeSpanView(); //changeToNewSickday();
-            addSickDayTimespan.StartPosition = FormStartPosition.CenterParent;
-            DialogResult result = addSickDayTimespan.ShowDialog(this);
+            EditTimeSpanView addSickDays = new EditTimeSpanView(); 
+            addSickDays.StartPosition = FormStartPosition.CenterParent;
+            addSickDays.changeToDate();
+            DialogResult result = addSickDays.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
                 List<DateTime> days = new List<DateTime>();
-                days = addSickDayTimespan.getTimePeriod();
+                days = addSickDays.getDatePeriod();
                 employee.addSickday(days[0], days[1]);
                 updateLvSickdays();
             }
@@ -309,13 +310,14 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddPause_Click(object sender, EventArgs e)
         {
-            FormAddPause formAddPause = new FormAddPause();
-            formAddPause.StartPosition = FormStartPosition.CenterParent;
-            DialogResult result = formAddPause.ShowDialog(this);
+            EditTimeSpanView addPauseView = new EditTimeSpanView();
+            addPauseView.StartPosition = FormStartPosition.CenterParent;
+            addPauseView.changeToTime();
+            DialogResult result = addPauseView.ShowDialog(this);
 
             if (result == DialogResult.OK)
             {
-                employee.addPause(formAddPause.getTimePeriod());
+                employee.addPause(addPauseView.getTimePeriod());
                 updateLvPauseTimes();
             }
             else

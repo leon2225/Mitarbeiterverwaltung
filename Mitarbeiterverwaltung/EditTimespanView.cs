@@ -30,7 +30,40 @@ namespace Mitarbeiterverwaltung
             this.Close();
         }
 
-        public List<DateTime> getTimePeriod()
+        public void changeToTime()
+        {
+            dtpBegin.Format = DateTimePickerFormat.Custom;
+            dtpBegin.ShowUpDown = true;
+            dtpBegin.CustomFormat = "HH:mm";
+            dtpEnd.Format = DateTimePickerFormat.Custom;
+            dtpEnd.ShowUpDown = true;
+            dtpEnd.CustomFormat = "HH:mm";
+        }
+
+        public void changeToDate()
+        {
+            dtpBegin.Format = DateTimePickerFormat.Short;
+            dtpBegin.ShowUpDown = false;
+            dtpEnd.Format = DateTimePickerFormat.Short;
+            dtpEnd.ShowUpDown= false;
+        }
+
+        public TimePeriod getTimePeriod()
+        {
+            var begin = dtpBegin.Value;
+            var end = dtpEnd.Value;
+            if (begin > end)
+            {
+                throw new CustomException("Pause shall be later then the begin", exceptionType.info);
+            }
+            else
+            {
+                return new TimePeriod(dtpBegin.Value, dtpEnd.Value);
+            }
+
+        }
+
+        public List<DateTime> getDatePeriod()
         {
             var begin = dtpBegin.Value;
             var end = dtpEnd.Value;
