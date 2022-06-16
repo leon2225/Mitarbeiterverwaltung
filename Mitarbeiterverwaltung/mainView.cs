@@ -174,7 +174,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
+            EmployeeView newStaffMember = new EmployeeView(null, currentEmployee);
             newStaffMember.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = newStaffMember.ShowDialog(this);
             
@@ -364,7 +364,7 @@ namespace Mitarbeiterverwaltung
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
             {
-                EditEmployee newStaffMember = new EditEmployee(currentEmployee, this.currentEmployee);
+                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee);
                 newStaffMember.StartPosition = FormStartPosition.CenterParent;
                 DialogResult result = newStaffMember.ShowDialog(this);
                 if (result == DialogResult.OK)

@@ -2,13 +2,12 @@ using Mitarbeiterverwaltung.LL;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class EditEmployee : Form
+    public partial class EmployeeView : Form
     {
-        Panel? activePanel;
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
 
-        public EditEmployee(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
+        public EmployeeView(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
             this.employee = employee;

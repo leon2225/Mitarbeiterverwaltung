@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class EditEmployee
+    partial class EmployeeView
     {
         /// <summary>
         ///  Required designer variable.
@@ -31,7 +31,7 @@
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "12:45",
             "13:15"}, -1);
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditEmployee));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeView));
             this.label_name = new System.Windows.Forms.Label();
             this.label_surname = new System.Windows.Forms.Label();
             this.label_workingTimeWeek = new System.Windows.Forms.Label();
