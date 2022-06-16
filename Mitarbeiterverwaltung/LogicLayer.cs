@@ -142,44 +142,6 @@ namespace Mitarbeiterverwaltung.LL
             maxEmployeeId++;
         }
 
-        public void parse(Dictionary<String, String> data)
-        {
-            foreach (var (key, value) in data)
-            {
-                //This step could be done via property assignment, but this way the interface stays the same,
-                //regardless off changes in propertynames
-                switch (key)
-                {
-                    case "name":
-                        this.name = value;
-                        break;
-
-                    case "surname":
-                        this.surname = value;
-                        break;
-
-                    case "adress":
-                        this.adress = value;
-                        break;
-
-                    case "phone":
-                        this.phone = value;
-                        break;
-
-                    case "passwordHash":
-                        this.passwordHash = value;
-                        break;
-
-                    case "Id":
-                        Id = value;
-                        maxEmployeeId = Math.Max(Int32.Parse(value), maxEmployeeId);
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        }
 
         private byte[] GetHash(string inputString)
         {
@@ -232,6 +194,64 @@ namespace Mitarbeiterverwaltung.LL
         {
             return hashPassword(password).Equals(passwordHash);
         }
+
+
+        public static string escapeString(string input)
+        {
+            
+            return input.Replace(" ,", "|,");
+        }
+
+        public static string unescapeString(string input)
+        {
+            return input.Replace("|,", " ,");
+        }
+
+        public void parse(List<string> propertyNames, string data)
+        {
+            List<string> values = data.Split(" ,").ToList();
+            var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => unescapeString(x.v));
+            parse(p);
+        }
+
+        public void parse(Dictionary<String, String> data)
+        {
+            foreach (var (key, value) in data)
+            {
+                //This step could be done via property assignment, but this way the interface stays the same,
+                //regardless off changes in propertynames
+                switch (key)
+                {
+                    case "name":
+                        this.name = value;
+                        break;
+
+                    case "surname":
+                        this.surname = value;
+                        break;
+
+                    case "adress":
+                        this.adress = value;
+                        break;
+
+                    case "phone":
+                        this.phone = value;
+                        break;
+
+                    case "passwordHash":
+                        this.passwordHash = value;
+                        break;
+
+                    case "Id":
+                        Id = value;
+                        maxEmployeeId = Math.Max(Int32.Parse(value), maxEmployeeId);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     public class HourlyRatedEmployee : Employee
@@ -253,54 +273,6 @@ namespace Mitarbeiterverwaltung.LL
 
         public HourlyRatedEmployee() : base()
         {
-
-        }
-
-        public new void parse(Dictionary<String, String> data)
-        {
-            base.parse(data);
-            
-            foreach( var (key, value) in data)
-            {
-                if( value != "")
-                {
-                    switch (key)
-                    {
-                        case "weekTimeLimit":
-                            this.weekTimeLimit = TimeSpan.Parse(value);
-                            break;
-
-                        case "vacationDays":
-                            this.vacationDays = Int32.Parse(value);
-                            break;
-
-                        case "checkInOutTimes":
-                            this.checkInOutTimes = value.Split(';').Select(x => DateTime.Parse(x)).ToList();
-                            break;
-                            
-                        case "pauseTimes":
-                            this.pauseTimes = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
-                            break;
-
-                        case "sickDays":
-                            this.sickDays = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
-                            break;
-
-                        case "vacations":
-                            this.vacations = value.Split(';').Select(x => VacationRequest.parse(x)).ToList();
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    //value is empty -> do nothing
-                }
-                
-            }
-
 
         }
 
@@ -468,11 +440,69 @@ namespace Mitarbeiterverwaltung.LL
                         break;
                 }
 
-                returnString += value + " ,";
+                returnString += escapeString(value.ToString()) + " ,";
             }
             return returnString;
         }
-    public void calcWorkingTime()
+
+
+
+        public new void parse(List<string> propertyNames, string data)
+        {
+            List<string> values = data.Split(" ,").ToList();
+            var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => unescapeString(x.v));
+            parse(p);
+        }
+
+        public new void parse(Dictionary<String, String> data)
+        {
+            base.parse(data);
+
+            foreach (var (key, value) in data)
+            {
+                if (value != "")
+                {
+                    switch (key)
+                    {
+                        case "weekTimeLimit":
+                            this.weekTimeLimit = TimeSpan.Parse(value);
+                            break;
+
+                        case "vacationDays":
+                            this.vacationDays = Int32.Parse(value);
+                            break;
+
+                        case "checkInOutTimes":
+                            this.checkInOutTimes = value.Split(';').Select(x => DateTime.Parse(x)).ToList();
+                            break;
+
+                        case "pauseTimes":
+                            this.pauseTimes = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
+                            break;
+
+                        case "sickDays":
+                            this.sickDays = value.Split(';').Select(x => TimePeriod.parse(x)).ToList();
+                            break;
+
+                        case "vacations":
+                            this.vacations = value.Split(';').Select(x => VacationRequest.parse(x)).ToList();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    //value is empty -> do nothing
+                }
+
+            }
+
+
+        }
+
+        public void calcWorkingTime()
         {
             // --- to be called on every sign in and stamp out ---
             //get week working time

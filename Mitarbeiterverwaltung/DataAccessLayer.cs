@@ -46,18 +46,14 @@ namespace Mitarbeiterverwaltung.DAL
             
             foreach (var line in csvLines)
             {
-                
-                List<string> values = line.Split(" ,").ToList();
-                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
                 HourlyRatedEmployee employee = new HourlyRatedEmployee();
-                employee.parse(p);
-
-                employees.Add(p["Id"], employee);
+                employee.parse(propertyNames, line);
+                employees.Add(employee.Id, employee);
             }
             foreach (var line in csvLines)
             {
                 List<string> values = line.Split(" ,").ToList();
-                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
+                var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => Employee.unescapeString(x.v));
                 string id = p["Id"];
                 Employee employee = employees[id];
                 string supervisorId = p["supervisor"];
