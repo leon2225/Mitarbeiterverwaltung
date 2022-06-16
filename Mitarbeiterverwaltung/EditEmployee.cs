@@ -28,6 +28,8 @@ namespace Mitarbeiterverwaltung
             {
                 this.Text = "Neuen Mitarbeiter hinzufügen";
 
+                this.employee = new HourlyRatedEmployee();
+
                 // Remove tabs other then Personal Data
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabVacations);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabWorkingTimes);
@@ -65,6 +67,7 @@ namespace Mitarbeiterverwaltung
                 newEmployee.phone = this.txtPhone.Text;
                 newEmployee.vacationDays = Int32.Parse(this.mtxtHolidays.Text);
                 newEmployee.weekTimeLimit = new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0);
+                newEmployee.supervisor = this.supervisor;
             }
 
             return newEmployee;
