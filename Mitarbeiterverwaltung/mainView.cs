@@ -258,7 +258,7 @@ namespace Mitarbeiterverwaltung
         private void hideAll()
         {
             btnAddEmployee.Visible = false;
-            btnRemoveEmployee.Visible = false;
+            btnEditEmployee.Visible = false;
             managementPanel.Visible = false;
             btnLogout.Visible = false;
             btnPanelCtrl.Visible = false;
@@ -308,7 +308,7 @@ namespace Mitarbeiterverwaltung
         {
             hideAll();
             btnAddEmployee.Visible = true;
-            btnRemoveEmployee.Visible = true;
+            btnEditEmployee.Visible = true;
             managementPanel.Visible = true;
             btnLogout.Visible = true;
             btnPanelCtrl.Visible = true;
@@ -350,11 +350,11 @@ namespace Mitarbeiterverwaltung
         {
             if (e.IsSelected)
             {
-                btnRemoveEmployee.Enabled = true;
+                btnEditEmployee.Enabled = true;
             }
             else
             {
-                btnRemoveEmployee.Enabled = false;
+                btnEditEmployee.Enabled = false;
             }
         }
 
@@ -492,6 +492,11 @@ namespace Mitarbeiterverwaltung
         private void label4_Click(object sender, EventArgs e)
         {
             changeToUpdatePassword();
+        }
+
+        private void lvEmployees_DoubleClick(object sender, EventArgs e)
+        {
+            this.BeginInvoke(new Action(btnEditEmployee.PerformClick));
         }
     }
 }

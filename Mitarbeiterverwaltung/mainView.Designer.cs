@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "5",
             "Rolf",
             "12"}, -1);
@@ -87,7 +87,7 @@
             this.Urlaubstage = new System.Windows.Forms.ColumnHeader();
             this.btnPanelCtrl = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
-            this.btnRemoveEmployee = new System.Windows.Forms.Button();
+            this.btnEditEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1.SuspendLayout();
@@ -624,9 +624,9 @@
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
             this.lvEmployees.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvEmployees.MultiSelect = false;
@@ -637,6 +637,7 @@
             this.lvEmployees.UseCompatibleStateImageBehavior = false;
             this.lvEmployees.View = System.Windows.Forms.View.Details;
             this.lvEmployees.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvEmployees_ItemSelectionChanged);
+            this.lvEmployees.DoubleClick += new System.EventHandler(this.lvEmployees_DoubleClick);
             // 
             // ID
             // 
@@ -708,19 +709,19 @@
             this.btnAddEmployee.Visible = false;
             this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
             // 
-            // btnRemoveEmployee
+            // btnEditEmployee
             // 
-            this.btnRemoveEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRemoveEmployee.Enabled = false;
-            this.btnRemoveEmployee.Location = new System.Drawing.Point(197, 791);
-            this.btnRemoveEmployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnRemoveEmployee.Name = "btnRemoveEmployee";
-            this.btnRemoveEmployee.Size = new System.Drawing.Size(160, 31);
-            this.btnRemoveEmployee.TabIndex = 5;
-            this.btnRemoveEmployee.Text = "Mitarbeiter Bearbeiten";
-            this.btnRemoveEmployee.UseVisualStyleBackColor = true;
-            this.btnRemoveEmployee.Visible = false;
-            this.btnRemoveEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
+            this.btnEditEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditEmployee.Enabled = false;
+            this.btnEditEmployee.Location = new System.Drawing.Point(197, 791);
+            this.btnEditEmployee.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEditEmployee.Name = "btnEditEmployee";
+            this.btnEditEmployee.Size = new System.Drawing.Size(160, 31);
+            this.btnEditEmployee.TabIndex = 5;
+            this.btnEditEmployee.Text = "Mitarbeiter Bearbeiten";
+            this.btnEditEmployee.UseVisualStyleBackColor = true;
+            this.btnEditEmployee.Visible = false;
+            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
             // dateTimePicker1
             // 
@@ -753,7 +754,7 @@
             this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.btnRemoveEmployee);
+            this.Controls.Add(this.btnEditEmployee);
             this.Controls.Add(this.btnAddEmployee);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnPanelCtrl);
@@ -808,7 +809,7 @@
         private ColumnHeader Wochenarbeitszeit;
         private ColumnHeader Urlaubstage;
         private Button btnAddEmployee;
-        private Button btnRemoveEmployee;
+        private Button btnEditEmployee;
         private ColumnHeader subordinates;
         private ColumnHeader totalWorktime;
         private ColumnHeader overtime;
