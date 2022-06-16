@@ -74,32 +74,7 @@ namespace Mitarbeiterverwaltung.LL
         }
     }
 
-    public class Absenteeism
-    {
-        public DateTime startTime { get; set; }
-        public DateTime endTime { get; set; }
-        public RequestState? state { get; set; }
-        public String type { get; set; }
-
-        public Absenteeism()
-        {
-
-        }
-
-        public Absenteeism(string type, string startTime, string endTime, string state)
-        {
-            this.type = type;
-            this.startTime = DateTime.Parse(startTime);
-            this.endTime = DateTime.Parse(endTime);
-            this.state = (RequestState) Enum.Parse(typeof(RequestState),state);
-        }
-
-        public override string ToString()
-        {
-            return type + " " + startTime.ToString("dd.MM.yyyy") + " " + endTime.ToString("dd.MM.yyyy") + " " + state.ToString();
-        }
-
-    }
+    
     public class TimeHandler
     {
         private TimeSpan offset;
@@ -311,7 +286,7 @@ namespace Mitarbeiterverwaltung.LL
 
         }
 
-        public void requestHoliday(DateTime startTime, DateTime endTime)
+        public void requestVacation(DateTime startTime, DateTime endTime)
         {
             VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending);
             vacations.Add(vacationRequest);
@@ -459,7 +434,6 @@ namespace Mitarbeiterverwaltung.LL
                         }
                         break;
 
-                    case "timestamps":
                     case "checkInOutTimes":
                         List<DateTime> timestamps = (List<DateTime>)value;
                         if (timestamps.Count > 0)
