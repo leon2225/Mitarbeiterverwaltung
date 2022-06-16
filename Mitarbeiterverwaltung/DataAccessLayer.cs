@@ -36,7 +36,7 @@ namespace Mitarbeiterverwaltung.DAL
             //If headers aren't equal, the csv file is not compatible
             if (!sProptertyNames.SetEquals(actualPropertyNames))
             {
-                throw new CustomException("CSV file is not compatible", exceptionType.error);
+                throw new ErrorException("Laden der CSV-Datei fehlgeschlagen");
             }
             
             //remove header from lines
@@ -152,7 +152,7 @@ namespace Mitarbeiterverwaltung.DAL
                     if (!trimmedLine.Contains(']'))
                     {
                         // TODO raise error
-                        throw new CustomException("Invalid ini File", exceptionType.error);
+                        throw new ErrorException("Ungültige Initalisierungsdatei");
                     }
 
                     int sectionStart = trimmedLine.IndexOf('[') + 1;
@@ -268,7 +268,7 @@ namespace Mitarbeiterverwaltung.DAL
             {
                 if (!fileContent.ContainsKey("settings") || !fileContent["settings"].ContainsKey(property))
                 {
-                    throw new CustomException("Invalid ini file", exceptionType.error);
+                    throw new ErrorException("Ungültige Initalisierungsdatei");
                 }
             }
             string currentDir = Directory.GetCurrentDirectory();

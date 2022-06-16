@@ -211,7 +211,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new CustomException("activePanelNotSupported", exceptionType.error);
+                throw new ErrorException("Panel kann nicht gesetzt werden");
             }
         }
 
@@ -228,7 +228,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new CustomException("No employee with ID " + Id, exceptionType.warning);
+                throw new WarningException("No employee with ID " + Id);
             }
 
             
@@ -258,7 +258,7 @@ namespace Mitarbeiterverwaltung
         private void hideAll()
         {
             btnAddEmployee.Visible = false;
-            btnRemoveEmployee.Visible = false;
+            btnEditEmployee.Visible = false;
             managementPanel.Visible = false;
             btnLogout.Visible = false;
             btnPanelCtrl.Visible = false;
@@ -308,7 +308,7 @@ namespace Mitarbeiterverwaltung
         {
             hideAll();
             btnAddEmployee.Visible = true;
-            btnRemoveEmployee.Visible = true;
+            btnEditEmployee.Visible = true;
             managementPanel.Visible = true;
             btnLogout.Visible = true;
             btnPanelCtrl.Visible = true;
@@ -350,11 +350,11 @@ namespace Mitarbeiterverwaltung
         {
             if (e.IsSelected)
             {
-                btnRemoveEmployee.Enabled = true;
+                btnEditEmployee.Enabled = true;
             }
             else
             {
-                btnRemoveEmployee.Enabled = false;
+                btnEditEmployee.Enabled = false;
             }
         }
 
@@ -466,32 +466,32 @@ namespace Mitarbeiterverwaltung
             txtNewPasswordRepeated.Clear();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtEmployeeId_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnLogin_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSecureLogin_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
+        private void lblPasswordForgottten_Click(object sender, EventArgs e)
         {
             changeToUpdatePassword();
+        }
+
+        private void lvEmployees_DoubleClick(object sender, EventArgs e)
+        {
+            this.BeginInvoke(new Action(btnEditEmployee.PerformClick));
+        }
+
+        private void txtEmployeeId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                this.BeginInvoke(new Action(btnLogin.PerformClick));
+                e.Handled = true;
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                this.BeginInvoke(new Action(btnSecureLogin.PerformClick));
+                e.Handled = true;
+            }
         }
     }
 }

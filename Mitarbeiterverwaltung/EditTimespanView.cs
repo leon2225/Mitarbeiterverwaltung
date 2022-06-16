@@ -54,7 +54,8 @@ namespace Mitarbeiterverwaltung
             var end = dtpEnd.Value;
             if (begin > end)
             {
-                throw new CustomException("Pause shall be later then the begin", exceptionType.info);
+
+                throw new WarningException("Der Anfangszeitpunkt muss vor dem Endzeitpunkt liegen");
             }
             else
             {
@@ -63,23 +64,5 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        public List<DateTime> getDatePeriod()
-        {
-            var begin = dtpBegin.Value;
-            var end = dtpEnd.Value;
-            if (begin > end)
-            {
-                throw new CustomException("Pause shall be later then the begin", exceptionType.info);
-            }
-            else
-            {
-                // return new TimePeriod(dtpBegin.Value, dtpEnd.Value); TODO evtl als timeperiod
-                List<DateTime> periods = new List<DateTime>();
-                periods.Add(dtpBegin.Value);
-                periods.Add(dtpEnd.Value);
-                return periods;
-            }
-
-        }
     }
 }

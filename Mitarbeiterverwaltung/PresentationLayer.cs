@@ -12,7 +12,7 @@ namespace Mitarbeiterverwaltung
         [STAThread]
         static void Main()
         {
-            String iniPath =  Directory.GetCurrentDirectory() + "\\data\\config.ini";
+            String iniPath = Directory.GetCurrentDirectory() + "\\data\\config.ini";
             InitFileParser initFileParser = new InitFileParser(iniPath);
             Settings settings = initFileParser.loadSettings();
 
@@ -43,37 +43,29 @@ namespace Mitarbeiterverwaltung
         // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.application.threadexception?redirectedfrom=MSDN&view=windowsdesktop-6.0
         private static void GuiThreadException(object sender, ThreadExceptionEventArgs t)
         {
-            CustomException exception = (CustomException)t.Exception;
-            ShowExceptionDialog(exception);
-            if(exception.type == exceptionType.error)
-                Application.Exit();
-        }
-
-        // Creates the error message and displays it.
-        private static DialogResult ShowExceptionDialog(CustomException e)
-        {
-            MessageBoxButtons selectedButtons;
             MessageBoxIcon selectedIcon;
-            switch (e.type)
+            if (t.Exception is WarningException)
             {
-                case exceptionType.info:
-                    selectedButtons = MessageBoxButtons.OK;
-                    selectedIcon = MessageBoxIcon.Information;
-                    break;
-                case exceptionType.warning:
-                    selectedButtons = MessageBoxButtons.OK;
-                    selectedIcon = MessageBoxIcon.Warning;
-                    break;
-                case exceptionType.error:
-                    selectedButtons = MessageBoxButtons.OK;
-                    selectedIcon = MessageBoxIcon.Error;
-                    break;
-                default:
-                    selectedButtons = MessageBoxButtons.OK;
-                    selectedIcon = MessageBoxIcon.Error;
-                    break;
+                selectedIcon = MessageBoxIcon.Warning;
             }
-            return MessageBox.Show(e.Message, e.type.ToString().ToUpper(), selectedButtons, selectedIcon);
+            else if (t.Exception is ErrorException)
+            {
+                selectedIcon = MessageBoxIcon.Error;
+            }
+            else
+            {
+                selectedIcon = MessageBoxIcon.Error;
+            }
+            MessageBox.Show(t.Exception.Message, selectedIcon.ToString().ToUpper(), MessageBoxButtons.OK, selectedIcon);
+
+            if (selectedIcon == MessageBoxIcon.Error)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                // programm can stay open -> do nothing 
+            }
         }
     }
 
@@ -83,29 +75,30 @@ namespace Mitarbeiterverwaltung
         warning,
         error
     }
-    class CustomException : Exception
+
+    class WarningException : Exception
     {
-        public CustomException()
+        public WarningException()
         {
-
         }
-
-        public CustomException(string message) :base (message)
+        public WarningException(string message) : base(message)
         {
-
         }
-
-        public CustomException(string message, Exception inner) :base(message, inner)
+        public WarningException(string message, Exception inner) : base(message, inner)
         {
-
         }
-
-        public CustomException(string message, exceptionType type) :base(message)
-        {
-            this.type = type;
-        }
-
-        public exceptionType type;
     }
 
-}
+        class ErrorException : Exception
+        {
+            public ErrorException()
+            {
+            }
+            public ErrorException(string message) : base(message)
+            {
+            }
+            public ErrorException(string message, Exception inner) : base(message, inner)
+            {
+            }
+        }
+    }
