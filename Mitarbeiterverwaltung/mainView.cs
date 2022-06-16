@@ -22,7 +22,7 @@ namespace Mitarbeiterverwaltung
         private Dictionary<string, ListViewItem> lvItems;
         private TimeHandler timeHandler;
         private Settings settings;
-        private System.Timers.Timer logoutTimer;
+        private DateTime logoutTimerBegin = DateTime.MinValue;
 
         public MainView(CompanyData companyData, Settings settings)
         {
@@ -40,14 +40,29 @@ namespace Mitarbeiterverwaltung
 
         private void updateTime(Object myObject, EventArgs myEventArgs)
         {
+            //handle time display
             string seperator = timeHandler.getTime().Second % 2 == 0 ? ":" : " ";
             string timeString = timeHandler.getTime().Hour.ToString("D2")+ seperator + timeHandler.getTime().Minute.ToString("D2");
             lblClock.Text = timeString;
-        }
 
-        private void saveIniFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            //handle logout
+            if(logoutTimerBegin != DateTime.MinValue)
+            {
+                TimeSpan loggedInTime = DateTime.Now - logoutTimerBegin;
+                if(loggedInTime.TotalMinutes > settings.autoLogoutTimeout)
+                {
+                    timeoutReached();
+                    logoutTimerBegin = DateTime.MinValue;
+                }
+                else
+                {
+                    //Time sinve login is less then autoLogoutTimeout -> do nothing
+                }
+            }
+            else
+            {
+                //logout Timer is inactive -> do nothing
+            }
         }
 
         private void MainViewL_Load(object sender, EventArgs e)
@@ -59,19 +74,10 @@ namespace Mitarbeiterverwaltung
 
         private void startLogoutCountdown()
         {
-            logoutTimer = new System.Timers.Timer();
-            logoutTimer.Interval = 1000*60*settings.autoLogoutTimeout; //timout after 15 minutes [ms]
-
-            // Hook up the Elapsed event for the timer. 
-            logoutTimer.Elapsed += timeoutReached;
-
-            // Have the timer fire repeated events (true is the default)
-            logoutTimer.AutoReset = true;
-            // Start the timer
-            logoutTimer.Enabled = true;
+            logoutTimerBegin = timeHandler.getTime();
         }
 
-        private void timeoutReached(Object source, System.Timers.ElapsedEventArgs e)
+        private void timeoutReached()
         {
             this.BeginInvoke(new Action(btnLogout.PerformClick));
         }
