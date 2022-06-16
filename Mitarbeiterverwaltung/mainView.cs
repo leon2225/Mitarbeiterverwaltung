@@ -471,15 +471,6 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void txtEmployeeId_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnLogin_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
         private void txtPassword_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -497,6 +488,15 @@ namespace Mitarbeiterverwaltung
         private void lvEmployees_DoubleClick(object sender, EventArgs e)
         {
             this.BeginInvoke(new Action(btnEditEmployee.PerformClick));
+        }
+
+        private void txtEmployeeId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                this.BeginInvoke(new Action(btnLogin.PerformClick));
+                e.Handled = true;
+            }
         }
     }
 }

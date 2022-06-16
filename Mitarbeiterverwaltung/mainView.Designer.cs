@@ -44,6 +44,7 @@
             this.checkInPanel = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlStatistics = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTotalDayWorkingTime = new System.Windows.Forms.Label();
             this.lblTotalDayWorkingTimeTitle = new System.Windows.Forms.Label();
             this.btnRequestHolidays = new System.Windows.Forms.Button();
             this.lblHolidaysRemainingTitle = new System.Windows.Forms.Label();
@@ -93,7 +94,6 @@
             this.btnEditEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.lblTotalDayWorkingTime = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -174,7 +174,7 @@
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(86, 31);
-            this.btnLogout.TabIndex = 0;
+            this.btnLogout.TabIndex = 99;
             this.btnLogout.Text = "Abmelden";
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Visible = false;
@@ -217,24 +217,34 @@
             this.pnlStatistics.Controls.Add(this.lblOvertimeRemaining, 1, 3);
             this.pnlStatistics.Controls.Add(this.lblWorkingTime, 1, 2);
             this.pnlStatistics.Controls.Add(this.label7, 0, 1);
-            this.pnlStatistics.Location = new System.Drawing.Point(3, 504);
+            this.pnlStatistics.Location = new System.Drawing.Point(3, 538);
             this.pnlStatistics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnlStatistics.Name = "pnlStatistics";
             this.pnlStatistics.RowCount = 6;
             this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.00001F));
-            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.99999F));
+            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.pnlStatistics.Size = new System.Drawing.Size(374, 205);
+            this.pnlStatistics.Size = new System.Drawing.Size(374, 171);
             this.pnlStatistics.TabIndex = 6;
+            // 
+            // lblTotalDayWorkingTime
+            // 
+            this.lblTotalDayWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTotalDayWorkingTime.AutoSize = true;
+            this.lblTotalDayWorkingTime.Location = new System.Drawing.Point(354, 6);
+            this.lblTotalDayWorkingTime.Name = "lblTotalDayWorkingTime";
+            this.lblTotalDayWorkingTime.Size = new System.Drawing.Size(17, 20);
+            this.lblTotalDayWorkingTime.TabIndex = 8;
+            this.lblTotalDayWorkingTime.Text = "0";
             // 
             // lblTotalDayWorkingTimeTitle
             // 
             this.lblTotalDayWorkingTimeTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblTotalDayWorkingTimeTitle.AutoSize = true;
-            this.lblTotalDayWorkingTimeTitle.Location = new System.Drawing.Point(3, 8);
+            this.lblTotalDayWorkingTimeTitle.Location = new System.Drawing.Point(3, 6);
             this.lblTotalDayWorkingTimeTitle.Name = "lblTotalDayWorkingTimeTitle";
             this.lblTotalDayWorkingTimeTitle.Size = new System.Drawing.Size(137, 20);
             this.lblTotalDayWorkingTimeTitle.TabIndex = 10;
@@ -244,7 +254,7 @@
             // 
             this.btnRequestHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlStatistics.SetColumnSpan(this.btnRequestHolidays, 2);
-            this.btnRequestHolidays.Location = new System.Drawing.Point(3, 169);
+            this.btnRequestHolidays.Location = new System.Drawing.Point(3, 135);
             this.btnRequestHolidays.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRequestHolidays.Name = "btnRequestHolidays";
             this.btnRequestHolidays.Size = new System.Drawing.Size(368, 31);
@@ -257,7 +267,7 @@
             // 
             this.lblHolidaysRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblHolidaysRemainingTitle.AutoSize = true;
-            this.lblHolidaysRemainingTitle.Location = new System.Drawing.Point(3, 134);
+            this.lblHolidaysRemainingTitle.Location = new System.Drawing.Point(3, 105);
             this.lblHolidaysRemainingTitle.Name = "lblHolidaysRemainingTitle";
             this.lblHolidaysRemainingTitle.Size = new System.Drawing.Size(181, 20);
             this.lblHolidaysRemainingTitle.TabIndex = 4;
@@ -267,7 +277,7 @@
             // 
             this.lblOvertimeRemainingTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblOvertimeRemainingTitle.AutoSize = true;
-            this.lblOvertimeRemainingTitle.Location = new System.Drawing.Point(3, 94);
+            this.lblOvertimeRemainingTitle.Location = new System.Drawing.Point(3, 74);
             this.lblOvertimeRemainingTitle.Name = "lblOvertimeRemainingTitle";
             this.lblOvertimeRemainingTitle.Size = new System.Drawing.Size(185, 20);
             this.lblOvertimeRemainingTitle.TabIndex = 5;
@@ -278,7 +288,7 @@
             // 
             this.lblWorkingTimeTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblWorkingTimeTitle.AutoSize = true;
-            this.lblWorkingTimeTitle.Location = new System.Drawing.Point(3, 55);
+            this.lblWorkingTimeTitle.Location = new System.Drawing.Point(3, 42);
             this.lblWorkingTimeTitle.Name = "lblWorkingTimeTitle";
             this.lblWorkingTimeTitle.Size = new System.Drawing.Size(240, 20);
             this.lblWorkingTimeTitle.TabIndex = 3;
@@ -289,7 +299,7 @@
             // 
             this.lblHolidaysRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblHolidaysRemaining.AutoSize = true;
-            this.lblHolidaysRemaining.Location = new System.Drawing.Point(354, 134);
+            this.lblHolidaysRemaining.Location = new System.Drawing.Point(354, 105);
             this.lblHolidaysRemaining.Name = "lblHolidaysRemaining";
             this.lblHolidaysRemaining.Size = new System.Drawing.Size(17, 20);
             this.lblHolidaysRemaining.TabIndex = 8;
@@ -299,7 +309,7 @@
             // 
             this.lblOvertimeRemaining.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblOvertimeRemaining.AutoSize = true;
-            this.lblOvertimeRemaining.Location = new System.Drawing.Point(354, 94);
+            this.lblOvertimeRemaining.Location = new System.Drawing.Point(354, 74);
             this.lblOvertimeRemaining.Name = "lblOvertimeRemaining";
             this.lblOvertimeRemaining.Size = new System.Drawing.Size(17, 20);
             this.lblOvertimeRemaining.TabIndex = 7;
@@ -309,7 +319,7 @@
             // 
             this.lblWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblWorkingTime.AutoSize = true;
-            this.lblWorkingTime.Location = new System.Drawing.Point(354, 55);
+            this.lblWorkingTime.Location = new System.Drawing.Point(354, 42);
             this.lblWorkingTime.Name = "lblWorkingTime";
             this.lblWorkingTime.Size = new System.Drawing.Size(17, 20);
             this.lblWorkingTime.TabIndex = 6;
@@ -320,10 +330,10 @@
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlStatistics.SetColumnSpan(this.label7, 2);
-            this.label7.Location = new System.Drawing.Point(3, 37);
-            this.label7.MinimumSize = new System.Drawing.Size(0, 2);
+            this.label7.Location = new System.Drawing.Point(3, 33);
+            this.label7.MinimumSize = new System.Drawing.Size(0, 1);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(368, 10);
+            this.label7.Size = new System.Drawing.Size(368, 3);
             this.label7.TabIndex = 11;
             // 
             // pnlCheckInMain
@@ -421,7 +431,7 @@
             this.txtEmployeeId.Name = "txtEmployeeId";
             this.txtEmployeeId.Size = new System.Drawing.Size(206, 34);
             this.txtEmployeeId.TabIndex = 1;
-            this.txtEmployeeId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtEmployeeId_KeyUp);
+            this.txtEmployeeId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmployeeId_KeyPress);
             // 
             // btnLogin
             // 
@@ -729,7 +739,7 @@
             this.btnPanelCtrl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnPanelCtrl.Name = "btnPanelCtrl";
             this.btnPanelCtrl.Size = new System.Drawing.Size(157, 31);
-            this.btnPanelCtrl.TabIndex = 0;
+            this.btnPanelCtrl.TabIndex = 98;
             this.btnPanelCtrl.Text = "Mitarbeiter verwalten";
             this.btnPanelCtrl.UseVisualStyleBackColor = true;
             this.btnPanelCtrl.Visible = false;
@@ -784,23 +794,13 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // lblTotalDayWorkingTime
-            // 
-            this.lblTotalDayWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblTotalDayWorkingTime.AutoSize = true;
-            this.lblTotalDayWorkingTime.Location = new System.Drawing.Point(354, 8);
-            this.lblTotalDayWorkingTime.Name = "lblTotalDayWorkingTime";
-            this.lblTotalDayWorkingTime.Size = new System.Drawing.Size(17, 20);
-            this.lblTotalDayWorkingTime.TabIndex = 8;
-            this.lblTotalDayWorkingTime.Text = "0";
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1353, 828);
-            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
+            this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnEditEmployee);
             this.Controls.Add(this.btnAddEmployee);
