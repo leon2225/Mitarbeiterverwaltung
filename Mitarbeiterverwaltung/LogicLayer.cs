@@ -102,7 +102,7 @@ namespace Mitarbeiterverwaltung.LL
 
     public class Employee
     {
-        private static int maxEmployeeId = 1000;
+        private static int maxEmployeeId = 999;
         public string Id { get; set; }
         public string passwordHash { get; set; }
         public string name { get; set; }
@@ -171,7 +171,7 @@ namespace Mitarbeiterverwaltung.LL
                         break;
 
                     case "Id":
-                        this.Id = value;
+                        Id = value;
                         maxEmployeeId = Math.Max(Int32.Parse(value), maxEmployeeId);
                         break;
 
