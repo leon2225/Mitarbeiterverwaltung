@@ -466,21 +466,7 @@ namespace Mitarbeiterverwaltung
             txtNewPasswordRepeated.Clear();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPassword_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSecureLogin_Click(sender, e);
-                e.Handled = true;
-            }
-        }
-
-        private void label4_Click(object sender, EventArgs e)
+        private void lblPasswordForgottten_Click(object sender, EventArgs e)
         {
             changeToUpdatePassword();
         }
@@ -495,6 +481,15 @@ namespace Mitarbeiterverwaltung
             if (e.KeyChar == (char)Keys.Return)
             {
                 this.BeginInvoke(new Action(btnLogin.PerformClick));
+                e.Handled = true;
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                this.BeginInvoke(new Action(btnSecureLogin.PerformClick));
                 e.Handled = true;
             }
         }
