@@ -409,5 +409,18 @@ namespace Mitarbeiterverwaltung
 
             updateLvCheckInOutTimes();
         }
+
+        private void lvCheckInOutTimes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            bool enableState = lvCheckInOutTimes.SelectedItems.Count > 0;
+            btnEditCheckInOutTime .Enabled = enableState;
+        }
+
+        private void lvSickDays_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool enableState = lvSickDays.SelectedItems.Count > 0;
+            btnAddAbsenteeism.Enabled = enableState;
+            btnDeleteAbsenteeism .Enabled = enableState; //TODO rename button
+        }
     }
 }
