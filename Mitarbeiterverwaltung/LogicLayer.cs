@@ -468,7 +468,7 @@ namespace Mitarbeiterverwaltung.LL
                         break;
                 }
 
-                returnString += value + ",";
+                returnString += value + " ,";
             }
             return returnString;
         }

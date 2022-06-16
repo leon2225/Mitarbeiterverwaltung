@@ -29,7 +29,7 @@ namespace Mitarbeiterverwaltung.DAL
            
             List<string> csvLines = csvString.Split("\r\n").ToList();
 
-            var propertyNames = csvLines[0].Split(",").ToList();
+            var propertyNames = csvLines[0].Split(" ,").ToList();
 
             var sProptertyNames = new HashSet<string>(propertyNames);
             
@@ -47,7 +47,7 @@ namespace Mitarbeiterverwaltung.DAL
             foreach (var line in csvLines)
             {
                 
-                List<string> values = line.Split(",").ToList();
+                List<string> values = line.Split(" ,").ToList();
                 var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
                 HourlyRatedEmployee employee = new HourlyRatedEmployee();
                 employee.parse(p);
@@ -56,7 +56,7 @@ namespace Mitarbeiterverwaltung.DAL
             }
             foreach (var line in csvLines)
             {
-                List<string> values = line.Split(",").ToList();
+                List<string> values = line.Split(" ,").ToList();
                 var p = propertyNames.Zip(values, (k, v) => new { k, v }).ToDictionary(x => x.k, x => x.v);
                 string id = p["Id"];
                 Employee employee = employees[id];
@@ -83,7 +83,7 @@ namespace Mitarbeiterverwaltung.DAL
             string csvString = "";
             var propertyNames = typeof(HourlyRatedEmployee).GetProperties().Select(field => field.Name).ToList();
             propertyNames.Sort();
-            string header = string.Join(",", propertyNames);
+            string header = string.Join(" ,", propertyNames);
             csvString += header;
 
             foreach (HourlyRatedEmployee employee in employees.Values)
