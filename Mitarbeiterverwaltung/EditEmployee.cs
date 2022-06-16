@@ -115,9 +115,7 @@ namespace Mitarbeiterverwaltung
 
             if (result == DialogResult.OK)
             {
-                List<DateTime> days = new List<DateTime>();
-                days = addSickDays.getDatePeriod();
-                employee.addSickday(days[0], days[1]);
+                employee.addSickday(addSickDays.getTimePeriod());
                 updateLvSickdays();
             }
             else
@@ -127,53 +125,9 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void btnCancelAddSickday_Click(object sender, EventArgs e)
-        {
-            changeToSickdayList();
-            //discard new item 
-        }
-
-        private void btnSaveSickday_Click(object sender, EventArgs e)
-        {
-            changeToSickdayList();
-            //save absenteeism and display in list
-            DateTime startDate = dtpBeginnAbsenteeism.Value;
-            DateTime endDate = dtpEndAbsenteeism.Value;
-
-            if (endDate < startDate)
-            {
-                throw new CustomException("Selected Enddate is before Startdate", exceptionType.info);
-            }
-            else
-            {
-                //add to list
-                employee.addSickday(startDate, endDate);
-                //update view
-                updateLvSickdays();
-            }
-
-
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void changeToNewSickday()
-        {
-            pnlSickdays.Visible = false;
-            pnlNewSickday.Visible = true;
-            button_save.Enabled = false;
-            button_cancel.Enabled = false;
-        }
-
-        private void changeToSickdayList()
-        {
-            pnlNewSickday.Visible = false;
-            pnlSickdays.Visible = true;
-            button_save.Enabled = true;
-            button_cancel.Enabled = true;
         }
 
         private ListViewItem vacationRequestToItem(VacationRequest vacationRequest)
@@ -332,7 +286,8 @@ namespace Mitarbeiterverwaltung
 
         private void lvPause_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            btnRemovePause.Enabled = true;
+            bool enableState = lvPause.SelectedItems.Count > 0;
+            btnRemovePause.Enabled = enableState;
         }
 
         private void btnRemovePause_click(object sender, EventArgs e)
@@ -419,7 +374,6 @@ namespace Mitarbeiterverwaltung
         private void lvSickDays_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvSickDays.SelectedItems.Count > 0;
-            btnAddAbsenteeism.Enabled = enableState;
             btnDeleteAbsenteeism .Enabled = enableState; //TODO rename button
         }
     }

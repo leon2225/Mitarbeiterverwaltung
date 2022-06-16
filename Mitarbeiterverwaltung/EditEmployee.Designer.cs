@@ -81,14 +81,6 @@
             this.Beginn = new System.Windows.Forms.ColumnHeader();
             this.Ende = new System.Windows.Forms.ColumnHeader();
             this.btnAddAbsenteeism = new System.Windows.Forms.Button();
-            this.pnlNewSickday = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpBeginnAbsenteeism = new System.Windows.Forms.DateTimePicker();
-            this.dtpEndAbsenteeism = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnSaveNewSickday = new System.Windows.Forms.Button();
-            this.btnCancelAddSickday = new System.Windows.Forms.Button();
             this.tabVacations = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDenyVacationRequest = new System.Windows.Forms.Button();
@@ -173,7 +165,6 @@
             this.panel1.SuspendLayout();
             this.tabSickDates.SuspendLayout();
             this.pnlSickdays.SuspendLayout();
-            this.pnlNewSickday.SuspendLayout();
             this.tabVacations.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -526,7 +517,6 @@
             // 
             // btnAddPause
             // 
-            this.btnAddPause.Enabled = false;
             this.btnAddPause.Location = new System.Drawing.Point(399, 124);
             this.btnAddPause.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddPause.Name = "btnAddPause";
@@ -702,7 +692,6 @@
             // 
             this.tabSickDates.BackColor = System.Drawing.SystemColors.Control;
             this.tabSickDates.Controls.Add(this.pnlSickdays);
-            this.tabSickDates.Controls.Add(this.pnlNewSickday);
             this.tabSickDates.Location = new System.Drawing.Point(4, 29);
             this.tabSickDates.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabSickDates.Name = "tabSickDates";
@@ -765,7 +754,6 @@
             // 
             // btnAddAbsenteeism
             // 
-            this.btnAddAbsenteeism.Enabled = false;
             this.btnAddAbsenteeism.Location = new System.Drawing.Point(399, 124);
             this.btnAddAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddAbsenteeism.Name = "btnAddAbsenteeism";
@@ -774,103 +762,6 @@
             this.btnAddAbsenteeism.Text = "Fehlzeit hinzufügen";
             this.btnAddAbsenteeism.UseVisualStyleBackColor = true;
             this.btnAddAbsenteeism.Click += new System.EventHandler(this.btnAddSickday_Click);
-            // 
-            // pnlNewSickday
-            // 
-            this.pnlNewSickday.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlNewSickday.ColumnCount = 2;
-            this.pnlNewSickday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.26615F));
-            this.pnlNewSickday.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.73385F));
-            this.pnlNewSickday.Controls.Add(this.label2, 0, 0);
-            this.pnlNewSickday.Controls.Add(this.dtpBeginnAbsenteeism, 1, 1);
-            this.pnlNewSickday.Controls.Add(this.dtpEndAbsenteeism, 1, 2);
-            this.pnlNewSickday.Controls.Add(this.label3, 0, 1);
-            this.pnlNewSickday.Controls.Add(this.label4, 0, 2);
-            this.pnlNewSickday.Controls.Add(this.btnSaveNewSickday, 1, 3);
-            this.pnlNewSickday.Controls.Add(this.btnCancelAddSickday, 0, 3);
-            this.pnlNewSickday.Location = new System.Drawing.Point(0, 0);
-            this.pnlNewSickday.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pnlNewSickday.Name = "pnlNewSickday";
-            this.pnlNewSickday.RowCount = 5;
-            this.pnlNewSickday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.68226F));
-            this.pnlNewSickday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.25226F));
-            this.pnlNewSickday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.80992F));
-            this.pnlNewSickday.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.43801F));
-            this.pnlNewSickday.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pnlNewSickday.Size = new System.Drawing.Size(592, 325);
-            this.pnlNewSickday.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.pnlNewSickday.SetColumnSpan(this.label2, 2);
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(3, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(586, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Neue krankheitsbedingte Fehlzeit eintragen";
-            // 
-            // dtpBeginnAbsenteeism
-            // 
-            this.dtpBeginnAbsenteeism.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpBeginnAbsenteeism.Location = new System.Drawing.Point(146, 58);
-            this.dtpBeginnAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtpBeginnAbsenteeism.Name = "dtpBeginnAbsenteeism";
-            this.dtpBeginnAbsenteeism.Size = new System.Drawing.Size(108, 27);
-            this.dtpBeginnAbsenteeism.TabIndex = 1;
-            // 
-            // dtpEndAbsenteeism
-            // 
-            this.dtpEndAbsenteeism.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEndAbsenteeism.Location = new System.Drawing.Point(146, 100);
-            this.dtpEndAbsenteeism.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtpEndAbsenteeism.Name = "dtpEndAbsenteeism";
-            this.dtpEndAbsenteeism.Size = new System.Drawing.Size(108, 27);
-            this.dtpEndAbsenteeism.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 20);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Beginn der Fehlzeit";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 106);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 20);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Ende der Fehlzeit";
-            // 
-            // btnSaveNewSickday
-            // 
-            this.btnSaveNewSickday.Location = new System.Drawing.Point(146, 141);
-            this.btnSaveNewSickday.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnSaveNewSickday.Name = "btnSaveNewSickday";
-            this.btnSaveNewSickday.Size = new System.Drawing.Size(86, 31);
-            this.btnSaveNewSickday.TabIndex = 5;
-            this.btnSaveNewSickday.Text = "Eintragen";
-            this.btnSaveNewSickday.UseVisualStyleBackColor = true;
-            this.btnSaveNewSickday.Click += new System.EventHandler(this.btnSaveSickday_Click);
-            // 
-            // btnCancelAddSickday
-            // 
-            this.btnCancelAddSickday.Location = new System.Drawing.Point(3, 141);
-            this.btnCancelAddSickday.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnCancelAddSickday.Name = "btnCancelAddSickday";
-            this.btnCancelAddSickday.Size = new System.Drawing.Size(86, 31);
-            this.btnCancelAddSickday.TabIndex = 6;
-            this.btnCancelAddSickday.Text = "Abbrechen";
-            this.btnCancelAddSickday.UseVisualStyleBackColor = true;
-            this.btnCancelAddSickday.Click += new System.EventHandler(this.btnCancelAddSickday_Click);
             // 
             // tabVacations
             // 
@@ -1691,8 +1582,6 @@
             this.panel1.ResumeLayout(false);
             this.tabSickDates.ResumeLayout(false);
             this.pnlSickdays.ResumeLayout(false);
-            this.pnlNewSickday.ResumeLayout(false);
-            this.pnlNewSickday.PerformLayout();
             this.tabVacations.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1749,14 +1638,6 @@
         private ColumnHeader Ende;
         private Button btnAddAbsenteeism;
         private Panel pnlSickdays;
-        private TableLayoutPanel pnlNewSickday;
-        private Label label2;
-        private DateTimePicker dtpBeginnAbsenteeism;
-        private DateTimePicker dtpEndAbsenteeism;
-        private Label label3;
-        private Label label4;
-        private Button btnSaveNewSickday;
-        private Button btnCancelAddSickday;
         private Panel panel1;
         private Button btnDeleteAbsenteeism;
         private ColumnHeader columnHeader1;

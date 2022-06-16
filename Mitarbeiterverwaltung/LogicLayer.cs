@@ -346,10 +346,8 @@ namespace Mitarbeiterverwaltung.LL
             return (checkInOutTimes.Count % 2) == 1;
         }
 
-        public void addSickday(DateTime startTime, DateTime endTime)
+        public void addSickday(TimePeriod sickDays)
         {
-            TimePeriod sickDays = new TimePeriod(startTime, endTime);
-
             this.sickDays.Add(sickDays);
         }
 
