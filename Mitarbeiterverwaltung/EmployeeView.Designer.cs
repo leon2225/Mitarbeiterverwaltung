@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "12:45",
             "13:15"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeView));
@@ -289,6 +289,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(355, 23);
             this.txtAddress.TabIndex = 4;
+            this.txtAddress.Text = "Beispielstraße 123, SampleCity 12345";
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPhone
@@ -300,6 +301,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(355, 23);
             this.txtPhone.TabIndex = 5;
+            this.txtPhone.Text = "015234 / 55435642";
             this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button_save
@@ -380,6 +382,7 @@
             this.mtxtHolidays.Name = "mtxtHolidays";
             this.mtxtHolidays.Size = new System.Drawing.Size(41, 23);
             this.mtxtHolidays.TabIndex = 7;
+            this.mtxtHolidays.Text = "30";
             this.mtxtHolidays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // mtxtWeekTimeLimit
@@ -391,6 +394,7 @@
             this.mtxtWeekTimeLimit.Name = "mtxtWeekTimeLimit";
             this.mtxtWeekTimeLimit.Size = new System.Drawing.Size(41, 23);
             this.mtxtWeekTimeLimit.TabIndex = 6;
+            this.mtxtWeekTimeLimit.Text = "40";
             this.mtxtWeekTimeLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -489,7 +493,7 @@
             this.lvPause.FullRowSelect = true;
             this.lvPause.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvPause.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lvPause.Location = new System.Drawing.Point(3, 3);
             this.lvPause.Name = "lvPause";
             this.lvPause.Size = new System.Drawing.Size(320, 240);
@@ -1617,7 +1621,7 @@
             this.tabControl3.Size = new System.Drawing.Size(200, 100);
             this.tabControl3.TabIndex = 0;
             // 
-            // EditEmployee
+            // EmployeeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1630,7 +1634,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EditEmployee";
+            this.Name = "EmployeeView";
             this.ShowIcon = false;
             this.Text = "Mitarbeiter bearbeiten";
             this.tableLayoutPanel1.ResumeLayout(false);

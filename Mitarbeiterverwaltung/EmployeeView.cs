@@ -4,26 +4,18 @@ namespace Mitarbeiterverwaltung
 {
     public partial class EmployeeView : Form
     {
-        private HourlyRatedEmployee? employee;
+        private HourlyRatedEmployee employee;
         private HourlyRatedEmployee? supervisor;
+        private bool newEmployee;
 
         public EmployeeView(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
+            newEmployee = employee == null;
             this.employee = employee;
             this.supervisor = supervisor;
 
-            if (employee != null)
-            {
-                this.txtName.Text = employee.name;
-                this.txtSurname.Text = employee.surname;
-                this.txtAddress.Text = employee.adress;
-                this.txtPhone.Text = employee.phone;
-                this.mtxtHolidays.Text = employee.vacationDays.ToString();
-                this.mtxtWeekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
-                this.btnResetPassword.Enabled = true;
-            }
-            else
+            if (newEmployee)
             {
                 this.Text = "Neuen Mitarbeiter hinzufügen";
 
@@ -33,44 +25,40 @@ namespace Mitarbeiterverwaltung
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabVacations);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabWorkingTimes);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabSickDates);
-                // Create default pause time
 
                 btnRemove.Visible = false;
+            }
+            else
+            {
+                this.txtName.Text = employee.name;
+                this.txtSurname.Text = employee.surname;
+                this.txtAddress.Text = employee.adress;
+                this.txtPhone.Text = employee.phone;
+                this.mtxtHolidays.Text = employee.vacationDays.ToString();
+                this.mtxtWeekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
+                this.btnResetPassword.Enabled = true;
             }
 
         }
 
         public HourlyRatedEmployee getUserData()
         {
-            //todo reset password for new worker
-            HourlyRatedEmployee newEmployee;
-            if (employee == null)
+            if(newEmployee)
             {
-                newEmployee = new HourlyRatedEmployee
-                (
-                    this.txtName.Text,
-                    this.txtSurname.Text,
-                    this.txtAddress.Text,
-                    this.txtPhone.Text,
-                    Int32.Parse(this.mtxtHolidays.Text),
-                    "",
-                    new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0)
-                );
-                newEmployee.supervisor = this.supervisor;
-            }
-            else
-            {
-                newEmployee = employee;
-                newEmployee.name = this.txtName.Text;
-                newEmployee.surname = this.txtSurname.Text;
-                newEmployee.adress = this.txtAddress.Text;
-                newEmployee.phone = this.txtPhone.Text;
-                newEmployee.vacationDays = Int32.Parse(this.mtxtHolidays.Text);
-                newEmployee.weekTimeLimit = new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0);
-                newEmployee.supervisor = this.supervisor;
+                employee.resetPassword();
             }
 
-            return newEmployee;
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("name", txtName.Text);
+            data.Add("surname", txtSurname.Text);
+            data.Add("adress", txtAddress.Text);
+            data.Add("phone", txtPhone.Text);
+            data.Add("vacationDays", mtxtHolidays.Text);
+            data.Add("weekTimeLimit", new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0).ToString());
+            employee.parse(data);
+            employee.supervisor = this.supervisor;
+
+            return employee;
         }
 
 
