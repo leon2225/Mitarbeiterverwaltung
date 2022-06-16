@@ -297,32 +297,6 @@ namespace Mitarbeiterverwaltung
             updateLvPauseTimes();
         }
 
-        private void txtName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (txtName.Text.Any(char.IsDigit))
-            {
-                txtName.Clear();
-                throw new CustomException("A name can only contain characters, not numbers", exceptionType.info);
-            }
-            else
-            {
-                //validation ok, do nothing
-            }
-        }
-
-        private void txtSurname_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (txtSurname.Text.Any(char.IsDigit))
-            {
-                txtSurname.Clear();
-                throw new CustomException("A surname can only contain characters, not numbers", exceptionType.info);
-            }
-            else
-            {
-                //validation ok, do nothing
-            }
-        }
-
         private void btnEditCheckInOutTime_Click(object sender, EventArgs e)
         {
             int index = (int)lvCheckInOutTimes.SelectedItems[0].Tag;

@@ -69,7 +69,7 @@ namespace Mitarbeiterverwaltung.LL
             }
             else
             {
-                throw new CustomException("Could not parse RequestState", exceptionType.error);
+                throw new ErrorException("Status des Urlaubsantrags kann nicht geladen werden");
             }
         }
     }
@@ -313,7 +313,7 @@ namespace Mitarbeiterverwaltung.LL
             // -> len of checkInOutTime must be even
             if (isCheckedIn())
             {
-                throw new CustomException("Invalid chekInOuttimes length", exceptionType.error);
+                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten");
             }
             else
             {
@@ -330,7 +330,7 @@ namespace Mitarbeiterverwaltung.LL
             // -> len of checkInOutTime must be odd
             if ( !isCheckedIn())
             {
-                throw new CustomException("Invalid chekInOuttimes length", exceptionType.error);
+                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten");
             }
             else
             {

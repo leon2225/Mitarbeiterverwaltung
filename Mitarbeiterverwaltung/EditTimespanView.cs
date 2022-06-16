@@ -54,7 +54,8 @@ namespace Mitarbeiterverwaltung
             var end = dtpEnd.Value;
             if (begin > end)
             {
-                throw new CustomException("Pause shall be later then the begin", exceptionType.info);
+
+                throw new WarningException("Der Anfangszeitpunkt muss vor dem Endzeitpunkt liegen");
             }
             else
             {

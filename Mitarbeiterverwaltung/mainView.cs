@@ -211,7 +211,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new CustomException("activePanelNotSupported", exceptionType.error);
+                throw new ErrorException("Panel kann nicht gesetzt werden");
             }
         }
 
@@ -228,7 +228,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new CustomException("No employee with ID " + Id, exceptionType.warning);
+                throw new WarningException("No employee with ID " + Id);
             }
 
             
