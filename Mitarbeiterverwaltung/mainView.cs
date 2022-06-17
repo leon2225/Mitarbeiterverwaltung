@@ -174,7 +174,8 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            EditEmployee newStaffMember = new EditEmployee(null, currentEmployee);
+            startLogoutCountdown();
+            EmployeeView newStaffMember = new EmployeeView(null, currentEmployee);
             newStaffMember.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = newStaffMember.ShowDialog(this);
             
@@ -360,6 +361,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
+            startLogoutCountdown();
             string id = lvEmployees.SelectedItems[0].Text;
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
@@ -398,6 +400,7 @@ namespace Mitarbeiterverwaltung
         private void btnRequestHolidays_Click(object sender, EventArgs e)
         {
             //Todo hier das Fenster für Urlaub beantragen öffnen
+            startLogoutCountdown();
             HolidayRequestView holidayRequest = new HolidayRequestView(currentEmployee);
             holidayRequest.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = holidayRequest.ShowDialog(this);
@@ -468,6 +471,7 @@ namespace Mitarbeiterverwaltung
 
         private void lblPasswordForgottten_Click(object sender, EventArgs e)
         {
+            startLogoutCountdown();
             changeToUpdatePassword();
         }
 
