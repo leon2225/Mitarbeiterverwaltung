@@ -309,7 +309,7 @@ namespace Mitarbeiterverwaltung
                 maxTime = DateTime.MaxValue;
             }
 
-            FormEditCheckInOutTime form = new FormEditCheckInOutTime(employee.checkInOutTimes[index], minTime, maxTime);
+            EditDateTimeView form = new EditDateTimeView(employee.checkInOutTimes[index], minTime, maxTime);
 
             form.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = form.ShowDialog(this);

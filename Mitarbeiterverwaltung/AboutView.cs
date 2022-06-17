@@ -11,9 +11,9 @@ using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class About : Form
+    public partial class AboutView : Form
     {
-        public About(Settings settings)
+        public AboutView(Settings settings)
         {
             InitializeComponent();
             lblCompanyName.Text = settings.companyName;

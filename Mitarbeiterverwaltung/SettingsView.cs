@@ -11,10 +11,10 @@ using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class SettingsDialog : Form
+    public partial class SettingsView : Form
     {
         private Settings startValues;
-        public SettingsDialog(Settings settings)
+        public SettingsView(Settings settings)
         {
             InitializeComponent();
             startValues = settings;

@@ -89,7 +89,7 @@ namespace Mitarbeiterverwaltung
             lblHolidaysRemaining.Text = currentEmployee.vacationDays.ToString();
         }
 
-        private void checkForPendingHolidayRequests()
+        private void checkForPendingVacationRequests()
         {
             int counter = 0;
             foreach (var employee in currentEmployee.subordinates.Values)
@@ -120,7 +120,7 @@ namespace Mitarbeiterverwaltung
             //}
         }
 
-        private void updatelvEmployees()
+        private void updateLvEmployees()
         {
             lvItems.Clear();
             lvEmployees.Items.Clear ();
@@ -183,7 +183,7 @@ namespace Mitarbeiterverwaltung
             {
 
                 companyData.addEmployee(newStaffMember.getUserData());
-                updatelvEmployees();
+                updateLvEmployees();
             }
         }
 
@@ -315,8 +315,8 @@ namespace Mitarbeiterverwaltung
             managementPanel.BringToFront();
             btnPanelCtrl.Text = "Ein / Ausstemplen";
             activePanel = managementPanel;
-            updatelvEmployees();
-            checkForPendingHolidayRequests();
+            updateLvEmployees();
+            checkForPendingVacationRequests();
         }
 
         private void changeToLogin()
@@ -370,13 +370,13 @@ namespace Mitarbeiterverwaltung
                 if (result == DialogResult.OK)
                 {
                     newStaffMember.getUserData();
-                    updatelvEmployees();
+                    updateLvEmployees();
                 }
                 else if (result == DialogResult.Abort)
                 {
                     companyData.removeEmployee(currentEmployee);
                     lvEmployees.SelectedItems[0].Remove();
-                    updatelvEmployees();
+                    updateLvEmployees();
                 }
             }
         }
@@ -398,12 +398,12 @@ namespace Mitarbeiterverwaltung
         private void btnRequestHolidays_Click(object sender, EventArgs e)
         {
             //Todo hier das Fenster für Urlaub beantragen öffnen
-            HolidayRequestView holidayRequest = new HolidayRequestView(currentEmployee);
+            VacationRequestView holidayRequest = new VacationRequestView(currentEmployee);
             holidayRequest.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = holidayRequest.ShowDialog(this);
             if(result == DialogResult.OK)
             {
-                holidayRequest.sendHolidayRequest();
+                holidayRequest.sendVacationRequest();
             }
         }
 
