@@ -95,7 +95,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddSickdays_Click(object sender, EventArgs e)
         {
-            EditTimeSpanView addSickDays = new EditTimeSpanView(); 
+            AddTimePeriodView addSickDays = new AddTimePeriodView(); 
             addSickDays.StartPosition = FormStartPosition.CenterParent;
             addSickDays.changeToDate();
             DialogResult result = addSickDays.ShowDialog(this);
@@ -255,7 +255,7 @@ namespace Mitarbeiterverwaltung
 
         private void btnAddPause_Click(object sender, EventArgs e)
         {
-            EditTimeSpanView addPauseView = new EditTimeSpanView();
+            AddTimePeriodView addPauseView = new AddTimePeriodView();
             addPauseView.StartPosition = FormStartPosition.CenterParent;
             addPauseView.changeToTime();
             DialogResult result = addPauseView.ShowDialog(this);
@@ -309,7 +309,7 @@ namespace Mitarbeiterverwaltung
                 maxTime = DateTime.MaxValue;
             }
 
-            FormEditCheckInOutTime form = new FormEditCheckInOutTime(employee.checkInOutTimes[index], minTime, maxTime);
+            EditDateTimeView form = new EditDateTimeView(employee.checkInOutTimes[index], minTime, maxTime);
 
             form.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = form.ShowDialog(this);

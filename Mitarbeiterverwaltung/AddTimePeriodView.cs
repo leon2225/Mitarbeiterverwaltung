@@ -11,9 +11,9 @@ using Mitarbeiterverwaltung.LL;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class EditTimeSpanView : Form
+    public partial class AddTimePeriodView : Form
     {
-        public EditTimeSpanView()
+        public AddTimePeriodView()
         {
             InitializeComponent();
         }

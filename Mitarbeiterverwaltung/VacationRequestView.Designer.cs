@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class HolidayRequestView
+    partial class VacationRequestView
     {
         /// <summary>
         /// Required designer variable.
@@ -125,7 +125,7 @@
             this.dtpHolidayStart.Name = "dtpHolidayStart";
             this.dtpHolidayStart.Size = new System.Drawing.Size(105, 27);
             this.dtpHolidayStart.TabIndex = 5;
-            this.dtpHolidayStart.ValueChanged += new System.EventHandler(this.holidayRangeChanged);
+            this.dtpHolidayStart.ValueChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
             // chkHalfDayBegin
             // 
@@ -139,7 +139,7 @@
             this.chkHalfDayBegin.TabIndex = 8;
             this.chkHalfDayBegin.Text = "halber Tag";
             this.chkHalfDayBegin.UseVisualStyleBackColor = true;
-            this.chkHalfDayBegin.CheckedChanged += new System.EventHandler(this.holidayRangeChanged);
+            this.chkHalfDayBegin.CheckedChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
             // chkHalfDayEnd
             // 
@@ -153,7 +153,7 @@
             this.chkHalfDayEnd.TabIndex = 9;
             this.chkHalfDayEnd.Text = "halber Tag";
             this.chkHalfDayEnd.UseVisualStyleBackColor = true;
-            this.chkHalfDayEnd.CheckedChanged += new System.EventHandler(this.holidayRangeChanged);
+            this.chkHalfDayEnd.CheckedChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
             // btnCancelRequest
             // 
@@ -188,7 +188,7 @@
             this.dtpHolidayEnd.Name = "dtpHolidayEnd";
             this.dtpHolidayEnd.Size = new System.Drawing.Size(105, 27);
             this.dtpHolidayEnd.TabIndex = 6;
-            this.dtpHolidayEnd.ValueChanged += new System.EventHandler(this.holidayRangeChanged);
+            this.dtpHolidayEnd.ValueChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
             // lblRemainingHolidays
             // 

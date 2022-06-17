@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class FormEditCheckInOutTime : Form
+    public partial class EditDateTimeView : Form
     {
-        public FormEditCheckInOutTime(DateTime currentTime,DateTime minTime, DateTime maxTime)
+        public EditDateTimeView(DateTime currentTime,DateTime minTime, DateTime maxTime)
         {
             InitializeComponent();
             dtpDateTime.MinDate = minTime;
