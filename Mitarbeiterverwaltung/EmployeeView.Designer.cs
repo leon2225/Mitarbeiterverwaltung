@@ -252,7 +252,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtName, 3);
             this.txtName.Location = new System.Drawing.Point(157, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(392, 23);
+            this.txtName.Size = new System.Drawing.Size(371, 23);
             this.txtName.TabIndex = 2;
             this.txtName.Text = "Max";
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -264,7 +264,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtSurname, 3);
             this.txtSurname.Location = new System.Drawing.Point(157, 32);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(392, 23);
+            this.txtSurname.Size = new System.Drawing.Size(371, 23);
             this.txtSurname.TabIndex = 3;
             this.txtSurname.Text = "Mustermann";
             this.txtSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -276,7 +276,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtAddress, 3);
             this.txtAddress.Location = new System.Drawing.Point(157, 61);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(392, 23);
+            this.txtAddress.Size = new System.Drawing.Size(371, 23);
             this.txtAddress.TabIndex = 4;
             this.txtAddress.Text = "Beispielstraße 123, SampleCity 12345";
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -288,7 +288,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.txtPhone, 3);
             this.txtPhone.Location = new System.Drawing.Point(157, 90);
             this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(392, 23);
+            this.txtPhone.Size = new System.Drawing.Size(371, 23);
             this.txtPhone.TabIndex = 5;
             this.txtPhone.Text = "015234 / 55435642";
             this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -328,8 +328,6 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -1112,6 +1110,13 @@
             this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader11.Width = 156;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(0, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.BackColor = System.Drawing.SystemColors.Control;
@@ -1455,6 +1460,13 @@
             this.columnHeader16.Text = "Ende";
             this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader16.Width = 156;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(0, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 4;
             // 
             // tableLayoutPanel5
             // 

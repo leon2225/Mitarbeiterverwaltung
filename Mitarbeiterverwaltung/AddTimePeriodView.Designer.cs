@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class EditTimeSpanView
+    partial class AddTimePeriodView
     {
         /// <summary>
         /// Required designer variable.

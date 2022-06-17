@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class FormEditCheckInOutTime
+    partial class EditDateTimeView
     {
         /// <summary>
         /// Required designer variable.

@@ -11,22 +11,22 @@ using Mitarbeiterverwaltung.LL;
 
 namespace Mitarbeiterverwaltung
 {
-    public partial class HolidayRequestView : Form
+    public partial class VacationRequestView : Form
     {
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
 
-        public HolidayRequestView(HourlyRatedEmployee? employee)
+        public VacationRequestView(HourlyRatedEmployee? employee)
         {
             InitializeComponent();
             this.employee = employee;
             dtpHolidayStart.MinDate = DateTime.Today;
             dtpHolidayEnd.MinDate = DateTime.Today;
             btnSendRequest.Enabled = false;
-            holidayRangeChanged(new object(), new EventArgs());
+            vacationRangeChanged(new object(), new EventArgs());
         }
 
-        public void sendHolidayRequest()
+        public void sendVacationRequest()
         {
             DateTime startDate = dtpHolidayStart.Value;
             DateTime endDate = dtpHolidayEnd.Value;
@@ -42,7 +42,7 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void holidayRangeChanged(object sender, EventArgs e)
+        private void vacationRangeChanged(object sender, EventArgs e)
         {
             double holidaysCount = 0;
             double remainingHolidays = 0;
@@ -123,7 +123,7 @@ namespace Mitarbeiterverwaltung
             });
             return newItem;
         }
-        private void updateLvHolidayRequests()
+        private void updateLvVacationRequests()
         {
             lvHolidayRequests.Items.Clear();
             for (int i = 0; i < employee.vacations.Count; i++)
@@ -138,7 +138,7 @@ namespace Mitarbeiterverwaltung
         {
             if (e.TabPage == tabViewRequests)
             {
-                updateLvHolidayRequests();
+                updateLvVacationRequests();
             }
             else
             {
