@@ -2,7 +2,9 @@
 
 namespace Mitarbeiterverwaltung.DAL
 {
-
+    /// <summary>
+    /// Holding the system settings loaded from Ini-File or changed in settings window
+    /// </summary>
     public class Settings
     {
         public string companyName { get; set; }
@@ -12,6 +14,9 @@ namespace Mitarbeiterverwaltung.DAL
         public int autoLogoutTimeout { get; set; }
     }
 
+    /// <summary>
+    /// Handler for reading and writing Data to CSV-File.
+    /// </summary>
     public class CSVStorageHandler
     {
         public string path;
@@ -21,6 +26,12 @@ namespace Mitarbeiterverwaltung.DAL
             this.path = path;
         }
 
+        /// <summary>
+        /// Reading the properties of all HourlyRatedEmployees from CSV-File.
+        /// </summary>
+        /// <remarks>The properties are sorted alphabetically.</remarks>
+        /// <returns>Dictionary with all employees of the CSV-File.</returns>
+        /// <exception cref="ErrorException"></exception>
         public Dictionary<string, Employee> load()
         {
             string csvString = File.ReadAllText(path);
@@ -69,11 +80,13 @@ namespace Mitarbeiterverwaltung.DAL
 
                 employee.subordinates = subordinates;
             }
-
-
             return employees;
         }
 
+        /// <summary>
+        /// Save the properties of all employees to CSV-File.
+        /// </summary>
+        /// <param name="employees">Dictionary with all employees of the system.</param>
         public void save(Dictionary<string, Employee> employees)
         {
             string csvString = "";
@@ -92,14 +105,23 @@ namespace Mitarbeiterverwaltung.DAL
         }
     }
 
+    /// <summary>
+    /// Handler for reading and writing Data to Ini-File.
+    /// </summary>
     public class InitFileParser
     {
         public string path;
-        private Dictionary<string, Dictionary<string, string>> data;
+        private Dictionary<string, Dictionary<string, string>> data; //todo rename to something better
         public InitFileParser(string filePath = "init.ini")
         {
             path = filePath;
         }
+
+        /// <summary>
+        /// Loading the settings from the settings dialog to internal Dictionary.
+        /// </summary>
+        /// <remarks>For better readability the absolute filepaths are reduced to relative paths.</remarks>
+        /// <param name="settings"></param>
         public void updateFromSettings(Settings settings)
         {
             string currentDir = Directory.GetCurrentDirectory();
@@ -123,6 +145,11 @@ namespace Mitarbeiterverwaltung.DAL
             data["settings"]["timeRounding"] = settings.timeRounding.ToString();
             data["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
         }
+
+        /// <summary>
+        /// Save the Settings to Ini-File without deleting comments
+        /// </summary>
+        /// <exception cref="ErrorException"></exception>
         public void saveFile()
         {
             String currentSection = "NoSection";
@@ -193,6 +220,11 @@ namespace Mitarbeiterverwaltung.DAL
 
             File.WriteAllText(path, outputString);
         }
+
+        /// <summary>
+        /// Reading the Settings from Ini-File and a convert data to a dictionary.
+        /// </summary>
+        /// <returns>Dictionary containing all key/value pairs of the Ini-File.</returns>
         public Dictionary<string, Dictionary<string, string>> parseFile()
         {
             Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
@@ -259,6 +291,11 @@ namespace Mitarbeiterverwaltung.DAL
             return result;
         }
 
+        /// <summary>
+        /// Assign the raw key/value pairs to internal system setting parameters
+        /// </summary>
+        /// <returns>Internal system setting values</returns>
+        /// <exception cref="ErrorException"></exception>
         public Settings loadSettings()
         {
             Dictionary<string, Dictionary<string, string>> fileContent = parseFile();
