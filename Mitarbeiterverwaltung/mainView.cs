@@ -400,9 +400,8 @@ namespace Mitarbeiterverwaltung
         private void btnRequestHolidays_Click(object sender, EventArgs e)
         {
             //Todo hier das Fenster für Urlaub beantragen öffnen
-            VacationRequestView holidayRequest = new VacationRequestView(currentEmployee);
             startLogoutCountdown();
-            HolidayRequestView holidayRequest = new HolidayRequestView(currentEmployee);
+            VacationRequestView holidayRequest = new VacationRequestView(currentEmployee);
             holidayRequest.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = holidayRequest.ShowDialog(this);
             if(result == DialogResult.OK)

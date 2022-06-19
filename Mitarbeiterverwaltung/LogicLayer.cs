@@ -33,6 +33,18 @@ namespace Mitarbeiterverwaltung.LL
             return endDate - startDate;
         }
 
+        public bool isInTimespan(DateTime day)
+        {
+            if (day > startDate && day < endDate)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public override String ToString()
         {
             return startDate.ToString() + " - " + endDate.ToString();
@@ -343,7 +355,9 @@ namespace Mitarbeiterverwaltung.LL
 
         public TimeSpan getTimeWorkedToday()
         {
-            return new TimeSpan();
+            List<DateTime> currentDayTimestamps;
+            currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(DateTime.Now.Date));
+            return getTimeWorkedForOneDay(currentDayTimestamps);
         }
 
         public TimeSpan getPauseTime()
@@ -498,6 +512,19 @@ namespace Mitarbeiterverwaltung.LL
             }
 
 
+        }
+
+        public TimeSpan getTimeWorkedForOneDay(List<DateTime> day)
+        {
+            if (day.Count % 2 != 0)
+                throw new ErrorException("Fehler bei der Berechnung der Arbeitszeit");
+            TimeSpan totalTime = new TimeSpan();
+            for (int i = 0; i < day.Count; i += 2)
+            {
+                TimePeriod workingPeriod = new TimePeriod(this.checkInOutTimes[i], this.checkInOutTimes[i + 1]);
+                totalTime = totalTime.Add(workingPeriod.getDuration());
+            }
+            return totalTime;
         }
 
         public void calcWorkingTime()
