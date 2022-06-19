@@ -586,10 +586,12 @@ namespace Mitarbeiterverwaltung.LL
             // --- to be called on every sign in and stamp out ---
             //get week working time
             workingTimeDayLimit = this.weekTimeLimit.Divide(5);
+            DateTime firstDay = this.checkInOutTimes.First().Date;
             DateTime lastDay = this.checkInOutTimes.Last().Date;
+            DateTime day = firstDay;
             // https://stackoverflow.com/questions/23825438/how-to-count-datetimes-with-same-day
             var listOfDays = this.checkInOutTimes.GroupBy(x => x.Date).Select(x => x.Key).ToList();
-            foreach (var day in listOfDays)
+            while (day != lastDay)
 
             {
                 currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(day));
@@ -628,7 +630,7 @@ namespace Mitarbeiterverwaltung.LL
                     totalWorkingTime = totalWorkingTime.Add(workingTimeDayLimit);
                     totalOvertime = totalOvertime.Add(overtimeDay); //add day overtime to total overtime
                 }
-                
+                day.AddDays(1);
             }
             totalWorkingTime = totalWorkingTime;
             totalOvertime = totalOvertime;
