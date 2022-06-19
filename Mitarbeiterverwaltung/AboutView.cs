@@ -11,6 +11,9 @@ using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {
+    /// <summary>
+    /// Window showing the company contact information and logo. 
+    /// </summary>
     public partial class AboutView : Form
     {
         public AboutView(Settings settings)
@@ -18,11 +21,6 @@ namespace Mitarbeiterverwaltung
             InitializeComponent();
             lblCompanyName.Text = settings.companyName;
             pictureLogo.Image = new Bitmap(settings.logoPath);
-        }
-
-        private void lblCompanyName_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
