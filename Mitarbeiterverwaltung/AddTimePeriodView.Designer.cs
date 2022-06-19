@@ -123,7 +123,7 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // EditTimeSpanView
+            // AddTimePeriodView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -133,9 +133,9 @@
             this.MaximizeBox = false;
             this.MdiChildrenMinimizedAnchorBottom = false;
             this.MinimizeBox = false;
-            this.Name = "EditTimeSpanView";
+            this.Name = "AddTimePeriodView";
             this.ShowIcon = false;
-            this.Text = "Krankheitstage hinzufügen";
+            this.Text = "TimePeriod hinzufügen";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
