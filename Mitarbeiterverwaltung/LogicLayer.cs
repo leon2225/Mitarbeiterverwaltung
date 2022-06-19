@@ -514,6 +514,55 @@ namespace Mitarbeiterverwaltung.LL
 
         }
 
+        // add pause times stamps
+        // get pause times
+        // get copy of stamps for one day
+        // for pauseTime in PauseTimes
+        //      check for conflicting pause times
+        //          if stamp out is before pause ends and if it is the last time stamped
+        //              check out at beginning of pause (reduce working time)
+        //          else if stamp out before pause ends and not the last time 
+        //              move stamp out to end of the pause   
+        //------------------------------
+        //      if not stamped out at pause time beginn
+        //          get last stamp in before first pause
+        //          add stamp out at pause beginning
+        //          add stamp in at pause end
+        //
+
+        private bool isDayVacation(DateTime day)
+        {
+            foreach (var vacation in this.vacations)
+            {
+                if (vacation.isInTimespan(day) && vacation.state == RequestState.accepted)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool isDayWeekend(DateTime day)
+        {
+            if (day.DayOfWeek == DayOfWeek.Sunday || day.DayOfWeek == DayOfWeek.Saturday)
+                return true;
+            else
+                return false;
+        }
+
+        private bool isDaySickDay(DateTime day)
+        {
+            //todo in eine Funktion schreiben mit find
+            foreach (var sickDayPeriod in this.sickDays)
+            {
+                if (sickDayPeriod.isInTimespan(day))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public TimeSpan getTimeWorkedForOneDay(List<DateTime> day)
         {
             if (day.Count % 2 != 0)
@@ -526,44 +575,65 @@ namespace Mitarbeiterverwaltung.LL
             }
             return totalTime;
         }
-
         public void calcWorkingTime()
         {
+            TimeSpan workingTimeDayLimit;
+            TimeSpan totalWorkingTimeDay = new TimeSpan();
+            TimeSpan overtimeDay = new TimeSpan();
+            TimeSpan totalOvertime = new TimeSpan();
+            TimeSpan totalWorkingTime = new TimeSpan();
+            List<DateTime> currentDayTimestamps;
             // --- to be called on every sign in and stamp out ---
             //get week working time
-            //calc working time day (weekWorkingTime/5)
-            //if current day is first and not weekend
-            //  delete all stamp times of previous month
-            //else
-            //  do nothing
-            //for each day in month until current day -1
-            //  check if day is weekend
-            //      break
-            //  check if day is holiday
-            //      direct add one working day to totalTime
-            //      break
-            //  check if day is sickDay
-            //      direct add one working day to totalTime
-            //      break
-            //  else calc day working time
-            //      round exact stamp times
-            //      check if stamp times in pause times
-            //          remove invalid stamp times
-            //      add stamp times for given pause times
-            //      -->calc total workTime day
-            //      if totalWorkTimeDay is higher than workTimeDay
-            //          add overtimeWeek for surplus workingTime
-            //      else if totalWorkTimeDay is lower than workTimeDay
-            //          reduce overtimeWeek for deficient workingTimeDay
-            //      else
-            //          do nothing
-            //      add one WorkingTimeDay to totalWorktimeMonth
-            //calc workingTime for current day
-            //  check if day is weekend
-            //  check if day is holiday
-            //  check if day is sickDay
-            //  calc working Time day like above until now
+            workingTimeDayLimit = this.weekTimeLimit.Divide(5);
+            DateTime lastDay = this.checkInOutTimes.Last().Date;
+            // https://stackoverflow.com/questions/23825438/how-to-count-datetimes-with-same-day
+            var listOfDays = this.checkInOutTimes.GroupBy(x => x.Date).Select(x => x.Key).ToList();
+            foreach (var day in listOfDays)
 
+            {
+                currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(day));
+                totalWorkingTimeDay = getTimeWorkedForOneDay(currentDayTimestamps);
+                overtimeDay = TimeSpan.Zero;
+                if (isDayWeekend(day))
+                {
+                    overtimeDay = totalWorkingTimeDay;
+                    totalOvertime = totalOvertime.Add(overtimeDay);
+                    continue;
+                }
+                else if (isDayVacation(day))
+                {
+                    overtimeDay = totalWorkingTimeDay;
+                    // and add one working day
+                }
+                else if (isDaySickDay(day))
+                {
+                    // is possible if worked and then becomes sick --> ignore stamp times?
+                    throw new ErrorException("Mitarbeiter arbeitet obwohl krank");
+                }
+                else
+                {
+                    //normal working day
+                    overtimeDay = workingTimeDayLimit - totalWorkingTimeDay;
+
+                }
+                if (day == lastDay)
+                {
+                    //extra calc for last day
+                    //only necessary if lastday is today otherwise the day is already closed
+                    totalWorkingTime = totalWorkingTime.Add(totalWorkingTimeDay);
+                }
+                else
+                {
+                    totalWorkingTime = totalWorkingTime.Add(workingTimeDayLimit);
+                    totalOvertime = totalOvertime.Add(overtimeDay); //add day overtime to total overtime
+                }
+                
+            }
+            totalWorkingTime = totalWorkingTime;
+            totalOvertime = totalOvertime;
+            //  save new total working Time to employee
+            //  round display time visible
         }
     }
 
