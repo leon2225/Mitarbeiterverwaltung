@@ -143,7 +143,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         /// <param name="timestamp">Time and Date</param>
         /// <param name="stampType">Type of Stamp (in or out)</param>
-        /// <returns></returns>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem checkInOutTimeToItem(DateTime timestamp, string stampType)
         {
             ListViewItem newItem = new ListViewItem(new string[] {
@@ -159,7 +159,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         /// <param name="timePeriod">start and end of <c>TimePeriod</c></param>
         /// <param name="format">text format of ListViewItem in ListView</param>
-        /// <returns></returns>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem timePeriodToItem(TimePeriod timePeriod, string format = "dd.MM.yyyy")
         {
             ListViewItem newItem = new ListViewItem(new string[] {
