@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "5",
             "Rolf",
             "12"}, -1);
@@ -46,7 +46,7 @@
             this.pnlStatistics = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotalDayWorkingTime = new System.Windows.Forms.Label();
             this.lblTotalDayWorkingTimeTitle = new System.Windows.Forms.Label();
-            this.btnRequestHolidays = new System.Windows.Forms.Button();
+            this.btnVacationManagement = new System.Windows.Forms.Button();
             this.lblHolidaysRemainingTitle = new System.Windows.Forms.Label();
             this.lblOvertimeRemainingTitle = new System.Windows.Forms.Label();
             this.lblWorkingTimeTitle = new System.Windows.Forms.Label();
@@ -208,7 +208,7 @@
             this.pnlStatistics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.98058F));
             this.pnlStatistics.Controls.Add(this.lblTotalDayWorkingTime, 1, 0);
             this.pnlStatistics.Controls.Add(this.lblTotalDayWorkingTimeTitle, 0, 0);
-            this.pnlStatistics.Controls.Add(this.btnRequestHolidays, 0, 5);
+            this.pnlStatistics.Controls.Add(this.btnVacationManagement, 0, 5);
             this.pnlStatistics.Controls.Add(this.lblHolidaysRemainingTitle, 0, 4);
             this.pnlStatistics.Controls.Add(this.lblOvertimeRemainingTitle, 0, 3);
             this.pnlStatistics.Controls.Add(this.lblWorkingTimeTitle, 0, 2);
@@ -248,17 +248,17 @@
             this.lblTotalDayWorkingTimeTitle.TabIndex = 10;
             this.lblTotalDayWorkingTimeTitle.Text = "Heutige Arbeitszeit";
             // 
-            // btnRequestHolidays
+            // btnVacationManagement
             // 
-            this.btnRequestHolidays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlStatistics.SetColumnSpan(this.btnRequestHolidays, 2);
-            this.btnRequestHolidays.Location = new System.Drawing.Point(3, 101);
-            this.btnRequestHolidays.Name = "btnRequestHolidays";
-            this.btnRequestHolidays.Size = new System.Drawing.Size(321, 23);
-            this.btnRequestHolidays.TabIndex = 9;
-            this.btnRequestHolidays.Text = "Urlaubsverwaltung";
-            this.btnRequestHolidays.UseVisualStyleBackColor = true;
-            this.btnRequestHolidays.Click += new System.EventHandler(this.btnRequestHolidays_Click);
+            this.btnVacationManagement.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlStatistics.SetColumnSpan(this.btnVacationManagement, 2);
+            this.btnVacationManagement.Location = new System.Drawing.Point(3, 101);
+            this.btnVacationManagement.Name = "btnVacationManagement";
+            this.btnVacationManagement.Size = new System.Drawing.Size(321, 23);
+            this.btnVacationManagement.TabIndex = 9;
+            this.btnVacationManagement.Text = "Urlaubsverwaltung";
+            this.btnVacationManagement.UseVisualStyleBackColor = true;
+            this.btnVacationManagement.Click += new System.EventHandler(this.btnVacationManagement_Click);
             // 
             // lblHolidaysRemainingTitle
             // 
@@ -279,7 +279,6 @@
             this.lblOvertimeRemainingTitle.Size = new System.Drawing.Size(146, 15);
             this.lblOvertimeRemainingTitle.TabIndex = 5;
             this.lblOvertimeRemainingTitle.Text = "Verbleibende Überstunden";
-            this.lblOvertimeRemainingTitle.Click += new System.EventHandler(this.lblOvertimeRemaining_Click);
             // 
             // lblWorkingTimeTitle
             // 
@@ -290,7 +289,6 @@
             this.lblWorkingTimeTitle.Size = new System.Drawing.Size(193, 15);
             this.lblWorkingTimeTitle.TabIndex = 3;
             this.lblWorkingTimeTitle.Text = "Arbeitsstunden im aktuellen Monat";
-            this.lblWorkingTimeTitle.Click += new System.EventHandler(this.lblWorkingTime_Click);
             // 
             // lblHolidaysRemaining
             // 
@@ -656,9 +654,9 @@
             this.Urlaubstage});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.lvEmployees.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
             this.lvEmployees.MultiSelect = false;
             this.lvEmployees.Name = "lvEmployees";
@@ -855,7 +853,7 @@
         private Label lblWorkingTime;
         private Label lblHolidaysRemaining;
         private Label lblOvertimeRemaining;
-        private Button btnRequestHolidays;
+        private Button btnVacationManagement;
         private TableLayoutPanel changePasswordPanel;
         private Label label2;
         private Label label1;
