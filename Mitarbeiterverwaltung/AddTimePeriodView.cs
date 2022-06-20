@@ -22,24 +22,6 @@ namespace Mitarbeiterverwaltung
         }
 
         /// <summary>
-        /// Closing the Dialog with cancel argument to discard the selected time period in parent window.
-        /// </summary>
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        /// <summary>
-        /// Closing the Dialog with ok argument to save the selected time period in parent window.
-        /// </summary>
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        /// <summary>
         /// Changes the view of the two DateTimePickers to select only times with format HH:mm.
         /// </summary>
         public void changeToTime()
