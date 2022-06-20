@@ -45,10 +45,11 @@
             this.btnSaveEmployee = new System.Windows.Forms.Button();
             this.btnCancelEmployeeView = new System.Windows.Forms.Button();
             this.btnRemoveEmployee = new System.Windows.Forms.Button();
+            this.pnlPersonalData = new System.Windows.Forms.TableLayoutPanel();
             this.mtxtVacationDays = new System.Windows.Forms.MaskedTextBox();
             this.mtxtWeekTimeLimit = new System.Windows.Forms.MaskedTextBox();
-            this.lblResetPasswort = new System.Windows.Forms.Label();
             this.btnResetPassword = new System.Windows.Forms.Button();
+            this.lblResetPasswort = new System.Windows.Forms.Label();
             this.tabCtrlEditEmployee = new System.Windows.Forms.TabControl();
             this.tabPersonalData = new System.Windows.Forms.TabPage();
             this.tabPause = new System.Windows.Forms.TabPage();
@@ -76,6 +77,7 @@
             this.chBeginnVacationDays = new System.Windows.Forms.ColumnHeader();
             this.chEndVacationDays = new System.Windows.Forms.ColumnHeader();
             this.chStateVacationRequest = new System.Windows.Forms.ColumnHeader();
+            this.pnlPersonalData.SuspendLayout();
             this.tabCtrlEditEmployee.SuspendLayout();
             this.tabPersonalData.SuspendLayout();
             this.tabPause.SuspendLayout();
@@ -148,6 +150,7 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPersonalData.SetColumnSpan(this.txtName, 3);
             this.txtName.Location = new System.Drawing.Point(157, 3);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(371, 23);
@@ -159,6 +162,7 @@
             // 
             this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPersonalData.SetColumnSpan(this.txtSurname, 3);
             this.txtSurname.Location = new System.Drawing.Point(157, 32);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(371, 23);
@@ -170,6 +174,7 @@
             // 
             this.txtAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPersonalData.SetColumnSpan(this.txtAddress, 3);
             this.txtAddress.Location = new System.Drawing.Point(157, 61);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(371, 23);
@@ -181,6 +186,7 @@
             // 
             this.txtPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPersonalData.SetColumnSpan(this.txtPhone, 3);
             this.txtPhone.Location = new System.Drawing.Point(157, 90);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(371, 23);
@@ -221,6 +227,39 @@
             this.btnRemoveEmployee.UseVisualStyleBackColor = true;
             this.btnRemoveEmployee.Click += new System.EventHandler(this.btnRemoveEmployee_Click);
             // 
+            // pnlPersonalData
+            // 
+            this.pnlPersonalData.ColumnCount = 4;
+            this.pnlPersonalData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pnlPersonalData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pnlPersonalData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pnlPersonalData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pnlPersonalData.Controls.Add(this.mtxtVacationDays, 3, 4);
+            this.pnlPersonalData.Controls.Add(this.mtxtWeekTimeLimit, 1, 4);
+            this.pnlPersonalData.Controls.Add(this.lblName, 0, 0);
+            this.pnlPersonalData.Controls.Add(this.lblSurname, 0, 1);
+            this.pnlPersonalData.Controls.Add(this.lblAdress, 0, 2);
+            this.pnlPersonalData.Controls.Add(this.lblPhone, 0, 3);
+            this.pnlPersonalData.Controls.Add(this.lblWorkingTimeWeekLimit, 0, 4);
+            this.pnlPersonalData.Controls.Add(this.txtName, 1, 0);
+            this.pnlPersonalData.Controls.Add(this.txtSurname, 1, 1);
+            this.pnlPersonalData.Controls.Add(this.txtAddress, 1, 2);
+            this.pnlPersonalData.Controls.Add(this.txtPhone, 1, 3);
+            this.pnlPersonalData.Controls.Add(this.btnResetPassword, 1, 5);
+            this.pnlPersonalData.Controls.Add(this.lblVacationDays, 2, 4);
+            this.pnlPersonalData.Location = new System.Drawing.Point(0, 0);
+            this.pnlPersonalData.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlPersonalData.Name = "pnlPersonalData";
+            this.pnlPersonalData.RowCount = 6;
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.Size = new System.Drawing.Size(531, 181);
+            this.pnlPersonalData.TabIndex = 19;
+            // 
             // mtxtVacationDays
             // 
             this.mtxtVacationDays.BeepOnError = true;
@@ -245,6 +284,19 @@
             this.mtxtWeekTimeLimit.Text = "40";
             this.mtxtWeekTimeLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // btnResetPassword
+            // 
+            this.btnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pnlPersonalData.SetColumnSpan(this.btnResetPassword, 2);
+            this.btnResetPassword.Enabled = false;
+            this.btnResetPassword.Location = new System.Drawing.Point(157, 151);
+            this.btnResetPassword.Name = "btnResetPassword";
+            this.btnResetPassword.Size = new System.Drawing.Size(117, 23);
+            this.btnResetPassword.TabIndex = 8;
+            this.btnResetPassword.Text = "Zurücksetzen";
+            this.btnResetPassword.UseVisualStyleBackColor = true;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
+            // 
             // lblResetPasswort
             // 
             this.lblResetPasswort.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -254,18 +306,6 @@
             this.lblResetPasswort.Size = new System.Drawing.Size(54, 15);
             this.lblResetPasswort.TabIndex = 20;
             this.lblResetPasswort.Text = "Passwort";
-            // 
-            // btnResetPassword
-            // 
-            this.btnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnResetPassword.Enabled = false;
-            this.btnResetPassword.Location = new System.Drawing.Point(157, 151);
-            this.btnResetPassword.Name = "btnResetPassword";
-            this.btnResetPassword.Size = new System.Drawing.Size(117, 23);
-            this.btnResetPassword.TabIndex = 8;
-            this.btnResetPassword.Text = "Zurücksetzen";
-            this.btnResetPassword.UseVisualStyleBackColor = true;
-            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // tabCtrlEditEmployee
             // 
@@ -290,6 +330,7 @@
             // 
             this.tabPersonalData.BackColor = System.Drawing.SystemColors.Control;
             this.tabPersonalData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPersonalData.Controls.Add(this.pnlPersonalData);
             this.tabPersonalData.Location = new System.Drawing.Point(4, 24);
             this.tabPersonalData.Margin = new System.Windows.Forms.Padding(0);
             this.tabPersonalData.Name = "tabPersonalData";
@@ -332,7 +373,7 @@
             this.lvPause.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvPause.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.lvPause.Location = new System.Drawing.Point(0, 0);
+            this.lvPause.Location = new System.Drawing.Point(5, 4);
             this.lvPause.Name = "lvPause";
             this.lvPause.Size = new System.Drawing.Size(320, 240);
             this.lvPause.TabIndex = 1;
@@ -446,7 +487,7 @@
             this.chEndSickDays});
             this.lvSickDays.FullRowSelect = true;
             this.lvSickDays.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvSickDays.Location = new System.Drawing.Point(0, 0);
+            this.lvSickDays.Location = new System.Drawing.Point(5, 4);
             this.lvSickDays.Name = "lvSickDays";
             this.lvSickDays.Size = new System.Drawing.Size(320, 239);
             this.lvSickDays.TabIndex = 1;
@@ -521,7 +562,7 @@
             this.chStateVacationRequest});
             this.lvVacations.FullRowSelect = true;
             this.lvVacations.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvVacations.Location = new System.Drawing.Point(0, 0);
+            this.lvVacations.Location = new System.Drawing.Point(5, 4);
             this.lvVacations.Name = "lvVacations";
             this.lvVacations.Size = new System.Drawing.Size(320, 240);
             this.lvVacations.TabIndex = 1;
@@ -561,6 +602,8 @@
             this.Name = "EmployeeView";
             this.ShowIcon = false;
             this.Text = "Mitarbeiter bearbeiten";
+            this.pnlPersonalData.ResumeLayout(false);
+            this.pnlPersonalData.PerformLayout();
             this.tabCtrlEditEmployee.ResumeLayout(false);
             this.tabPersonalData.ResumeLayout(false);
             this.tabPause.ResumeLayout(false);
@@ -617,5 +660,6 @@
         private MaskedTextBox mtxtWeekTimeLimit;
         private MaskedTextBox mtxtVacationDays;
         private Button btnEditCheckInOutTime;
+        private TableLayoutPanel pnlPersonalData;
     }
 }

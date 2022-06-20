@@ -366,7 +366,7 @@ namespace Mitarbeiterverwaltung
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
             {
-                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee);
+                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee); //todo rename to understand difference
                 newStaffMember.StartPosition = FormStartPosition.CenterParent;
                 DialogResult result = newStaffMember.ShowDialog(this);
                 if (result == DialogResult.OK)
