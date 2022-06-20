@@ -11,6 +11,9 @@ using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {
+    /// <summary>
+    /// Dialog loading the system settings from Ini-File and make it possible to change and save it from user interface.
+    /// </summary>
     public partial class SettingsView : Form
     {
         private Settings startValues;
@@ -22,13 +25,17 @@ namespace Mitarbeiterverwaltung
             txtFilePathCsv.Text = startValues.csvPath;
             txtfilePathIcon.Text = startValues.logoPath;
             int itemIdx = nmbrRounding.FindStringExact(startValues.timeRounding.ToString());
-            if (itemIdx == -1) 
+            if (itemIdx == -1) //todo add else block
                 itemIdx = 0;
                 //throw new Exception("Invalid time rounding"); //Todo exception
             nmbrRounding.SelectedIndex = itemIdx;
             mtxtAutoLogoutTimeout.Text = startValues.autoLogoutTimeout.ToString();
         }
 
+        /// <summary>
+        /// Load the setting values from Dialog input fields and return them to system.
+        /// </summary>
+        /// <returns>system settings</returns>
         public Settings getSettings()
         {
             Settings settings = new Settings();
@@ -40,18 +47,9 @@ namespace Mitarbeiterverwaltung
             return settings;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
+        /// <summary>
+        /// Opens a new FileDialog to set a new path to CSV-File. 
+        /// </summary>
         private void btnCsv_Click(object sender, EventArgs e)
         {
             openFileDialogCsv.FileName = txtFilePathCsv.Text;
@@ -59,10 +57,12 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 txtFilePathCsv.Text = openFileDialogCsv.FileName;
-
-            }
+            } //todo add else block
         }
 
+        /// <summary>
+        /// Opens a new FileDialog to set a new path to Ini-File. 
+        /// </summary>
         private void btnIcon_Click(object sender, EventArgs e)
         {
             openFileDialogPng.FileName = txtfilePathIcon.Text;
@@ -70,17 +70,7 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 txtfilePathIcon.Text = openFileDialogPng.FileName;
-            }
-        }
-
-        private void SettingsDialog_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
+            } //todo add else block
         }
     }
 }
