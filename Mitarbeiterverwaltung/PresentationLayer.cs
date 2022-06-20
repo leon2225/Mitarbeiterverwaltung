@@ -17,7 +17,7 @@ namespace Mitarbeiterverwaltung
             Settings settings = initFileParser.loadSettings();
 
 
-            CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH");
+            CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH"); //todo use a better default company name
 
             var csvStorageHandler = new CSVStorageHandler(settings.csvPath);
             //
@@ -25,22 +25,19 @@ namespace Mitarbeiterverwaltung
             companyData.employees = loadedEmployees;
             // Enable the Windows version depended design settings
             Application.EnableVisualStyles();
-            // Enable WinForms excaption handling
+            // Enable WinForms exception handling
             Application.ThreadException += new ThreadExceptionEventHandler(PresentationLayer.GuiThreadException);
-            // Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException); //TODO non GUI exceptions
             // Run Application
             Application.Run(new MainView(companyData, settings));
             csvStorageHandler.save(companyData.employees);
             initFileParser.updateFromSettings(settings);
             initFileParser.saveFile();
-
             return;
-
         }
 
-        // exception handling winforms event queue
-        // from Microsoft Documentation
-        // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.application.threadexception?redirectedfrom=MSDN&view=windowsdesktop-6.0
+        /// <summary>
+        /// Loading the Exceptions from WinForms and classify warning level
+        /// </summary>
         private static void GuiThreadException(object sender, ThreadExceptionEventArgs t)
         {
             MessageBoxIcon selectedIcon;
@@ -69,13 +66,10 @@ namespace Mitarbeiterverwaltung
         }
     }
 
-    public enum exceptionType
-    {
-        info,
-        warning,
-        error
-    }
-
+    /// <summary>
+    /// Opens a MessageBox with a warning message.
+    /// </summary>
+    /// <remarks>A warning that something failed is shown but the application does not terminate. </remarks>
     class WarningException : Exception
     {
         public WarningException()
@@ -89,7 +83,11 @@ namespace Mitarbeiterverwaltung
         }
     }
 
-        class ErrorException : Exception
+    /// <summary>
+    /// Opens a MessageBox with a error message.
+    /// </summary>
+    /// <remarks>A error that something failed is shown and the application is closed immediately. Unsaved data are maybe lost. </remarks>
+    class ErrorException : Exception
         {
             public ErrorException()
             {

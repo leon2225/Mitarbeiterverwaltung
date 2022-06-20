@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsView));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblSetCompanyName = new System.Windows.Forms.Label();
+            this.lblSetLogoPath = new System.Windows.Forms.Label();
+            this.lblSetCsvFilePath = new System.Windows.Forms.Label();
+            this.lblSetTimeRounding = new System.Windows.Forms.Label();
             this.openFileDialogCsv = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogPng = new System.Windows.Forms.OpenFileDialog();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
@@ -40,50 +40,50 @@
             this.txtFilePathCsv = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnIcon = new System.Windows.Forms.Button();
-            this.btnCsv = new System.Windows.Forms.Button();
+            this.btnNewIconPath = new System.Windows.Forms.Button();
+            this.btnNewCsvPath = new System.Windows.Forms.Button();
             this.nmbrRounding = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblSetAutoLogout = new System.Windows.Forms.Label();
+            this.lblRoundingUnit = new System.Windows.Forms.Label();
+            this.lblLogoutTimeUnit = new System.Windows.Forms.Label();
             this.mtxtAutoLogoutTimeout = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
-            // label1
+            // lblSetCompanyName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Firmenname";
+            this.lblSetCompanyName.AutoSize = true;
+            this.lblSetCompanyName.Location = new System.Drawing.Point(12, 22);
+            this.lblSetCompanyName.Name = "lblSetCompanyName";
+            this.lblSetCompanyName.Size = new System.Drawing.Size(74, 15);
+            this.lblSetCompanyName.TabIndex = 0;
+            this.lblSetCompanyName.Text = "Firmenname";
             // 
-            // label2
+            // lblSetLogoPath
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Logo Pfad";
+            this.lblSetLogoPath.AutoSize = true;
+            this.lblSetLogoPath.Location = new System.Drawing.Point(12, 52);
+            this.lblSetLogoPath.Name = "lblSetLogoPath";
+            this.lblSetLogoPath.Size = new System.Drawing.Size(61, 15);
+            this.lblSetLogoPath.TabIndex = 1;
+            this.lblSetLogoPath.Text = "Logo Pfad";
             // 
-            // label3
+            // lblSetCsvFilePath
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 84);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Pfad zur CSV-Datei";
+            this.lblSetCsvFilePath.AutoSize = true;
+            this.lblSetCsvFilePath.Location = new System.Drawing.Point(12, 84);
+            this.lblSetCsvFilePath.Name = "lblSetCsvFilePath";
+            this.lblSetCsvFilePath.Size = new System.Drawing.Size(106, 15);
+            this.lblSetCsvFilePath.TabIndex = 2;
+            this.lblSetCsvFilePath.Text = "Pfad zur CSV-Datei";
             // 
-            // label4
+            // lblSetTimeRounding
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 113);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Zeitrundung";
+            this.lblSetTimeRounding.AutoSize = true;
+            this.lblSetTimeRounding.Location = new System.Drawing.Point(12, 113);
+            this.lblSetTimeRounding.Name = "lblSetTimeRounding";
+            this.lblSetTimeRounding.Size = new System.Drawing.Size(73, 15);
+            this.lblSetTimeRounding.TabIndex = 3;
+            this.lblSetTimeRounding.Text = "Zeitrundung";
             // 
             // openFileDialogCsv
             // 
@@ -127,46 +127,46 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(413, 180);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(81, 23);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Abbrechen";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSave.Location = new System.Drawing.Point(500, 180);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Speichern";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnIcon
+            // btnNewIconPath
             // 
-            this.btnIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIcon.Location = new System.Drawing.Point(541, 48);
-            this.btnIcon.Name = "btnIcon";
-            this.btnIcon.Size = new System.Drawing.Size(34, 23);
-            this.btnIcon.TabIndex = 2;
-            this.btnIcon.Text = "...";
-            this.btnIcon.UseVisualStyleBackColor = true;
-            this.btnIcon.Click += new System.EventHandler(this.btnIcon_Click);
+            this.btnNewIconPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNewIconPath.Location = new System.Drawing.Point(541, 48);
+            this.btnNewIconPath.Name = "btnNewIconPath";
+            this.btnNewIconPath.Size = new System.Drawing.Size(34, 23);
+            this.btnNewIconPath.TabIndex = 2;
+            this.btnNewIconPath.Text = "...";
+            this.btnNewIconPath.UseVisualStyleBackColor = true;
+            this.btnNewIconPath.Click += new System.EventHandler(this.btnIcon_Click);
             // 
-            // btnCsv
+            // btnNewCsvPath
             // 
-            this.btnCsv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCsv.Location = new System.Drawing.Point(541, 79);
-            this.btnCsv.Name = "btnCsv";
-            this.btnCsv.Size = new System.Drawing.Size(34, 23);
-            this.btnCsv.TabIndex = 3;
-            this.btnCsv.Text = "...";
-            this.btnCsv.UseVisualStyleBackColor = true;
-            this.btnCsv.Click += new System.EventHandler(this.btnCsv_Click);
+            this.btnNewCsvPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNewCsvPath.Location = new System.Drawing.Point(541, 79);
+            this.btnNewCsvPath.Name = "btnNewCsvPath";
+            this.btnNewCsvPath.Size = new System.Drawing.Size(34, 23);
+            this.btnNewCsvPath.TabIndex = 3;
+            this.btnNewCsvPath.Text = "...";
+            this.btnNewCsvPath.UseVisualStyleBackColor = true;
+            this.btnNewCsvPath.Click += new System.EventHandler(this.btnCsv_Click);
             // 
             // nmbrRounding
             // 
@@ -180,33 +180,32 @@
             this.nmbrRounding.Size = new System.Drawing.Size(140, 23);
             this.nmbrRounding.TabIndex = 4;
             // 
-            // label5
+            // lblSetAutoLogout
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 140);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(147, 15);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Automatische Abmeldung";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.lblSetAutoLogout.AutoSize = true;
+            this.lblSetAutoLogout.Location = new System.Drawing.Point(12, 140);
+            this.lblSetAutoLogout.Name = "lblSetAutoLogout";
+            this.lblSetAutoLogout.Size = new System.Drawing.Size(147, 15);
+            this.lblSetAutoLogout.TabIndex = 14;
+            this.lblSetAutoLogout.Text = "Automatische Abmeldung";
             // 
-            // label6
+            // lblRoundingUnit
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(311, 113);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 15);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Minute(n)";
+            this.lblRoundingUnit.AutoSize = true;
+            this.lblRoundingUnit.Location = new System.Drawing.Point(311, 113);
+            this.lblRoundingUnit.Name = "lblRoundingUnit";
+            this.lblRoundingUnit.Size = new System.Drawing.Size(60, 15);
+            this.lblRoundingUnit.TabIndex = 16;
+            this.lblRoundingUnit.Text = "Minute(n)";
             // 
-            // label7
+            // lblLogoutTimeUnit
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(311, 140);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 15);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Minute(n)";
+            this.lblLogoutTimeUnit.AutoSize = true;
+            this.lblLogoutTimeUnit.Location = new System.Drawing.Point(311, 140);
+            this.lblLogoutTimeUnit.Name = "lblLogoutTimeUnit";
+            this.lblLogoutTimeUnit.Size = new System.Drawing.Size(60, 15);
+            this.lblLogoutTimeUnit.TabIndex = 17;
+            this.lblLogoutTimeUnit.Text = "Minute(n)";
             // 
             // mtxtAutoLogoutTimeout
             // 
@@ -219,34 +218,33 @@
             this.mtxtAutoLogoutTimeout.TabIndex = 5;
             this.mtxtAutoLogoutTimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // SettingsDialog
+            // SettingsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(587, 215);
             this.Controls.Add(this.mtxtAutoLogoutTimeout);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblLogoutTimeUnit);
+            this.Controls.Add(this.lblRoundingUnit);
+            this.Controls.Add(this.lblSetAutoLogout);
             this.Controls.Add(this.nmbrRounding);
-            this.Controls.Add(this.btnCsv);
-            this.Controls.Add(this.btnIcon);
+            this.Controls.Add(this.btnNewCsvPath);
+            this.Controls.Add(this.btnNewIconPath);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtFilePathCsv);
             this.Controls.Add(this.txtfilePathIcon);
             this.Controls.Add(this.txtCompanyName);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblSetTimeRounding);
+            this.Controls.Add(this.lblSetCsvFilePath);
+            this.Controls.Add(this.lblSetLogoPath);
+            this.Controls.Add(this.lblSetCompanyName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SettingsDialog";
+            this.Name = "SettingsView";
             this.Text = "Einstellungen";
-            this.Load += new System.EventHandler(this.SettingsDialog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,10 +252,10 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label lblSetCompanyName;
+        private Label lblSetLogoPath;
+        private Label lblSetCsvFilePath;
+        private Label lblSetTimeRounding;
         private OpenFileDialog openFileDialogCsv;
         private OpenFileDialog openFileDialogPng;
         private TextBox txtCompanyName;
@@ -265,12 +263,12 @@
         private TextBox txtFilePathCsv;
         private Button btnCancel;
         private Button btnSave;
-        private Button btnIcon;
-        private Button btnCsv;
+        private Button btnNewIconPath;
+        private Button btnNewCsvPath;
         private ComboBox nmbrRounding;
-        private Label label5;
-        private Label label6;
-        private Label label7;
+        private Label lblSetAutoLogout;
+        private Label lblRoundingUnit;
+        private Label lblLogoutTimeUnit;
         private MaskedTextBox mtxtAutoLogoutTimeout;
     }
 }

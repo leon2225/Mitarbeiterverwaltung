@@ -2,12 +2,21 @@ using Mitarbeiterverwaltung.LL;
 
 namespace Mitarbeiterverwaltung
 {
+    /// <summary>
+    /// Dialog to view and edit data of a selected employee.
+    /// <remarks>In reduced form used to sign up new employees.</remarks>
+    /// </summary>
     public partial class EmployeeView : Form
     {
         private HourlyRatedEmployee employee;
         private HourlyRatedEmployee? supervisor;
         private bool newEmployee;
 
+        /// <summary>
+        /// Loading the data of an existing employee or create a new employee an disable unavailable tabs.
+        /// </summary>
+        /// <param name="employee">Employee that should be loaded</param>
+        /// <param name="supervisor">Supervisor of the Employee</param>
         public EmployeeView(HourlyRatedEmployee? employee, HourlyRatedEmployee? supervisor)
         {
             InitializeComponent();
@@ -26,7 +35,7 @@ namespace Mitarbeiterverwaltung
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabWorkingTimes);
                 this.tabCtrlEditEmployee.Controls.Remove(this.tabSickDates);
 
-                btnRemove.Visible = false;
+                btnRemoveEmployee.Visible = false;
             }
             else
             {
@@ -34,13 +43,17 @@ namespace Mitarbeiterverwaltung
                 this.txtSurname.Text = employee.surname;
                 this.txtAddress.Text = employee.adress;
                 this.txtPhone.Text = employee.phone;
-                this.mtxtHolidays.Text = employee.vacationDays.ToString();
+                this.mtxtVacationDays.Text = employee.vacationDays.ToString();
                 this.mtxtWeekTimeLimit.Text = employee.weekTimeLimit.TotalHours.ToString();
                 this.btnResetPassword.Enabled = true;
             }
 
         }
 
+        /// <summary>
+        /// Getting the data from Dialog and save them to employee TODO maybe change 
+        /// </summary>
+        /// <returns>The employee with the values from the Dialog</returns>
         public HourlyRatedEmployee getUserData()
         {
             if(newEmployee)
@@ -53,26 +66,17 @@ namespace Mitarbeiterverwaltung
             data.Add("surname", txtSurname.Text);
             data.Add("adress", txtAddress.Text);
             data.Add("phone", txtPhone.Text);
-            data.Add("vacationDays", mtxtHolidays.Text);
+            data.Add("vacationDays", mtxtVacationDays.Text);
             data.Add("weekTimeLimit", new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0).ToString());
             employee.parse(data);
-            employee.supervisor = this.supervisor;
+            employee.supervisor = this.supervisor; 
 
-            return employee;
+            return employee; //todo pauseTime, vacation, workingTimes and Sick days
         }
 
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
+        /// <summary>
+        /// Remove the selected employee after a second confirmation
+        /// </summary>
         private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Soll der Mitarbeiter " + this.employee.surname + " " + this.employee.name + " wirklich gelöscht werden?", "Enfernen eines Mitarbeiters", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -87,12 +91,19 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Reset the Password of the current Employee.
+        /// </summary>
+        /// <remarks>If the current employee will sign in next time, he will be notified to change his password.</remarks>
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Das Passwort von " + this.employee.surname + " " + this.employee.name + " wurde erfolgreich zurückgesetzt", "Passwort eines Mitarbeiters zurücksetzen", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.employee.resetPassword();
         }
 
+        /// <summary>
+        /// Opens a new Dialog to add a new TimePeriod of Sick Days to selected Employee.
+        /// </summary>
         private void btnAddSickdays_Click(object sender, EventArgs e)
         {
             AddTimePeriodView addSickDays = new AddTimePeriodView(); 
@@ -112,11 +123,11 @@ namespace Mitarbeiterverwaltung
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Convert the entries of a <c>VacationRequest</c> to a <c>ListViewItem</c> to display in a ListView.
+        /// </summary>
+        /// <param name="vacationRequest">VacationRequest containing start Date, end Date and a state.</param>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem vacationRequestToItem(VacationRequest vacationRequest)
         {
             ListViewItem newItem = new ListViewItem(new string[] {
@@ -127,6 +138,12 @@ namespace Mitarbeiterverwaltung
             return newItem;
         }
 
+        /// <summary>
+        /// Convert a timestamp from checkInOutTimes to a <c>ListViewItem</c> to display in a ListView.
+        /// </summary>
+        /// <param name="timestamp">Time and Date</param>
+        /// <param name="stampType">Type of Stamp (in or out)</param>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem checkInOutTimeToItem(DateTime timestamp, string stampType)
         {
             ListViewItem newItem = new ListViewItem(new string[] {
@@ -137,6 +154,12 @@ namespace Mitarbeiterverwaltung
             return newItem;
         }
 
+        /// <summary>
+        /// Convert a <c>TimePeriod</c> to a <c>ListViewItem</c> to display in a ListView.
+        /// </summary>
+        /// <param name="timePeriod">start and end of <c>TimePeriod</c></param>
+        /// <param name="format">text format of ListViewItem in ListView</param>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem timePeriodToItem(TimePeriod timePeriod, string format = "dd.MM.yyyy")
         {
             ListViewItem newItem = new ListViewItem(new string[] {
@@ -146,17 +169,23 @@ namespace Mitarbeiterverwaltung
             return newItem;
         }
 
+        /// <summary>
+        /// Clear the ListView for Vacations and add all vacation requests of employee to ListView
+        /// </summary>
         private void updateLvVacations()
         {
             lvVacations.Items.Clear();
             for (int i = 0; i < employee.vacations.Count; i++)
             {
                 ListViewItem newItem = vacationRequestToItem(employee.vacations[i]);
-                newItem.Tag = i;
+                newItem.Tag = i; // tag used to identify index of item
                 lvVacations.Items.Add(newItem);
             }
         }
 
+        /// <summary>
+        /// Clear the ListView for SickDays and add all SickDay periods of employee to ListView
+        /// </summary>
         private void updateLvSickdays()
         {
             lvSickDays.Items.Clear();
@@ -164,11 +193,14 @@ namespace Mitarbeiterverwaltung
             foreach (TimePeriod sickday in employee.sickDays)
             {
                 ListViewItem newItem = timePeriodToItem(sickday);
-                newItem.Tag = index++;
+                newItem.Tag = index++; // tag used to identify index of item
                 lvSickDays.Items.Add(newItem);
             }
         }
 
+        /// <summary>
+        /// Clear the ListView for PauseTimes and add all PauseTimes of employee to ListView
+        /// </summary>
         private void updateLvPauseTimes()
         {
             lvPause.Items.Clear();
@@ -178,16 +210,20 @@ namespace Mitarbeiterverwaltung
                 foreach (TimePeriod pauseTime in employee.pauseTimes)
                 {
                     ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
-                    newItem.Tag = index++;
+                    newItem.Tag = index++; // tag used to identify index of item
                     lvPause.Items.Add(newItem);
                 }
             }
             else
             {
-                // skip loading pause times if empty
+                // skip loading pause times if empty 
+                //todo now not necessary anymore
             }
         }
 
+        /// <summary>
+        /// Clear the ListView for CheckInOutTimes and add all stamp times of employee to ListView
+        /// </summary>
         private void updateLvCheckInOutTimes()
         {
             lvCheckInOutTimes.Items.Clear();
@@ -200,6 +236,9 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Update the ListViews of the selected Tab on every change
+        /// </summary>
         private void tabCtrlEditEmployee_Selected(object sender, TabControlEventArgs e)
         {
             if (e.TabPage == tabVacations)
@@ -224,6 +263,10 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Deletes the selected SickDays period and updates ListView.
+        /// </summary>
+        /// <remarks>The button is disabled if no Item is selected.</remarks>
         private void btnRemoveSickdays_Click(object sender, EventArgs e)
         {
             int index = (int)lvSickDays.SelectedItems[0].Tag;
@@ -232,6 +275,9 @@ namespace Mitarbeiterverwaltung
             updateLvSickdays();
         }
 
+        /// <summary>
+        /// Toggle the buttons for changing the state of a pending VacationRequest if any item is selected.
+        /// </summary>
         private void lvVacations_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             bool enableState = lvVacations.SelectedItems.Count > 0;
@@ -239,6 +285,9 @@ namespace Mitarbeiterverwaltung
             btnDenyVacationRequest.Enabled = enableState;
         }
 
+        /// <summary>
+        /// Set the state of a vacation request to accepted.
+        /// </summary>
         private void btnAllowVacationRequest_Click(object sender, EventArgs e)
         {
             int index = (int)lvVacations.SelectedItems[0].Tag;
@@ -246,6 +295,9 @@ namespace Mitarbeiterverwaltung
             updateLvVacations();
         }
 
+        /// <summary>
+        /// Set the state of a vacation request to denied.
+        /// </summary>
         private void btnDenyVacationRequest_Click(object sender, EventArgs e)
         {
             int index = (int)lvVacations.SelectedItems[0].Tag;
@@ -253,6 +305,9 @@ namespace Mitarbeiterverwaltung
             updateLvVacations();
         }
 
+        /// <summary>
+        /// Starts the Dialog to add a new pausetime for the employee and updates ListView.
+        /// </summary>
         private void btnAddPause_Click(object sender, EventArgs e)
         {
             AddTimePeriodView addPauseView = new AddTimePeriodView();
@@ -271,12 +326,18 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Toggle the button for editing a pause time if any item is selected.
+        /// </summary>
         private void lvPause_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             bool enableState = lvPause.SelectedItems.Count > 0;
             btnRemovePause.Enabled = enableState;
         }
 
+        /// <summary>
+        /// Deletes the selected pause time for the employee and updates ListView.
+        /// </summary>
         private void btnRemovePause_click(object sender, EventArgs e)
         {
             int index = (int)lvPause.SelectedItems[0].Tag;
@@ -284,6 +345,14 @@ namespace Mitarbeiterverwaltung
             updateLvPauseTimes();
         }
 
+        /// <summary>
+        /// Opens a new Dialog to adjust the selected stamp time and updates the ListView.
+        /// </summary>
+        /// <remarks>
+        /// The timestamp can only be adjusted between the previous and next timestamp. 
+        /// If the selected timestamp is the first or the last it can only be adjusted 
+        /// in the opposite direction.
+        /// </remarks>
         private void btnEditCheckInOutTime_Click(object sender, EventArgs e)
         {
             int index = (int)lvCheckInOutTimes.SelectedItems[0].Tag;
@@ -326,12 +395,18 @@ namespace Mitarbeiterverwaltung
             updateLvCheckInOutTimes();
         }
 
+        /// <summary>
+        /// Toggle the button for editing a checkInOutTimes if any item is selected.
+        /// </summary>
         private void lvCheckInOutTimes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             bool enableState = lvCheckInOutTimes.SelectedItems.Count > 0;
             btnEditCheckInOutTime .Enabled = enableState;
         }
 
+        /// <summary>
+        /// Toggle the button for deleting a sick day period if any item is selected.
+        /// </summary>
         private void lvSickDays_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvSickDays.SelectedItems.Count > 0;

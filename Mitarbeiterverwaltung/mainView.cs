@@ -14,6 +14,9 @@ using Mitarbeiterverwaltung.DAL;
 
 namespace Mitarbeiterverwaltung
 {
+    /// <summary>
+    /// Main window of the application displaying the checkInView, statistics and the ManagementView. 
+    /// </summary>
     public partial class MainView : Form
     {
         Panel ?activePanel;
@@ -38,6 +41,9 @@ namespace Mitarbeiterverwaltung
             updateTime(new object(), new EventArgs ());
         }
 
+        /// <summary>
+        /// Updates the time for the system used for automatic logout and displaying current time to the employee.
+        /// </summary>
         private void updateTime(Object myObject, EventArgs myEventArgs)
         {
             //handle time display
@@ -65,23 +71,35 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        private void onLoad(object sender, EventArgs e) //TODO rename to mainviewL
+        /// <summary>
+        /// Reset the window to login and clear employee list when the application is loaded.
+        /// </summary>
+        private void onLoad(object sender, EventArgs e)
         {
-            lvEmployees.Items.Clear();
+            lvEmployees.Items.Clear(); //todo really necessary
             changeToLogin();
 
         }
 
+        /// <summary>
+        /// Set or reset the start time for the auto logout timer to current system time.
+        /// </summary>
         private void startLogoutCountdown()
         {
             logoutTimerBegin = timeHandler.getTime();
         }
 
+        /// <summary>
+        /// Logout current employee if timer is expired.
+        /// </summary>
         private void timeoutReached()
         {
             this.BeginInvoke(new Action(btnLogout.PerformClick));
         }
 
+        /// <summary>
+        /// Loads the latest statistics to make the working and vacation times visible for the current employee.
+        /// </summary>
         private void loadStatistics()
         {
             lblWorkingTime.Text = String.Format("{0} ({1})", roundTimeSpan(currentEmployee.getTimeWorkedThisWeek(), settings.timeRounding).ToString(@"hh\:mm"), currentEmployee.getTimeWorkedThisWeek().ToString(@"hh\:mm"));
@@ -89,6 +107,9 @@ namespace Mitarbeiterverwaltung
             lblHolidaysRemaining.Text = currentEmployee.vacationDays.ToString();
         }
 
+        /// <summary>
+        /// Check for all subordinates if there are open vacation requests to remind the supervisor to decide over them.
+        /// </summary>
         private void checkForPendingVacationRequests()
         {
             int counter = 0;
@@ -120,6 +141,9 @@ namespace Mitarbeiterverwaltung
             //}
         }
 
+        /// <summary>
+        /// Clear the ListView for subordinates and add all subordinates to ListView
+        /// </summary>
         private void updateLvEmployees()
         {
             lvItems.Clear();
@@ -140,6 +164,12 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Round a TimeSpan to a given precision of minutes 
+        /// </summary>
+        /// <param name="inTimeSpan">TimeSpan to round</param>
+        /// <param name="numberOfMinutes">rounding precision</param>
+        /// <returns>rounded TimeSpan</returns>
         private TimeSpan roundTimeSpan(TimeSpan inTimeSpan, int numberOfMinutes)
         {
             int roundedMinutes = ((inTimeSpan.Minutes + numberOfMinutes / 2) / numberOfMinutes) * numberOfMinutes;
@@ -147,6 +177,11 @@ namespace Mitarbeiterverwaltung
             return timeSpan;
         }
 
+        /// <summary>
+        /// Convert the properties of an Employee to a ListViewItem to display in ListView
+        /// </summary>
+        /// <param name="employee">hourly payed employee</param>
+        /// <returns>ListViewItem to Display in a ListView</returns>
         private ListViewItem employeeToItem(HourlyRatedEmployee employee)
         {
             List<string> subordinates = ((Dictionary<string, Employee>)employee.subordinates).Select(kvp => (kvp.Value.surname + ", " + kvp.Value.name)).ToList(); ;
@@ -165,6 +200,10 @@ namespace Mitarbeiterverwaltung
             return listItem;
         }
 
+        /// <summary>
+        /// Adds a single employee to the ListView in ManagmentView.
+        /// </summary>
+        /// <param name="employee"></param>
         private void addEmployeeToList(HourlyRatedEmployee employee)
         {
             ListViewItem newItem = employeeToItem(employee);
@@ -172,22 +211,27 @@ namespace Mitarbeiterverwaltung
             lvItems.Add(employee.Id, newItem);
         }
 
+        /// <summary>
+        /// Opens a Dialog to register a new Employee in the system and updates the ListView.
+        /// </summary>
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             startLogoutCountdown();
             EmployeeView newStaffMember = new EmployeeView(null, currentEmployee);
             newStaffMember.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = newStaffMember.ShowDialog(this);
-            
-
             if (result == DialogResult.OK)
             {
-
                 companyData.addEmployee(newStaffMember.getUserData());
                 updateLvEmployees();
-            }
+            } //todo add else block
         }
 
+        /// <summary>
+        /// Change the Panel from CheckInOut to ManagementView and the other way round.
+        /// </summary>
+        /// <remarks>To become access to ManagementView the user must be authenticated via a password first.</remarks>
+        /// <exception cref="ErrorException"></exception>
         private void btnPanelCtrl_Click(object sender, EventArgs e)
         {
             if (activePanel == managementPanel)
@@ -216,6 +260,11 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Sign in the current user to checkInOutView if id is assigned to a valid employee.
+        /// </summary>
+        /// <remarks>At this stage no additional authentication is required to access checkInOutView.</remarks>
+        /// <exception cref="WarningException"></exception>
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string Id = txtEmployeeId.Text;
@@ -231,10 +280,11 @@ namespace Mitarbeiterverwaltung
             {
                 throw new WarningException("No employee with ID " + Id);
             }
-
-            
         }
 
+        /// <summary>
+        /// Sign in the current user to ManagementView if password is correct.
+        /// </summary>
         private void btnSecureLogin_Click(object sender, EventArgs e)
         {
             if (currentEmployee.checkPassword(txtPassword.Text))
@@ -250,12 +300,18 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Sign out the current employee and load LoginView.
+        /// </summary>
         private void btnLogout_Click(object sender, EventArgs e)
         {
             currentEmployee = null;
             changeToLogin();
         }
 
+        /// <summary>
+        /// Hide all elements from MainView to load next view.
+        /// </summary>
         private void hideAll()
         {
             btnAddEmployee.Visible = false;
@@ -269,6 +325,9 @@ namespace Mitarbeiterverwaltung
             pnlSecureLogin.Visible = false;
         }
 
+        /// <summary>
+        /// Toggle the title of the button and the corresponding label when checkIn state changes.
+        /// </summary>
         private void updateCheckInState()
         {
             if (currentEmployee.isCheckedIn())
@@ -283,6 +342,9 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Load the Panel to enter a new password.
+        /// </summary>
         private void changeToUpdatePassword()
         {
             changeToLogin();
@@ -290,6 +352,9 @@ namespace Mitarbeiterverwaltung
             pnlChangePassword.Visible = true;
         }
 
+        /// <summary>
+        /// Change the view to CheckInPanel and update statistics.
+        /// </summary>
         private void changeToCheckin()
         {
             hideAll();
@@ -304,7 +369,9 @@ namespace Mitarbeiterverwaltung
             loadStatistics();
         }
 
-
+        /// <summary>
+        /// Change the view to ManagementView and load ListView of subordinates.
+        /// </summary>
         private void changeToManagement()
         {
             hideAll();
@@ -320,6 +387,9 @@ namespace Mitarbeiterverwaltung
             checkForPendingVacationRequests();
         }
 
+        /// <summary>
+        /// Change the view to LoginView.
+        /// </summary>
         private void changeToLogin()
         {
             hideAll();
@@ -331,7 +401,7 @@ namespace Mitarbeiterverwaltung
         }
 
         /// <summary>
-        /// Changes MainView to Panel for Login into secured area
+        /// Changes MainView to Panel for Login into secured area.
         /// </summary>
         private void changeToSecureLogin()
         {
@@ -347,18 +417,18 @@ namespace Mitarbeiterverwaltung
             this.ActiveControl = txtPassword;
         }
 
+        /// <summary>
+        /// Toggle the button for edit the selected employee if any is selected.
+        /// </summary>
         private void lvEmployees_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (e.IsSelected)
-            {
-                btnEditEmployee.Enabled = true;
-            }
-            else
-            {
-                btnEditEmployee.Enabled = false;
-            }
+            bool enableState = lvEmployees.SelectedItems.Count > 0;
+            btnEditEmployee.Enabled = enableState;
         }
 
+        /// <summary>
+        /// Opens a Dialog to edit a selected employee and updates the ListView if employee is deleted.
+        /// </summary>
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
             startLogoutCountdown();
@@ -366,7 +436,7 @@ namespace Mitarbeiterverwaltung
             HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
             if (currentEmployee != null)
             {
-                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee);
+                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee); //todo rename to understand difference
                 newStaffMember.StartPosition = FormStartPosition.CenterParent;
                 DialogResult result = newStaffMember.ShowDialog(this);
                 if (result == DialogResult.OK)
@@ -383,6 +453,9 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Check in or check out the current employee.
+        /// </summary>
         private void btnCheckIn_Click(object sender, EventArgs e)
         {
             if (currentEmployee.isCheckedIn())
@@ -397,24 +470,33 @@ namespace Mitarbeiterverwaltung
             updateCheckInState();
         }
 
-        private void btnRequestHolidays_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Opens a Dialog to manage personal vacation.
+        /// </summary>
+        /// <remarks>Possibility to view old requests or add a new request</remarks>
+        private void btnVacationManagement_Click(object sender, EventArgs e)
         {
-            //Todo hier das Fenster für Urlaub beantragen öffnen
             startLogoutCountdown();
-            VacationRequestView holidayRequest = new VacationRequestView(currentEmployee);
-            holidayRequest.StartPosition = FormStartPosition.CenterParent;
-            DialogResult result = holidayRequest.ShowDialog(this);
+            VacationRequestView vacationRequest = new VacationRequestView(currentEmployee);
+            vacationRequest.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = vacationRequest.ShowDialog(this);
             if(result == DialogResult.OK)
             {
-                holidayRequest.sendVacationRequest();
-            }
+                vacationRequest.sendVacationRequest();
+            } //todo add else block
         }
 
+        /// <summary>
+        /// Enables the testing possibility to change the current system time.
+        /// </summary>
         private void lblClock_Click(object sender, EventArgs e)
         {
             dateTimePicker1.Visible = !dateTimePicker1.Visible;
         }
 
+        /// <summary>
+        /// Updates the system time if value is changed manually. 
+        /// </summary>
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedTime = ((DateTimePicker)sender).Value;
@@ -422,6 +504,9 @@ namespace Mitarbeiterverwaltung
             updateTime(null, null);
         }
 
+        /// <summary>
+        /// Opens a new Dialog with system settings. 
+        /// </summary>
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsView settingsDialog = new SettingsView(this.settings);
@@ -430,9 +515,12 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 settingsDialog.getSettings();
-            }
+            } //todo add else block 
         }
 
+        /// <summary>
+        /// Opens a new Dialog with the about view.
+        /// </summary>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutView aboutBox1 = new AboutView(settings);
@@ -440,21 +528,13 @@ namespace Mitarbeiterverwaltung
             aboutBox1.ShowDialog(this);
         }
 
-        private void lblWorkingTime_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblOvertimeRemaining_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Changes the password to the new one if password check was successful otherwise show error. 
+        /// </summary>
         private void btnChangePassword_Click(object sender, EventArgs e)
         {
             if (currentEmployee.setPassword(txtNewPassword.Text, txtNewPasswordRepeated.Text))
             {
-                //save new password
                 lblPasswordChangeFailed.Visible = false;
                 startLogoutCountdown();
                 changeToCheckin();
@@ -464,38 +544,49 @@ namespace Mitarbeiterverwaltung
             {
                 lblPasswordChangeFailed.Visible = true;
             }
-            // clear password input fields
             txtNewPassword.Clear();
             txtNewPasswordRepeated.Clear();
         }
 
+        /// <summary>
+        /// Change the view to change password. 
+        /// </summary>
         private void lblPasswordForgottten_Click(object sender, EventArgs e)
         {
             startLogoutCountdown();
             changeToUpdatePassword();
         }
 
+        /// <summary>
+        /// Loading the EmployeeView via double click on the listViewItem of the employee. 
+        /// </summary>
         private void lvEmployees_DoubleClick(object sender, EventArgs e)
         {
             this.BeginInvoke(new Action(btnEditEmployee.PerformClick));
         }
 
+        /// <summary>
+        /// Accept also an enter key press on the keyboard as click on the login button to login the employee
+        /// </summary>
         private void txtEmployeeId_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
                 this.BeginInvoke(new Action(btnLogin.PerformClick));
                 e.Handled = true;
-            }
+            } //todo add else block
         }
 
+        /// <summary>
+        /// Accept also an enter key press on the keyboard as click on the login button to authenticate the employee.
+        /// </summary>
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
                 this.BeginInvoke(new Action(btnSecureLogin.PerformClick));
                 e.Handled = true;
-            }
+            } //todo add else block
         }
     }
 }

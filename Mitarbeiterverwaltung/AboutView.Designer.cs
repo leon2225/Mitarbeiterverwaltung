@@ -54,7 +54,6 @@
             this.lblCompanyName.Size = new System.Drawing.Size(119, 32);
             this.lblCompanyName.TabIndex = 1;
             this.lblCompanyName.Text = "Ivy GmbH";
-            this.lblCompanyName.Click += new System.EventHandler(this.lblCompanyName_Click);
             // 
             // label2
             // 
@@ -66,7 +65,7 @@
             this.label2.Text = "Copyright: Damian Goldbach \r\nund Leon Farchau";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // About
+            // AboutView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +76,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(538, 365);
             this.MinimumSize = new System.Drawing.Size(538, 365);
-            this.Name = "About";
+            this.Name = "AboutView";
             this.Text = "Über";
             ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.ResumeLayout(false);
