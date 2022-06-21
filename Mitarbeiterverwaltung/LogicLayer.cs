@@ -595,12 +595,30 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
-        /// //todo if implemented
+        /// Returns a timespan for the worked Time in period until now
         /// </summary>
-        /// <returns></returns>
-        public TimeSpan getTimeWorkedThisWeek()
+        /// <param name="period"></param>
+        /// <returns>timespan containing the time worked in period</returns>
+        public TimeSpan getTimeWorkedIn(TimePeriod period)
         {
-            return new TimeSpan();
+            TimeSpan workTime = new TimeSpan();
+            //iterates over checkOUT times only
+            for (int i = 1; i < this.checkInOutTimes.Count; i+=2)
+            {
+                DateTime startDate = this.checkInOutTimes[i - 1];
+                DateTime endDate = this.checkInOutTimes[i];
+
+
+                if(period.contains(startDate))
+                {
+                    workTime += endDate - startDate;
+                }
+                else
+                {
+                    //checkInOutTime is not in this month -> do nothing
+                }
+            }
+            return workTime;
         }
 
         /// <summary>
