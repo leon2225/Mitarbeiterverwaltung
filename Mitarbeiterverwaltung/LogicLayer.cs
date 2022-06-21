@@ -107,7 +107,8 @@ namespace Mitarbeiterverwaltung.LL
     public class VacationRequest : TimePeriod
     {
         public RequestState state { get; set; }
-        public VacationRequest (DateTime startDate, DateTime endDate, RequestState state) : base (startDate, endDate)
+        public bool useOVertime { get; set; }
+        public VacationRequest (DateTime startDate, DateTime endDate, RequestState state, bool useOvertime) : base (startDate, endDate)
         {
             this.state = state;
         }
@@ -118,7 +119,7 @@ namespace Mitarbeiterverwaltung.LL
         /// <returns>String containing startDate - endDate - state</returns>
         public override String ToString()
         {
-            return startDate.ToString() + " - " + endDate.ToString() + " - " + state.ToString();
+            return startDate.ToString() + " - " + endDate.ToString() + " - " + state.ToString() + " - " + useOVertime.ToString();
         }
 
         /// <summary>
@@ -132,9 +133,10 @@ namespace Mitarbeiterverwaltung.LL
             String[] parts = str.Split(" - ");
 
             RequestState state = RequestState.none;
-            if (Enum.TryParse<RequestState>(parts[2], out state))
+            bool useOvertime = false;
+            if (Enum.TryParse<RequestState>(parts[2], out state) && bool.TryParse(parts[3], out useOvertime))
             {
-                return new VacationRequest(DateTime.Parse(parts[0]), DateTime.Parse(parts[1]), state);
+                return new VacationRequest(DateTime.Parse(parts[0]), DateTime.Parse(parts[1]), state, bool.Parse(parts[3]));
             }
             else
             {
@@ -423,9 +425,10 @@ namespace Mitarbeiterverwaltung.LL
         /// </summary>
         /// <param name="startTime">beginning of the vacation</param>
         /// <param name="endTime">ending of the vacation</param>
-        public void requestVacation(DateTime startTime, DateTime endTime)
+        /// <param name="useOvertime">true if overtime should be taken before vacationtime is consumed</param>
+        public void requestVacation(DateTime startTime, DateTime endTime, bool useOvertime)
         {
-            VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending);
+            VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending, useOvertime);
             vacations.Add(vacationRequest);
         }
 

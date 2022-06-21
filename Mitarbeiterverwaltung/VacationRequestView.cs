@@ -39,7 +39,7 @@ namespace Mitarbeiterverwaltung
             DateTime endDate = dtpVacationEnd.Value;
             if (endDate > startDate)
             {
-                employee.requestVacation(startDate, endDate);
+                employee.requestVacation(startDate, endDate, chkUseOvertime.Checked);
             }
             else
             {

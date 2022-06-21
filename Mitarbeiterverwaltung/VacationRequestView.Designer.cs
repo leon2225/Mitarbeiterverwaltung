@@ -42,7 +42,7 @@
             this.lblRemainingHolidaysPreview = new System.Windows.Forms.Label();
             this.lblRemainingOvertimePreview = new System.Windows.Forms.Label();
             this.lblInvalid = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkUseOvertime = new System.Windows.Forms.CheckBox();
             this.tabControlHolidayRequest = new System.Windows.Forms.TabControl();
             this.tabNewRequest = new System.Windows.Forms.TabPage();
             this.tabViewRequests = new System.Windows.Forms.TabPage();
@@ -81,7 +81,7 @@
             this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingHolidaysPreview, 1, 3);
             this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingOvertimePreview, 1, 2);
             this.pnlNewHolidayRequest.Controls.Add(this.lblInvalid, 2, 3);
-            this.pnlNewHolidayRequest.Controls.Add(this.checkBox1, 2, 2);
+            this.pnlNewHolidayRequest.Controls.Add(this.chkUseOvertime, 2, 2);
             this.pnlNewHolidayRequest.Location = new System.Drawing.Point(0, 0);
             this.pnlNewHolidayRequest.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNewHolidayRequest.Name = "pnlNewHolidayRequest";
@@ -237,18 +237,18 @@
             this.lblInvalid.Text = "Ungültig";
             this.lblInvalid.Visible = false;
             // 
-            // checkBox1
+            // chkUseOvertime
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox1.Location = new System.Drawing.Point(282, 62);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(100, 19);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Text = "Verwenden";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkUseOvertime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkUseOvertime.AutoSize = true;
+            this.chkUseOvertime.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkUseOvertime.Location = new System.Drawing.Point(282, 62);
+            this.chkUseOvertime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkUseOvertime.Name = "chkUseOvertime";
+            this.chkUseOvertime.Size = new System.Drawing.Size(100, 19);
+            this.chkUseOvertime.TabIndex = 13;
+            this.chkUseOvertime.Text = "Verwenden";
+            this.chkUseOvertime.UseVisualStyleBackColor = true;
             // 
             // tabControlHolidayRequest
             // 
@@ -371,6 +371,6 @@
         private Panel panel1;
         private Label label3;
         private Label lblRemainingOvertimePreview;
-        private CheckBox checkBox1;
+        private CheckBox chkUseOvertime;
     }
 }
