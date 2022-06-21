@@ -78,7 +78,6 @@ namespace Mitarbeiterverwaltung
         {
             lvEmployees.Items.Clear(); //todo really necessary
             changeToLogin();
-
         }
 
         /// <summary>

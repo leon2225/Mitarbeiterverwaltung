@@ -221,7 +221,7 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
-        /// //TODO was macht die funktion?
+        /// Transforms password into a string of byte-values, prepared for hash function.
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
@@ -229,6 +229,7 @@ namespace Mitarbeiterverwaltung.LL
         {
             StringBuilder sb = new StringBuilder();
             foreach (byte b in GetHash(password))
+                //convert byte into byte into hex string with two digits
                 sb.Append(b.ToString("X2"));
 
             return sb.ToString();
@@ -279,7 +280,7 @@ namespace Mitarbeiterverwaltung.LL
             }
             else
             {
-                passwordHash = hashPassword(password); //TODO this?
+                passwordHash = hashPassword(password);
                 this.resetPasswordFlag = false;
                 return true;
             }
@@ -859,7 +860,11 @@ namespace Mitarbeiterverwaltung.LL
             if (employee.supervisor != null)
             {
                 employee.supervisor.subordinates.Add(employee.Id, employee);
-            } //todo error if no supervisor found, delete employee
+            }
+            else
+            {
+                //employee has no supervisor -> employee should not be add as someones subordinate
+            }
         }
 
         /// <summary>
@@ -872,7 +877,11 @@ namespace Mitarbeiterverwaltung.LL
             if (employee.supervisor != null)
             {
                 employee.supervisor.subordinates.Remove(employee.Id);
-            } //todo error if no supervisor found, error?
+            }
+            else
+            {
+                //employee has no supervisor -> employee should not be removed as someones subordinate
+            }
             foreach (Employee subordinate in employee.subordinates.Values)
             {
                 subordinate.supervisor = employee.supervisor;

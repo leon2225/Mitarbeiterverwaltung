@@ -205,19 +205,12 @@ namespace Mitarbeiterverwaltung
         {
             lvPause.Items.Clear();
             int index = 0;
-            if (employee != null)
+            
+            foreach (TimePeriod pauseTime in employee.pauseTimes)
             {
-                foreach (TimePeriod pauseTime in employee.pauseTimes)
-                {
-                    ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
-                    newItem.Tag = index++; // tag used to identify index of item
-                    lvPause.Items.Add(newItem);
-                }
-            }
-            else
-            {
-                // skip loading pause times if empty 
-                //todo now not necessary anymore
+                ListViewItem newItem = timePeriodToItem(pauseTime, "HH:mm");
+                newItem.Tag = index++; // tag used to identify index of item
+                lvPause.Items.Add(newItem);
             }
         }
 
@@ -410,7 +403,7 @@ namespace Mitarbeiterverwaltung
         private void lvSickDays_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvSickDays.SelectedItems.Count > 0;
-            btnRemoveSickDays .Enabled = enableState; //TODO rename button
+            btnRemoveSickDays.Enabled = enableState;
         }
 
 
