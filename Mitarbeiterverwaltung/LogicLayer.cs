@@ -47,7 +47,7 @@ namespace Mitarbeiterverwaltung.LL
         /// </summary>
         /// <param name="day">day to verify</param>
         /// <returns><c>true</c> if the day is in <c>TimePeriod</c> and <c>false</c> if not.</returns>
-        public bool isInTimespan(DateTime day)
+        public bool contains(DateTime day)
         {
             if (day > startDate && day < endDate)
             {
@@ -80,6 +80,34 @@ namespace Mitarbeiterverwaltung.LL
 
             return Math.Round(businessDays, 1);
         }
+
+        /// <summary>
+        /// Bounds the TimePeriod so that it is within frame.
+        /// </summary>
+        /// <param name="frame"> frame to which the TimePeriod should be bounded to</param>
+        /// <returns>Bounded TimePeriod; startDate == endDate if there is no conjuction</returns>
+        public TimePeriod boundTo(TimePeriod frame)
+        {
+            TimePeriod output = this;
+
+            bool startInMonth = frame.contains(startDate);
+            bool endInMonth = frame.contains(endDate);
+
+            if (startInMonth || endInMonth)
+            {
+                //only consider that part of the timeperiod, that is actually in this month
+                output.startDate = startInMonth ? startDate : frame.startDate;
+                output.endDate = endInMonth ? endDate : frame.endDate;
+            }
+            else
+            {
+                //if there is no conjunction between the timePeriods set endDate to startData
+                output.endDate = output.startDate;
+            }
+
+            return output;
+        }
+
         /// <summary>
         /// Converts the two dates to one String.
         /// </summary>
