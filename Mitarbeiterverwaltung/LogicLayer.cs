@@ -865,70 +865,59 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
-        /// Calculate the total working time including overtime on weekends and vacationTimes.  
+        /// Calculates worked time and overtime for the month in which the current date of the timeHandler lies
         /// </summary>
-        /// <exception cref="ErrorException"></exception>
-        public void calcWorkingTime()
+        /// <param name="timeHandler">timeHandler selecting the month for that workedTime and overTime should be calculated</param>
+        /// <returns>TimeSpan representing the overTime</returns>
+        public TimeSpan calculateOvertime(TimeHandler timeHandler)
         {
-            TimeSpan workingTimeDayLimit;
-            TimeSpan totalWorkingTimeDay = new TimeSpan();
-            TimeSpan overtimeDay = new TimeSpan();
-            TimeSpan totalOvertime = new TimeSpan();
-            TimeSpan totalWorkingTime = new TimeSpan();
-            List<DateTime> currentDayTimestamps;
-            // --- to be called on every sign in and stamp out ---
-            //get week working time
-            workingTimeDayLimit = this.weekTimeLimit.Divide(5);
-            DateTime firstDay = this.checkInOutTimes.First().Date;
-            DateTime lastDay = this.checkInOutTimes.Last().Date;
-            DateTime day = firstDay;
-            // https://stackoverflow.com/questions/23825438/how-to-count-datetimes-with-same-day
-            var listOfDays = this.checkInOutTimes.GroupBy(x => x.Date).Select(x => x.Key).ToList();
-            while (day != lastDay)
+            TimePeriod monthPeriod = timeHandler.getMonth();
 
+            TimeSpan workedTime = getTimeWorkedIn(monthPeriod);
+
+            TimeSpan contractTime = monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+
+            //subtract vacation from contracttime
+            foreach(VacationRequest vacationRequest in vacations)
             {
-                currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(day));
-                totalWorkingTimeDay = getTimeWorkedForOneDay(currentDayTimestamps);
-                overtimeDay = TimeSpan.Zero;
-                if (isDayWeekend(day))
+                if(vacationRequest.state == RequestState.accepted)
                 {
-                    overtimeDay = totalWorkingTimeDay;
-                    totalOvertime = totalOvertime.Add(overtimeDay);
-                    continue;
-                }
-                else if (isDayVacation(day))
-                {
-                    overtimeDay = totalWorkingTimeDay;
-                    // and add one working day
-                }
-                else if (isDaySickDay(day))
-                {
-                    // is possible if worked and then becomes sick --> ignore stamp times?
-                    throw new ErrorException("Mitarbeiter arbeitet obwohl krank");
+                    TimePeriod boundedPeriod = vacationRequest.boundTo(monthPeriod);
+                    if (boundedPeriod.startDate != boundedPeriod.endDate)
+                    { 
+                        contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                    }
+                    else
+                    {
+                        //Vacation is not in current Month -> do nothing
+                    }
                 }
                 else
                 {
-                    //normal working day
-                    overtimeDay = workingTimeDayLimit - totalWorkingTimeDay;
-
+                    //vacation not granted -> not taken and time should not be subtracted
                 }
-                if (day == lastDay)
-                {
-                    //extra calc for last day
-                    //only necessary if lastday is today otherwise the day is already closed
-                    totalWorkingTime = totalWorkingTime.Add(totalWorkingTimeDay);
-                }
-                else
-                {
-                    totalWorkingTime = totalWorkingTime.Add(workingTimeDayLimit);
-                    totalOvertime = totalOvertime.Add(overtimeDay); //add day overtime to total overtime
-                }
-                day.AddDays(1);
             }
-            totalWorkingTime = totalWorkingTime;
-            totalOvertime = totalOvertime;
-            //  save new total working Time to employee
-            //  round display time visible
+
+            //subtract sickdays from contractTime
+            foreach(TimePeriod sickDay in sickDays)
+            {
+                TimePeriod boundedPeriod = sickDay.boundTo(monthPeriod);
+
+                if (boundedPeriod.startDate != boundedPeriod.endDate)
+                {
+                    contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                }
+                else
+                {
+                    //Sickday is not in current Month -> do nothing
+                }
+            }
+
+            // workedTime now contains the time worked this month
+            // contractTime now contains the time the employee should work this month
+
+            return workedTime - contractTime;
+
         }
     }
 
