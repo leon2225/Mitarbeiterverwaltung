@@ -505,6 +505,24 @@ namespace Mitarbeiterverwaltung.LL
             else
             {
                 DateTime now = timeHandler.getTime();
+
+                //check if there where pausetimes during the checked in time
+                TimePeriod checkedInPeriod = new TimePeriod(checkInOutTimes.Last(), now);
+                foreach(TimePeriod pausePeriod in pauseTimes)
+                {
+                    if (checkedInPeriod.contains(pausePeriod.startDate) && checkedInPeriod.contains(pausePeriod.endDate))
+                    {
+                        //pausePeriod was during checkedInPeriod -> Add checkInOutTimes for pause
+                        checkInOutTimes.Add(pausePeriod.startDate);
+                        checkInOutTimes.Add(pausePeriod.endDate);
+                    }
+                    else
+                    {
+                        //pausePeriod was outside checkedInPeriod -> do nothing
+                        //CheckoutTime during pause -> ignore pause -> do nothing
+                    }
+                }
+
                 checkInOutTimes.Add(now);
             }
 
@@ -770,7 +788,7 @@ namespace Mitarbeiterverwaltung.LL
         {
             foreach (var vacation in this.vacations)
             {
-                if (vacation.isInTimespan(day) && vacation.state == RequestState.accepted)
+                if (vacation.contains(day) && vacation.state == RequestState.accepted)
                 {
                     return true;
                 }
@@ -801,7 +819,7 @@ namespace Mitarbeiterverwaltung.LL
             //todo in eine Funktion schreiben mit find
             foreach (var sickDayPeriod in this.sickDays)
             {
-                if (sickDayPeriod.isInTimespan(day))
+                if (sickDayPeriod.contains(day))
                 {
                     return true;
                 }
