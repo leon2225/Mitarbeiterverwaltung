@@ -197,6 +197,17 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
+        /// Gets the month as TimePeriod represented bý the TimeHandler
+        /// </summary>
+        /// <returns> TimePeriod that contains the current month represented by the TimeHandler</returns>
+        public TimePeriod getMonth()
+        {
+            DateTime startOfMonth = new DateTime(getTime().Year, getTime().Month, 1);
+            DateTime endOfMonth = startOfMonth.AddMonths(1) - new TimeSpan(0, 0, 1);
+            return new TimePeriod(startOfMonth, endOfMonth);
+        }
+
+        /// <summary>
         /// Set a new time or date to manipulate the current time. 
         /// </summary>
         /// <param name="time">desired new time</param>
