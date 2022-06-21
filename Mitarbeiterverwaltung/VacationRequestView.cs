@@ -70,7 +70,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                holidaysCount = getBusinessDays(startDate, endDate);
+                holidaysCount = new TimePeriod(startDate, endDate).getBusinessDays();
                 remainingHolidays = employee.vacationDays - holidaysCount;
                 requestValid = remainingHolidays >= 0;
             }
@@ -90,28 +90,6 @@ namespace Mitarbeiterverwaltung
                 lblRemainingHolidays.Visible = false;
                 btnSendRequest.Enabled = false;
             }
-        }
-
-        /// <summary>
-        /// Remove all weekends from timespan between start and end day to get working days count.
-        /// </summary>
-        /// <returns>number of working day between start and end date</returns>
-        private double getBusinessDays(DateTime startDay, DateTime endDay) //todo verschieben nach timespan?
-        {
-            // Source: https://alecpojidaev.wordpress.com/2009/10/29/work-days-calculation-with-c/
-            // {
-            double businessDays =
-                1 + ((endDay.Date - startDay.Date).TotalDays * 5 -
-                (startDay.DayOfWeek - endDay.DayOfWeek) * 2) / 7;
-
-            businessDays -= (endDay.DayOfWeek == DayOfWeek.Saturday) ? 1 : 0;
-            businessDays -= (startDay.DayOfWeek == DayOfWeek.Sunday) ? 1 : 0;
-            // }
-
-            businessDays -= (endDay.Hour <= 12) ? 0.5 : 0;
-            businessDays -= (startDay.Hour >= 12) ? 0.5 : 0;
-
-            return Math.Round(businessDays,1);
         }
 
         //Todo evtl noch rename wegen editEmployee

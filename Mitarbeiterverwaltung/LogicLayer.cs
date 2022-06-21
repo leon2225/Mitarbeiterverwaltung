@@ -60,6 +60,27 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
+        /// Remove all weekends from timespan between start and end day to get working days count.
+        /// </summary>
+        /// <returns>working days between start and end date</returns>
+        public double getBusinessDays()
+        {
+            // Source: https://alecpojidaev.wordpress.com/2009/10/29/work-days-calculation-with-c/
+            // {
+            double businessDays =
+                1 + ((endDate.Date - startDate.Date).TotalDays * 5 -
+                (startDate.DayOfWeek - endDate.DayOfWeek) * 2) / 7;
+
+            businessDays -= (endDate.DayOfWeek == DayOfWeek.Saturday) ? 1 : 0;
+            businessDays -= (startDate.DayOfWeek == DayOfWeek.Sunday) ? 1 : 0;
+            // }
+
+            businessDays -= (endDate.Hour <= 12) ? 0.5 : 0;
+            businessDays -= (startDate.Hour >= 12) ? 0.5 : 0;
+
+            return Math.Round(businessDays, 1);
+        }
+        /// <summary>
         /// Converts the two dates to one String.
         /// </summary>
         /// <returns>String containing startDate - endDate</returns>
