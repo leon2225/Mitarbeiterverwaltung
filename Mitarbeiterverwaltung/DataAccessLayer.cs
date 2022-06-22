@@ -37,7 +37,7 @@ namespace Mitarbeiterverwaltung.DAL
             string csvString = File.ReadAllText(path);
 
             var actualPropertyNames = HourlyRatedEmployee.getPropertyNames();
-           
+
             List<string> csvLines = csvString.Split("\r\n").ToList();
 
             var propertyNames = csvLines[0].Split(" ,").ToList();
@@ -49,7 +49,8 @@ namespace Mitarbeiterverwaltung.DAL
             {
                 throw new ErrorException("Laden der CSV-Datei fehlgeschlagen");
             }
-            
+
+            //propertyNames.Remove("vacationDaysLeft");
             //remove header from lines
             csvLines.RemoveAt(0);
 

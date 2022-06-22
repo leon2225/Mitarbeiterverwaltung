@@ -447,7 +447,10 @@ namespace Mitarbeiterverwaltung.LL
         };
         public List<TimePeriod> sickDays { get; set; } = new List<TimePeriod>();
         public List<VacationRequest> vacations{ get; set; } = new List<VacationRequest>();
-        public int vacationDays { get; set; } = 0;
+        public int vacationDays { get; private set; } = 0;
+        public float vacationDaysLeft { get; private set; } = 0;
+        private TimeSpan overTime { get; set; } = new TimeSpan(); //ToDo Add to parser + to string
+
 
         public HourlyRatedEmployee(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password)
         {
@@ -583,21 +586,16 @@ namespace Mitarbeiterverwaltung.LL
         /// //todo if implemented
         /// </summary>
         /// <returns></returns>
-        public TimeSpan getTotalWorktime()
+        public TimeSpan getOvertime(TimeHandler timeHandler)
         {
-            return new TimeSpan();
+            TimeSpan contractedTime = calculateContractTime(timeHandler);
+            TimeSpan workedTime = getTimeWorkedIn(timeHandler.getMonth());
+
+            //don't add undertime until end of month if the workedTime isn't greater than the contractedTime
+            return (contractedTime > workedTime) ? overTime : overTime + contractedTime - workedTime;
         }
 
-        /// <summary>
-        /// //todo if implemented
-        /// </summary>
-        /// <returns></returns>
-        public TimeSpan getOvertime()
-        {
-            return new TimeSpan();
-        }
-
-        /// <summary>
+        /*/// <summary>
         /// Calculate the working time for today from the checkInOut times.
         /// </summary>
         /// <returns>TimeSpan of time worked today</returns>
@@ -606,7 +604,7 @@ namespace Mitarbeiterverwaltung.LL
             List<DateTime> currentDayTimestamps;
             currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(DateTime.Now.Date));
             return getTimeWorkedForOneDay(currentDayTimestamps);
-        }
+        }*/
 
         /// <summary>
         /// //todo if implemented

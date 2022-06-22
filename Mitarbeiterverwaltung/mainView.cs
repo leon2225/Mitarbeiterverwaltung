@@ -105,7 +105,7 @@ namespace Mitarbeiterverwaltung
             lblWorkingTime.Text = String.Format("{0} ({1})", 
                 roundTimeSpan(timeWorked, settings.timeRounding).ToString(@"hh\:mm"), 
                 timeWorked.ToString(@"hh\:mm"));
-            lblOvertimeRemaining.Text = currentEmployee.getOvertime().ToString(@"hh\:mm");
+            lblOvertimeRemaining.Text = currentEmployee.getOvertime(timeHandler).ToString(@"hh\:mm");
             lblHolidaysRemaining.Text = currentEmployee.vacationDays.ToString();
         }
 
@@ -196,7 +196,7 @@ namespace Mitarbeiterverwaltung
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
                 roundTimeSpan(employee.getTimeWorkedIn(timeHandler.getMonth()), settings.timeRounding).ToString(),
-                roundTimeSpan(employee.getOvertime(), settings.timeRounding).ToString(),
+                roundTimeSpan(employee.getOvertime(timeHandler), settings.timeRounding).ToString(),
                 employee.vacationDays.ToString()
             });
             return listItem;
