@@ -505,11 +505,17 @@ namespace Mitarbeiterverwaltung.LL
             else
             {
                 DateTime now = timeHandler.getTime();
+                TimeSpan dateOffset = now.Date - DateTime.MinValue;
 
                 //check if there where pausetimes during the checked in time
                 TimePeriod checkedInPeriod = new TimePeriod(checkInOutTimes.Last(), now);
+
                 foreach(TimePeriod pausePeriod in pauseTimes)
                 {
+                    //transform pausePeriod to today
+                    pausePeriod.startDate += dateOffset;
+                    pausePeriod.endDate += dateOffset;
+
                     if (checkedInPeriod.contains(pausePeriod.startDate) && checkedInPeriod.contains(pausePeriod.endDate))
                     {
                         //pausePeriod was during checkedInPeriod -> Add checkInOutTimes for pause
