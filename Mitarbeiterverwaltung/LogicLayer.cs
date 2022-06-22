@@ -487,6 +487,20 @@ namespace Mitarbeiterverwaltung.LL
             }
             else
             {
+                DateTime monthStart = timeHandler.getMonth().startDate;
+
+                if( this.checkInOutTimes.FindAll(d => d >= monthStart).Count == 0)
+                {
+                    //If there a no other checkInOutTimes in the current month -> first checkIn in new month
+                    // -> call endOfMonthCallback
+                    //callback should handler at least: archiving checkInOutTimes until end of last month
+                    // + calc overtime in last month
+                }
+                else
+                {
+                    //checkIn is not the first of this month -> do nothing
+                }
+
                 DateTime now = timeHandler.getTime();
                 checkInOutTimes.Add(now);
             }
@@ -539,6 +553,8 @@ namespace Mitarbeiterverwaltung.LL
                         checkInOutTimes.Add(timeHandler.getMonth().startDate - new TimeSpan(0, 0, 1));
 
                         //call endOfMonthCallback
+                        //callback should handler at least: archiving checkInOutTimes until end of last month
+                        // + calc overtime in last month
 
                         //add 00:00:00 as checkInTime
                         checkInOutTimes.Add(timeHandler.getMonth().startDate);
@@ -642,6 +658,126 @@ namespace Mitarbeiterverwaltung.LL
             return workTime;
         }
 
+
+        /// <summary>
+        /// Check if a selected day is in a vacation period.
+        /// </summary>
+        /// <param name="day">day to check</param>
+        /// <returns><c>true</c> if day is in vacation period, otherwise <c>false</c></returns>
+        private bool isDayVacation(DateTime day)
+        {
+            foreach (var vacation in this.vacations)
+            {
+                if (vacation.contains(day) && vacation.state == RequestState.accepted)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Check if a selected day is at weekend.
+        /// </summary>
+        /// <param name="day">day to check</param>
+        /// <returns><c>true</c> if day is at weekend, otherwise <c>false</c></returns>
+        private bool isDayWeekend(DateTime day)
+        {
+            if (day.DayOfWeek == DayOfWeek.Sunday || day.DayOfWeek == DayOfWeek.Saturday)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Check if a selected day is in a sick day period.
+        /// </summary>
+        /// <param name="day">day to check</param>
+        /// <returns><c>true</c> if day is a sick day, otherwise <c>false</c></returns>
+        private bool isDaySickDay(DateTime day)
+        {
+            //todo in eine Funktion schreiben mit find
+            foreach (var sickDayPeriod in this.sickDays)
+            {
+                if (sickDayPeriod.contains(day))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /*
+        /// <summary>
+        /// Calculate working time for a given day.
+        /// </summary>
+        /// <param name="day">day to calculate</param>
+        /// <returns>TimeSpan of total working time for the selected day</returns>
+        /// <exception cref="ErrorException"></exception>
+        public TimeSpan getTimeWorkedForOneDay(List<DateTime> day)
+        {
+            if (day.Count % 2 != 0)
+                throw new ErrorException("Fehler bei der Berechnung der Arbeitszeit");
+            TimeSpan totalTime = new TimeSpan();
+            for (int i = 0; i < day.Count; i += 2)
+            {
+                TimePeriod workingPeriod = new TimePeriod(this.checkInOutTimes[i], this.checkInOutTimes[i + 1]);
+                totalTime = totalTime.Add(workingPeriod.getDuration());
+            }
+            return totalTime;
+        }*/
+
+        /// <summary>
+        /// Calculates the contracted for the month in which the current date of the timeHandler lies
+        /// </summary>
+        /// <param name="timeHandler">timeHandler selecting the month for that the contractedTime should be calculated</param>
+        /// <returns>TimeSpan representing the contractedTime</returns>
+        public TimeSpan calculateContractTime(TimeHandler timeHandler)
+        {
+            TimePeriod monthPeriod = timeHandler.getMonth();
+
+            TimeSpan contractTime = monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+
+            //subtract vacation from contracttime
+            foreach(VacationRequest vacationRequest in vacations)
+            {
+                if(vacationRequest.state == RequestState.accepted)
+                {
+                    TimePeriod boundedPeriod = vacationRequest.boundTo(monthPeriod);
+                    if (boundedPeriod.startDate != boundedPeriod.endDate)
+                    { 
+                        contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                    }
+                    else
+                    {
+                        //Vacation is not in current Month -> do nothing
+                    }
+                }
+                else
+                {
+                    //vacation not granted -> not taken and time should not be subtracted
+                }
+            }
+
+            //subtract sickdays from contractTime
+            foreach(TimePeriod sickDay in sickDays)
+            {
+                TimePeriod boundedPeriod = sickDay.boundTo(monthPeriod);
+
+                if (boundedPeriod.startDate != boundedPeriod.endDate)
+                {
+                    contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                }
+                else
+                {
+                    //Sickday is not in current Month -> do nothing
+                }
+            }
+
+            // contractTime now contains the time the employee should work this month
+            return contractTime;
+        }
+
+
         /// <summary>
         /// Read all Properties an Employee can contain and sort them alphabetical.
         /// </summary>
@@ -692,7 +828,7 @@ namespace Mitarbeiterverwaltung.LL
 
                     case "pauseTimes":
                     case "sickDays":
-                        List<TimePeriod> timePeriods = (List<TimePeriod>)value; 
+                        List<TimePeriod> timePeriods = (List<TimePeriod>)value;
                         if (timePeriods.Count > 0)
                         {
                             value = string.Join(";", timePeriods);
@@ -798,147 +934,6 @@ namespace Mitarbeiterverwaltung.LL
                 }
 
             }
-
-
-        }
-
-        // add pause times stamps
-        // get pause times
-        // get copy of stamps for one day
-        // for pauseTime in PauseTimes
-        //      check for conflicting pause times
-        //          if stamp out is before pause ends and if it is the last time stamped
-        //              check out at beginning of pause (reduce working time)
-        //          else if stamp out before pause ends and not the last time 
-        //              move stamp out to end of the pause   
-        //------------------------------
-        //      if not stamped out at pause time beginn
-        //          get last stamp in before first pause
-        //          add stamp out at pause beginning
-        //          add stamp in at pause end
-        //
-
-        /// <summary>
-        /// Check if a selected day is in a vacation period.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is in vacation period, otherwise <c>false</c></returns>
-        private bool isDayVacation(DateTime day)
-        {
-            foreach (var vacation in this.vacations)
-            {
-                if (vacation.contains(day) && vacation.state == RequestState.accepted)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Check if a selected day is at weekend.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is at weekend, otherwise <c>false</c></returns>
-        private bool isDayWeekend(DateTime day)
-        {
-            if (day.DayOfWeek == DayOfWeek.Sunday || day.DayOfWeek == DayOfWeek.Saturday)
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Check if a selected day is in a sick day period.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is a sick day, otherwise <c>false</c></returns>
-        private bool isDaySickDay(DateTime day)
-        {
-            //todo in eine Funktion schreiben mit find
-            foreach (var sickDayPeriod in this.sickDays)
-            {
-                if (sickDayPeriod.contains(day))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Calculate working time for a given day.
-        /// </summary>
-        /// <param name="day">day to calculate</param>
-        /// <returns>TimeSpan of total working time for the selected day</returns>
-        /// <exception cref="ErrorException"></exception>
-        public TimeSpan getTimeWorkedForOneDay(List<DateTime> day)
-        {
-            if (day.Count % 2 != 0)
-                throw new ErrorException("Fehler bei der Berechnung der Arbeitszeit");
-            TimeSpan totalTime = new TimeSpan();
-            for (int i = 0; i < day.Count; i += 2)
-            {
-                TimePeriod workingPeriod = new TimePeriod(this.checkInOutTimes[i], this.checkInOutTimes[i + 1]);
-                totalTime = totalTime.Add(workingPeriod.getDuration());
-            }
-            return totalTime;
-        }
-
-        /// <summary>
-        /// Calculates worked time and overtime for the month in which the current date of the timeHandler lies
-        /// </summary>
-        /// <param name="timeHandler">timeHandler selecting the month for that workedTime and overTime should be calculated</param>
-        /// <returns>TimeSpan representing the overTime</returns>
-        public TimeSpan calculateOvertime(TimeHandler timeHandler)
-        {
-            TimePeriod monthPeriod = timeHandler.getMonth();
-
-            TimeSpan workedTime = getTimeWorkedIn(monthPeriod);
-
-            TimeSpan contractTime = monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
-
-            //subtract vacation from contracttime
-            foreach(VacationRequest vacationRequest in vacations)
-            {
-                if(vacationRequest.state == RequestState.accepted)
-                {
-                    TimePeriod boundedPeriod = vacationRequest.boundTo(monthPeriod);
-                    if (boundedPeriod.startDate != boundedPeriod.endDate)
-                    { 
-                        contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
-                    }
-                    else
-                    {
-                        //Vacation is not in current Month -> do nothing
-                    }
-                }
-                else
-                {
-                    //vacation not granted -> not taken and time should not be subtracted
-                }
-            }
-
-            //subtract sickdays from contractTime
-            foreach(TimePeriod sickDay in sickDays)
-            {
-                TimePeriod boundedPeriod = sickDay.boundTo(monthPeriod);
-
-                if (boundedPeriod.startDate != boundedPeriod.endDate)
-                {
-                    contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
-                }
-                else
-                {
-                    //Sickday is not in current Month -> do nothing
-                }
-            }
-
-            // workedTime now contains the time worked this month
-            // contractTime now contains the time the employee should work this month
-
-            return workedTime - contractTime;
-
         }
     }
 
