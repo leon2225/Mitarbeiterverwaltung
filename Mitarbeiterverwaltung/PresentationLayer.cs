@@ -17,7 +17,7 @@ namespace Mitarbeiterverwaltung
             Settings settings = initFileParser.loadSettings();
 
 
-            CompanyData companyData = new CompanyData("Chio Chips uns Knabberartikel GmbH"); //todo use a better default company name
+            CompanyData companyData = new CompanyData("Chio Chips und Knabberartikel GmbH"); //todo use a better default company name -> what ?! this is perfect!
 
             var csvStorageHandler = new CSVStorageHandler(settings.csvPath);
             //

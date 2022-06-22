@@ -521,6 +521,23 @@ namespace Mitarbeiterverwaltung.LL
                         //pausePeriod was outside checkedInPeriod -> do nothing
                         //CheckoutTime during pause -> ignore pause -> do nothing
                     }
+
+                    //check if there where a month-change during the checked in time
+                    if (checkedInPeriod.contains(timeHandler.getMonth().startDate))
+                    {
+                        //there where a month-change during checkedInPeriod -> split worktime up into last-month and this month
+                        //add 23:59:59 at last day of the last month as checkout Time
+                        checkInOutTimes.Add(timeHandler.getMonth().startDate - new TimeSpan(0, 0, 1));
+
+                        //call endOfMonthCallback
+
+                        //add 00:00:00 as checkInTime
+                        checkInOutTimes.Add(timeHandler.getMonth().startDate);
+                    }
+                    else
+                    {
+                        //no change of month during checkedInTime -> do nothing
+                    }
                 }
 
                 checkInOutTimes.Add(now);
