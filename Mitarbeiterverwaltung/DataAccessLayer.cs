@@ -50,7 +50,6 @@ namespace Mitarbeiterverwaltung.DAL
                 throw new ErrorException("Laden der CSV-Datei fehlgeschlagen");
             }
 
-            //propertyNames.Remove("vacationDaysLeft");
             //remove header from lines
             csvLines.RemoveAt(0);
 
@@ -112,7 +111,7 @@ namespace Mitarbeiterverwaltung.DAL
     public class InitFileParser
     {
         public string path;
-        private Dictionary<string, Dictionary<string, string>> data; //todo rename to something better
+        private Dictionary<string, Dictionary<string, string>> iniData;
         public InitFileParser(string filePath = "init.ini")
         {
             path = filePath;
@@ -128,23 +127,23 @@ namespace Mitarbeiterverwaltung.DAL
             string currentDir = Directory.GetCurrentDirectory();
             if (settings.csvPath.Contains(currentDir))
             {
-                data["settings"]["csvPath"] = "." + settings.csvPath.Substring(currentDir.Length);
+                iniData["settings"]["csvPath"] = "." + settings.csvPath.Substring(currentDir.Length);
             }
             else
             {
-                data["settings"]["csvPath"] = settings.csvPath;
+                iniData["settings"]["csvPath"] = settings.csvPath;
             }
             if (settings.logoPath.Contains(currentDir))
             {
-                data["settings"]["logoPath"] = "." + settings.logoPath.Substring(currentDir.Length);
+                iniData["settings"]["logoPath"] = "." + settings.logoPath.Substring(currentDir.Length);
             }
             else
             {
-                data["settings"]["logoPath"] = settings.logoPath;
+                iniData["settings"]["logoPath"] = settings.logoPath;
             }
-            data["settings"]["companyName"] = settings.companyName;
-            data["settings"]["timeRounding"] = settings.timeRounding.ToString();
-            data["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
+            iniData["settings"]["companyName"] = settings.companyName;
+            iniData["settings"]["timeRounding"] = settings.timeRounding.ToString();
+            iniData["settings"]["autoLogoutTimeout"] = settings.autoLogoutTimeout.ToString();
         }
 
         /// <summary>
@@ -323,7 +322,7 @@ namespace Mitarbeiterverwaltung.DAL
                 }
             }
             // Suspend the screen.  
-            data = result;
+            iniData = result;
             return result;
         }
 

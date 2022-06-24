@@ -599,9 +599,10 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
-        /// //todo if implemented
+        ///  Returns the overtime in upto the date represented by timeHandler
         /// </summary>
-        /// <returns></returns>
+        /// <param name="timeHandler">TimeHandler that represents the curren time</param>
+        /// <returns>Overtime upto the time represented by timehandler</returns>
         public TimeSpan getOvertime(TimeHandler timeHandler)
         {
             TimeSpan contractedTime = calculateContractTime(timeHandler);
@@ -611,30 +612,10 @@ namespace Mitarbeiterverwaltung.LL
             return (contractedTime > workedTime) ? overTime : overTime + contractedTime - workedTime;
         }
 
-        /*/// <summary>
-        /// Calculate the working time for today from the checkInOut times.
-        /// </summary>
-        /// <returns>TimeSpan of time worked today</returns>
-        public TimeSpan getTimeWorkedToday()
-        {
-            List<DateTime> currentDayTimestamps;
-            currentDayTimestamps = this.checkInOutTimes.FindAll(d => d.Equals(DateTime.Now.Date));
-            return getTimeWorkedForOneDay(currentDayTimestamps);
-        }*/
-
-        /// <summary>
-        /// //todo if implemented
-        /// </summary>
-        /// <returns></returns>
-        public TimeSpan getPauseTime()
-        {
-            return new TimeSpan();
-        }
-
         /// <summary>
         /// Returns a timespan for the worked Time in period until now
         /// </summary>
-        /// <param name="period"></param>
+        /// <param name="period">TimePeriod for that the workedTime should be calculated</param>
         /// <returns>timespan containing the time worked in period</returns>
         public TimeSpan getTimeWorkedIn(TimePeriod period)
         {
@@ -657,74 +638,6 @@ namespace Mitarbeiterverwaltung.LL
             }
             return workTime;
         }
-
-
-        /// <summary>
-        /// Check if a selected day is in a vacation period.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is in vacation period, otherwise <c>false</c></returns>
-        private bool isDayVacation(DateTime day)
-        {
-            foreach (var vacation in this.vacations)
-            {
-                if (vacation.contains(day) && vacation.state == RequestState.accepted)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Check if a selected day is at weekend.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is at weekend, otherwise <c>false</c></returns>
-        private bool isDayWeekend(DateTime day)
-        {
-            if (day.DayOfWeek == DayOfWeek.Sunday || day.DayOfWeek == DayOfWeek.Saturday)
-                return true;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Check if a selected day is in a sick day period.
-        /// </summary>
-        /// <param name="day">day to check</param>
-        /// <returns><c>true</c> if day is a sick day, otherwise <c>false</c></returns>
-        private bool isDaySickDay(DateTime day)
-        {
-            //todo in eine Funktion schreiben mit find
-            foreach (var sickDayPeriod in this.sickDays)
-            {
-                if (sickDayPeriod.contains(day))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        /*
-        /// <summary>
-        /// Calculate working time for a given day.
-        /// </summary>
-        /// <param name="day">day to calculate</param>
-        /// <returns>TimeSpan of total working time for the selected day</returns>
-        /// <exception cref="ErrorException"></exception>
-        public TimeSpan getTimeWorkedForOneDay(List<DateTime> day)
-        {
-            if (day.Count % 2 != 0)
-                throw new ErrorException("Fehler bei der Berechnung der Arbeitszeit");
-            TimeSpan totalTime = new TimeSpan();
-            for (int i = 0; i < day.Count; i += 2)
-            {
-                TimePeriod workingPeriod = new TimePeriod(this.checkInOutTimes[i], this.checkInOutTimes[i + 1]);
-                totalTime = totalTime.Add(workingPeriod.getDuration());
-            }
-            return totalTime;
-        }*/
 
         /// <summary>
         /// Calculates the contracted for the month in which the current date of the timeHandler lies

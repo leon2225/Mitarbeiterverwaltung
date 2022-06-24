@@ -76,7 +76,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void onLoad(object sender, EventArgs e)
         {
-            lvEmployees.Items.Clear(); //todo really necessary
+            lvEmployees.Items.Clear();
             changeToLogin();
         }
 
@@ -274,7 +274,6 @@ namespace Mitarbeiterverwaltung
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string Id = txtEmployeeId.Text;
-            //TODO transform key into valid pattern i.e. 0001 -> 1 
             if (companyData.employees.Keys.Contains(Id))
             {
                 currentEmployee = (HourlyRatedEmployee)companyData.employees[Id];
