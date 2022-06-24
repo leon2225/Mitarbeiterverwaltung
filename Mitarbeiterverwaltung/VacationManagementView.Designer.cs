@@ -1,6 +1,6 @@
 ﻿namespace Mitarbeiterverwaltung
 {
-    partial class VacationRequestView
+    partial class VacationManagementView
     {
         /// <summary>
         /// Required designer variable.

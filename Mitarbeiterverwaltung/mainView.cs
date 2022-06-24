@@ -479,7 +479,7 @@ namespace Mitarbeiterverwaltung
         private void btnVacationManagement_Click(object sender, EventArgs e)
         {
             startLogoutCountdown();
-            VacationRequestView vacationRequest = new VacationRequestView(currentEmployee);
+            VacationManagementView vacationRequest = new VacationManagementView(currentEmployee);
             vacationRequest.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = vacationRequest.ShowDialog(this);
             if(result == DialogResult.OK)

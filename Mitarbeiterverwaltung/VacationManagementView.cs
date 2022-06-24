@@ -14,12 +14,12 @@ namespace Mitarbeiterverwaltung
     /// <summary>
     /// Dialog to display previous vacation requests and add a new request with possibility to use overtime as vacationDays.
     /// </summary>
-    public partial class VacationRequestView : Form
+    public partial class VacationManagementView : Form
     {
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
 
-        public VacationRequestView(HourlyRatedEmployee? employee)
+        public VacationManagementView(HourlyRatedEmployee? employee)
         {
             InitializeComponent();
             this.employee = employee;
@@ -37,15 +37,9 @@ namespace Mitarbeiterverwaltung
         {
             DateTime startDate = dtpVacationStart.Value;
             DateTime endDate = dtpVacationEnd.Value;
-            if (endDate > startDate)
-            {
-                employee.requestVacation(startDate, endDate, chkUseOvertime.Checked);
-            }
-            else
-            {
-                throw new ErrorException("Das gewählte Datum ist ungültig");
-                 //TODO unnecessary because of previous check
-            }
+
+            //Datetime values are valid due to automatic range adjustments
+            employee.requestVacation(startDate, endDate, chkUseOvertime.Checked);
         }
 
         /// <summary>
@@ -92,7 +86,6 @@ namespace Mitarbeiterverwaltung
             }
         }
 
-        //Todo evtl noch rename wegen editEmployee
         /// <summary>
         /// Convert the entries of a <c>VacationRequest</c> to a <c>ListViewItem</c> to display in a ListView.
         /// </summary>
