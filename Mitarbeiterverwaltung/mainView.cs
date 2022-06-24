@@ -226,7 +226,11 @@ namespace Mitarbeiterverwaltung
             {
                 companyData.addEmployee(newStaffMember.getUserData());
                 updateLvEmployees();
-            } //todo add else block
+            }
+            else
+            {
+                //Employee should not be added -> do nothing
+            }
         }
 
         /// <summary>
@@ -435,23 +439,23 @@ namespace Mitarbeiterverwaltung
         {
             startLogoutCountdown();
             string id = lvEmployees.SelectedItems[0].Text;
-            HourlyRatedEmployee currentEmployee = (HourlyRatedEmployee)companyData.employees[id];
-            if (currentEmployee != null)
+
+            //No check needed, because only valid employee-IDs are selectable
+            HourlyRatedEmployee selectedEmployee = (HourlyRatedEmployee)companyData.employees[id];
+            
+            EmployeeView employeeView = new EmployeeView(selectedEmployee, currentEmployee);
+            employeeView.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = employeeView.ShowDialog(this);
+            if (result == DialogResult.OK)
             {
-                EmployeeView newStaffMember = new EmployeeView(currentEmployee, this.currentEmployee); //todo rename to understand difference
-                newStaffMember.StartPosition = FormStartPosition.CenterParent;
-                DialogResult result = newStaffMember.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    newStaffMember.getUserData();
-                    updateLvEmployees();
-                }
-                else if (result == DialogResult.Abort)
-                {
-                    companyData.removeEmployee(currentEmployee);
-                    lvEmployees.SelectedItems[0].Remove();
-                    updateLvEmployees();
-                }
+                employeeView.getUserData();
+                updateLvEmployees();
+            }
+            else if (result == DialogResult.Abort)
+            {
+                companyData.removeEmployee(selectedEmployee);
+                lvEmployees.SelectedItems[0].Remove();
+                updateLvEmployees();
             }
         }
 
@@ -485,7 +489,11 @@ namespace Mitarbeiterverwaltung
             if(result == DialogResult.OK)
             {
                 vacationRequest.sendVacationRequest();
-            } //todo add else block
+            } 
+            else
+            {
+                //No vacation should be added -> do nothing
+            }
         }
 
         /// <summary>
@@ -517,7 +525,11 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 settingsDialog.getSettings();
-            } //todo add else block 
+            }
+            else
+            {
+                //Not pressed ok -> do nothing
+            }
         }
 
         /// <summary>
@@ -525,9 +537,9 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutView aboutBox1 = new AboutView(settings);
-            aboutBox1.StartPosition = FormStartPosition.CenterParent;
-            aboutBox1.ShowDialog(this);
+            AboutView aboutView = new AboutView(settings);
+            aboutView.StartPosition = FormStartPosition.CenterParent;
+            aboutView.ShowDialog(this);
         }
 
         /// <summary>
@@ -576,7 +588,11 @@ namespace Mitarbeiterverwaltung
             {
                 this.BeginInvoke(new Action(btnLogin.PerformClick));
                 e.Handled = true;
-            } //todo add else block
+            }
+            else
+            {
+                //Only login on enter -> do nothing
+            }
         }
 
         /// <summary>
@@ -588,7 +604,9 @@ namespace Mitarbeiterverwaltung
             {
                 this.BeginInvoke(new Action(btnSecureLogin.PerformClick));
                 e.Handled = true;
-            } //todo add else block
+            } //Only accept on enter -> do nothing
+        }
+
         /// <summary>
         /// EventHandler for displaying help message
         /// </summary>

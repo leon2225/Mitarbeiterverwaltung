@@ -179,8 +179,11 @@ namespace Mitarbeiterverwaltung.DAL
                 {
                     if (!trimmedLine.Contains(']'))
                     {
-                        // TODO raise error
                         throw new ErrorException("Ungültige Initalisierungsdatei");
+                    }
+                    else
+                    {
+                        // Ini-File is valid -> do nothing
                     }
 
                     int sectionStart = trimmedLine.IndexOf('[') + 1;
@@ -199,16 +202,27 @@ namespace Mitarbeiterverwaltung.DAL
                     String oldValue = trimmedLine.Substring(keyEnd + 1);
                     oldValue = oldValue.Trim();
 
-                    //TODO: Validate if section and key exists in dict
-                    String newValue = data[currentSection][key];
-
-                    // add " if there are whitespaces in the value
-                    if (newValue.Any(Char.IsWhiteSpace))
+                    if (iniData.ContainsKey(currentSection) && iniData[currentSection].ContainsKey(key))
                     {
-                        newValue = "\"" + newValue + "\""; 
-                    }
+                        String newValue = iniData[currentSection][key];
 
-                    currentLine = currentLine.Replace(oldValue, newValue);
+                        // add " if there are whitespaces in the value
+                        if (newValue.Any(Char.IsWhiteSpace))
+                        {
+                            newValue = "\"" + newValue + "\""; 
+                        }
+                        else
+                        {
+                            //no chars to escape -> do nothing
+                        }
+
+                        currentLine = currentLine.Replace(oldValue, newValue);
+                    }
+                    else
+                    {
+                        //section/key pair does not exist-> ignore
+                    }
+                    
 
                 }
                 else
@@ -230,19 +244,31 @@ namespace Mitarbeiterverwaltung.DAL
         {
             Dictionary<string, Dictionary<string, string>> result = new Dictionary<string, Dictionary<string, string>>();
 
-
-            //TODO check if file exists
+            //check if file exists
+            if ( !System.IO.File.Exists(path))
+            {
+                throw new ErrorException("Es existiert keine Ini-Datei!");
+            }
+            else
+            {
+                // path does exist -> do nothing
+            }
 
             string currentSection = "NoSection";
             // Read the file and display it line by line.  
             foreach (string line in System.IO.File.ReadLines(path))
             {
                 string currentLine = line;
-                //remove comments
+
+                //remove comments from ini file
                 int commentStart = currentLine.IndexOf('#');
                 if (commentStart != -1)
                 {
                     currentLine = currentLine.Substring(0, commentStart);
+                }
+                else
+                {
+                    //no comment -> do nothing
                 }
 
                 //remove whitespace
@@ -253,8 +279,13 @@ namespace Mitarbeiterverwaltung.DAL
                 {
                     if (!currentLine.Contains(']'))
                     {
-                        // TODO raise error
+                        throw new ErrorException("Ini Datei is ungültig.");
                     }
+                    else
+                    {
+                        // line valid -> do nothing
+                    }
+
                     int sectionStart = currentLine.IndexOf('[') + 1;
                     int sectionEnd = currentLine.IndexOf(']');
 
@@ -277,6 +308,10 @@ namespace Mitarbeiterverwaltung.DAL
                     if (value[value.Length - 1] == '"' && value[0] == '"')
                     {
                         value = value.Substring(1, value.Length - 2);
+                    }
+                    else
+                    {
+                        //There are no " to remove -> do nothing
                     }
 
                     result[currentSection].Add(key, value);
@@ -308,6 +343,10 @@ namespace Mitarbeiterverwaltung.DAL
                 {
                     throw new ErrorException("Ungültige Initalisierungsdatei");
                 }
+                else
+                {
+                    //Ini-File valid -> do nothing
+                }
             }
             string currentDir = Directory.GetCurrentDirectory();
             settings.companyName = fileContent["settings"]["companyName"];
@@ -316,10 +355,18 @@ namespace Mitarbeiterverwaltung.DAL
             {
                 settings.logoPath = currentDir + settings.logoPath.Substring(1);
             }
+            else
+            {
+                //path is absolute -> take string and don't change it
+            }
             settings.csvPath = fileContent["settings"]["csvPath"];
             if (settings.csvPath[0] == '.')
             {
                 settings.csvPath = currentDir + settings.csvPath.Substring(1);
+            }
+            else
+            {
+                //path is absolute -> take string and don't change it
             }
             settings.timeRounding = Int32.Parse(fileContent["settings"]["timeRounding"]);
             settings.autoLogoutTimeout = Int32.Parse(fileContent["settings"]["autoLogoutTimeout"]);

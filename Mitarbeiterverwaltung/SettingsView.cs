@@ -25,9 +25,16 @@ namespace Mitarbeiterverwaltung
             txtFilePathCsv.Text = startValues.csvPath;
             txtfilePathIcon.Text = startValues.logoPath;
             int itemIdx = nmbrRounding.FindStringExact(startValues.timeRounding.ToString());
-            if (itemIdx == -1) //todo add else block
+            if (itemIdx == -1) 
+            {
+                throw new WarningException("Ungültige Rundungszeit in der Ini-Datei!");
                 itemIdx = 0;
-                //throw new Exception("Invalid time rounding"); //Todo exception
+            }
+            else
+            {
+                //Valid value read from ini-file -> do nothing
+            }
+
             nmbrRounding.SelectedIndex = itemIdx;
             mtxtAutoLogoutTimeout.Text = startValues.autoLogoutTimeout.ToString();
         }
@@ -57,7 +64,11 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 txtFilePathCsv.Text = openFileDialogCsv.FileName;
-            } //todo add else block
+            }
+            else
+            {
+                //No file was selected with ok -> do nothing
+            }
         }
 
         /// <summary>
@@ -70,7 +81,11 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 txtfilePathIcon.Text = openFileDialogPng.FileName;
-            } //todo add else block
+            }
+            else
+            {
+                //No file was selected with ok -> do nothing
+            }
         }
     }
 }
