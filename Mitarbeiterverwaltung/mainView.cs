@@ -589,6 +589,13 @@ namespace Mitarbeiterverwaltung
                 this.BeginInvoke(new Action(btnSecureLogin.PerformClick));
                 e.Handled = true;
             } //todo add else block
+        /// <summary>
+        /// EventHandler for displaying help message
+        /// </summary>
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String messageText = Properties.Resources.HelpString;
+            MessageBox.Show(messageText, "Hilfe", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
     }
 }
