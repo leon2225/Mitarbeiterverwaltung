@@ -16,13 +16,11 @@ namespace Mitarbeiterverwaltung
             InitFileParser initFileParser = new InitFileParser(iniPath);
             Settings settings = initFileParser.loadSettings();
 
-
-            CompanyData companyData = new CompanyData("Chio Chips und Knabberartikel GmbH"); //todo use a better default company name -> what ?! this is perfect!
-
             var csvStorageHandler = new CSVStorageHandler(settings.csvPath);
-            //
             var loadedEmployees = csvStorageHandler.load();
-            companyData.employees = loadedEmployees;
+
+            CompanyData companyData = new CompanyData("Chio Chips und Knabberartikel GmbH", loadedEmployees);
+
             // Enable the Windows version depended design settings
             Application.EnableVisualStyles();
             // Enable WinForms exception handling

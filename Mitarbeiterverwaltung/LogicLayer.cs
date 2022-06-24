@@ -232,12 +232,12 @@ namespace Mitarbeiterverwaltung.LL
     public class Employee
     {
         private static int maxEmployeeId = 999;
-        public string Id { get; set; }
-        public string passwordHash { get; set; }
-        public string name { get; set; }
-        public string surname { get; set; }
-        public string adress { get; set; }
-        public string phone { get; set; }
+        public string Id { get; private set; }
+        public string passwordHash { get; private set; }
+        public string name { get; private set; }
+        public string surname { get; private set; }
+        public string adress { get; private set; }
+        public string phone { get; private set; }
         public Employee? supervisor { get; set; }
         public Dictionary<string, Employee> subordinates { get; set; }
 
@@ -439,17 +439,17 @@ namespace Mitarbeiterverwaltung.LL
     /// </summary>
     public class HourlyRatedEmployee : Employee
     {
-        public TimeSpan weekTimeLimit { get; set; } = TimeSpan.Zero; //worktime per week due to contract
-        public List<DateTime> checkInOutTimes { get; set; } = new List<DateTime>();
-        public List<TimePeriod> pauseTimes { get; set; } = new List<TimePeriod>() 
+        public TimeSpan weekTimeLimit { get; private set; } = TimeSpan.Zero; //worktime per week due to contract
+        public List<DateTime> checkInOutTimes { get; private set; } = new List<DateTime>();
+        public List<TimePeriod> pauseTimes { get; private set; } = new List<TimePeriod>() 
         { 
             new TimePeriod(DateTime.MinValue + new TimeSpan(12,0,0), new TimeSpan(0,45,0))
         };
-        public List<TimePeriod> sickDays { get; set; } = new List<TimePeriod>();
-        public List<VacationRequest> vacations{ get; set; } = new List<VacationRequest>();
+        public List<TimePeriod> sickDays { get; private set; } = new List<TimePeriod>();
+        public List<VacationRequest> vacations{ get; private set; } = new List<VacationRequest>();
         public int vacationDays { get; private set; } = 0;
-        public float vacationDaysLeft { get; private set; } = 0;
-        private TimeSpan overTime { get; set; } = new TimeSpan(); //ToDo Add to parser + to string
+        public float vacationDaysLeft { get; private set; } = 0; //ToDo Add to parser + to string
+        public  TimeSpan overTime { get; private set; } = new TimeSpan(); //ToDo Add to parser + to string
 
 
         public HourlyRatedEmployee(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password)
@@ -942,14 +942,14 @@ namespace Mitarbeiterverwaltung.LL
     /// </summary>
     public class CompanyData
     {
-        public Dictionary<string, Employee> employees { get; set; }
-        public string logoPath { get; set; }
-        public string companyName { get; set; }
+        public Dictionary<string, Employee> employees { get; private set; }
+        private string logoPath { get; set; }
+        private string companyName { get; set; }
 
 
-        public CompanyData(string companyName, string logoPath = "logo.png")
+        public CompanyData(string companyName, Dictionary<string, Employee> employees, string logoPath = "logo.png")
         {
-            employees = new Dictionary<string, Employee>();
+            this.employees = employees;
             this.companyName = companyName;
             this.logoPath = logoPath;
         }
