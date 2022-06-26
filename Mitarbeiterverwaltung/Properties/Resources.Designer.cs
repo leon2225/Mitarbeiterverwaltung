@@ -61,7 +61,14 @@ namespace Mitarbeiterverwaltung.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Ste [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Informationen zum Programm: 
+        ///Das Ihnen vorliegende Programm dient der Arbeitszeiterfassung und Verwaltung von Urlauben für die Mitarbeiter Ihrer Firma. Im Umfang des Programms ist die Beantragung von Urlaub, die Genehmigung und das Einsehen der übrigen Urlaubstage und Überstunden enthalten.
+        ///
+        ///LoginView:
+        ///Der Startbildschirm des Programmes enthält den LoginView. Zum Einloggen benötigen Sie ihre persönliche Mitarbeiter ID. 
+        ///
+        ///Firmensettings:
+        ///Informationen zu den hinterlegten Firmeninformationen finden Sie [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string HelpString {
             get {

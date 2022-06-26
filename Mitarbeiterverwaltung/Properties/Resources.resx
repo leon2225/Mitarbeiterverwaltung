@@ -118,14 +118,44 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HelpString" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+    <value>Informationen zum Programm: 
+Das Ihnen vorliegende Programm dient der Arbeitszeiterfassung und Verwaltung von Urlauben für die Mitarbeiter Ihrer Firma. Im Umfang des Programms ist die Beantragung von Urlaub, die Genehmigung und das Einsehen der übrigen Urlaubstage und Überstunden enthalten.
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+LoginView:
+Der Startbildschirm des Programmes enthält den LoginView. Zum Einloggen benötigen Sie ihre persönliche Mitarbeiter ID. 
 
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
+Firmensettings:
+Informationen zu den hinterlegten Firmeninformationen finden Sie in der oberen, linken Ecke des Startbildschirmes. Unter „Datei“-&gt; „Einstellungen“ haben Sie die Möglichkeit, bei Änderungen an ihren Firmeninformationen, den Namen Ihrer Firma oder Ihr Logo zu ändern und die Einstellungen zur Zeiterfassung anzupassen. Überprüfen können Sie die hinterlegten Daten unter „Info“.
 
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+Zeiterfassung:
+Nach gelungener Anmeldung (siehe LoginView) gelangen Sie zum MainView, des Programms. Zur Arbeitszeiterfassung bietet das Programm auf der Zentral eine „Einstempeln“-Funktion. Ob das Einstempeln erfolgreich war, erkennen Sie daran, ob an gleicher Stelle nun die Funktion „Ausstempeln“ erscheint. Die Zeiterfassung läuft nun bis zum Zeitpunkt des Ausstempelns.
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.</value>
+Urlaubsverwaltung:
+Ebenfalls im MainView in der unteren linken Seite des Programms befindet sich die Urlaubsverwaltung. Unter diesem Reiter haben Sie die Möglichkeiten „Neuen Antrag stellen“, um einen Urlaub zu beantragen und „Anträge einsehen“, um den Status Ihrer bisherigen Anträge zu prüfen. Zusätzlich zum Start- und Enddatum Ihres Urlaubs haben Sie die Möglichkeit auszuwählen, ob Beginn oder Ende des Urlaubes aus einem halben Urlaubstag bestehen soll, dies geschieht durch Auswählen des Kastens „halber Tag“ neben dem gewünschten Datum. Zur Vervollständigung des Antrages können Sie Ihre verbleibenden Urlaubstage und Überstunden einsehen und auswählen, ob zuerst Überstunden verwendet werden sollen. Zum Abschluss des Antrages wählen Sie „Absenden“.
+
+Mitarbeiter-Verwaltung:
+Im Falle einer vorliegenden Führungsaufgabe haben Sie zusätzlich die Möglichkeit durch ein zugewiesenes Passwort Zugang zum ManagementView zu erlangen. Im Falle des Vergessens oder wenn Sie Ihr Passwort ändern wollen, müssen Sie bei Ihrer/m Vorgesetzten/m ein neues Passwort beantragen. 
+In der Ansicht des ManagementView erhalten Sie eine Übersicht über Ihre untergebenen Mitarbeiter, deren Arbeitszeiten und Urlaubstage. An dieser Stelle besitzen Sie in der unteren, linken Ecke des Programms die Möglichkeit eine/n neue/n Mitarbeiter/in Anzulegen „Mitarbeiter Hinzufügen“ (siehe NewEmployeeView) oder eine/n ausgewählte/n Miterabeiter/in zu bearbeiten „Mitarbeiter Bearbeiten“ (siehe EmployeeView). 
+
+EmployeeView:
+Die Mitarbeiter-Verwaltung bietet die Möglichkeit angelegte Untergebene zu bearbeiten (siehe Mitarbeiter-Verwaltung). In der Ansicht des EmployeeViews befinden sich die Reiter „Persönliche Daten“, „Pausenzeiten“, „Stempelzeiten“, „Krankheit“ und „Urlaub“. Außerdem findet sich hier die Möglichkeit einen Mitarbeiter zu entfernen.
+
+EmployeeView- Persönliche Daten:
+In dem Reiter “Persönliche Daten“ lässt sich die Anschrift des Untergebenen bearbeiten und gleichzeitig die vorgesehenen Arbeitsstunden und Urlaubstage festlegen. Außerdem befindet sich in diesem Reiter die Möglichkeit für den Vorgesetzten das Passwort für seinen Untergebenen neu zu setzten (siehe Mitarbeiter-Verwaltung).
+
+EmployeeView-Pausenzeiten:
+In diesem Reiter lassen sich neue Pausenzeiten für den Mitarbeiter mit Beginn und Endzeit erstellen oder Pausen entfernen.
+
+EmployeeView-Stempelzeiten:
+Der Reiter „Stempelzeiten“ dient vorranging der Korrektur Fehleingetragener Stempelzeiten durch den Untergebenen. So lassen sich hier dokumentierte Zeiten ändern.
+
+EmployeeView-Krankheit:
+Der Reiter „Krankheit“ ermöglicht es Fehltzeiten des Mitarbeiters anzulegen.
+
+EmployeeView- Urlaub:
+Der letzte Reiter des EmployeeView „Urlaub“ stellt die Vorgesetzten Perspektive der Anträge auf Urlaub dar (siehe Urlaubsverwaltung). Hier kann ein eingegangener Antrag ausgewählt und entweder genehmigt oder verweigert werden.
+
+NewEmployeeView:
+Die Funktion „Mitarbeiter Hinzufügen“ beinhaltet zwei Reiter, „Persönliche Daten“ und „Pausenzeiten“. An dieser Stelle lassen sich somit die unter EmployeeView bearbeitbaren Informationen zu einem untergebenen erstmalig anlegen.</value>
   </data>
 </root>
