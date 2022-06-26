@@ -102,11 +102,11 @@ namespace Mitarbeiterverwaltung
         private void loadStatistics()
         {
             TimeSpan timeWorked = currentEmployee.getTimeWorkedIn(timeHandler.getMonth());
-            lblWorkingTime.Text = String.Format("{0} ({1})", 
-                roundTimeSpan(timeWorked, settings.timeRounding).ToString(@"hh\:mm"), 
-                timeWorked.ToString(@"hh\:mm"));
-            lblOvertimeRemaining.Text = currentEmployee.getOvertime(timeHandler).ToString(@"hh\:mm");
-            lblHolidaysRemaining.Text = currentEmployee.vacationDays.ToString();
+            lblWorkingTime.Text = String.Format("{0} ({1})",
+                TimeSpanToString( roundTimeSpan(timeWorked, settings.timeRounding)), 
+                TimeSpanToString( timeWorked));
+            lblOvertimeRemaining.Text = TimeSpanToString(currentEmployee.getOvertime(timeHandler));
+            lblHolidaysRemaining.Text = currentEmployee.getVacationDaysLeft().ToString();
         }
 
         /// <summary>
@@ -180,6 +180,16 @@ namespace Mitarbeiterverwaltung
         }
 
         /// <summary>
+        /// Converts TimeSpan into string, but with totalhours
+        /// </summary>
+        /// <param name="timeSpan">TimeSpan to transform into string</param>
+        /// <returns>String that represents TimeSpan</returns>
+        private String TimeSpanToString(TimeSpan timeSpan)
+        {
+            return (int)timeSpan.TotalHours + timeSpan.ToString(@"\:mm");
+        }
+
+        /// <summary>
         /// Convert the properties of an Employee to a ListViewItem to display in ListView
         /// </summary>
         /// <param name="employee">hourly payed employee</param>
@@ -195,8 +205,8 @@ namespace Mitarbeiterverwaltung
                 employee.name,
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
-                roundTimeSpan(employee.getTimeWorkedIn(timeHandler.getMonth()), settings.timeRounding).ToString(),
-                roundTimeSpan(employee.getOvertime(timeHandler), settings.timeRounding).ToString(),
+                TimeSpanToString( roundTimeSpan(employee.getTimeWorkedIn(timeHandler.getMonth()), settings.timeRounding)),
+                TimeSpanToString( roundTimeSpan( employee.getOvertime(timeHandler), settings.timeRounding)),
                 employee.vacationDays.ToString()
             });
             return listItem;
