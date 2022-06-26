@@ -49,6 +49,11 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void vacationRangeChanged(object sender, EventArgs e)
         {
+            //update ranges of DateTimePickers
+            dtpVacationStart.MaxDate = dtpVacationEnd.Value;
+            dtpVacationEnd.MinDate = dtpVacationStart.Value;
+
+
             double holidaysCount = 0;
             double remainingHolidays = 0;
             DateTime startDate = dtpVacationStart.Value.Date;
