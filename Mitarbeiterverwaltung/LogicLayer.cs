@@ -135,10 +135,11 @@ namespace Mitarbeiterverwaltung.LL
     public class VacationRequest : TimePeriod
     {
         public RequestState state { get; set; }
-        public bool useOVertime { get; set; }
+        public bool useOvertime { get; set; }
         public VacationRequest (DateTime startDate, DateTime endDate, RequestState state, bool useOvertime) : base (startDate, endDate)
         {
             this.state = state;
+            this.useOvertime = useOvertime;
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace Mitarbeiterverwaltung.LL
         /// <returns>String containing startDate - endDate - state</returns>
         public override String ToString()
         {
-            return startDate.ToString() + " - " + endDate.ToString() + " - " + state.ToString() + " - " + useOVertime.ToString();
+            return startDate.ToString() + " - " + endDate.ToString() + " - " + state.ToString() + " - " + useOvertime.ToString();
         }
 
         /// <summary>
@@ -472,6 +473,84 @@ namespace Mitarbeiterverwaltung.LL
         {
             VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending, useOvertime);
             vacations.Add(vacationRequest);
+        }
+
+        /// <summary>
+        /// Functions calculates overtime and vacationsTimes for given vacation.
+        /// </summary>
+        /// <param name="request">Vacation request to calc</param>
+        /// <param name="_overTimeLeft">Overtime as reference</param>
+        /// <param name="_vacationHalfDaysLeft">VacationHalfDaysLeft as reference</param>
+        /// <returns>True if vacation can be granted, False otherwise</returns>
+        public bool calculateVacationRequest(VacationRequest request, ref TimeSpan _overTimeLeft, ref double _vacationHalfDaysLeft)
+        {
+            bool vacationPossible = true;
+
+            if (request.useOvertime)
+            {
+                TimeSpan vacationTime = request.getBusinessDays() * (weekTimeLimit / 5);
+
+                if (vacationTime < _overTimeLeft)
+                {
+                    //the needed vacatime can completely be covered by overtime
+                    _overTimeLeft -= vacationTime;
+                }
+                else
+                {
+                    //only a part of the vacation time can be covered by overtime
+                    //Time to take from vacationDaysLeft
+                    double vacationHoursTake = (vacationTime - _overTimeLeft).TotalHours;
+                    double hoursPerHalfDay = weekTimeLimit.TotalHours / 10;
+
+                    double vacationHalfDaysToTake = Math.Ceiling(vacationHoursTake / hoursPerHalfDay);
+
+                    TimeSpan overTimeToTake = vacationTime - TimeSpan.FromHours(vacationHalfDaysToTake * hoursPerHalfDay);
+
+                    //check if there are enough vacationdays left
+                    if (_vacationHalfDaysLeft > vacationHalfDaysToTake)
+                    {
+                        _vacationHalfDaysLeft -= vacationHalfDaysToTake;
+                        _overTimeLeft -= overTimeToTake;
+                    }
+                    else
+                    {
+                        //There aren't enough vacationDaysLeft to cover the vacation
+                        //Take so much overtime, that it gets negative but covers the entire vacation
+                        _overTimeLeft = vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
+
+                        _vacationHalfDaysLeft = 0;
+                        vacationPossible = false;
+                    }
+
+                }
+            }
+            else
+            {
+                _vacationHalfDaysLeft -= request.getBusinessDays() * 2;
+
+                vacationPossible = _vacationHalfDaysLeft > request.getBusinessDays() * 2;
+            }
+            return vacationPossible;
+        }
+
+        /// <summary>
+        /// Functions calculates overtime and vacationsTimes for granting vacation. Can be simulated.
+        /// </summary>
+        /// <param name="request">VacationRequest to grant</param>
+        public void grantVacation(int index)
+        {
+            VacationRequest request = vacations[index];
+            TimeSpan currentOverTime = overTime;
+            Double currentVacationHalfDaysLeft = vacationHalfDaysLeft;
+            calculateVacationRequest(request, ref currentOverTime, ref currentVacationHalfDaysLeft);
+            overTime = currentOverTime;
+            vacationHalfDaysLeft = currentVacationHalfDaysLeft;
+            request.state = RequestState.accepted;
+        }
+
+        public double getVacationDaysLeft()
+        {
+            return vacationHalfDaysLeft / 2;
         }
 
         /// <summary>
