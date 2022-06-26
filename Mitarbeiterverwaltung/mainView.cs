@@ -85,7 +85,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void startLogoutCountdown()
         {
-            logoutTimerBegin = timeHandler.getTime();
+            logoutTimerBegin = DateTime.Now;
         }
 
         /// <summary>
