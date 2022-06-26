@@ -256,7 +256,7 @@ namespace Mitarbeiterverwaltung.LL
             maxEmployeeId++;
         }
 
-        public Employee(string name, string surname, string adress, string phone, int holidays, string password)
+        public Employee(string name, string surname, string adress, string phone, string password)
         {
             this.name = name;
             this.surname = surname;
@@ -448,11 +448,11 @@ namespace Mitarbeiterverwaltung.LL
         public List<TimePeriod> sickDays { get; private set; } = new List<TimePeriod>();
         public List<VacationRequest> vacations{ get; private set; } = new List<VacationRequest>();
         public int vacationDays { get; private set; } = 0;
-        public float vacationDaysLeft { get; private set; } = 0; //ToDo Add to parser + to string
-        public  TimeSpan overTime { get; private set; } = new TimeSpan(); //ToDo Add to parser + to string
+        public double vacationHalfDaysLeft { get; private set; } = 0; // stores the rest amount of vacations, in halfdays //ToDo Add to parser + to string
+        private  TimeSpan overTime { get; set; } = new TimeSpan(); //ToDo Add to parser + to string
 
 
-        public HourlyRatedEmployee(string name, string surname, string adress, string phone, int holidays, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, holidays, password)
+        public HourlyRatedEmployee(string name, string surname, string adress, string phone, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, password)
         {
             this.weekTimeLimit = weekTimeLimit;
         }
@@ -609,7 +609,7 @@ namespace Mitarbeiterverwaltung.LL
             TimeSpan workedTime = getTimeWorkedIn(timeHandler.getMonth());
 
             //don't add undertime until end of month if the workedTime isn't greater than the contractedTime
-            return (contractedTime > workedTime) ? overTime : overTime + contractedTime - workedTime;
+            return (contractedTime > workedTime) ? overTime : overTime + workedTime - contractedTime;
         }
 
         /// <summary>
@@ -819,6 +819,10 @@ namespace Mitarbeiterverwaltung.LL
 
                         case "vacationDays":
                             this.vacationDays = Int32.Parse(value);
+                            break;
+
+                        case "vacationHalfDaysLeft":
+                            this.vacationHalfDaysLeft = Int32.Parse(value);
                             break;
 
                         case "checkInOutTimes":

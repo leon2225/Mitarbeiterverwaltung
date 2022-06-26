@@ -68,6 +68,16 @@ namespace Mitarbeiterverwaltung
             data.Add("phone", txtPhone.Text);
             data.Add("vacationDays", mtxtVacationDays.Text);
             data.Add("weekTimeLimit", new TimeSpan(Int32.Parse(this.mtxtWeekTimeLimit.Text), 0, 0).ToString());
+
+            //Get diff between old and new vacationdays and add the diff if there now are more vacationDyas than before
+            double newVacationDays = Double.Parse(mtxtVacationDays.Text);
+            if (employee.vacationDays < newVacationDays )
+            {
+                double newVacationDaysLeft = employee.getVacationDaysLeft();
+                newVacationDaysLeft += newVacationDays - employee.vacationDays;
+                data.Add("vacationsHalfDaysLeft", (newVacationDaysLeft * 2).ToString());
+            }
+
             employee.parse(data);
             employee.supervisor = this.supervisor; 
 
