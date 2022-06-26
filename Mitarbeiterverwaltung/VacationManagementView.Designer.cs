@@ -249,6 +249,7 @@
             this.chkUseOvertime.TabIndex = 13;
             this.chkUseOvertime.Text = "Verwenden";
             this.chkUseOvertime.UseVisualStyleBackColor = true;
+            this.chkUseOvertime.CheckedChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
             // tabControlHolidayRequest
             // 
@@ -324,7 +325,7 @@
             this.chVacationState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.chVacationState.Width = 145;
             // 
-            // VacationRequestView
+            // VacationManagementView
             // 
             this.AcceptButton = this.btnSendRequest;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -335,7 +336,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "VacationRequestView";
+            this.Name = "VacationManagementView";
             this.Text = "Urlaubsverwaltung";
             this.pnlNewHolidayRequest.ResumeLayout(false);
             this.pnlNewHolidayRequest.PerformLayout();

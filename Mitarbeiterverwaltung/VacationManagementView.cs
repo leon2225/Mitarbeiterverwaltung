@@ -18,11 +18,13 @@ namespace Mitarbeiterverwaltung
     {
         private HourlyRatedEmployee? employee;
         private HourlyRatedEmployee? supervisor;
+        private TimeHandler timeHandler;
 
-        public VacationManagementView(HourlyRatedEmployee? employee)
+        public VacationManagementView(HourlyRatedEmployee? employee, TimeHandler timeHandler)
         {
             InitializeComponent();
             this.employee = employee;
+            this.timeHandler = timeHandler;
             dtpVacationStart.MinDate = DateTime.Today;
             dtpVacationEnd.MinDate = DateTime.Today;
             btnSendRequest.Enabled = false;
@@ -57,31 +59,29 @@ namespace Mitarbeiterverwaltung
 
             bool requestValid = true;
 
-            if (endDate < startDate)
-            {
-                requestValid = false;
-                //throw new Exception("Enddate is before Startdate");
-            }
-            else
-            {
-                holidaysCount = new TimePeriod(startDate, endDate).getBusinessDays();
-                remainingHolidays = employee.vacationDays - holidaysCount;
-                requestValid = remainingHolidays >= 0;
-            }
-            
+            //check if request is valid
+            VacationRequest testRequest = new VacationRequest(
+                startDate, 
+                endDate, 
+                RequestState.pending, 
+                chkUseOvertime.Checked);
+            TimeSpan overTimeLeft = employee.getOvertime(timeHandler);
+            Double vacationHalfDaysLeft = employee.vacationHalfDaysLeft;
+
+            requestValid = employee.calculateVacationRequest(testRequest, ref overTimeLeft, ref vacationHalfDaysLeft);
+
+            lblRemainingHolidaysPreview.Text = (vacationHalfDaysLeft / 2).ToString();
+            lblRemainingOvertimePreview.Text = (int)overTimeLeft.TotalHours + overTimeLeft.ToString(@"\:mm");
+
             if (requestValid)
             {
-                lblRemainingHolidaysPreview.Text = remainingHolidays.ToString();
-                lblRemainingHolidaysPreview.Visible = true;
-                lblRemainingHolidays.Visible = true;
+                
                 lblInvalid.Visible = false;
                 btnSendRequest.Enabled = true;
             }
             else
             {
                 lblInvalid.Visible = true;
-                lblRemainingHolidaysPreview.Visible = false;
-                lblRemainingHolidays.Visible = false;
                 btnSendRequest.Enabled = false;
             }
         }
