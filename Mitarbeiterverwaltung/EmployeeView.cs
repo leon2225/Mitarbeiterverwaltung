@@ -294,7 +294,7 @@ namespace Mitarbeiterverwaltung
         private void btnAllowVacationRequest_Click(object sender, EventArgs e)
         {
             int index = (int)lvVacations.SelectedItems[0].Tag;
-            employee.vacations[index].state = RequestState.accepted;
+            employee.grantVacation(index);
             updateLvVacations();
         }
 
