@@ -19,6 +19,7 @@ namespace Mitarbeiterverwaltung
         public AddTimePeriodView()
         {
             InitializeComponent();
+            setBounds(new Object(), new EventArgs());
         }
 
         /// <summary>
@@ -68,5 +69,10 @@ namespace Mitarbeiterverwaltung
 
         }
 
+        private void setBounds(object sender, EventArgs e)
+        {
+            dtpBegin.MaxDate = dtpEnd.Value;
+            dtpEnd.MinDate = dtpBegin.Value;
+        }
     }
 }

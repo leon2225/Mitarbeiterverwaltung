@@ -67,6 +67,7 @@
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(102, 23);
             this.dtpEnd.TabIndex = 3;
+            this.dtpEnd.ValueChanged += new System.EventHandler(this.setBounds);
             // 
             // dtpBegin
             // 
@@ -77,6 +78,7 @@
             this.dtpBegin.Name = "dtpBegin";
             this.dtpBegin.Size = new System.Drawing.Size(102, 23);
             this.dtpBegin.TabIndex = 4;
+            this.dtpBegin.ValueChanged += new System.EventHandler(this.setBounds);
             // 
             // tableLayoutPanel1
             // 
