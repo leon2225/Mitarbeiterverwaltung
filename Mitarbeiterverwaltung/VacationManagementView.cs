@@ -120,8 +120,9 @@ namespace Mitarbeiterverwaltung
 
         /// <summary>
         /// Clear the ListView for Vacations and add all vacation requests of employee to ListView
+        /// It also updates the rest of the View
         /// </summary>
-        private void updateLvVacationRequests()
+        private void updateView()
         {
             lvVacationRequests.Items.Clear();
             for (int i = 0; i < employee.vacations.Count; i++)
@@ -139,13 +140,34 @@ namespace Mitarbeiterverwaltung
         {
             if (e.TabPage == tabViewRequests)
             {
-                updateLvVacationRequests();
+                updateView();
             }
             else
             {
                 //do nothing
             }
 
+        }
+
+        private void lvVacationRequests_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool enableState = lvVacationRequests.SelectedItems.Count > 0;
+            if(enableState)
+            {
+                //Only pending vacations-requests may be removed
+                btnRemoveVacation.Enabled = employee.vacations[lvVacationRequests.SelectedIndices[0]].state == RequestState.pending;
+            }
+            else
+            {
+                //Change event was fired, but no item selected -> do nothing
+            }
+        }
+
+        private void btnRemoveVacation_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = lvVacationRequests.SelectedIndices[0];
+            employee.vacations.RemoveAt(selectedIndex);
+            updateView();
         }
     }
 }
