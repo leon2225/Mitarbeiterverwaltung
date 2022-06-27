@@ -16,10 +16,13 @@ namespace Mitarbeiterverwaltung
     /// </summary>
     public partial class AddTimePeriodView : Form
     {
-        public AddTimePeriodView()
+        private List<TimePeriod> otherPeriods;
+        private bool isTime = false;
+        public AddTimePeriodView(List<TimePeriod> otherPeriods)
         {
             InitializeComponent();
             setBounds(new Object(), new EventArgs());
+            this.otherPeriods = otherPeriods;
         }
 
         /// <summary>
@@ -27,6 +30,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         public void changeToTime()
         {
+            isTime = true;
             this.Text = "Pausenzeiten hinzufügen";
             dtpBegin.Format = DateTimePickerFormat.Custom;
             dtpBegin.ShowUpDown = true;
@@ -34,6 +38,7 @@ namespace Mitarbeiterverwaltung
             dtpEnd.Format = DateTimePickerFormat.Custom;
             dtpEnd.ShowUpDown = true;
             dtpEnd.CustomFormat = "HH:mm";
+            dtpEnd.Value = dtpBegin.Value + new TimeSpan(0, 30, 0);
         }
 
         /// <summary>
@@ -41,6 +46,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         public void changeToDate()
         {
+            isTime = false;
             this.Text = "Krankheitstage hinzufügen";
             dtpBegin.Format = DateTimePickerFormat.Short;
             dtpBegin.ShowUpDown = false;
@@ -55,12 +61,32 @@ namespace Mitarbeiterverwaltung
         /// <exception cref="WarningException"></exception>
         public TimePeriod getTimePeriod()
         {
-            var begin = dtpBegin.Value;
-            var end = dtpEnd.Value;
-            if (begin > end)
+            DateTime startDate = isTime ? DateTime.MinValue + dtpBegin.Value.TimeOfDay : dtpBegin.Value;
+            DateTime endDate = isTime ? DateTime.MinValue + dtpEnd.Value.TimeOfDay : dtpEnd.Value;
+
+            if(isTime)
+            {
+                startDate -= new TimeSpan(0, 0, startDate.Second);
+                endDate -= new TimeSpan(0, 0, endDate.Second);
+            }
+            else
+            {
+                startDate = startDate.Date;
+                endDate = endDate.Date + new TimeSpan(23,59,59);
+            }
+
+
+            TimePeriod period = new TimePeriod(startDate, endDate);
+            bool overlapping = false;
+            foreach (TimePeriod otherPeriod in otherPeriods)
+            {
+                overlapping |= otherPeriod.boundTo(period).getDuration() != TimeSpan.Zero;
+            }
+
+            if (overlapping)
             {
 
-                throw new WarningException("Der Anfangszeitpunkt muss vor dem Endzeitpunkt liegen");
+                throw new WarningException("Der Zeitraum überschneidet sich mit einem anderem");
             }
             else
             {
@@ -73,6 +99,8 @@ namespace Mitarbeiterverwaltung
         {
             dtpBegin.MaxDate = dtpEnd.Value;
             dtpEnd.MinDate = dtpBegin.Value;
+
+
         }
     }
 }

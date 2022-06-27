@@ -116,7 +116,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void btnAddSickdays_Click(object sender, EventArgs e)
         {
-            AddTimePeriodView addSickDays = new AddTimePeriodView(); 
+            AddTimePeriodView addSickDays = new AddTimePeriodView(employee.sickDays); 
             addSickDays.StartPosition = FormStartPosition.CenterParent;
             addSickDays.changeToDate();
             DialogResult result = addSickDays.ShowDialog(this);
@@ -313,7 +313,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void btnAddPause_Click(object sender, EventArgs e)
         {
-            AddTimePeriodView addPauseView = new AddTimePeriodView();
+            AddTimePeriodView addPauseView = new AddTimePeriodView(employee.pauseTimes);
             addPauseView.StartPosition = FormStartPosition.CenterParent;
             addPauseView.changeToTime();
             DialogResult result = addPauseView.ShowDialog(this);
