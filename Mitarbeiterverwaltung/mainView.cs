@@ -495,14 +495,7 @@ namespace Mitarbeiterverwaltung
             VacationManagementView vacationRequest = new VacationManagementView(currentEmployee, timeHandler);
             vacationRequest.StartPosition = FormStartPosition.CenterParent;
             DialogResult result = vacationRequest.ShowDialog(this);
-            if(result == DialogResult.OK)
-            {
-                vacationRequest.sendVacationRequest();
-            } 
-            else
-            {
-                //No vacation should be added -> do nothing
-            }
+            
         }
 
         /// <summary>

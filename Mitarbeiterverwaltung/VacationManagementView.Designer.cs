@@ -167,7 +167,6 @@
             // btnSendRequest
             // 
             this.btnSendRequest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSendRequest.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSendRequest.Location = new System.Drawing.Point(307, 174);
             this.btnSendRequest.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
             this.btnSendRequest.Name = "btnSendRequest";
@@ -175,6 +174,7 @@
             this.btnSendRequest.TabIndex = 4;
             this.btnSendRequest.Text = "Absenden";
             this.btnSendRequest.UseVisualStyleBackColor = true;
+            this.btnSendRequest.Click += new System.EventHandler(this.btnSendRequest_Click);
             // 
             // dtpVacationEnd
             // 
@@ -314,6 +314,7 @@
             this.chVacationBegin,
             this.chVacationEnd,
             this.chVacationState});
+            this.lvVacationRequests.FullRowSelect = true;
             this.lvVacationRequests.Location = new System.Drawing.Point(6, 6);
             this.lvVacationRequests.Name = "lvVacationRequests";
             this.lvVacationRequests.Size = new System.Drawing.Size(353, 157);

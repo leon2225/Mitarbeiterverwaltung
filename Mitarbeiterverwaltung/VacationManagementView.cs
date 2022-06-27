@@ -176,5 +176,11 @@ namespace Mitarbeiterverwaltung
             employee.vacations.RemoveAt(selectedIndex);
             updateView();
         }
+
+        private void btnSendRequest_Click(object sender, EventArgs e)
+        {
+            sendVacationRequest();
+            updateView();
+        }
     }
 }
