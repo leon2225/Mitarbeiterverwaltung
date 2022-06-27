@@ -700,6 +700,23 @@ namespace Mitarbeiterverwaltung.LL
         /// <param name="sickDays">TimePeriod of sick days</param>
         public void addSickday(TimePeriod sickDays)
         {
+            foreach (VacationRequest request in vacations)
+            {
+                if(request.state == RequestState.accepted && 
+                    (request.boundTo(sickDays).getDuration() != TimeSpan.Zero))
+                {
+                    //Request is accepted and overlaps with the sickdays
+                    //credit the overlapping time to vacationDaysLeft
+
+                    double overlappingBusinessDays = request.boundTo(sickDays).getBusinessDays();
+                    vacationHalfDaysLeft += overlappingBusinessDays * 2;
+                }
+                else
+                {
+                    //They are not overlapping -> do nonthing
+                }
+            }
+
             this.sickDays.Add(sickDays);
         }
 
