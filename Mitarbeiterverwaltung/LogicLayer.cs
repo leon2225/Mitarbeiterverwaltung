@@ -14,6 +14,25 @@ namespace Mitarbeiterverwaltung.LL
         none
     }
 
+    static class RequestStateMethods
+    {
+        public static String GetName(this RequestState state)
+        {
+            switch (state)
+            {
+                case RequestState.pending:
+                    return "Ausstehend";
+                case RequestState.accepted:
+                    return "Akzeptiert";
+                case RequestState.denied:
+                    return "Abgelehnt";
+                case RequestState.none: //Fallthrough
+                default:
+                    return "Ungültig";
+            }
+        }
+    }
+
     /// <summary>
     /// New datatype for saving the period of two times and check their dependencies. 
     /// </summary>

@@ -113,7 +113,7 @@ namespace Mitarbeiterverwaltung
             ListViewItem newItem = new ListViewItem(new string[] {
                 vacationRequest.startDate.ToString("dd.MM.yyyy"),
                 vacationRequest.endDate.ToString("dd.MM.yyyy"),
-                vacationRequest.state.ToString()
+                vacationRequest.state.GetName(),
             });
             return newItem;
         }
