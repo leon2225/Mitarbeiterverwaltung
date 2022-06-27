@@ -40,8 +40,11 @@ namespace Mitarbeiterverwaltung
         /// <exception cref="ErrorException"></exception>
         public void sendVacationRequest()
         {
-            DateTime startDate = dtpVacationStart.Value;
-            DateTime endDate = dtpVacationEnd.Value;
+            DateTime startDate = dtpVacationStart.Value.Date;
+            DateTime endDate = dtpVacationEnd.Value.Date;
+
+            startDate += chkHalfDayBegin.Checked ? new TimeSpan(12, 0, 0) : new TimeSpan(0, 0, 0);
+            endDate += chkHalfDayEnd.Checked ? new TimeSpan(12, 0, 0) : new TimeSpan(23, 59, 59);
 
             //Datetime values are valid due to automatic range adjustments
             employee.requestVacation(startDate, endDate, chkUseOvertime.Checked);
