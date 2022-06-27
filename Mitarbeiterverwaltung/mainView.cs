@@ -565,15 +565,6 @@ namespace Mitarbeiterverwaltung
         }
 
         /// <summary>
-        /// Change the view to change password. 
-        /// </summary>
-        private void lblPasswordForgottten_Click(object sender, EventArgs e)
-        {
-            startLogoutCountdown();
-            changeToUpdatePassword();
-        }
-
-        /// <summary>
         /// Loading the EmployeeView via double click on the listViewItem of the employee. 
         /// </summary>
         private void lvEmployees_DoubleClick(object sender, EventArgs e)

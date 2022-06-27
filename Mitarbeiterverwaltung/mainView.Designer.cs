@@ -39,6 +39,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblClock = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.checkInPanel = new System.Windows.Forms.Panel();
@@ -60,7 +61,6 @@
             this.btnCheckIn = new System.Windows.Forms.Button();
             this.loginPanel = new System.Windows.Forms.Panel();
             this.pnlSecureLogin = new System.Windows.Forms.Panel();
-            this.lblPasswordForgottten = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnSecureLogin = new System.Windows.Forms.Button();
@@ -94,7 +94,6 @@
             this.btnEditEmployee = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -155,6 +154,13 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Hilfe";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // lblClock
             // 
@@ -395,7 +401,6 @@
             // pnlSecureLogin
             // 
             this.pnlSecureLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnlSecureLogin.Controls.Add(this.lblPasswordForgottten);
             this.pnlSecureLogin.Controls.Add(this.label8);
             this.pnlSecureLogin.Controls.Add(this.txtPassword);
             this.pnlSecureLogin.Controls.Add(this.btnSecureLogin);
@@ -405,19 +410,6 @@
             this.pnlSecureLogin.Name = "pnlSecureLogin";
             this.pnlSecureLogin.Size = new System.Drawing.Size(320, 154);
             this.pnlSecureLogin.TabIndex = 14;
-            // 
-            // lblPasswordForgottten
-            // 
-            this.lblPasswordForgottten.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPasswordForgottten.AutoSize = true;
-            this.lblPasswordForgottten.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblPasswordForgottten.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
-            this.lblPasswordForgottten.Location = new System.Drawing.Point(182, 128);
-            this.lblPasswordForgottten.Name = "lblPasswordForgottten";
-            this.lblPasswordForgottten.Size = new System.Drawing.Size(135, 20);
-            this.lblPasswordForgottten.TabIndex = 7;
-            this.lblPasswordForgottten.Text = "Passwort vergessen";
-            this.lblPasswordForgottten.Click += new System.EventHandler(this.lblPasswordForgottten_Click);
             // 
             // label8
             // 
@@ -772,13 +764,6 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // hilfeToolStripMenuItem
-            // 
-            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.hilfeToolStripMenuItem.Text = "Hilfe";
-            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -877,7 +862,6 @@
         private TextBox txtPassword;
         private Button btnSecureLogin;
         private Label label9;
-        private Label lblPasswordForgottten;
         private PrintPreviewDialog printPreviewDialog1;
         private TableLayoutPanel pnlStatistics;
         private Panel pnlCheckInMain;
