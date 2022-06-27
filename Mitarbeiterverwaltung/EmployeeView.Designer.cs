@@ -379,7 +379,7 @@
             this.lvPause.TabIndex = 1;
             this.lvPause.UseCompatibleStateImageBehavior = false;
             this.lvPause.View = System.Windows.Forms.View.Details;
-            this.lvPause.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvPause_ItemSelectionChanged);
+            this.lvPause.SelectedIndexChanged += new System.EventHandler(this.lvPause_SelectedIndexChanged);
             // 
             // chBeginnPauseTime
             // 

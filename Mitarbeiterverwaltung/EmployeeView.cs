@@ -124,12 +124,12 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 employee.addSickday(addSickDays.getTimePeriod());
-                updateLvSickdays();
             }
             else
             {
                 //do nothing
             }
+            updateLvSickdays();
 
         }
 
@@ -206,6 +206,8 @@ namespace Mitarbeiterverwaltung
                 newItem.Tag = index++; // tag used to identify index of item
                 lvSickDays.Items.Add(newItem);
             }
+
+            lvSickDays_SelectedIndexChanged(new Object(), new EventArgs());
         }
 
         /// <summary>
@@ -222,6 +224,8 @@ namespace Mitarbeiterverwaltung
                 newItem.Tag = index++; // tag used to identify index of item
                 lvPause.Items.Add(newItem);
             }
+
+            lvPause_SelectedIndexChanged(new Object(), new EventArgs());
         }
 
         /// <summary>
@@ -321,18 +325,26 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 employee.addPause(addPauseView.getTimePeriod());
-                updateLvPauseTimes();
             }
             else
             {
                 //do nothing
             }
+            updateLvPauseTimes();
         }
 
         /// <summary>
         /// Toggle the button for editing a pause time if any item is selected.
         /// </summary>
         private void lvPause_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Toggle the button for editing a pause time if any item is selected.
+        /// </summary>
+        private void lvPause_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvPause.SelectedItems.Count > 0;
             btnRemovePause.Enabled = enableState;
@@ -416,6 +428,6 @@ namespace Mitarbeiterverwaltung
             btnRemoveSickDays.Enabled = enableState;
         }
 
-
+        
     }
 }
