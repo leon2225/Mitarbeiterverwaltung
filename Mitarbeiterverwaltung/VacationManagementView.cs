@@ -28,16 +28,6 @@ namespace Mitarbeiterverwaltung
             dtpVacationStart.MinDate = DateTime.Today;
             dtpVacationEnd.MinDate = DateTime.Today;
 
-            //only allow vac. request when there are no pending requests
-            bool vacReqAllowed = employee.vacations.FindAll(d => (d.state == RequestState.pending)).Count == 0;
-            if(!vacReqAllowed)
-            {
-                tabControlHolidayRequest.Controls.Remove(tabNewRequest);
-            }
-            else
-            {
-                //no pending request -> show all tabs
-            }
 
             updateLvVacationRequests();
             vacationRangeChanged(new object(), new EventArgs());
@@ -131,6 +121,10 @@ namespace Mitarbeiterverwaltung
                 newItem.Tag = i;
                 lvVacationRequests.Items.Add(newItem);
             }
+
+            //only allow vac. request when there are no pending requests
+            bool vacReqAllowed = employee.vacations.FindAll(d => (d.state == RequestState.pending)).Count == 0;
+            ((Control)tabNewRequest).Enabled = vacReqAllowed;
         }
 
         /// <summary>
