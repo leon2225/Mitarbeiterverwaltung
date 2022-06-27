@@ -118,7 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="HelpString" xml:space="preserve">
-    <value>Informationen zum Programm: 
+    <value>Informationen zum Programm:
+
 Das Ihnen vorliegende Programm dient der Arbeitszeiterfassung und Verwaltung von Urlauben für die Mitarbeiter Ihrer Firma. Im Umfang des Programms ist die Beantragung von Urlaub, die Genehmigung und das Einsehen der übrigen Urlaubstage und Überstunden enthalten.
 
 LoginView:

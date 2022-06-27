@@ -595,8 +595,9 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String messageText = Properties.Resources.HelpString;
-            MessageBox.Show(messageText, "Hilfe", MessageBoxButtons.OK, MessageBoxIcon.None);
+            HelpView helpView = new HelpView();
+            helpView.StartPosition = FormStartPosition.CenterParent;
+            helpView.ShowDialog(this);
         }
 
         /// <summary>
