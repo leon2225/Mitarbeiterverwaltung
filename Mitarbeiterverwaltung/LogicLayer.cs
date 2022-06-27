@@ -789,7 +789,7 @@ namespace Mitarbeiterverwaltung.LL
                     TimePeriod boundedPeriod = vacationRequest.boundTo(monthPeriod);
                     if (boundedPeriod.startDate != boundedPeriod.endDate)
                     { 
-                        contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                        contractTime -= boundedPeriod.getBusinessDays() * (weekTimeLimit / 5);
                     }
                     else
                     {
@@ -809,7 +809,19 @@ namespace Mitarbeiterverwaltung.LL
 
                 if (boundedPeriod.startDate != boundedPeriod.endDate)
                 {
-                    contractTime -= monthPeriod.getBusinessDays() * (weekTimeLimit / 5);
+                    contractTime -= boundedPeriod.getBusinessDays() * (weekTimeLimit / 5);
+
+                    //Add back time to contractTime that where subtracted twice (sick + on vacation)
+                    foreach (VacationRequest vacationRequest in vacations)
+                    {
+                        if (vacationRequest.state == RequestState.accepted &&
+                            (vacationRequest.boundTo(boundedPeriod).getDuration() != TimeSpan.Zero))
+                        {
+                            //Request is accepted and overlaps with the sickdays
+                            TimeSpan overlappingTime = vacationRequest.boundTo(boundedPeriod).getBusinessDays() * (weekTimeLimit / 5);
+                            contractTime += overlappingTime;
+                        }
+                    }
                 }
                 else
                 {
