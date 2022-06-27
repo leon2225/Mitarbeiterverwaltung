@@ -491,6 +491,7 @@ namespace Mitarbeiterverwaltung.LL
         public void requestVacation(DateTime startTime, DateTime endTime, bool useOvertime)
         {
             VacationRequest vacationRequest = new VacationRequest(startTime, endTime, RequestState.pending, useOvertime);
+
             vacations.Add(vacationRequest);
         }
 
@@ -500,10 +501,11 @@ namespace Mitarbeiterverwaltung.LL
         /// <param name="request">Vacation request to calc</param>
         /// <param name="_overTimeLeft">Overtime as reference</param>
         /// <param name="_vacationHalfDaysLeft">VacationHalfDaysLeft as reference</param>
-        /// <returns>True if vacation can be granted, False otherwise</returns>
-        public bool calculateVacationRequest(VacationRequest request, ref TimeSpan _overTimeLeft, ref double _vacationHalfDaysLeft)
+        /// <returns>0 if vacation can be granted, 1 if not enough vacation/overtime, 2 if overlapping with sickDay</returns>
+        public int calculateVacationRequest(VacationRequest request, ref TimeSpan _overTimeLeft, ref double _vacationHalfDaysLeft)
         {
-            bool vacationPossible = true;
+            bool enoughVacationDays = true;
+            bool overlapping = false;
 
             if (request.useOvertime)
             {
@@ -538,7 +540,7 @@ namespace Mitarbeiterverwaltung.LL
                         _overTimeLeft = vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
 
                         _vacationHalfDaysLeft = 0;
-                        vacationPossible = false;
+                        enoughVacationDays = false;
                     }
 
                 }
@@ -547,9 +549,27 @@ namespace Mitarbeiterverwaltung.LL
             {
                 _vacationHalfDaysLeft -= request.getBusinessDays() * 2;
 
-                vacationPossible = _vacationHalfDaysLeft > request.getBusinessDays() * 2;
+                enoughVacationDays = _vacationHalfDaysLeft > request.getBusinessDays() * 2;
             }
-            return vacationPossible;
+
+            foreach (TimePeriod sickDay in sickDays)
+            {
+                TimePeriod boundedPeriod = request.boundTo(sickDay);
+                overlapping |= (boundedPeriod.startDate != boundedPeriod.endDate);
+            }
+
+            if (overlapping)
+            {
+                return 2;
+            }
+            else if(!enoughVacationDays)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         /// <summary>

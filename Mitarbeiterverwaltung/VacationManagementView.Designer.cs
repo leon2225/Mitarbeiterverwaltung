@@ -37,16 +37,17 @@
             this.btnCancelRequest = new System.Windows.Forms.Button();
             this.btnSendRequest = new System.Windows.Forms.Button();
             this.dtpVacationEnd = new System.Windows.Forms.DateTimePicker();
-            this.lblRemainingHolidays = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblRemainingHolidaysPreview = new System.Windows.Forms.Label();
             this.lblRemainingOvertimePreview = new System.Windows.Forms.Label();
-            this.lblInvalid = new System.Windows.Forms.Label();
             this.chkUseOvertime = new System.Windows.Forms.CheckBox();
+            this.lblInvalid = new System.Windows.Forms.Label();
+            this.lblRemainingHolidays = new System.Windows.Forms.Label();
             this.tabControlHolidayRequest = new System.Windows.Forms.TabControl();
             this.tabNewRequest = new System.Windows.Forms.TabPage();
             this.tabViewRequests = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRemoveVacation = new System.Windows.Forms.Button();
             this.lvVacationRequests = new System.Windows.Forms.ListView();
             this.chVacationBegin = new System.Windows.Forms.ColumnHeader();
             this.chVacationEnd = new System.Windows.Forms.ColumnHeader();
@@ -76,21 +77,21 @@
             this.pnlNewHolidayRequest.Controls.Add(this.btnCancelRequest, 0, 4);
             this.pnlNewHolidayRequest.Controls.Add(this.btnSendRequest, 2, 4);
             this.pnlNewHolidayRequest.Controls.Add(this.dtpVacationEnd, 1, 1);
-            this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingHolidays, 0, 3);
             this.pnlNewHolidayRequest.Controls.Add(this.label3, 0, 2);
             this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingHolidaysPreview, 1, 3);
             this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingOvertimePreview, 1, 2);
-            this.pnlNewHolidayRequest.Controls.Add(this.lblInvalid, 2, 3);
             this.pnlNewHolidayRequest.Controls.Add(this.chkUseOvertime, 2, 2);
+            this.pnlNewHolidayRequest.Controls.Add(this.lblInvalid, 2, 3);
+            this.pnlNewHolidayRequest.Controls.Add(this.lblRemainingHolidays, 0, 3);
             this.pnlNewHolidayRequest.Location = new System.Drawing.Point(0, 0);
             this.pnlNewHolidayRequest.Margin = new System.Windows.Forms.Padding(0);
             this.pnlNewHolidayRequest.Name = "pnlNewHolidayRequest";
             this.pnlNewHolidayRequest.RowCount = 5;
-            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.09273F));
-            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.58474F));
-            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.2317F));
-            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.09083F));
-            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 84F));
+            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.26326F));
+            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.69978F));
+            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.49932F));
+            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.53764F));
+            this.pnlNewHolidayRequest.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
             this.pnlNewHolidayRequest.Size = new System.Drawing.Size(385, 200);
             this.pnlNewHolidayRequest.TabIndex = 0;
             // 
@@ -108,7 +109,7 @@
             // 
             this.lblVacationEnd.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblVacationEnd.AutoSize = true;
-            this.lblVacationEnd.Location = new System.Drawing.Point(3, 36);
+            this.lblVacationEnd.Location = new System.Drawing.Point(3, 37);
             this.lblVacationEnd.Name = "lblVacationEnd";
             this.lblVacationEnd.Size = new System.Drawing.Size(97, 15);
             this.lblVacationEnd.TabIndex = 1;
@@ -142,7 +143,7 @@
             // 
             this.chkHalfDayEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.chkHalfDayEnd.AutoSize = true;
-            this.chkHalfDayEnd.Location = new System.Drawing.Point(302, 34);
+            this.chkHalfDayEnd.Location = new System.Drawing.Point(302, 35);
             this.chkHalfDayEnd.Name = "chkHalfDayEnd";
             this.chkHalfDayEnd.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkHalfDayEnd.Size = new System.Drawing.Size(80, 19);
@@ -179,27 +180,17 @@
             // 
             this.dtpVacationEnd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.dtpVacationEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpVacationEnd.Location = new System.Drawing.Point(184, 32);
+            this.dtpVacationEnd.Location = new System.Drawing.Point(184, 33);
             this.dtpVacationEnd.Name = "dtpVacationEnd";
             this.dtpVacationEnd.Size = new System.Drawing.Size(92, 23);
             this.dtpVacationEnd.TabIndex = 6;
             this.dtpVacationEnd.ValueChanged += new System.EventHandler(this.vacationRangeChanged);
             // 
-            // lblRemainingHolidays
-            // 
-            this.lblRemainingHolidays.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblRemainingHolidays.AutoSize = true;
-            this.lblRemainingHolidays.Location = new System.Drawing.Point(3, 93);
-            this.lblRemainingHolidays.Name = "lblRemainingHolidays";
-            this.lblRemainingHolidays.Size = new System.Drawing.Size(141, 15);
-            this.lblRemainingHolidays.TabIndex = 2;
-            this.lblRemainingHolidays.Text = "Verbleibende Urlaubstage";
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 64);
+            this.label3.Location = new System.Drawing.Point(3, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(146, 15);
             this.label3.TabIndex = 11;
@@ -207,9 +198,8 @@
             // 
             // lblRemainingHolidaysPreview
             // 
-            this.lblRemainingHolidaysPreview.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblRemainingHolidaysPreview.AutoSize = true;
-            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(173, 93);
+            this.lblRemainingHolidaysPreview.Location = new System.Drawing.Point(173, 89);
             this.lblRemainingHolidaysPreview.Name = "lblRemainingHolidaysPreview";
             this.lblRemainingHolidaysPreview.Size = new System.Drawing.Size(13, 15);
             this.lblRemainingHolidaysPreview.TabIndex = 7;
@@ -219,30 +209,18 @@
             // 
             this.lblRemainingOvertimePreview.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblRemainingOvertimePreview.AutoSize = true;
-            this.lblRemainingOvertimePreview.Location = new System.Drawing.Point(173, 64);
+            this.lblRemainingOvertimePreview.Location = new System.Drawing.Point(173, 67);
             this.lblRemainingOvertimePreview.Name = "lblRemainingOvertimePreview";
             this.lblRemainingOvertimePreview.Size = new System.Drawing.Size(13, 15);
             this.lblRemainingOvertimePreview.TabIndex = 12;
             this.lblRemainingOvertimePreview.Text = "0";
-            // 
-            // lblInvalid
-            // 
-            this.lblInvalid.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblInvalid.AutoSize = true;
-            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
-            this.lblInvalid.Location = new System.Drawing.Point(329, 93);
-            this.lblInvalid.Name = "lblInvalid";
-            this.lblInvalid.Size = new System.Drawing.Size(53, 15);
-            this.lblInvalid.TabIndex = 10;
-            this.lblInvalid.Text = "Ungültig";
-            this.lblInvalid.Visible = false;
             // 
             // chkUseOvertime
             // 
             this.chkUseOvertime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.chkUseOvertime.AutoSize = true;
             this.chkUseOvertime.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkUseOvertime.Location = new System.Drawing.Point(282, 62);
+            this.chkUseOvertime.Location = new System.Drawing.Point(282, 65);
             this.chkUseOvertime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkUseOvertime.Name = "chkUseOvertime";
             this.chkUseOvertime.Size = new System.Drawing.Size(100, 19);
@@ -250,6 +228,28 @@
             this.chkUseOvertime.Text = "Verwenden";
             this.chkUseOvertime.UseVisualStyleBackColor = true;
             this.chkUseOvertime.CheckedChanged += new System.EventHandler(this.vacationRangeChanged);
+            // 
+            // lblInvalid
+            // 
+            this.lblInvalid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInvalid.AutoSize = true;
+            this.lblInvalid.ForeColor = System.Drawing.Color.Red;
+            this.lblInvalid.Location = new System.Drawing.Point(332, 89);
+            this.lblInvalid.Margin = new System.Windows.Forms.Padding(0);
+            this.lblInvalid.Name = "lblInvalid";
+            this.lblInvalid.Size = new System.Drawing.Size(53, 15);
+            this.lblInvalid.TabIndex = 10;
+            this.lblInvalid.Text = "Ungültig";
+            this.lblInvalid.Visible = false;
+            // 
+            // lblRemainingHolidays
+            // 
+            this.lblRemainingHolidays.AutoSize = true;
+            this.lblRemainingHolidays.Location = new System.Drawing.Point(3, 89);
+            this.lblRemainingHolidays.Name = "lblRemainingHolidays";
+            this.lblRemainingHolidays.Size = new System.Drawing.Size(141, 15);
+            this.lblRemainingHolidays.TabIndex = 2;
+            this.lblRemainingHolidays.Text = "Verbleibende Urlaubstage";
             // 
             // tabControlHolidayRequest
             // 
@@ -290,11 +290,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.btnRemoveVacation);
             this.panel1.Controls.Add(this.lvVacationRequests);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(389, 201);
             this.panel1.TabIndex = 1;
+            // 
+            // btnRemoveVacation
+            // 
+            this.btnRemoveVacation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveVacation.Location = new System.Drawing.Point(245, 171);
+            this.btnRemoveVacation.Name = "btnRemoveVacation";
+            this.btnRemoveVacation.Size = new System.Drawing.Size(114, 23);
+            this.btnRemoveVacation.TabIndex = 1;
+            this.btnRemoveVacation.Text = "Antrag entfernen";
+            this.btnRemoveVacation.UseVisualStyleBackColor = true;
+            this.btnRemoveVacation.Click += new System.EventHandler(this.btnRemoveVacation_Click);
             // 
             // lvVacationRequests
             // 
@@ -304,10 +316,11 @@
             this.chVacationState});
             this.lvVacationRequests.Location = new System.Drawing.Point(6, 6);
             this.lvVacationRequests.Name = "lvVacationRequests";
-            this.lvVacationRequests.Size = new System.Drawing.Size(353, 168);
+            this.lvVacationRequests.Size = new System.Drawing.Size(353, 157);
             this.lvVacationRequests.TabIndex = 0;
             this.lvVacationRequests.UseCompatibleStateImageBehavior = false;
             this.lvVacationRequests.View = System.Windows.Forms.View.Details;
+            this.lvVacationRequests.SelectedIndexChanged += new System.EventHandler(this.lvVacationRequests_SelectedIndexChanged);
             // 
             // chVacationBegin
             // 
@@ -373,5 +386,6 @@
         private Label label3;
         private Label lblRemainingOvertimePreview;
         private CheckBox chkUseOvertime;
+        private Button btnRemoveVacation;
     }
 }

@@ -28,8 +28,9 @@ namespace Mitarbeiterverwaltung
             dtpVacationStart.MinDate = DateTime.Today;
             dtpVacationEnd.MinDate = DateTime.Today;
 
+            btnRemoveVacation.Enabled = false;
 
-            updateLvVacationRequests();
+            updateView();
             vacationRangeChanged(new object(), new EventArgs());
         }
 
@@ -64,7 +65,7 @@ namespace Mitarbeiterverwaltung
             startDate += chkHalfDayBegin.Checked ? new TimeSpan(12, 0, 0) : new TimeSpan(0, 0, 0);
             endDate += chkHalfDayEnd.Checked ? new TimeSpan(12, 0, 0) : new TimeSpan(23, 59, 59);
 
-            bool requestValid = true;
+            int requestState = 0;
 
             //check if request is valid
             VacationRequest testRequest = new VacationRequest(
@@ -75,12 +76,12 @@ namespace Mitarbeiterverwaltung
             TimeSpan overTimeLeft = employee.getOvertime(timeHandler);
             Double vacationHalfDaysLeft = employee.vacationHalfDaysLeft;
 
-            requestValid = employee.calculateVacationRequest(testRequest, ref overTimeLeft, ref vacationHalfDaysLeft);
+            requestState = employee.calculateVacationRequest(testRequest, ref overTimeLeft, ref vacationHalfDaysLeft);
 
             lblRemainingHolidaysPreview.Text = (vacationHalfDaysLeft / 2).ToString();
             lblRemainingOvertimePreview.Text = (int)overTimeLeft.TotalHours + overTimeLeft.ToString(@"\:mm");
 
-            if (requestValid)
+            if (requestState == 0)
             {
                 
                 lblInvalid.Visible = false;
@@ -89,6 +90,18 @@ namespace Mitarbeiterverwaltung
             else
             {
                 lblInvalid.Visible = true;
+                switch (requestState)
+                {
+                    case 1:
+                        lblInvalid.Text = "Nicht genügend Urlaubstage/ Überstunden";
+                        break;
+                   case 2:
+                        lblInvalid.Text = "Überschneidung mit Krankheitstag";
+                        break;
+                    default:
+                        lblInvalid.Text = "Anderer Fehler";
+                        break;
+                }  
                 btnSendRequest.Enabled = false;
             }
         }
