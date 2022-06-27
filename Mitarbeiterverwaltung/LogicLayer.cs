@@ -107,21 +107,17 @@ namespace Mitarbeiterverwaltung.LL
         /// <returns>Bounded TimePeriod; startDate == endDate if there is no conjuction</returns>
         public TimePeriod boundTo(TimePeriod frame)
         {
-            TimePeriod output = this;
-
-            bool startInMonth = frame.contains(startDate);
-            bool endInMonth = frame.contains(endDate);
-
-            if (startInMonth || endInMonth)
-            {
-                //only consider that part of the timeperiod, that is actually in this month
-                output.startDate = startInMonth ? startDate : frame.startDate;
-                output.endDate = endInMonth ? endDate : frame.endDate;
-            }
-            else
+            TimePeriod output = new TimePeriod(this.startDate, this.endDate);
+            output.startDate = startDate > frame.startDate ? startDate : frame.startDate;
+            output.endDate = endDate > frame.endDate ? frame.endDate : endDate;
+            if(output.endDate < output.startDate)
             {
                 //if there is no conjunction between the timePeriods set endDate to startData
                 output.endDate = output.startDate;
+            }
+            else
+            {
+                //There is a conjunction of both -> do nothing
             }
 
             return output;
