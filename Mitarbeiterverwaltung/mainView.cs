@@ -293,7 +293,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new WarningException("No employee with ID " + Id);
+                throw new WarningException("Es existiert kein Mitarbeiter mit der  " + Id);
             }
         }
 
