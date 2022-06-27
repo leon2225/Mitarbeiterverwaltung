@@ -503,7 +503,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void lblClock_Click(object sender, EventArgs e)
         {
-            dateTimePicker1.Visible = !dateTimePicker1.Visible;
+            dtpManipulateTime.Visible = !dtpManipulateTime.Visible;
         }
 
         /// <summary>
@@ -532,16 +532,6 @@ namespace Mitarbeiterverwaltung
             {
                 //Not pressed ok -> do nothing
             }
-        }
-
-        /// <summary>
-        /// Opens a new Dialog with the about view.
-        /// </summary>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutView aboutView = new AboutView(settings);
-            aboutView.StartPosition = FormStartPosition.CenterParent;
-            aboutView.ShowDialog(this);
         }
 
         /// <summary>
@@ -607,6 +597,16 @@ namespace Mitarbeiterverwaltung
         {
             String messageText = Properties.Resources.HelpString;
             MessageBox.Show(messageText, "Hilfe", MessageBoxButtons.OK, MessageBoxIcon.None);
+        }
+
+        /// <summary>
+        /// Opens a new Dialog with the about view
+        /// </summary>
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutView aboutView = new AboutView(settings);
+            aboutView.StartPosition = FormStartPosition.CenterParent;
+            aboutView.ShowDialog(this);
         }
     }
 }
