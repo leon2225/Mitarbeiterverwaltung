@@ -257,6 +257,7 @@
             this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pnlPersonalData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.pnlPersonalData.Size = new System.Drawing.Size(531, 181);
             this.pnlPersonalData.TabIndex = 19;
             // 
@@ -286,14 +287,14 @@
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pnlPersonalData.SetColumnSpan(this.btnResetPassword, 2);
+            this.btnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pnlPersonalData.SetColumnSpan(this.btnResetPassword, 3);
             this.btnResetPassword.Enabled = false;
             this.btnResetPassword.Location = new System.Drawing.Point(157, 151);
             this.btnResetPassword.Name = "btnResetPassword";
-            this.btnResetPassword.Size = new System.Drawing.Size(117, 23);
+            this.btnResetPassword.Size = new System.Drawing.Size(164, 23);
             this.btnResetPassword.TabIndex = 8;
-            this.btnResetPassword.Text = "Zurücksetzen";
+            this.btnResetPassword.Text = "Passwort zurücksetzen";
             this.btnResetPassword.UseVisualStyleBackColor = true;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
