@@ -436,6 +436,7 @@ namespace Mitarbeiterverwaltung.LL
 
                     case "passwordHash":
                         this.passwordHash = value;
+                        this.resetPasswordFlag = value == String.Empty;
                         break;
 
                     case "Id":
