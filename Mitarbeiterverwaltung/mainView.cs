@@ -521,17 +521,26 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsView settingsDialog = new SettingsView(this.settings);
-            settingsDialog.StartPosition = FormStartPosition.CenterParent;
-            DialogResult result = settingsDialog.ShowDialog(this);
-            if (result == DialogResult.OK)
+            //User needs to be logged in and have the right (be supervisor of some kind) to edit settings
+            if(activePanel == managementPanel && currentEmployee.subordinates.Count > 0)
             {
-                settingsDialog.getSettings();
+                SettingsView settingsDialog = new SettingsView(this.settings);
+                settingsDialog.StartPosition = FormStartPosition.CenterParent;
+                DialogResult result = settingsDialog.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    settingsDialog.getSettings();
+                }
+                else
+                {
+                    //Not pressed ok -> do nothing
+                }
             }
             else
             {
-                //Not pressed ok -> do nothing
+                throw new WarningException("Nur angemeldet, berechtigte Personen dürfen die Einstellungen ändern.");
             }
+            
         }
 
         /// <summary>
