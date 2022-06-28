@@ -546,7 +546,7 @@ namespace Mitarbeiterverwaltung.LL
             {
                 _vacationHalfDaysLeft -= request.getBusinessDays() * 2;
 
-                enoughVacationDays = _vacationHalfDaysLeft > request.getBusinessDays() * 2;
+                enoughVacationDays = _vacationHalfDaysLeft > 0;
             }
 
             foreach (TimePeriod sickDay in sickDays)
