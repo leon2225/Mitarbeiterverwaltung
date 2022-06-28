@@ -75,13 +75,13 @@ namespace Mitarbeiterverwaltung
             {
                 double newVacationDaysLeft = employee.getVacationDaysLeft();
                 newVacationDaysLeft += newVacationDays - employee.vacationDays;
-                data.Add("vacationsHalfDaysLeft", (newVacationDaysLeft * 2).ToString());
+                data.Add("vacationHalfDaysLeft", (newVacationDaysLeft * 2).ToString());
             }
 
             employee.parse(data);
             employee.supervisor = this.supervisor; 
 
-            return employee; //todo pauseTime, vacation, workingTimes and Sick days
+            return employee; 
         }
 
         /// <summary>
