@@ -159,6 +159,9 @@ namespace Mitarbeiterverwaltung
 
         }
 
+        /// <summary>
+        /// Update removeVacation button, so that it only is enabled if the request may be removed
+        /// </summary>
         private void lvVacationRequests_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool enableState = lvVacationRequests.SelectedItems.Count > 0;
@@ -173,17 +176,23 @@ namespace Mitarbeiterverwaltung
             }
         }
 
+        /// <summary>
+        /// Remove the selected request
+        /// </summary>
         private void btnRemoveVacation_Click(object sender, EventArgs e)
         {
             int selectedIndex = lvVacationRequests.SelectedIndices[0];
             employee.vacations.RemoveAt(selectedIndex);
             updateView();
         }
-
+         /// <summary>
+         /// Send vacationrequest and update the view
+         /// </summary>
         private void btnSendRequest_Click(object sender, EventArgs e)
         {
             sendVacationRequest();
             updateView();
+            tabControlHolidayRequest.SelectedIndex = 1;
         }
     }
 }
