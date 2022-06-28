@@ -42,10 +42,7 @@
             this.lblClock = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.checkInPanel = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pnlStatistics = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTotalDayWorkingTime = new System.Windows.Forms.Label();
-            this.lblTotalDayWorkingTimeTitle = new System.Windows.Forms.Label();
             this.btnVacationManagement = new System.Windows.Forms.Button();
             this.lblHolidaysRemainingTitle = new System.Windows.Forms.Label();
             this.lblOvertimeRemainingTitle = new System.Windows.Forms.Label();
@@ -92,7 +89,6 @@
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnEditEmployee = new System.Windows.Forms.Button();
             this.dtpManipulateTime = new System.Windows.Forms.DateTimePicker();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1.SuspendLayout();
             this.checkInPanel.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -129,15 +125,16 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Einstellungen";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Beenden";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -182,7 +179,6 @@
             this.checkInPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkInPanel.Controls.Add(this.splitter1);
             this.checkInPanel.Controls.Add(this.pnlStatistics);
             this.checkInPanel.Controls.Add(this.pnlCheckInMain);
             this.checkInPanel.Location = new System.Drawing.Point(0, 47);
@@ -190,23 +186,12 @@
             this.checkInPanel.Size = new System.Drawing.Size(1184, 535);
             this.checkInPanel.TabIndex = 3;
             // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(4, 535);
-            this.splitter1.TabIndex = 7;
-            this.splitter1.TabStop = false;
-            // 
             // pnlStatistics
             // 
             this.pnlStatistics.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlStatistics.ColumnCount = 2;
             this.pnlStatistics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.01942F));
             this.pnlStatistics.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.98058F));
-            this.pnlStatistics.Controls.Add(this.lblTotalDayWorkingTime, 1, 0);
-            this.pnlStatistics.Controls.Add(this.lblTotalDayWorkingTimeTitle, 0, 0);
             this.pnlStatistics.Controls.Add(this.btnVacationManagement, 0, 5);
             this.pnlStatistics.Controls.Add(this.lblHolidaysRemainingTitle, 0, 4);
             this.pnlStatistics.Controls.Add(this.lblOvertimeRemainingTitle, 0, 3);
@@ -226,26 +211,6 @@
             this.pnlStatistics.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.pnlStatistics.Size = new System.Drawing.Size(327, 128);
             this.pnlStatistics.TabIndex = 6;
-            // 
-            // lblTotalDayWorkingTime
-            // 
-            this.lblTotalDayWorkingTime.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblTotalDayWorkingTime.AutoSize = true;
-            this.lblTotalDayWorkingTime.Location = new System.Drawing.Point(311, 4);
-            this.lblTotalDayWorkingTime.Name = "lblTotalDayWorkingTime";
-            this.lblTotalDayWorkingTime.Size = new System.Drawing.Size(13, 15);
-            this.lblTotalDayWorkingTime.TabIndex = 8;
-            this.lblTotalDayWorkingTime.Text = "0";
-            // 
-            // lblTotalDayWorkingTimeTitle
-            // 
-            this.lblTotalDayWorkingTimeTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblTotalDayWorkingTimeTitle.AutoSize = true;
-            this.lblTotalDayWorkingTimeTitle.Location = new System.Drawing.Point(3, 4);
-            this.lblTotalDayWorkingTimeTitle.Name = "lblTotalDayWorkingTimeTitle";
-            this.lblTotalDayWorkingTimeTitle.Size = new System.Drawing.Size(107, 15);
-            this.lblTotalDayWorkingTimeTitle.TabIndex = 10;
-            this.lblTotalDayWorkingTimeTitle.Text = "Heutige Arbeitszeit";
             // 
             // btnVacationManagement
             // 
@@ -745,23 +710,13 @@
             this.dtpManipulateTime.Visible = false;
             this.dtpManipulateTime.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
-            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.checkInPanel);
+            this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.dtpManipulateTime);
             this.Controls.Add(this.btnEditEmployee);
             this.Controls.Add(this.btnAddEmployee);
@@ -852,15 +807,11 @@
         private TextBox txtPassword;
         private Button btnSecureLogin;
         private Label lblPasswordInputTitle;
-        private PrintPreviewDialog printPreviewDialog1;
         private TableLayoutPanel pnlStatistics;
         private Panel pnlCheckInMain;
         private Panel pnlMainLogin;
         private TableLayoutPanel pnlChangePassword;
-        private Splitter splitter1;
-        private Label lblTotalDayWorkingTimeTitle;
         private Label lblHorizontalLine;
-        private Label lblTotalDayWorkingTime;
         private ToolStripMenuItem hilfeToolStripMenuItem;
     }
 }
