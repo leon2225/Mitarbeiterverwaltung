@@ -106,6 +106,58 @@ namespace Mitarbeiterverwaltung.DAL
     }
 
     /// <summary>
+    /// Handler for managing Archive Files
+    /// </summary>
+    public class ArchiveHandler
+    {
+        private string path;
+
+        public ArchiveHandler(string path = "archives\\")
+        {
+            this.path = path;
+        }
+
+        /// <summary>
+        /// Returns file name
+        /// </summary>
+        /// <returns></returns>
+        private String getFileName()
+        {
+            return DateTime.Now.ToString("yyyy_MM") + ".csv";
+        }
+
+        /// <summary>
+        /// Checks if arhciveing has be done for the current month
+        /// </summary>
+        /// <returns></returns>
+        public bool isNewMonth()
+        {
+            string fileString = getFileName();
+            var files = Directory.GetFiles(path).ToList();
+            Directory.GetCurrentDirectory();
+            return files.Contains(fileString);
+        }
+
+        public void writeArchive(CompanyData company)
+        {
+            String fileName = Directory.GetCurrentDirectory() + "\\" + path + getFileName();
+            String outputString = "";
+            TimeHandler timeHandler = new TimeHandler();
+            foreach (HourlyRatedEmployee employee in company.employees.Values)
+            {
+                List<DateTime> checkInOutTimes = employee.newMonth(timeHandler);
+
+                for (int i = 0; i < checkInOutTimes.Count; i++)
+                {
+                    outputString += String.Format("{0},{1},{2}\n", employee.Id, ((i % 2 == 0) ? "ein" : "aus"), checkInOutTimes[i]);
+                }
+            }
+
+            File.WriteAllText(fileName, outputString);
+        }
+    }
+
+    /// <summary>
     /// Handler for reading and writing Data to Ini-File.
     /// </summary>
     public class InitFileParser
@@ -234,6 +286,7 @@ namespace Mitarbeiterverwaltung.DAL
 
             File.WriteAllText(path, outputString);
         }
+
 
         /// <summary>
         /// Reading the Settings from Ini-File and a convert data to a dictionary.

@@ -13,6 +13,7 @@ namespace Mitarbeiterverwaltung
         static void Main()
         {
             String iniPath = Directory.GetCurrentDirectory() + "\\data\\config.ini";
+            String archivePath = Directory.GetCurrentDirectory() + "\\data\\config.ini";
             InitFileParser initFileParser = new InitFileParser(iniPath);
             Settings settings = initFileParser.loadSettings();
 
@@ -20,6 +21,13 @@ namespace Mitarbeiterverwaltung
             var loadedEmployees = csvStorageHandler.load();
 
             CompanyData companyData = new CompanyData("Chio Chips und Knabberartikel GmbH", loadedEmployees);
+
+            //archive handling
+            ArchiveHandler archiveHandler = new ArchiveHandler();
+            if (archiveHandler.isNewMonth())
+            {
+                archiveHandler.writeArchive(companyData);
+            }
 
             // Enable the Windows version depended design settings
             Application.EnableVisualStyles();

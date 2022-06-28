@@ -927,6 +927,42 @@ namespace Mitarbeiterverwaltung.LL
             return returnString;
         }
 
+        /// <summary>
+        /// Handles the start of a new month
+        /// </summary>
+        /// <param name="timeHandler">current time</param>
+        /// <returns>The checkInOutTimes for archive</returns>
+        public List<DateTime> newMonth( TimeHandler timeHandler)
+        {
+            overTime += getOvertime(timeHandler);
+
+            List<DateTime> _checkInOutTimes = new List<DateTime>(checkInOutTimes);
+            checkInOutTimes.Clear();
+
+            if(isCheckedIn())
+            {
+                //employee is currently checked in -> add checkout for archive and checkin for current month
+                checkInOutTimes.Add(timeHandler.getTime());
+                _checkInOutTimes.Add(timeHandler.getTime() - new TimeSpan(0, 0, 1));
+            }
+            else
+            {
+                //employee is not checked in -> do nothing
+            }
+
+            if(timeHandler.getTime().Month == 0)
+            {
+                //first month of year -> new year -> add vacationDays to vacationHalfDaysLeft
+                vacationHalfDaysLeft += vacationDays * 2;
+            }
+            else
+            {
+                //Not first month -> do nothing
+            }
+
+            return _checkInOutTimes;
+        }
+
 
         /// <summary>
         /// Extension to parse a list of properties from an hourly paid employee out of a string and a convert it to a dictionary.
