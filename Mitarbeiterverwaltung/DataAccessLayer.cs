@@ -141,7 +141,7 @@ namespace Mitarbeiterverwaltung.DAL
         public void writeArchive(CompanyData company)
         {
             String fileName = Directory.GetCurrentDirectory() + "\\" + path + getFileName();
-            String outputString = "";
+            String outputString = "ID,Status,Zeitstempel\n";
             TimeHandler timeHandler = new TimeHandler();
             foreach (HourlyRatedEmployee employee in company.employees.Values)
             {
