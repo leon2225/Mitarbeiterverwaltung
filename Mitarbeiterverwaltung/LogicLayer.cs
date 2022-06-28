@@ -469,11 +469,6 @@ namespace Mitarbeiterverwaltung.LL
         public TimeSpan overTime { get; private set; } = new TimeSpan();
 
 
-        public HourlyRatedEmployee(string name, string surname, string adress, string phone, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, password)
-        {
-            this.weekTimeLimit = weekTimeLimit;
-        }
-
         public HourlyRatedEmployee() : base()
         {
 
