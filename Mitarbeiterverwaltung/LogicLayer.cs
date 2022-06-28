@@ -465,8 +465,8 @@ namespace Mitarbeiterverwaltung.LL
         public List<TimePeriod> sickDays { get; private set; } = new List<TimePeriod>();
         public List<VacationRequest> vacations{ get; private set; } = new List<VacationRequest>();
         public int vacationDays { get; private set; } = 0;
-        public double vacationHalfDaysLeft { get; private set; } = 0; // stores the rest amount of vacations, in halfdays //ToDo Add to parser + to string
-        private  TimeSpan overTime { get; set; } = new TimeSpan(); //ToDo Add to parser + to string
+        public double vacationHalfDaysLeft { get; private set; } = 0; // stores the rest amount of vacations, in halfdays
+        public TimeSpan overTime { get; private set; } = new TimeSpan();
 
 
         public HourlyRatedEmployee(string name, string surname, string adress, string phone, string password, TimeSpan weekTimeLimit) : base(name, surname, adress, phone, password)
@@ -861,7 +861,9 @@ namespace Mitarbeiterverwaltung.LL
 
                 switch (key)
                 {
-                    case "holidays":
+                    case "vacationHalfDaysLeft"://fallthrough
+                    case "overTime"://fallthrough
+                    case "vacationDays":
                         value = value.ToString();
                         break;
 
