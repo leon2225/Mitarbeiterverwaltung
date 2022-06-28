@@ -39,19 +39,23 @@ namespace Mitarbeiterverwaltung
         private static void GuiThreadException(object sender, ThreadExceptionEventArgs t)
         {
             MessageBoxIcon selectedIcon;
+            String messageTitle;
             if (t.Exception is WarningException)
             {
                 selectedIcon = MessageBoxIcon.Warning;
+                messageTitle = "Warnung";
             }
             else if (t.Exception is ErrorException)
             {
                 selectedIcon = MessageBoxIcon.Error;
+                messageTitle = "Fehler";
             }
             else
             {
                 selectedIcon = MessageBoxIcon.Error;
+                messageTitle = "Unbekannter Fehler";
             }
-            MessageBox.Show(t.Exception.Message, selectedIcon.ToString().ToUpper(), MessageBoxButtons.OK, selectedIcon);
+            MessageBox.Show(t.Exception.Message, messageTitle, MessageBoxButtons.OK, selectedIcon);
 
             if (selectedIcon == MessageBoxIcon.Error)
             {

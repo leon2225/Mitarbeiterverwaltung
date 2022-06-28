@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="HelpView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="AddTimePeriodView.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -293,7 +293,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new WarningException("No employee with ID " + Id);
+                throw new WarningException("Es existiert kein Mitarbeiter mit der Id " + Id);
             }
         }
 
@@ -503,7 +503,7 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void lblClock_Click(object sender, EventArgs e)
         {
-            dateTimePicker1.Visible = !dateTimePicker1.Visible;
+            dtpManipulateTime.Visible = !dtpManipulateTime.Visible;
         }
 
         /// <summary>
@@ -535,16 +535,6 @@ namespace Mitarbeiterverwaltung
         }
 
         /// <summary>
-        /// Opens a new Dialog with the about view.
-        /// </summary>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutView aboutView = new AboutView(settings);
-            aboutView.StartPosition = FormStartPosition.CenterParent;
-            aboutView.ShowDialog(this);
-        }
-
-        /// <summary>
         /// Changes the password to the new one if password check was successful otherwise show error. 
         /// </summary>
         private void btnChangePassword_Click(object sender, EventArgs e)
@@ -562,15 +552,6 @@ namespace Mitarbeiterverwaltung
             }
             txtNewPassword.Clear();
             txtNewPasswordRepeated.Clear();
-        }
-
-        /// <summary>
-        /// Change the view to change password. 
-        /// </summary>
-        private void lblPasswordForgottten_Click(object sender, EventArgs e)
-        {
-            startLogoutCountdown();
-            changeToUpdatePassword();
         }
 
         /// <summary>
@@ -614,8 +595,19 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String messageText = Properties.Resources.HelpString;
-            MessageBox.Show(messageText, "Hilfe", MessageBoxButtons.OK, MessageBoxIcon.None);
+            HelpView helpView = new HelpView();
+            helpView.StartPosition = FormStartPosition.CenterParent;
+            helpView.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Opens a new Dialog with the about view
+        /// </summary>
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutView aboutView = new AboutView(settings);
+            aboutView.StartPosition = FormStartPosition.CenterParent;
+            aboutView.ShowDialog(this);
         }
     }
 }
