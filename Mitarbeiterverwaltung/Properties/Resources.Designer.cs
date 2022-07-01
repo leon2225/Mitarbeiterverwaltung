@@ -61,15 +61,13 @@ namespace Mitarbeiterverwaltung.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Informationen zum Programm:
+        ///   Sucht eine lokalisierte Zeichenfolge, die Informationen zum Programm: 
+        ///Das Ihnen vorliegende Programm dient der digitalen Zeiterfassung und Verwaltung von Mitarbeitern Ihrer Firma. Neben den Stempelzeiten können auch die Urlaubs- und Krankheitstage komfortabel mit der Software organisiert werden. Auch die automatische Erfassung von Überstunden ist möglich.
         ///
-        ///Das Ihnen vorliegende Programm dient der Arbeitszeiterfassung und Verwaltung von Urlauben für die Mitarbeiter Ihrer Firma. Im Umfang des Programms ist die Beantragung von Urlaub, die Genehmigung und das Einsehen der übrigen Urlaubstage und Überstunden enthalten.
+        ///Im Folgenden werden die verschiedenen Funktionen kurz vorgestellt:
         ///
-        ///LoginView:
-        ///Der Startbildschirm des Programmes enthält den LoginView. Zum Einloggen benötigen Sie ihre persönliche Mitarbeiter ID. 
-        ///
-        ///Firmensettings:
-        ///Informationen zu den hinterlegten Firmeninformationen finden Si [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///Login Bereich:
+        ///Dabei handelt es sich um den Startbildschirm des Programmes, welcher den Benutzer zum Einloggen aufforder [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string HelpString {
             get {
