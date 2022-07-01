@@ -352,10 +352,6 @@ namespace Mitarbeiterverwaltung.LL
             {
                 return false;
             }
-            else if(checkPassword(password))    //new password is old password
-            {
-                return false;
-            }
             else
             {
                 passwordHash = hashPassword(password);
