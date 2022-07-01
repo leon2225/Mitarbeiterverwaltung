@@ -37,7 +37,6 @@ namespace Mitarbeiterverwaltung
         /// <summary>
         /// Register the selected timespan as vacation request.
         /// </summary>
-        /// <exception cref="ErrorException"></exception>
         public void sendVacationRequest()
         {
             DateTime startDate = dtpVacationStart.Value.Date;

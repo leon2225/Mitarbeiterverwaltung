@@ -184,7 +184,7 @@ namespace Mitarbeiterverwaltung.LL
             }
             else
             {
-                throw new ErrorException("Status des Urlaubsantrags kann nicht geladen werden");
+                throw new ErrorException("Status des Urlaubsantrags kann nicht geladen werden.");
             }
         }
     }
@@ -589,7 +589,7 @@ namespace Mitarbeiterverwaltung.LL
         {
             if (isCheckedIn())
             {
-                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten");
+                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten.");
             }
             else
             {
@@ -623,7 +623,7 @@ namespace Mitarbeiterverwaltung.LL
         {
             if ( !isCheckedIn())
             {
-                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten");
+                throw new ErrorException("Fehler bei der Erfassung der Stempelzeiten.");
             }
             else
             {

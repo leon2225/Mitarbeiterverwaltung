@@ -272,7 +272,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new ErrorException("Panel kann nicht gesetzt werden");
+                throw new ErrorException("Panel kann nicht gesetzt werden.");
             }
         }
 
@@ -293,7 +293,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new WarningException("Es existiert kein Mitarbeiter mit der Id " + Id);
+                throw new WarningException("Es existiert kein Mitarbeiter mit der Id " + Id + ".");
             }
         }
 
@@ -538,7 +538,7 @@ namespace Mitarbeiterverwaltung
             }
             else
             {
-                throw new WarningException("Nur angemeldet, berechtigte Personen dürfen die Einstellungen ändern.");
+                throw new WarningException("Nur angemeldete, berechtigte Personen dürfen die Einstellungen ändern.");
             }
             
         }

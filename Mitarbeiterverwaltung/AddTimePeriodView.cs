@@ -86,7 +86,7 @@ namespace Mitarbeiterverwaltung
             if (overlapping)
             {
 
-                throw new WarningException("Der Zeitraum überschneidet sich mit einem anderem");
+                throw new WarningException("Der Zeitraum überschneidet sich mit einem anderem.");
             }
             else
             {

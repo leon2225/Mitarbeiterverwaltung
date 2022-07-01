@@ -47,7 +47,7 @@ namespace Mitarbeiterverwaltung.DAL
             //If headers aren't equal, the csv file is not compatible
             if (!sProptertyNames.SetEquals(actualPropertyNames))
             {
-                throw new ErrorException("Laden der CSV-Datei fehlgeschlagen");
+                throw new ErrorException("Laden der CSV-Datei fehlgeschlagen.");
             }
 
             //remove header from lines
@@ -230,7 +230,7 @@ namespace Mitarbeiterverwaltung.DAL
                 {
                     if (!trimmedLine.Contains(']'))
                     {
-                        throw new ErrorException("Ungültige Initalisierungsdatei");
+                        throw new ErrorException("Ungültige Initalisierungsdatei.");
                     }
                     else
                     {
@@ -393,7 +393,7 @@ namespace Mitarbeiterverwaltung.DAL
             {
                 if (!fileContent.ContainsKey("settings") || !fileContent["settings"].ContainsKey(property))
                 {
-                    throw new ErrorException("Ungültige Initalisierungsdatei");
+                    throw new ErrorException("Ungültige Initalisierungsdatei.");
                 }
                 else
                 {
