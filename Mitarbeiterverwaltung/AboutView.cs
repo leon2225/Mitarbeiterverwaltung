@@ -20,7 +20,7 @@ namespace Mitarbeiterverwaltung
         {
             InitializeComponent();
             lblCompanyName.Text = settings.companyName;
-            pictureLogo.Image = new Bitmap(settings.logoPath);
+            pictureLogo.Image = new Bitmap(settings.logoPath); //todo catch error at latest here
         }
     }
 }

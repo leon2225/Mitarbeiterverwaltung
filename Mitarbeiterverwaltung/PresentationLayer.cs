@@ -20,7 +20,7 @@ namespace Mitarbeiterverwaltung
             var csvStorageHandler = new CSVStorageHandler(settings.csvPath);
             var loadedEmployees = csvStorageHandler.load();
 
-            CompanyData companyData = new CompanyData("Chio Chips und Knabberartikel GmbH", loadedEmployees);
+            CompanyData companyData = new CompanyData("", loadedEmployees);
 
             //archive handling
             ArchiveHandler archiveHandler = new ArchiveHandler();

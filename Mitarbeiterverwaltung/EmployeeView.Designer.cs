@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "12:45",
-            "13:15"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeView));
             this.lblName = new System.Windows.Forms.Label();
             this.lblSurname = new System.Windows.Forms.Label();
@@ -153,9 +150,9 @@
             this.pnlPersonalData.SetColumnSpan(this.txtName, 3);
             this.txtName.Location = new System.Drawing.Point(157, 3);
             this.txtName.Name = "txtName";
+            this.txtName.PlaceholderText = "Max";
             this.txtName.Size = new System.Drawing.Size(371, 23);
             this.txtName.TabIndex = 2;
-            this.txtName.Text = "Max";
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtSurname
@@ -165,9 +162,9 @@
             this.pnlPersonalData.SetColumnSpan(this.txtSurname, 3);
             this.txtSurname.Location = new System.Drawing.Point(157, 32);
             this.txtSurname.Name = "txtSurname";
+            this.txtSurname.PlaceholderText = "Mustermann";
             this.txtSurname.Size = new System.Drawing.Size(371, 23);
             this.txtSurname.TabIndex = 3;
-            this.txtSurname.Text = "Mustermann";
             this.txtSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtAddress
@@ -177,9 +174,9 @@
             this.pnlPersonalData.SetColumnSpan(this.txtAddress, 3);
             this.txtAddress.Location = new System.Drawing.Point(157, 61);
             this.txtAddress.Name = "txtAddress";
+            this.txtAddress.PlaceholderText = "Beispielstraße 123, SampleCity 12345";
             this.txtAddress.Size = new System.Drawing.Size(371, 23);
             this.txtAddress.TabIndex = 4;
-            this.txtAddress.Text = "Beispielstraße 123, SampleCity 12345";
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtPhone
@@ -189,9 +186,9 @@
             this.pnlPersonalData.SetColumnSpan(this.txtPhone, 3);
             this.txtPhone.Location = new System.Drawing.Point(157, 90);
             this.txtPhone.Name = "txtPhone";
+            this.txtPhone.PlaceholderText = "015234 / 55435642";
             this.txtPhone.Size = new System.Drawing.Size(371, 23);
             this.txtPhone.TabIndex = 5;
-            this.txtPhone.Text = "015234 / 55435642";
             this.txtPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnSaveEmployee
@@ -372,8 +369,6 @@
             this.chEndPauseTime});
             this.lvPause.FullRowSelect = true;
             this.lvPause.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvPause.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.lvPause.Location = new System.Drawing.Point(5, 4);
             this.lvPause.Name = "lvPause";
             this.lvPause.Size = new System.Drawing.Size(320, 240);

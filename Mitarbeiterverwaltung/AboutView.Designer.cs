@@ -53,7 +53,6 @@
             this.lblCompanyName.Name = "lblCompanyName";
             this.lblCompanyName.Size = new System.Drawing.Size(119, 32);
             this.lblCompanyName.TabIndex = 1;
-            this.lblCompanyName.Text = "Ivy GmbH";
             // 
             // label2
             // 
