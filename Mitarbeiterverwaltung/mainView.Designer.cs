@@ -78,9 +78,10 @@
             this.chName = new System.Windows.Forms.ColumnHeader();
             this.chSubordinates = new System.Windows.Forms.ColumnHeader();
             this.chWeekTimeLimit = new System.Windows.Forms.ColumnHeader();
+            this.chVacationDays = new System.Windows.Forms.ColumnHeader();
+            this.chVacationDaysRemaining = new System.Windows.Forms.ColumnHeader();
             this.chTotalWorktime = new System.Windows.Forms.ColumnHeader();
             this.chOvertime = new System.Windows.Forms.ColumnHeader();
-            this.chVacationDays = new System.Windows.Forms.ColumnHeader();
             this.btnPanelCtrl = new System.Windows.Forms.Button();
             this.btnAddEmployee = new System.Windows.Forms.Button();
             this.btnEditEmployee = new System.Windows.Forms.Button();
@@ -595,9 +596,10 @@
             this.chName,
             this.chSubordinates,
             this.chWeekTimeLimit,
+            this.chVacationDays,
+            this.chVacationDaysRemaining,
             this.chTotalWorktime,
-            this.chOvertime,
-            this.chVacationDays});
+            this.chOvertime});
             this.lvEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEmployees.FullRowSelect = true;
             this.lvEmployees.Location = new System.Drawing.Point(0, 0);
@@ -635,25 +637,31 @@
             // 
             // chWeekTimeLimit
             // 
-            this.chWeekTimeLimit.Text = "Wochenarbeitszeit";
+            this.chWeekTimeLimit.Text = "Wochenstunden";
             this.chWeekTimeLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.chWeekTimeLimit.Width = 120;
+            this.chWeekTimeLimit.Width = 100;
+            // 
+            // chVacationDays
+            // 
+            this.chVacationDays.Text = "Jahresurlaub";
+            this.chVacationDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.chVacationDays.Width = 80;
+            // 
+            // chVacationDaysRemaining
+            // 
+            this.chVacationDaysRemaining.Text = "Verbleibende Urlaubstage";
+            this.chVacationDaysRemaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.chVacationDaysRemaining.Width = 150;
             // 
             // chTotalWorktime
             // 
-            this.chTotalWorktime.Text = "Bereits gearbeitet";
-            this.chTotalWorktime.Width = 105;
+            this.chTotalWorktime.Text = "Arbeitsstunden ";
+            this.chTotalWorktime.Width = 155;
             // 
             // chOvertime
             // 
             this.chOvertime.Text = "Überstunden";
-            this.chOvertime.Width = 80;
-            // 
-            // chVacationDays
-            // 
-            this.chVacationDays.Text = "Urlaubstage";
-            this.chVacationDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.chVacationDays.Width = 80;
+            this.chOvertime.Width = 120;
             // 
             // btnPanelCtrl
             // 
@@ -708,6 +716,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 621);
+            this.Controls.Add(this.managementPanel);
             this.Controls.Add(this.checkInPanel);
             this.Controls.Add(this.loginPanel);
             this.Controls.Add(this.dtpManipulateTime);
@@ -717,7 +726,6 @@
             this.Controls.Add(this.btnPanelCtrl);
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.managementPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainView";
@@ -806,5 +814,6 @@
         private TableLayoutPanel pnlChangePassword;
         private Label lblHorizontalLine;
         private ToolStripMenuItem hilfeToolStripMenuItem;
+        private ColumnHeader chVacationDaysRemaining;
     }
 }

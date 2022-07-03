@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using System.Globalization;
 using System.Text;
 
 namespace Mitarbeiterverwaltung.LL
@@ -224,6 +225,25 @@ namespace Mitarbeiterverwaltung.LL
         }
 
         /// <summary>
+        /// Get the name of the current month
+        /// </summary>
+        /// <returns>name of current month with offset</returns>
+        public String getMonthName()
+        {
+            int month = getTime().Month;
+            return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month);
+        }
+
+        /// <summary>
+        /// Get the current year
+        /// </summary>
+        /// <returns>current year with offset</returns>
+        public String getYear()
+        {
+            return getTime().Year.ToString();
+        }
+
+        /// <summary>
         /// Set a new time or date to manipulate the current time. 
         /// </summary>
         /// <param name="time">desired new time</param>
@@ -236,10 +256,11 @@ namespace Mitarbeiterverwaltung.LL
         /// Set the offset that should be added to current time.
         /// </summary>
         /// <param name="offset">time offset as TimeSpan</param>
-        public void setOffset(TimeSpan offset)
+        public void setOffset(TimeSpan offset) //todo unused??
         {
             this.offset = offset;
         }
+
     }
 
     /// <summary>

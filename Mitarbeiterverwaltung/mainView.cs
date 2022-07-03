@@ -148,6 +148,9 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void updateLvEmployees()
         {
+            // load date for colum title
+            lvEmployees.Columns[lvEmployees.Columns.Count - 1].Text = "Überstunden " + timeHandler.getYear(); 
+            lvEmployees.Columns[lvEmployees.Columns.Count - 2].Text = "Arbeitsstunden " + timeHandler.getMonthName();
             lvItems.Clear();
             lvEmployees.Items.Clear ();
             foreach (var employee in currentEmployee.subordinates.Values)
@@ -205,9 +208,10 @@ namespace Mitarbeiterverwaltung
                 employee.name,
                 subordinatesString,
                 employee.weekTimeLimit.TotalHours.ToString(),
+                employee.vacationDays.ToString(),
+                employee.getVacationDaysLeft().ToString(),
                 TimeSpanToString( roundTimeSpan(employee.getTimeWorkedIn(timeHandler.getMonth()), settings.timeRounding)),
                 TimeSpanToString( roundTimeSpan( employee.getOvertime(timeHandler), settings.timeRounding)),
-                employee.vacationDays.ToString()
             });
             return listItem;
         }
