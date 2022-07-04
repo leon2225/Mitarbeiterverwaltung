@@ -546,7 +546,7 @@ namespace Mitarbeiterverwaltung.LL
                     {
                         //There aren't enough vacationDaysLeft to cover the vacation
                         //Take so much overtime, that it gets negative but covers the entire vacation
-                        _overTimeLeft = vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
+                        _overTimeLeft -= vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
 
                         _vacationHalfDaysLeft = 0;
                         enoughVacationDays = false;
