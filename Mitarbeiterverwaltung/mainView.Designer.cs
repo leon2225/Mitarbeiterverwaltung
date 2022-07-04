@@ -643,7 +643,7 @@
             // 
             // chVacationDays
             // 
-            this.chVacationDays.Text = "Jahresurlaub";
+            this.chVacationDays.Text = "Urlaubstage";
             this.chVacationDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.chVacationDays.Width = 80;
             // 
@@ -651,7 +651,7 @@
             // 
             this.chVacationDaysRemaining.Text = "Verbleibende Urlaubstage";
             this.chVacationDaysRemaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.chVacationDaysRemaining.Width = 150;
+            this.chVacationDaysRemaining.Width = 180;
             // 
             // chTotalWorktime
             // 
@@ -661,7 +661,7 @@
             // chOvertime
             // 
             this.chOvertime.Text = "Überstunden";
-            this.chOvertime.Width = 120;
+            this.chOvertime.Width = 80;
             // 
             // btnPanelCtrl
             // 

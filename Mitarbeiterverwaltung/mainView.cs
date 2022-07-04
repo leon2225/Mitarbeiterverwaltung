@@ -148,9 +148,9 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void updateLvEmployees()
         {
-            // load date for colum title
-            lvEmployees.Columns[lvEmployees.Columns.Count - 1].Text = "Überstunden " + timeHandler.getYear(); 
+            // load date for colum title 
             lvEmployees.Columns[lvEmployees.Columns.Count - 2].Text = "Arbeitsstunden " + timeHandler.getMonthName();
+            lvEmployees.Columns[lvEmployees.Columns.Count - 3].Text = "Verbleibende Urlaubstage " + timeHandler.getYear();
             lvItems.Clear();
             lvEmployees.Items.Clear ();
             foreach (var employee in currentEmployee.subordinates.Values)
