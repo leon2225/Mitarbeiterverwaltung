@@ -135,7 +135,7 @@ namespace Mitarbeiterverwaltung.DAL
             string fileString = getFileName();
             var files = Directory.GetFiles(path).ToList();
             Directory.GetCurrentDirectory();
-            return files.Contains(fileString);
+            return !files.Contains(fileString);
         }
 
         public void writeArchive(CompanyData company)
