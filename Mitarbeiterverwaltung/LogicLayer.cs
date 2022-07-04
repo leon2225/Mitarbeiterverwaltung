@@ -946,7 +946,7 @@ namespace Mitarbeiterverwaltung.LL
                 //employee is not checked in -> do nothing
             }
 
-            if(timeHandler.getTime().Month == 0)
+            if(timeHandler.getTime().Month == 1)
             {
                 //first month of year -> new year -> add vacationDays to vacationHalfDaysLeft
                 vacationHalfDaysLeft += vacationDays * 2;
