@@ -143,6 +143,9 @@ namespace Mitarbeiterverwaltung.DAL
             String fileName = Directory.GetCurrentDirectory() + "\\" + path + getFileName();
             String outputString = "ID,Status,Zeitstempel\n";
             TimeHandler timeHandler = new TimeHandler();
+            DateTime startOfMonth = DateTime.Today;
+            startOfMonth -= new TimeSpan(startOfMonth.Day - 1,0,0,0);
+            timeHandler.setTime(startOfMonth);
             foreach (HourlyRatedEmployee employee in company.employees.Values)
             {
                 List<DateTime> checkInOutTimes = employee.newMonth(timeHandler);
