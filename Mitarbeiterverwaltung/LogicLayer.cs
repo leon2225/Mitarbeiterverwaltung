@@ -520,7 +520,7 @@ namespace Mitarbeiterverwaltung.LL
             {
                 TimeSpan vacationTime = request.getBusinessDays() * (weekTimeLimit / 5);
 
-                if (vacationTime < _overTimeLeft)
+                if (vacationTime <= _overTimeLeft)
                 {
                     //the needed vacatime can completely be covered by overtime
                     _overTimeLeft -= vacationTime;
@@ -537,7 +537,7 @@ namespace Mitarbeiterverwaltung.LL
                     TimeSpan overTimeToTake = vacationTime - TimeSpan.FromHours(vacationHalfDaysToTake * hoursPerHalfDay);
 
                     //check if there are enough vacationdays left
-                    if (_vacationHalfDaysLeft > vacationHalfDaysToTake)
+                    if (_vacationHalfDaysLeft >= vacationHalfDaysToTake)
                     {
                         _vacationHalfDaysLeft -= vacationHalfDaysToTake;
                         _overTimeLeft -= overTimeToTake;
@@ -558,7 +558,7 @@ namespace Mitarbeiterverwaltung.LL
             {
                 _vacationHalfDaysLeft -= request.getBusinessDays() * 2;
 
-                enoughVacationDays = _vacationHalfDaysLeft > 0;
+                enoughVacationDays = _vacationHalfDaysLeft >= 0;
             }
 
             foreach (TimePeriod sickDay in sickDays)
