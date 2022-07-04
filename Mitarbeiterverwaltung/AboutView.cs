@@ -20,7 +20,15 @@ namespace Mitarbeiterverwaltung
         {
             InitializeComponent();
             lblCompanyName.Text = settings.companyName;
-            pictureLogo.Image = new Bitmap(settings.logoPath);
+
+            if (!File.Exists(settings.logoPath))
+            {
+                throw new ErrorException("Der Logo-Pfad ist ungültig!");
+            }
+            else
+            {
+                pictureLogo.Image = new Bitmap(settings.logoPath);
+            }
         }
     }
 }
