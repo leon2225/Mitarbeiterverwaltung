@@ -1069,7 +1069,7 @@ namespace Mitarbeiterverwaltung.LL
         /// Register a new Employee and assign to list of subordinates.
         /// </summary>
         /// <param name="employee"></param>
-        public void addEmployee(Employee employee)
+        public void addEmployee(HourlyRatedEmployee employee)
         {
             employees.Add(employee.Id, employee);
             if (employee.supervisor != null)
@@ -1086,9 +1086,8 @@ namespace Mitarbeiterverwaltung.LL
         /// Remove a selected employee and hand over employees subordinates to next overlying supervisor.
         /// </summary>
         /// <param name="employee">Employee that should be removed</param>
-        public void removeEmployee(Employee employee)
+        public void removeEmployee(ref HourlyRatedEmployee employee)
         {
-            employees.Remove(employee.Id);
             if (employee.supervisor != null)
             {
                 employee.supervisor.subordinates.Remove(employee.Id);
@@ -1097,10 +1096,13 @@ namespace Mitarbeiterverwaltung.LL
             {
                 //employee has no supervisor -> employee should not be removed as someones subordinate
             }
-            foreach (Employee subordinate in employee.subordinates.Values)
+
+            foreach (var index in employee.subordinates.Keys)
             {
-                subordinate.supervisor = employee.supervisor;
+                employee.subordinates[index].supervisor = employee.supervisor;
+                employee.supervisor.subordinates.Add(index, employee.subordinates[index]);
             }
+            employees.Remove(employee.Id);
         }
     }
 }
