@@ -131,7 +131,7 @@ namespace Mitarbeiterverwaltung.DAL
         /// <returns></returns>
         private String getFileName()
         {
-            return DateTime.Now.ToString("yyyy_MM") + ".csv";
+            return DateTime.Now.AddMonths(-1).ToString("yyyy_MM") + ".csv";
         }
 
         /// <summary>
@@ -140,9 +140,8 @@ namespace Mitarbeiterverwaltung.DAL
         /// <returns></returns>
         public bool isNewMonth()
         {
-            string fileString = getFileName();
+            string fileString = path + getFileName();
             var files = Directory.GetFiles(path).ToList();
-            Directory.GetCurrentDirectory();
             return !files.Contains(fileString);
         }
 
