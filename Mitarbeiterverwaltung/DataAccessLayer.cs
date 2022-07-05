@@ -24,6 +24,14 @@ namespace Mitarbeiterverwaltung.DAL
         public CSVStorageHandler(string path)
         {
             this.path = path;
+            if (!File.Exists(path))
+            {
+                throw new ErrorException("Der CSV-Pfad ist ungültig!");
+            }
+            else
+            {
+                //Path is valid -> do nothing
+            }
         }
 
         /// <summary>
