@@ -457,14 +457,13 @@ namespace Mitarbeiterverwaltung
             if (result == DialogResult.OK)
             {
                 employeeView.getUserData();
-                updateLvEmployees();
             }
             else if (result == DialogResult.Abort)
             {
-                companyData.removeEmployee(selectedEmployee);
-                lvEmployees.SelectedItems[0].Remove();
-                updateLvEmployees();
+                companyData.removeEmployee(ref selectedEmployee);
+                //lvEmployees.SelectedItems[0].Remove();
             }
+            updateLvEmployees();
         }
 
         /// <summary>

@@ -252,15 +252,6 @@ namespace Mitarbeiterverwaltung.LL
             offset = time - DateTime.Now;
         }
 
-        /// <summary>
-        /// Set the offset that should be added to current time.
-        /// </summary>
-        /// <param name="offset">time offset as TimeSpan</param>
-        public void setOffset(TimeSpan offset) //todo unused??
-        {
-            this.offset = offset;
-        }
-
     }
 
     /// <summary>
@@ -520,7 +511,7 @@ namespace Mitarbeiterverwaltung.LL
             {
                 TimeSpan vacationTime = request.getBusinessDays() * (weekTimeLimit / 5);
 
-                if (vacationTime < _overTimeLeft)
+                if (vacationTime <= _overTimeLeft)
                 {
                     //the needed vacatime can completely be covered by overtime
                     _overTimeLeft -= vacationTime;
@@ -537,7 +528,7 @@ namespace Mitarbeiterverwaltung.LL
                     TimeSpan overTimeToTake = vacationTime - TimeSpan.FromHours(vacationHalfDaysToTake * hoursPerHalfDay);
 
                     //check if there are enough vacationdays left
-                    if (_vacationHalfDaysLeft > vacationHalfDaysToTake)
+                    if (_vacationHalfDaysLeft >= vacationHalfDaysToTake)
                     {
                         _vacationHalfDaysLeft -= vacationHalfDaysToTake;
                         _overTimeLeft -= overTimeToTake;
@@ -546,7 +537,7 @@ namespace Mitarbeiterverwaltung.LL
                     {
                         //There aren't enough vacationDaysLeft to cover the vacation
                         //Take so much overtime, that it gets negative but covers the entire vacation
-                        _overTimeLeft = vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
+                        _overTimeLeft -= vacationTime - TimeSpan.FromHours(_vacationHalfDaysLeft * hoursPerHalfDay);
 
                         _vacationHalfDaysLeft = 0;
                         enoughVacationDays = false;
@@ -558,7 +549,7 @@ namespace Mitarbeiterverwaltung.LL
             {
                 _vacationHalfDaysLeft -= request.getBusinessDays() * 2;
 
-                enoughVacationDays = _vacationHalfDaysLeft > 0;
+                enoughVacationDays = _vacationHalfDaysLeft >= 0;
             }
 
             foreach (TimePeriod sickDay in sickDays)
@@ -657,14 +648,14 @@ namespace Mitarbeiterverwaltung.LL
                 foreach(TimePeriod pausePeriod in pauseTimes)
                 {
                     //transform pausePeriod to today
-                    pausePeriod.startDate += dateOffset;
-                    pausePeriod.endDate += dateOffset;
+                    DateTime pauseTimeStart = pausePeriod.startDate + dateOffset;
+                    DateTime pauseTimeEnd = pausePeriod.endDate + dateOffset;
 
-                    if (checkedInPeriod.contains(pausePeriod.startDate) && checkedInPeriod.contains(pausePeriod.endDate))
+                    if (checkedInPeriod.contains(pauseTimeStart) && checkedInPeriod.contains(pauseTimeEnd))
                     {
                         //pausePeriod was during checkedInPeriod -> Add checkInOutTimes for pause
-                        checkInOutTimes.Add(pausePeriod.startDate);
-                        checkInOutTimes.Add(pausePeriod.endDate);
+                        checkInOutTimes.Add(pauseTimeStart);
+                        checkInOutTimes.Add(pauseTimeEnd);
                     }
                     else
                     {
@@ -967,7 +958,7 @@ namespace Mitarbeiterverwaltung.LL
                 //employee is not checked in -> do nothing
             }
 
-            if(timeHandler.getTime().Month == 0)
+            if(timeHandler.getTime().Month == 1)
             {
                 //first month of year -> new year -> add vacationDays to vacationHalfDaysLeft
                 vacationHalfDaysLeft += vacationDays * 2;
@@ -1069,7 +1060,7 @@ namespace Mitarbeiterverwaltung.LL
         /// Register a new Employee and assign to list of subordinates.
         /// </summary>
         /// <param name="employee"></param>
-        public void addEmployee(Employee employee)
+        public void addEmployee(HourlyRatedEmployee employee)
         {
             employees.Add(employee.Id, employee);
             if (employee.supervisor != null)
@@ -1086,9 +1077,8 @@ namespace Mitarbeiterverwaltung.LL
         /// Remove a selected employee and hand over employees subordinates to next overlying supervisor.
         /// </summary>
         /// <param name="employee">Employee that should be removed</param>
-        public void removeEmployee(Employee employee)
+        public void removeEmployee(ref HourlyRatedEmployee employee)
         {
-            employees.Remove(employee.Id);
             if (employee.supervisor != null)
             {
                 employee.supervisor.subordinates.Remove(employee.Id);
@@ -1097,10 +1087,13 @@ namespace Mitarbeiterverwaltung.LL
             {
                 //employee has no supervisor -> employee should not be removed as someones subordinate
             }
-            foreach (Employee subordinate in employee.subordinates.Values)
+
+            foreach (var index in employee.subordinates.Keys)
             {
-                subordinate.supervisor = employee.supervisor;
+                employee.subordinates[index].supervisor = employee.supervisor;
+                employee.supervisor.subordinates.Add(index, employee.subordinates[index]);
             }
+            employees.Remove(employee.Id);
         }
     }
 }
