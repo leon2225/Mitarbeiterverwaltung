@@ -648,14 +648,14 @@ namespace Mitarbeiterverwaltung.LL
                 foreach(TimePeriod pausePeriod in pauseTimes)
                 {
                     //transform pausePeriod to today
-                    pausePeriod.startDate += dateOffset;
-                    pausePeriod.endDate += dateOffset;
+                    DateTime pauseTimeStart = pausePeriod.startDate + dateOffset;
+                    DateTime pauseTimeEnd = pausePeriod.endDate + dateOffset;
 
-                    if (checkedInPeriod.contains(pausePeriod.startDate) && checkedInPeriod.contains(pausePeriod.endDate))
+                    if (checkedInPeriod.contains(pauseTimeStart) && checkedInPeriod.contains(pauseTimeEnd))
                     {
                         //pausePeriod was during checkedInPeriod -> Add checkInOutTimes for pause
-                        checkInOutTimes.Add(pausePeriod.startDate);
-                        checkInOutTimes.Add(pausePeriod.endDate);
+                        checkInOutTimes.Add(pauseTimeStart);
+                        checkInOutTimes.Add(pauseTimeEnd);
                     }
                     else
                     {
