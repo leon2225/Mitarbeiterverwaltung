@@ -114,33 +114,28 @@ namespace Mitarbeiterverwaltung
         /// </summary>
         private void checkForPendingVacationRequests()
         {
-            int counter = 0;
-            foreach (var employee in currentEmployee.subordinates.Values)
+            foreach (HourlyRatedEmployee employee in currentEmployee.subordinates.Values)
             {
-                /*foreach(var holidayRequest in employee.absenteeism)
+                foreach(VacationRequest vacationRequest in employee.vacations)
                 {
-                    if (holidayRequest.state == RequestState.pending)
+                    if (vacationRequest.state == RequestState.pending)
                     {
-                        counter++;
-                        var result = MessageBox.Show(employee.surname + " " + employee.name + " beantragt Urlaub vom " + holidayRequest.startTime.ToString("dd.MM.yyyy") + " bis zum " + holidayRequest.endTime.ToString("dd.MM.yyyy") + "\n\n Soll der Urlaub genehmigt werden?", "Urlaubsanfrage", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                        var result = MessageBox.Show(employee.name + " " + employee.surname + " beantragt Urlaub vom " + vacationRequest.startDate.ToString("dd.MM.yyyy") + " bis zum " + vacationRequest.endDate.ToString("dd.MM.yyyy") + "\n\n Soll der Urlaub genehmigt werden?", "Urlaubsanfrage", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                         switch (result)
                         {
                             case DialogResult.Yes:
-                                holidayRequest.state = RequestState.accepted;
+                                vacationRequest.state = RequestState.accepted;
                                 break;
                             case DialogResult.No:
-                                holidayRequest.state = RequestState.denied;
+                                vacationRequest.state = RequestState.denied;
                                 break;
                             default:
                                 break;
                         }
                     }
-                }*/
+                }
             }
-            //if(counter != 0)
-            //{
-            //    MessageBox.Show("Es gibt noch " + counter.ToString() + " offene Urlaubsanfragen.", "Offene Urlaubsanfragen", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            
         }
 
         /// <summary>
