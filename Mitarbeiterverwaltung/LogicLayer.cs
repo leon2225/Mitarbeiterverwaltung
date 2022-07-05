@@ -252,15 +252,6 @@ namespace Mitarbeiterverwaltung.LL
             offset = time - DateTime.Now;
         }
 
-        /// <summary>
-        /// Set the offset that should be added to current time.
-        /// </summary>
-        /// <param name="offset">time offset as TimeSpan</param>
-        public void setOffset(TimeSpan offset) //todo unused??
-        {
-            this.offset = offset;
-        }
-
     }
 
     /// <summary>
