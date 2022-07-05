@@ -461,7 +461,6 @@ namespace Mitarbeiterverwaltung
             else if (result == DialogResult.Abort)
             {
                 companyData.removeEmployee(ref selectedEmployee);
-                //lvEmployees.SelectedItems[0].Remove();
             }
             updateLvEmployees();
         }
