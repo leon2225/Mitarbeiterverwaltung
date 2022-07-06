@@ -124,19 +124,19 @@ Das Ihnen vorliegende Programm dient der digitalen Zeiterfassung und Verwaltung 
 Im Folgenden werden die verschiedenen Funktionen kurz vorgestellt:
 
 Login Bereich:
-Dabei handelt es sich um den Startbildschirm des Programmes, welcher den Benutzer zum Einloggen auffordert. Für die Anmeldung wird Ihre persönliche Mitarbeiter ID benötigt. 
+Dabei handelt es sich um den Startbildschirm des Programmes, welcher den Benutzer zum Einloggen auffordert. Für die Anmeldung wird Ihre persönliche Mitarbeiter-ID benötigt. 
 
 Einstellungen:
 Informationen zu den hinterlegten Firmeninformationen finden Sie in der oberen, linken Ecke des Startbildschirmes. Unter „Datei“-&gt; „Einstellungen“ haben Sie die Möglichkeit, bei Änderungen an ihren Firmeninformationen, den Namen Ihrer Firma oder Ihr Logo zu ändern und die Einstellungen zur Zeiterfassung anzupassen. Überprüfen können Sie die hinterlegten Daten unter „Info“. Die Einstellungen können nur geändert werden, wenn sich ein Benutzer im System über sein Passwort authentifiziert hat und über mindestens einen untergebenen Mitarbeiter verfügt.
 
 Zeiterfassung:
-Nach gelungener Anmeldung gelangen Sie zur Hauptansicht des Programms. Diese ist auf die wesentlichen Funktionen reduziert. So wird in der Mitte eine Schaltfläche zum Ein- bzw. Ausstempeln angezeigt.  Je nachdem ob Sie bereits eingestempelt sind, sehen Sie entweder „Einstempeln“ oder „Ausstempeln“ auf der Schaltfläche. Die Zeiterfassung läuft nun bis zum Zeitpunkt des Ausstempelns.
+Nach gelungener Anmeldung gelangen Sie zur Hauptansicht des Programms. Diese ist auf die wesentlichen Funktionen reduziert. So wird in der Mitte eine Schaltfläche zum Ein- bzw. Ausstempeln angezeigt.  Je nachdem, ob Sie bereits eingestempelt sind, sehen Sie entweder „Einstempeln“ oder „Ausstempeln“ auf der Schaltfläche. Die Zeiterfassung läuft nun bis zum Zeitpunkt des Ausstempelns.
 
 Statistiken:
 In der linken unteren Ecke werden Ihnen Ihre persönlichen Arbeitsstatistiken angezeigt. Die oberste Zeile zeigt die gerundete Arbeitszeit für den aktuellen Monat sowie dahinter in Klammern die exakte Arbeitszeit an. In der darunter liegenden Zeile können Sie den aktuellen Stand Ihrer Überstunden einsehen. In der letzten Zeile werden die verbleibenden Urlaubstage angezeigt.  
 
 Urlaubsverwaltung:
-In der unteren linken Ecke der Hauptansicht befindet sich die Urlaubsverwaltung. In diesem Bereich haben Sie die Möglichkeiten „Neuen Antrag stellen“, um einen Urlaub zu beantragen und „Anträge einsehen“, um den Status Ihrer bisherigen Anträge zu prüfen. Zusätzlich zum Start- und Enddatum Ihres Urlaubs haben Sie die Möglichkeit auszuwählen, ob Beginn oder Ende des Urlaubes aus einem halben Urlaubstag bestehen soll, dies geschieht durch Auswählen des Steuerelements „halber Tag“ neben dem gewünschten Datum. Sobald ein gültiges Datum gewählt wurde, wird die Vorschau über die verbleibenden Urlaubstage aktualisiert. Außerdem gibt es die Möglichkeit Überstunden im Urlaubsantrag zu verrechnen, sofern dies gewünscht ist. Zum Abschluss des Antrages wählen Sie „Absenden“.
+In der unteren linken Ecke der Hauptansicht befindet sich die Urlaubsverwaltung. In diesem Bereich haben Sie die Möglichkeiten „Neuen Antrag stellen“, um einen Urlaub zu beantragen und „Anträge einsehen“, um den Status Ihrer bisherigen Anträge zu prüfen. Zusätzlich zum Start- und Enddatum Ihres Urlaubs haben Sie die Möglichkeit auszuwählen, ob Beginn oder Ende des Urlaubs aus einem halben Urlaubstag bestehen soll, dies geschieht durch Auswählen des Steuerelements „halber Tag“ neben dem gewünschten Datum. Sobald ein gültiges Datum gewählt wurde, wird die Vorschau über die verbleibenden Urlaubstage aktualisiert. Außerdem gibt es die Möglichkeit Überstunden im Urlaubsantrag zu verrechnen, sofern dies gewünscht ist. Zum Abschluss des Antrages wählen Sie „Absenden“. Es kann immer nur ein Antrag zur gleichen Zeit gestellt werden. Erst wenn ein Antrag genehmigt oder abgelehnt wurde, kann ein neuer Antrag gestellt werden.
 
 Mitarbeiterverwaltung:
 Im Falle einer vorliegenden Führungsaufgabe haben Sie zusätzlich die Möglichkeit durch ein persönliches Kennwort Zugang zur Mitarbeiterverwaltung zu erlangen. Sollte die Anmeldung mittels persönlichen Kennworts nicht möglich sein, müssen Sie bei Ihrem Vorgesetzten ein Zurücksetzen des Passworts beantragen. Anschließend kann ein neues Kennwort gesetzt werden.
@@ -144,7 +144,7 @@ Im Falle einer vorliegenden Führungsaufgabe haben Sie zusätzlich die Möglichk
 In der Ansicht der Mitarbeiterverwaltung erhalten Sie eine Übersicht über Ihre untergebenen Mitarbeiter, deren Arbeitszeiten und Urlaubstage. In der unteren Programmleiste gibt es über Schaltflächen die Möglichkeit einen neuen Mitarbeiter anzulegen „Mitarbeiter Hinzufügen“ oder einen ausgewählten Mitarbeiter zu bearbeiten „Mitarbeiter Bearbeiten“. 
 
 Detailansicht Mitarbeiter:
-Die Mitarbeiterverwaltung bietet die Möglichkeit Untergebene zu bearbeiten (siehe Mitarbeiterverwaltung). In der Detailansicht befinden sich die Reiter „Persönliche Daten“, „Pausenzeiten“, „Stempelzeiten“, „Krankheit“ und „Urlaub“. Außerdem findet sich hier die Möglichkeit einen Mitarbeiter zu entfernen. Diese sind im Folgenden erläutert.
+Die Mitarbeiterverwaltung bietet die Möglichkeit, Untergebene zu bearbeiten (siehe Mitarbeiterverwaltung). In der Detailansicht befinden sich die Reiter „Persönliche Daten“, „Pausenzeiten“, „Stempelzeiten“, „Krankheit“ und „Urlaub“. Außerdem findet sich hier die Möglichkeit, einen Mitarbeiter zu entfernen. Diese sind im Folgenden erläutert.
 
 Persönliche Daten:
 In dem Reiter “Persönliche Daten“ lässt sich die Anschrift des Untergebenen bearbeiten und gleichzeitig die vorgesehenen Arbeitsstunden und Urlaubstage festlegen. Außerdem befindet sich in diesem Reiter die Möglichkeit für den Vorgesetzten das Passwort für seinen Untergebenen zurückzusetzen. Dabei gilt es zu beachten, dass die vorgesehenen Arbeitsstunden nur zum Monatsanfang angepasst werden dürfen.
@@ -159,13 +159,13 @@ Krankheit:
 Der Reiter „Krankheit“ ermöglicht es Fehlzeiten des Mitarbeiters anzulegen oder diese zu entfernen.
 
 Urlaub:
-Der letzte Reiter „Urlaub“ stellt die Vorgesetzten Perspektive der Anträge auf Urlaub dar (siehe Urlaubsverwaltung). Hier kann ein eingegangener Antrag ausgewählt und entweder genehmigt oder verweigert werden.
+Der letzte Reiter „Urlaub“ stellt die Vorgesetzten-Perspektive der Anträge auf Urlaub dar (siehe Urlaubsverwaltung). Hier kann ein eingegangener Antrag ausgewählt und entweder genehmigt oder verweigert werden.
 
 Mitarbeiter hinzufügen:
 Die Funktion „Mitarbeiter Hinzufügen“ beinhaltet zwei Reiter, „Persönliche Daten“ und „Pausenzeiten“ aus der Detailansicht Mitarbeiter. Mit Auswahl der Schaltfläche „Speichern“ wird ein neuer Mitarbeiter angelegt.
 
 Archivierung:
-Immer zum Monatsanfang werden die Arbeitszeiten aller Mitarbeiter in eine seperate CSV-Datei exportiert und stehen im System nicht mehr zur Verfügung. Die exportierten Daten können nun beispielsweise extern gesichert werden.
+Immer zum Monatsanfang werden die Arbeitszeiten aller Mitarbeiter in eine separate CSV-Datei exportiert und stehen im System nicht mehr zur Verfügung. Die exportierten Daten können nun beispielsweise extern gesichert werden.
 
 
 Bei weiteren Fragen kontaktieren Sie den Support unter support@mitarbeiterverwaltung.de</value>
