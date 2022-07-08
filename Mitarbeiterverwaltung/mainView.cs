@@ -402,6 +402,7 @@ namespace Mitarbeiterverwaltung
             loginPanel.Visible = true;
             pnlMainLogin.Visible = true;
             loginPanel.BringToFront();
+            this.ActiveControl = txtEmployeeId;
         }
 
         /// <summary>
