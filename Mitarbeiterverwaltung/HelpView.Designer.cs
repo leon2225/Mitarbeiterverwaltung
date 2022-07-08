@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpView));
             this.rtbHelp = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -50,6 +51,8 @@
             // 
             this.ClientSize = new System.Drawing.Size(501, 537);
             this.Controls.Add(this.rtbHelp);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "HelpView";
             this.Text = "Hilfe";
             this.ResumeLayout(false);
