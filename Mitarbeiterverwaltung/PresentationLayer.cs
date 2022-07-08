@@ -12,8 +12,14 @@ namespace Mitarbeiterverwaltung
         [STAThread]
         static void Main()
         {
+            // Enable the Windows version depended design settings
+            Application.EnableVisualStyles();
+            // Enable WinForms exception handling
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            Application.ThreadException += (sender, args) => GuiException(args.Exception);
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => GuiException(args.ExceptionObject as Exception);
+
             String iniPath = Directory.GetCurrentDirectory() + "\\data\\config.ini";
-            String archivePath = Directory.GetCurrentDirectory() + "\\data\\config.ini";
             InitFileParser initFileParser = new InitFileParser(iniPath);
             Settings settings = initFileParser.loadSettings();
 
@@ -29,10 +35,6 @@ namespace Mitarbeiterverwaltung
                 archiveHandler.writeArchive(companyData);
             }
 
-            // Enable the Windows version depended design settings
-            Application.EnableVisualStyles();
-            // Enable WinForms exception handling
-            Application.ThreadException += new ThreadExceptionEventHandler(PresentationLayer.GuiThreadException);
             // Run Application
             Application.Run(new MainView(companyData, settings));
             csvStorageHandler.save(companyData.employees);
@@ -44,16 +46,16 @@ namespace Mitarbeiterverwaltung
         /// <summary>
         /// Loading the Exceptions from WinForms and classify warning level
         /// </summary>
-        private static void GuiThreadException(object sender, ThreadExceptionEventArgs t)
+        private static void GuiException(Exception e)
         {
             MessageBoxIcon selectedIcon;
             String messageTitle;
-            if (t.Exception is WarningException)
+            if (e is WarningException)
             {
                 selectedIcon = MessageBoxIcon.Warning;
                 messageTitle = "Warnung";
             }
-            else if (t.Exception is ErrorException)
+            else if (e is ErrorException)
             {
                 selectedIcon = MessageBoxIcon.Error;
                 messageTitle = "Fehler";
@@ -63,7 +65,7 @@ namespace Mitarbeiterverwaltung
                 selectedIcon = MessageBoxIcon.Error;
                 messageTitle = "Unbekannter Fehler";
             }
-            MessageBox.Show(t.Exception.Message, messageTitle, MessageBoxButtons.OK, selectedIcon);
+            MessageBox.Show(e.Message, messageTitle, MessageBoxButtons.OK, selectedIcon);
 
             if (selectedIcon == MessageBoxIcon.Error)
             {
